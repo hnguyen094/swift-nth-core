@@ -1,6 +1,6 @@
 //
 //  mainApp.swift
-//  keepers
+//  keepers:together
 //
 //  Created by Hung on 9/5/23.
 //
@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 @main
-struct mainApp: App {
+struct mainVRApp: App {
     private let sharedModelContainer: ModelContainer
     
     init() {
@@ -22,8 +22,13 @@ struct mainApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentWithLoadView()
+            ContentView()
         }
-        .modelContainer(sharedModelContainer)
+        //.modelContainer(sharedModelContainer)
+
+        ImmersiveSpace(id: "ImmersiveSpace") {
+            ImmersiveView()
+        }
+        //.modelContainer(sharedModelContainer)
     }
 }

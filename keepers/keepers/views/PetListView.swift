@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  PetListView.swift
 //  keepers
 //
 //  Created by Hung on 9/5/23.
@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 import CoreData
 
-struct ContentView: View {
+struct PetListView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var pets: [Pet_Identity]
 
@@ -41,22 +41,6 @@ struct ContentView: View {
                     }
                 }
             }
-            // Force refreshes data from cloud store https://alexanderlogan.co.uk/blog/wwdc23/08-cloudkit-swift-data
-            .onReceive(
-                NotificationCenter.default.publisher(
-                    for: NSPersistentCloudKitContainer.eventChangedNotification)) { notification in
-                        guard let evt = notification.userInfo?[NSPersistentCloudKitContainer.eventNotificationUserInfoKey]
-                                as? NSPersistentCloudKitContainer.Event else {
-                            return; // not event we're looking for
-                        }
-                        if evt.endDate != nil && evt.type == .import {
-                            Task { @MainActor in
-                                let petFetchDescriptor = FetchDescriptor<Pet_Identity>()
-                                _ = try? modelContext.fetch(petFetchDescriptor)
-                                
-                            }
-                        }
-                    }
         } detail: {
             Text("Select a pet")
         }
@@ -84,6 +68,6 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    PetListView()
         .modelContainer(for: Pet_Identity.self, inMemory: true)
 }

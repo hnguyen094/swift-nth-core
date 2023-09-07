@@ -22,7 +22,7 @@ struct mainApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentWithLoadView()
+            ContentView()
         }
         .modelContainer(sharedModelContainer)
     }

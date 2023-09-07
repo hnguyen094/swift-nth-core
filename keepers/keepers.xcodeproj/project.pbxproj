@@ -16,7 +16,7 @@
 		B21911AA2AA7A764003CE806 /* keepersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21911A92AA7A764003CE806 /* keepersUITests.swift */; };
 		B21911AC2AA7A764003CE806 /* keepersUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21911AB2AA7A764003CE806 /* keepersUITestsLaunchTests.swift */; };
 		B21911C42AA7A7EB003CE806 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = B21911C32AA7A7EB003CE806 /* RealityKitContent */; };
-		B21911C62AA7A7EB003CE806 /* mainVRApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21911C52AA7A7EB003CE806 /* mainVRApp.swift */; };
+		B21911C62AA7A7EB003CE806 /* mainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21911C52AA7A7EB003CE806 /* mainApp.swift */; };
 		B21911C82AA7A7EB003CE806 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21911C72AA7A7EB003CE806 /* ContentView.swift */; };
 		B21911CA2AA7A7EB003CE806 /* ImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21911C92AA7A7EB003CE806 /* ImmersiveView.swift */; };
 		B21911CC2AA7A7ED003CE806 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B21911CB2AA7A7ED003CE806 /* Assets.xcassets */; };
@@ -24,7 +24,7 @@
 		B21911DA2AA7A7EE003CE806 /* keepers_togetherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21911D92AA7A7EE003CE806 /* keepers_togetherTests.swift */; };
 		B25F84C92AA7C04900526045 /* PetIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B219118E2AA7A762003CE806 /* PetIdentity.swift */; };
 		B25F84D32AA81BA400526045 /* WaitForCloudKitDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F84D22AA81BA400526045 /* WaitForCloudKitDataView.swift */; };
-		B25F84D52AA9075700526045 /* ContentWithLoadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F84D42AA9075700526045 /* ContentWithLoadView.swift */; };
+		B25F84D52AA9075700526045 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F84D42AA9075700526045 /* ContentView.swift */; };
 		B25F84D72AA909DB00526045 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F84D62AA909DB00526045 /* Styles.swift */; };
 		B25F84D82AA909DB00526045 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F84D62AA909DB00526045 /* Styles.swift */; };
 		B25F84D92AA909E100526045 /* WaitForCloudKitDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F84D22AA81BA400526045 /* WaitForCloudKitDataView.swift */; };
@@ -76,7 +76,7 @@
 		B21911AB2AA7A764003CE806 /* keepersUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keepersUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B21911BF2AA7A7EB003CE806 /* keepers-together.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "keepers-together.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B21911C22AA7A7EB003CE806 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
-		B21911C52AA7A7EB003CE806 /* mainVRApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainVRApp.swift; sourceTree = "<group>"; };
+		B21911C52AA7A7EB003CE806 /* mainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainApp.swift; sourceTree = "<group>"; };
 		B21911C72AA7A7EB003CE806 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B21911C92AA7A7EB003CE806 /* ImmersiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveView.swift; sourceTree = "<group>"; };
 		B21911CB2AA7A7ED003CE806 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -85,7 +85,7 @@
 		B21911D52AA7A7EE003CE806 /* keepers:togetherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "keepers:togetherTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B21911D92AA7A7EE003CE806 /* keepers_togetherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keepers_togetherTests.swift; sourceTree = "<group>"; };
 		B25F84D22AA81BA400526045 /* WaitForCloudKitDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitForCloudKitDataView.swift; sourceTree = "<group>"; };
-		B25F84D42AA9075700526045 /* ContentWithLoadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentWithLoadView.swift; sourceTree = "<group>"; };
+		B25F84D42AA9075700526045 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B25F84D62AA909DB00526045 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		B25F84DE2AA9159300526045 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		B25F84E22AA924BC00526045 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
@@ -215,7 +215,7 @@
 			children = (
 				B25F84CF2AA7F2AE00526045 /* boilerplate */,
 				B25F84D02AA7F2C600526045 /* views */,
-				B21911C52AA7A7EB003CE806 /* mainVRApp.swift */,
+				B21911C52AA7A7EB003CE806 /* mainApp.swift */,
 			);
 			path = "keepers-together";
 			sourceTree = "<group>";
@@ -258,19 +258,19 @@
 		B25F84CB2AA7F03400526045 /* views */ = {
 			isa = PBXGroup;
 			children = (
-				B25F84D42AA9075700526045 /* ContentWithLoadView.swift */,
+				B25F84D42AA9075700526045 /* ContentView.swift */,
 				B219118C2AA7A762003CE806 /* PetListView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
 		};
-		B25F84CE2AA7F26E00526045 /* SwiftData */ = {
+		B25F84CE2AA7F26E00526045 /* models */ = {
 			isa = PBXGroup;
 			children = (
 				B25F84E22AA924BC00526045 /* DataModel.swift */,
 				B219118E2AA7A762003CE806 /* PetIdentity.swift */,
 			);
-			path = SwiftData;
+			path = models;
 			sourceTree = "<group>";
 		};
 		B25F84CF2AA7F2AE00526045 /* boilerplate */ = {
@@ -306,7 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				B25F84D12AA81B4000526045 /* views */,
-				B25F84CE2AA7F26E00526045 /* SwiftData */,
+				B25F84CE2AA7F26E00526045 /* models */,
 				B25F84D62AA909DB00526045 /* Styles.swift */,
 				B25F84DE2AA9159300526045 /* Globals.swift */,
 			);
@@ -512,7 +512,7 @@
 				B25F84E32AA924BC00526045 /* DataModel.swift in Sources */,
 				B25F84D72AA909DB00526045 /* Styles.swift in Sources */,
 				B25F84DF2AA9159300526045 /* Globals.swift in Sources */,
-				B25F84D52AA9075700526045 /* ContentWithLoadView.swift in Sources */,
+				B25F84D52AA9075700526045 /* ContentView.swift in Sources */,
 				B25F84E62AA9287E00526045 /* ErrorView.swift in Sources */,
 				B219118B2AA7A762003CE806 /* mainApp.swift in Sources */,
 			);
@@ -545,7 +545,7 @@
 				B25F84E42AA924BC00526045 /* DataModel.swift in Sources */,
 				B21911C82AA7A7EB003CE806 /* ContentView.swift in Sources */,
 				B25F84E02AA9159300526045 /* Globals.swift in Sources */,
-				B21911C62AA7A7EB003CE806 /* mainVRApp.swift in Sources */,
+				B21911C62AA7A7EB003CE806 /* mainApp.swift in Sources */,
 				B25F84E72AA9287E00526045 /* ErrorView.swift in Sources */,
 				B21911CA2AA7A7EB003CE806 /* ImmersiveView.swift in Sources */,
 			);

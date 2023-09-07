@@ -9,14 +9,14 @@ import SwiftUI
 import SwiftData
 
 @main
-struct mainVRApp: App {
+struct mainApp: App {
     private let sharedModelContainer: ModelContainer
     
     init() {
         do {
             sharedModelContainer = try Shared.createModelContainer()
         } catch {
-            fatalError("Failed to load the model container. \(error)")
+            fatalError("Failed to load the model container (maybe CloudKit configuration error?) \(error)")
         }
     }
     
@@ -24,11 +24,11 @@ struct mainVRApp: App {
         WindowGroup {
             ContentView()
         }
-        //.modelContainer(sharedModelContainer)
+        .modelContainer(sharedModelContainer)
 
         ImmersiveSpace(id: "ImmersiveSpace") {
             ImmersiveView()
         }
-        //.modelContainer(sharedModelContainer)
+        .modelContainer(sharedModelContainer)
     }
 }

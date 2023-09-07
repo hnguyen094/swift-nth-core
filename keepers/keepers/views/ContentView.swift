@@ -1,5 +1,5 @@
 //
-//  ContentWithLoadView.swift
+//  ContentView.swift
 //  keepers
 //
 //  Created by Hung on 9/6/23.
@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct ContentWithLoadView: View {
+/// The entry point for all views for this app.
+struct ContentView: View {
     @State var loaded : Bool = false
     var body: some View {
         if (!loaded) {
@@ -19,5 +20,5 @@ struct ContentWithLoadView: View {
 }
 
 #Preview {
-    ContentWithLoadView()
+    ContentView()
 }

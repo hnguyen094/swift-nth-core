@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftData
-import CoreData
 
 struct PetListView: View {
     @Environment(\.modelContext) private var modelContext

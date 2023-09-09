@@ -8,11 +8,11 @@
 import SwiftUI
 import CoreData
 
-typealias CLContainer = NSPersistentCloudKitContainer
+typealias CKContainer = NSPersistentCloudKitContainer
 
 /// A loading screen that waits for CloudKit to publish its import event.
 ///
-/// Code partially taken from [here](https://alexanderlogan.co.uk/blog/wwdc23/08-cloudkit-swift-data).
+/// Code partially taken from [here](https://alexanderlogan.co.uk/blog/wwdc23/08-cloudkit-swift-data ).
 struct WaitForCloudKitDataView: View {
     @Binding var active: Bool
     
@@ -22,7 +22,7 @@ struct WaitForCloudKitDataView: View {
             Text("Fetching data...")
         }
         .onReceive(
-            NotificationCenter.default.publisher(for: CLContainer.eventChangedNotification)
+            NotificationCenter.default.publisher(for: CKContainer.eventChangedNotification)
                 .receive(on: DispatchQueue.main),
             perform: receive)
     }
@@ -30,14 +30,13 @@ struct WaitForCloudKitDataView: View {
     private func receive(notification : NotificationCenter.Publisher.Output) {
         guard 
             let evt = notification
-                .userInfo?[CLContainer.eventNotificationUserInfoKey]
-                as? CLContainer.Event,
+                .userInfo?[CKContainer.eventNotificationUserInfoKey]
+                as? CKContainer.Event,
             evt.endDate != nil,
             evt.type == .import
         else {
             return
         }
-        logger.info("Loaded iCloud data from container.")
         withAnimation {
             active = true
         }

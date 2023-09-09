@@ -2,28 +2,18 @@
 //  mainApp.swift
 //  keepers
 //
-//  Created by Hung on 9/5/23.
+//  Created by Hung on 9/9/23.
 //
 
 import SwiftUI
-import SwiftData
 
 @main
 struct mainApp: App {
-    private let sharedModelContainer: ModelContainer
-    
-    init() {
-        do {
-            sharedModelContainer = try Shared.createModelContainer()
-        } catch {
-            fatalError("Failed to load the model container. \(error)")
-        }
-    }
+    init() {}
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
         }
-        .modelContainer(sharedModelContainer)
     }
 }

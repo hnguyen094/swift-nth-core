@@ -13,11 +13,23 @@ struct Root: Reducer {
     }
     
     enum Action {
+        case settingsButtonTapped
         case destination(PresentationAction<Destination.Action>)
     }
     
-    func reduce(into state: inout State, action: Action) -> Effect<Action> {
-        return .none
+    var body: some ReducerOf<Self> {
+        Reduce<State, Action> { state, action in
+            switch action {
+            case .destination:
+                return .none
+            case .settingsButtonTapped:
+                state.destination = .settings(AudioSettings.State())
+                return .none
+            }
+        }
+        .ifLet(\.$destination, action: /Action.destination) {
+            Destination()
+        }
     }
     
     struct Destination: Reducer {

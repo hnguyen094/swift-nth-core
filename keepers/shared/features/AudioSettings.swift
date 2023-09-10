@@ -12,7 +12,8 @@ struct AudioSettings: Reducer {
     
     @Dependency(\.audioPlayer) var player
     @Dependency(\.logger) var logger
-
+    @Dependency(\.mainQueue) var mainQueue
+    
     struct State: Equatable {
         var volumes: Dictionary<Category, Float> = [:]
         
@@ -26,27 +27,23 @@ struct AudioSettings: Reducer {
     }
     
     enum Action {
-        case requestVolumeUpdate(Float, Category)
-        case volumeUpdateSuccess(Float, Category)
+        case changeVolumeUpdateValue(Float, Category)
+        case requestVolumeChange(Category)
     }
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
-        case .requestVolumeUpdate(let volume, let type):
-            if (state.volumes[type] == volume) {
-                return .none
-            }
-            
-            return .run { send in
-                await player.setVolume(volume, type)
-                await send(.volumeUpdateSuccess(volume, type))
-            } catch: { error, _ in
-                logger.error("Caught error while trying to set volume. [\(error)]")
-            }
-        case .volumeUpdateSuccess(let volume, let type):
-            logger.info("Volume of category [\(String(describing: type))] set to \(volume, attributes: "%.2f").")
-            state.volumes[type] = volume
+        case .changeVolumeUpdateValue(let volume, let category):
+            state.volumes[category] = volume
             return .none
+        case .requestVolumeChange(let category):
+            return .run { [volume = state.volumes[category]!] send in
+                await player.setVolume(volume, category)
+                logger.info("""
+                        Volume of category [\(String(describing: category))] \
+                        set to \(volume, attributes: "%.2f").
+                        """)
+            }
         }
     }
 }

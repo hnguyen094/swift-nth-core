@@ -13,6 +13,7 @@ struct Root: Reducer {
     }
     
     enum Action {
+        case startButtonTapped
         case settingsButtonTapped
         case destination(PresentationAction<Destination.Action>)
     }
@@ -25,6 +26,9 @@ struct Root: Reducer {
             case .settingsButtonTapped:
                 state.destination = .settings(AudioSettings.State())
                 return .none
+            case .startButtonTapped:
+                state.destination = .petsList(Pets.State())
+                return .none
             }
         }
         .ifLet(\.$destination, action: /Action.destination) {
@@ -34,13 +38,18 @@ struct Root: Reducer {
     
     struct Destination: Reducer {
         enum State {
+            case petsList(Pets.State)
             case settings(AudioSettings.State)
         }
         enum Action {
+            case petsList(Pets.Action)
             case settings(AudioSettings.Action)
         }
         
         var body: some ReducerOf<Self> {
+            Scope(state: /State.petsList, action: /Action.petsList) {
+                Pets()
+            }
             Scope(state: /State.settings, action: /Action.settings) {
                 AudioSettings()
             }

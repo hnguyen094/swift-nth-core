@@ -9,16 +9,19 @@ import SwiftUI
 import ComposableArchitecture
 
 struct RootView: View {
-    @Dependency(\.dataContainer) var dataContainer
     typealias Destination = Root.Destination
     let store: StoreOf<Root>
         
     var body: some View {
-        Button("Start") {}
-            .buttonStyle(RedCircleButtonStyle())
-        Button("Settings") {
-            store.send(Root.Action.settingsButtonTapped)
-        }
+        NavigationStack {
+            List {
+                Button("Send me to pets view") {
+                    store.send(Root.Action.startButtonTapped)
+                }
+                Button("Settings") {
+                    store.send(Root.Action.settingsButtonTapped)
+                }
+            }
             .sheet(
                 store: store.scope(state: \.$destination, action: { .destination($0) }),
                 state: /Destination.State.settings,
@@ -26,6 +29,15 @@ struct RootView: View {
             ) { store in
                 AudioSettingsView(store: store)
             }
+            .navigationTitle("Keepers")
+            .navigationDestination(
+                store: store.scope(state: \.$destination, action: { .destination($0) }),
+                state: /Destination.State.petsList,
+                action: Destination.Action.petsList
+            ) { store in
+                PetsView(store: store)
+            }
+        }
     }
 }
                    

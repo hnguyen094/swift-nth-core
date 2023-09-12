@@ -52,9 +52,7 @@ extension PersistentModelActor: DependencyKey {
         modelContainer: createContainer(from: ephemeralConfig))
     
     /// The types that are stored in the data model that fully describes the state of the application.
-    private static var schema = Schema([
-        PetIdentity.self
-    ])
+    private static var schema = Schema(versionedSchema: AppSchema.Latest.self)
     
     private static let liveConfig = ModelConfiguration(
         schema: schema,

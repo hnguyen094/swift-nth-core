@@ -34,6 +34,7 @@ extension AppSchema.V2 {
 }
 
 extension AppSchema.V1 {
+    typealias PetIdentity = Pet_Identity
     @Model
     final class Pet_Identity {
         /// Name of pet.

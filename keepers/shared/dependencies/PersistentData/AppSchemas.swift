@@ -10,6 +10,8 @@ import SwiftData
 import Dependencies
 
 enum AppSchema {
+    typealias Latest = V2
+
     enum V2: VersionedSchema {
         static var versionIdentifier: Schema.Version = Schema.Version(0, 0, 2)
         static var models: [any PersistentModel.Type] {

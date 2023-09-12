@@ -10,3 +10,10 @@ This will be the main product goes. Will contain an Xcode Workspace that contain
 `feat` = feature. Something that could be PR'd into `main` and adds a small functionality.<br>
 `fix` = bug fix. Fixes a small issue with the codebase.<br>
 `wip` = work-in-progress. Used for a big feature that might involve refactoring, large code changes, and/or will take a while to finish.
+
+### Updating Data Model
+To update the data model, you'll need to do a migration:
+- Create a new enum (e.g. `V10`) under `AppSchema`.
+- Extend this enum in the appropriate `@Model` classes that requires change, and modify the typealias at the top of the file accordingly.
+- Add new `Schema` and `MigrationStage` to `AppMigrationPlan`.
+- Modify `AppSchema.Latest` to the newest `Schema` version.

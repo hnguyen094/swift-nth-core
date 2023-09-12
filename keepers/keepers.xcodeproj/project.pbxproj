@@ -13,7 +13,6 @@
 		B217E9322AA97CC70048C37A /* shared_packages.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B217E9262AA97C1E0048C37A /* shared_packages.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B217E9362AA97CD00048C37A /* shared_packages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B217E9262AA97C1E0048C37A /* shared_packages.framework */; };
 		B217E9372AA97CD00048C37A /* shared_packages.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B217E9262AA97C1E0048C37A /* shared_packages.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B219118D2AA7A762003CE806 /* PetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B219118C2AA7A762003CE806 /* PetListView.swift */; };
 		B21911912AA7A764003CE806 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B21911902AA7A764003CE806 /* Assets.xcassets */; };
 		B21911952AA7A764003CE806 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B21911942AA7A764003CE806 /* Preview Assets.xcassets */; };
 		B21911A02AA7A764003CE806 /* keepersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B219119F2AA7A764003CE806 /* keepersTests.swift */; };
@@ -45,13 +44,21 @@
 		B2F9B4EB2AAD6C6E0070E4E3 /* AudioPlayerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4E92AAD6C6E0070E4E3 /* AudioPlayerClient.swift */; };
 		B2F9B4ED2AAD6CB00070E4E3 /* LoggerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4EC2AAD6CB00070E4E3 /* LoggerClient.swift */; };
 		B2F9B4EE2AAD6CB00070E4E3 /* LoggerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4EC2AAD6CB00070E4E3 /* LoggerClient.swift */; };
-		B2F9B4F02AAD6D580070E4E3 /* PersistentDataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4EF2AAD6D580070E4E3 /* PersistentDataClient.swift */; };
-		B2F9B4F12AAD6D580070E4E3 /* PersistentDataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4EF2AAD6D580070E4E3 /* PersistentDataClient.swift */; };
+		B2F9B4F02AAD6D580070E4E3 /* PersistentModelActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4EF2AAD6D580070E4E3 /* PersistentModelActor.swift */; };
+		B2F9B4F12AAD6D580070E4E3 /* PersistentModelActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4EF2AAD6D580070E4E3 /* PersistentModelActor.swift */; };
 		B2F9B4F32AAD75490070E4E3 /* AudioSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4F22AAD75490070E4E3 /* AudioSettingsView.swift */; };
 		B2F9B4F72AAD92280070E4E3 /* PetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4F62AAD92280070E4E3 /* PetsView.swift */; };
 		B2F9B4F92AAD92B80070E4E3 /* Pets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4F82AAD92B80070E4E3 /* Pets.swift */; };
 		B2F9B4FD2AAD99A60070E4E3 /* PetIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4FC2AAD99A60070E4E3 /* PetIdentity.swift */; };
 		B2F9B4FE2AAD99A60070E4E3 /* PetIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4FC2AAD99A60070E4E3 /* PetIdentity.swift */; };
+		B2F9B5002AAE5AEE0070E4E3 /* BindingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4FF2AAE5AEE0070E4E3 /* BindingExtensions.swift */; };
+		B2F9B5012AAE5AEE0070E4E3 /* BindingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4FF2AAE5AEE0070E4E3 /* BindingExtensions.swift */; };
+		B2F9B5062AAEDDB00070E4E3 /* TimeInvervalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B5052AAEDDB00070E4E3 /* TimeInvervalExtensions.swift */; };
+		B2F9B5072AAEDDB00070E4E3 /* TimeInvervalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B5052AAEDDB00070E4E3 /* TimeInvervalExtensions.swift */; };
+		B2F9B5092AAEEA9C0070E4E3 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B5082AAEEA9C0070E4E3 /* DateExtensions.swift */; };
+		B2F9B50A2AAEEA9C0070E4E3 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B5082AAEEA9C0070E4E3 /* DateExtensions.swift */; };
+		B2F9B50C2AB011000070E4E3 /* AppSchemas.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B50B2AB011000070E4E3 /* AppSchemas.swift */; };
+		B2F9B50D2AB011000070E4E3 /* AppSchemas.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B50B2AB011000070E4E3 /* AppSchemas.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,7 +129,6 @@
 		B217E9282AA97C1E0048C37A /* shared_packages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shared_packages.h; sourceTree = "<group>"; };
 		B217E92E2AA97C700048C37A /* swift-composable-architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "swift-composable-architecture"; path = "/Users/hung/Library/Developer/Xcode/DerivedData/keepers-eevzdgcsacduujdnuunuggyjjqgs/SourcePackages/checkouts/swift-composable-architecture"; sourceTree = "<absolute>"; };
 		B21911872AA7A762003CE806 /* keepers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = keepers.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B219118C2AA7A762003CE806 /* PetListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListView.swift; sourceTree = "<group>"; };
 		B21911902AA7A764003CE806 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B21911922AA7A764003CE806 /* keepers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = keepers.entitlements; sourceTree = "<group>"; };
 		B21911942AA7A764003CE806 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -154,11 +160,15 @@
 		B2F9B4E62AAD6C0E0070E4E3 /* UserPreferencesClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferencesClient.swift; sourceTree = "<group>"; };
 		B2F9B4E92AAD6C6E0070E4E3 /* AudioPlayerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerClient.swift; sourceTree = "<group>"; };
 		B2F9B4EC2AAD6CB00070E4E3 /* LoggerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerClient.swift; sourceTree = "<group>"; };
-		B2F9B4EF2AAD6D580070E4E3 /* PersistentDataClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentDataClient.swift; sourceTree = "<group>"; };
+		B2F9B4EF2AAD6D580070E4E3 /* PersistentModelActor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentModelActor.swift; sourceTree = "<group>"; };
 		B2F9B4F22AAD75490070E4E3 /* AudioSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSettingsView.swift; sourceTree = "<group>"; };
 		B2F9B4F62AAD92280070E4E3 /* PetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsView.swift; sourceTree = "<group>"; };
 		B2F9B4F82AAD92B80070E4E3 /* Pets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pets.swift; sourceTree = "<group>"; };
 		B2F9B4FC2AAD99A60070E4E3 /* PetIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetIdentity.swift; sourceTree = "<group>"; };
+		B2F9B4FF2AAE5AEE0070E4E3 /* BindingExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExtensions.swift; sourceTree = "<group>"; };
+		B2F9B5052AAEDDB00070E4E3 /* TimeInvervalExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInvervalExtensions.swift; sourceTree = "<group>"; };
+		B2F9B5082AAEEA9C0070E4E3 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		B2F9B50B2AB011000070E4E3 /* AppSchemas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSchemas.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,7 +268,6 @@
 				B2B51A102AAC561B0024E3BA /* views */,
 				B2B51A092AAC4BB90024E3BA /* features */,
 				B25F84CA2AA7EC8A00526045 /* boilerplate */,
-				B25F84CB2AA7F03400526045 /* views_deprecated */,
 				B2B51A0E2AAC55CE0024E3BA /* mainApp.swift */,
 			);
 			path = keepers;
@@ -354,14 +363,6 @@
 			name = boilerplate;
 			sourceTree = "<group>";
 		};
-		B25F84CB2AA7F03400526045 /* views_deprecated */ = {
-			isa = PBXGroup;
-			children = (
-				B219118C2AA7A762003CE806 /* PetListView.swift */,
-			);
-			path = views_deprecated;
-			sourceTree = "<group>";
-		};
 		B25F84CF2AA7F2AE00526045 /* boilerplate */ = {
 			isa = PBXGroup;
 			children = (
@@ -434,6 +435,9 @@
 			isa = PBXGroup;
 			children = (
 				B2F9B4E22AAD653C0070E4E3 /* ViewExtensions.swift */,
+				B2F9B4FF2AAE5AEE0070E4E3 /* BindingExtensions.swift */,
+				B2F9B5052AAEDDB00070E4E3 /* TimeInvervalExtensions.swift */,
+				B2F9B5082AAEEA9C0070E4E3 /* DateExtensions.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -452,7 +456,8 @@
 		B2F9B4F52AAD91770070E4E3 /* PersistentData */ = {
 			isa = PBXGroup;
 			children = (
-				B2F9B4EF2AAD6D580070E4E3 /* PersistentDataClient.swift */,
+				B2F9B50B2AB011000070E4E3 /* AppSchemas.swift */,
+				B2F9B4EF2AAD6D580070E4E3 /* PersistentModelActor.swift */,
 				B2F9B4FC2AAD99A60070E4E3 /* PetIdentity.swift */,
 			);
 			path = PersistentData;
@@ -709,15 +714,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2F9B4EA2AAD6C6E0070E4E3 /* AudioPlayerClient.swift in Sources */,
+				B2F9B5092AAEEA9C0070E4E3 /* DateExtensions.swift in Sources */,
+				B2F9B5002AAE5AEE0070E4E3 /* BindingExtensions.swift in Sources */,
 				B2EC9FF92AABAC630005D0AB /* Root.swift in Sources */,
 				B2B51A0B2AAC4BDF0024E3BA /* AudioSettings.swift in Sources */,
 				B2B51A0F2AAC55CE0024E3BA /* mainApp.swift in Sources */,
 				B2F9B4F32AAD75490070E4E3 /* AudioSettingsView.swift in Sources */,
 				B2F9B4E72AAD6C0E0070E4E3 /* UserPreferencesClient.swift in Sources */,
-				B2F9B4F02AAD6D580070E4E3 /* PersistentDataClient.swift in Sources */,
+				B2F9B50C2AB011000070E4E3 /* AppSchemas.swift in Sources */,
+				B2F9B4F02AAD6D580070E4E3 /* PersistentModelActor.swift in Sources */,
+				B2F9B5062AAEDDB00070E4E3 /* TimeInvervalExtensions.swift in Sources */,
 				B25F84D32AA81BA400526045 /* WaitForCloudKitDataView.swift in Sources */,
 				B2F9B4FD2AAD99A60070E4E3 /* PetIdentity.swift in Sources */,
-				B219118D2AA7A762003CE806 /* PetListView.swift in Sources */,
 				B2F9B4ED2AAD6CB00070E4E3 /* LoggerClient.swift in Sources */,
 				B2F9B4F92AAD92B80070E4E3 /* Pets.swift in Sources */,
 				B25F84D72AA909DB00526045 /* Styles.swift in Sources */,
@@ -749,6 +757,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2F9B50D2AB011000070E4E3 /* AppSchemas.swift in Sources */,
 				B2F9B4EB2AAD6C6E0070E4E3 /* AudioPlayerClient.swift in Sources */,
 				B25F84D82AA909DB00526045 /* Styles.swift in Sources */,
 				B25F84D92AA909E100526045 /* WaitForCloudKitDataView.swift in Sources */,
@@ -756,12 +765,15 @@
 				B2B51A0C2AAC4BDF0024E3BA /* AudioSettings.swift in Sources */,
 				B2F9B4E82AAD6C0E0070E4E3 /* UserPreferencesClient.swift in Sources */,
 				B2F9B4EE2AAD6CB00070E4E3 /* LoggerClient.swift in Sources */,
+				B2F9B5012AAE5AEE0070E4E3 /* BindingExtensions.swift in Sources */,
 				B2F9B4E42AAD653C0070E4E3 /* ViewExtensions.swift in Sources */,
 				B21911C62AA7A7EB003CE806 /* mainApp.swift in Sources */,
 				B2F9B4FE2AAD99A60070E4E3 /* PetIdentity.swift in Sources */,
 				B25F84E72AA9287E00526045 /* ErrorView.swift in Sources */,
+				B2F9B5072AAEDDB00070E4E3 /* TimeInvervalExtensions.swift in Sources */,
+				B2F9B50A2AAEEA9C0070E4E3 /* DateExtensions.swift in Sources */,
 				B21911CA2AA7A7EB003CE806 /* ImmersiveView.swift in Sources */,
-				B2F9B4F12AAD6D580070E4E3 /* PersistentDataClient.swift in Sources */,
+				B2F9B4F12AAD6D580070E4E3 /* PersistentModelActor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

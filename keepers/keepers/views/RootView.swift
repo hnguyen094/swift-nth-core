@@ -14,14 +14,15 @@ struct RootView: View {
         
     var body: some View {
         NavigationStack {
-            List {
-                Button("Send me to pets view") {
+                Button("Pets") {
                     store.send(Root.Action.startButtonTapped)
                 }
+                .buttonStyle(.borderedProminent)
+            
                 Button("Settings") {
                     store.send(Root.Action.settingsButtonTapped)
                 }
-            }
+                .buttonStyle(.bordered)
             .sheet(
                 store: store.scope(state: \.$destination, action: { .destination($0) }),
                 state: /Destination.State.settings,

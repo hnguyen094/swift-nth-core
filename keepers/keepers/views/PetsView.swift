@@ -15,78 +15,92 @@ struct PetsView: View {
     
     var body: some View {
         NavigationStack {
-            WithViewStore(self.store, observe: \.pets) { viewStore in
-                List {
-                    ForEach(Array(viewStore.state.enumerated()), id: \.element.id) {i, pet in
-                        Button("Edit \(pet.name)") {
+            List {
+                WithViewStore(self.store, observe: \.pets) { viewStore in
+                    ForEach(Array(viewStore.state.enumerated()), id: \.element.id)
+                    { i, pet in
+                        Button("\(pet.name) (\(pet.birthDate.elapsedTimeDescription) old)") {
                             store.send(.editPetTapped(i))
                         }
                     }
                 }
-                .navigationTitle("Pets")
-                .popover(
-                    store: store.scope(state: \.$destination, action: { .destination($0) }),
-                    state: /Destination.State.addOrEdit,
-                    action: Destination.Action.addOrEdit
-                ) { store in
-                    PetAddOrEditView(store: store)
+                .onDelete { store.send(.deletePetTapped($0)) }
+            }
+            .navigationTitle("Edit Pets")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    EditButton()
                 }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: { store.send(.addPetTapped) } ) {
-                            Label("Add pet", systemImage: "plus")
-                        }
+                ToolbarItem {
+                    Button(action: { store.send(.addPetTapped) } ) {
+                        Label("Add pet", systemImage: "plus")
                     }
                 }
             }
+            .popover(
+                store: store.scope(
+                    state: \.$destination,
+                    action: { .destination($0) }),
+                state: /Destination.State.addOrEdit,
+                action: Destination.Action.addOrEdit,
+                content: PetAddOrEditView.init(store:))
         }
     }
 }
 
 struct PetAddOrEditView: View {
     let store: StoreOf<AddOrEditPet>
+    
+    private func createPersonalityAttributeSlider(
+        viewStore: ViewStoreOf<AddOrEditPet>,
+        keyPath: WritableKeyPath<PetPersonality, Int8>) -> some View {
+            return LabeledContent {
+                Slider(
+                    value: .convert(from: viewStore.binding(
+                        get: { $0.personality[keyPath: keyPath] },
+                        send: { .updatePersonality(keyPath, $0) })),
+                    in: Float(Int8.min)...Float(Int8.max),
+                    step: 1,
+                    label: {
+                        Text("\(String(describing: keyPath))")
+                    })
+            } label: {
+                Text("\(String(describing: keyPath.customDumpDescription))")
+            }
+            
+    }
+    
     var body: some View {
         NavigationStack {
             WithViewStore(self.store, observe: identity) { viewStore in
-                TextField(text: viewStore.binding(
-                    get: \.name,
-                    send: { .set(\.$name, $0) }), prompt: Text("potato")) {
+                List() {
+                    LabeledContent {
+                        TextField("Name",
+                            text: viewStore.binding(get: \.name, send: { .set(\.$name, $0) }),
+                            prompt: Text("Add a pet name"))
+                    } label: {
                         Text("Name")
                     }
-                
-                DatePicker("Birth Date", selection: viewStore.binding(
-                    get: \.birthDate,
-                    send: { .set(\.$birthDate, $0) }))
-                
-                Stepper(value: viewStore.binding(
-                    get: \.personality.mind,
-                    send: { .updatePersonality(
-                        $0,
-                        viewStore.personality.nature,
-                        viewStore.personality.energy) })) {
-                            Text("\(viewStore.personality.mind)")
-                        }
-                Stepper(value: viewStore.binding(
-                    get: \.personality.nature,
-                    send: { .updatePersonality(
-                        viewStore.personality.mind,
-                        $0,
-                        viewStore.personality.energy) })) {
-                            Text("\(viewStore.personality.nature)")
-                        }
-                Stepper(value: viewStore.binding(
-                    get: \.personality.energy,
-                    send: { .updatePersonality(
-                        viewStore.personality.mind,
-                        viewStore.personality.nature,
-                        $0) })) {
-                            Text("\(viewStore.personality.energy)")
-                        }
-                Button("Submit") {
-                    viewStore.send(.submit)
+                    .multilineTextAlignment(.trailing)
+                    
+                    DatePicker("Birth Date", selection: viewStore.binding(
+                        get: \.birthDate,
+                        send: { .set(\.$birthDate, $0) }))
+                    
+                    Section {
+                        createPersonalityAttributeSlider(viewStore: viewStore, keyPath: \.mind)
+                        createPersonalityAttributeSlider(viewStore: viewStore, keyPath: \.nature)
+                        createPersonalityAttributeSlider(viewStore: viewStore, keyPath: \.energy)
+                    } header: {
+                        Text("Personality traits")
+                    }
+                    Button("Submit") {
+                        viewStore.send(.submit)
+                    }
                 }
-
+                .navigationTitle("Pet Modifications")
             }
+            .buttonStyle(.borderedProminent)
         }
     }
 }

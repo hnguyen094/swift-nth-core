@@ -14,7 +14,6 @@ typealias PetPersonality = AppSchema.V2.PetPersonality
 extension AppSchema.V2 {
     typealias PetPersonality = AppSchema.V1.PetPersonality
     /// Pet Identity used with SwiftData to create a persistent data model.
-    @Attribute(originalName: "Pet_Identity")
     @Model
     final class PetIdentity {
         /// Name of pet.

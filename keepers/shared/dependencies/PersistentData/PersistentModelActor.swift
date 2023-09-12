@@ -69,16 +69,16 @@ extension PersistentModelActor: DependencyKey {
     )
     
     /// Creates a model container for use with CloudKit.
-    private static func createContainer(
-        from config: ModelConfiguration
-    ) -> ModelContainer {
+    private static func createContainer(from config: ModelConfiguration) -> ModelContainer {
+        @Dependency(\.logger) var logger
         do {
             return try ModelContainer(
                 for: schema,
                 migrationPlan: AppSchema.AppMigrationPlan.self,
                 configurations: [config])
         } catch {
-            fatalError("Failed to load the model container. \(error)")
+            logger.error("Failed to load the model container. \(error)")
         }
+        return try! ModelContainer(for: PetIdentity.self)
     }
 }

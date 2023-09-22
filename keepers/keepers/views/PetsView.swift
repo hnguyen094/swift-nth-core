@@ -10,6 +10,8 @@ import ComposableArchitecture
 import Dependencies
 
 struct PetsView: View {
+    @Environment(\.editMode) private var editMode
+
     typealias Destination = Pets.Destination
     let store: StoreOf<Pets>
     
@@ -19,8 +21,14 @@ struct PetsView: View {
                 WithViewStore(self.store, observe: \.pets) { viewStore in
                     ForEach(Array(viewStore.state.enumerated()), id: \.element.id)
                     { i, pet in
-                        Button("\(pet.name) (\(pet.birthDate.elapsedTimeDescription) old)") {
-                            store.send(.editPetTapped(i))
+                        if editMode?.wrappedValue.isEditing == true {
+                            Button("Edit \(pet.name)") {
+                                store.send(.editPetTapped(i))
+                            }
+                        } else {
+                            Button("\(pet.name) (\(pet.birthDate.elapsedTimeDescription) old)") {
+                                store.send(.displayPetTapped(i))
+                            }
                         }
                     }
                 }
@@ -44,63 +52,13 @@ struct PetsView: View {
                 state: /Destination.State.addOrEdit,
                 action: Destination.Action.addOrEdit,
                 content: PetAddOrEditView.init(store:))
-        }
-    }
-}
-
-struct PetAddOrEditView: View {
-    let store: StoreOf<AddOrEditPet>
-    
-    private func createPersonalityAttributeSlider(
-        viewStore: ViewStoreOf<AddOrEditPet>,
-        keyPath: WritableKeyPath<PetPersonality, Int8>) -> some View {
-            return LabeledContent {
-                Slider(
-                    value: .convert(from: viewStore.binding(
-                        get: { $0.personality[keyPath: keyPath] },
-                        send: { .updatePersonality(keyPath, $0) })),
-                    in: Float(Int8.min)...Float(Int8.max),
-                    step: 1,
-                    label: {
-                        Text("\(String(describing: keyPath))")
-                    })
-            } label: {
-                Text("\(String(describing: keyPath.customDumpDescription))")
-            }
-            
-    }
-    
-    var body: some View {
-        NavigationStack {
-            WithViewStore(self.store, observe: identity) { viewStore in
-                List() {
-                    LabeledContent {
-                        TextField("Name",
-                            text: viewStore.binding(get: \.name, send: { .set(\.$name, $0) }),
-                            prompt: Text("Add a pet name"))
-                    } label: {
-                        Text("Name")
-                    }
-                    .multilineTextAlignment(.trailing)
-                    
-                    DatePicker("Birth Date", selection: viewStore.binding(
-                        get: \.birthDate,
-                        send: { .set(\.$birthDate, $0) }))
-                    
-                    Section {
-                        createPersonalityAttributeSlider(viewStore: viewStore, keyPath: \.mind)
-                        createPersonalityAttributeSlider(viewStore: viewStore, keyPath: \.nature)
-                        createPersonalityAttributeSlider(viewStore: viewStore, keyPath: \.energy)
-                    } header: {
-                        Text("Personality traits")
-                    }
-                    Button("Submit") {
-                        viewStore.send(.submit)
-                    }
-                }
-                .navigationTitle("Pet Modifications")
-            }
-            .buttonStyle(.borderedProminent)
+            .popover(
+                store: store.scope(
+                    state: \.$destination,
+                    action: { .destination($0) }),
+                state: /Destination.State.viewInAR,
+                action: Destination.Action.viewInAR,
+                content: PetDisplayView.init(store:))
         }
     }
 }

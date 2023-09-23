@@ -26,18 +26,15 @@ struct RootView: View {
             .sheet(
                 store: store.scope(state: \.$destination, action: { .destination($0) }),
                 state: /Destination.State.settings,
-                action: Destination.Action.settings
-            ) { store in
-                AudioSettingsView(store: store)
-            }
-            .navigationTitle("Keepers")
+                action: Destination.Action.settings,
+                content: AudioSettingsView.init(store:))
             .navigationDestination(
                 store: store.scope(state: \.$destination, action: { .destination($0) }),
                 state: /Destination.State.petsList,
-                action: Destination.Action.petsList
-            ) { store in
-                PetsView(store: store)
-            }
+                action: Destination.Action.petsList,
+                destination: PetListView.init(store:))
+            
+            .navigationTitle("Keepers")
         }
     }
 }

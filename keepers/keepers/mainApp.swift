@@ -14,7 +14,9 @@ struct mainApp: App {
         Root()
     }
 
-    init() {}
+    init() {
+        AppSystem.SimpleBounce.registerSystem()
+    }
     
     var body: some Scene {
         WindowGroup {

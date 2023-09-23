@@ -10,19 +10,22 @@ import Foundation
 extension Date {
     /// A description of the calendar elapsed time. This is intended for describing age.
     ///
-    /// Compatible range of time units: year -- minute.
+    /// Compatible range of time units: era -- minute.
     ///
-    /// Example -- "5 years" or "1 minute".
-    var elapsedTimeDescription: String {
+    /// Example -- "about 5 years" or "about 1 minute".
+    var approximateElapsedTimeDescription: String {
         let pluralS: (Int) -> String = { $0 > 1 ? "s" : "" }
         func helper(_ v: Int,_ unit: String, usePlural: Bool = true) -> String {
-            return "\(v) \(unit)\(pluralS(v))"
+            return "about \(v) \(unit)\(pluralS(v))"
         }
 
         let deltas = Calendar.current.dateComponents(
-            [.minute, .hour, .day, .weekOfMonth, .month, .year],
+            [.minute, .hour, .day, .weekOfMonth, .month, .year, .era],
             from: self,
             to: Date.now)
+        if (deltas.era! > 0) {
+            return helper(deltas.era!, "era")
+        }
         if (deltas.year! > 0) {
             return helper(deltas.year!, "year")
         }
@@ -41,6 +44,6 @@ extension Date {
         if (deltas.minute! > 0) {
             return helper(deltas.minute!, "minute")
         }
-        return "< a minute"
+        return "less than a minute"
     }
 }

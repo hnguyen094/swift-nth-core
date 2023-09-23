@@ -31,8 +31,14 @@
 		B25819F92ABD4B5F003B9C90 /* PetAddOrEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25819F72ABD4B5F003B9C90 /* PetAddOrEditView.swift */; };
 		B25819FB2ABD4BDE003B9C90 /* AddOrEditPet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25819FA2ABD4BDE003B9C90 /* AddOrEditPet.swift */; };
 		B25819FC2ABD4BDE003B9C90 /* AddOrEditPet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25819FA2ABD4BDE003B9C90 /* AddOrEditPet.swift */; };
-		B2581A042ABD60AC003B9C90 /* koppenheim.skybox in Resources */ = {isa = PBXBuildFile; fileRef = B2581A032ABD60AC003B9C90 /* koppenheim.skybox */; };
-		B2581A052ABD60AC003B9C90 /* koppenheim.skybox in Resources */ = {isa = PBXBuildFile; fileRef = B2581A032ABD60AC003B9C90 /* koppenheim.skybox */; };
+		B2581A042ABD60AC003B9C90 /* kloppenheim_06.skybox in Resources */ = {isa = PBXBuildFile; fileRef = B2581A032ABD60AC003B9C90 /* kloppenheim_06.skybox */; };
+		B2581A052ABD60AC003B9C90 /* kloppenheim_06.skybox in Resources */ = {isa = PBXBuildFile; fileRef = B2581A032ABD60AC003B9C90 /* kloppenheim_06.skybox */; };
+		B2581A072ABD7DF1003B9C90 /* PetDisplayView.RKView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2581A062ABD7DF1003B9C90 /* PetDisplayView.RKView.swift */; };
+		B2581A0F2ABE7967003B9C90 /* SimpleBounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2581A0E2ABE7967003B9C90 /* SimpleBounce.swift */; };
+		B2581A142ABE99C2003B9C90 /* AppSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2581A132ABE99C2003B9C90 /* AppSystem.swift */; };
+		B2581A152ABE99C2003B9C90 /* AppSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2581A132ABE99C2003B9C90 /* AppSystem.swift */; };
+		B2581A172ABE99D6003B9C90 /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2581A162ABE99D6003B9C90 /* AppComponent.swift */; };
+		B2581A182ABE99D6003B9C90 /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2581A162ABE99D6003B9C90 /* AppComponent.swift */; };
 		B25F84D32AA81BA400526045 /* WaitForCloudKitDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F84D22AA81BA400526045 /* WaitForCloudKitDataView.swift */; };
 		B25F84D72AA909DB00526045 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F84D62AA909DB00526045 /* Styles.swift */; };
 		B25F84D82AA909DB00526045 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F84D62AA909DB00526045 /* Styles.swift */; };
@@ -57,7 +63,7 @@
 		B2F9B4F02AAD6D580070E4E3 /* PersistentModelActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4EF2AAD6D580070E4E3 /* PersistentModelActor.swift */; };
 		B2F9B4F12AAD6D580070E4E3 /* PersistentModelActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4EF2AAD6D580070E4E3 /* PersistentModelActor.swift */; };
 		B2F9B4F32AAD75490070E4E3 /* AudioSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4F22AAD75490070E4E3 /* AudioSettingsView.swift */; };
-		B2F9B4F72AAD92280070E4E3 /* PetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4F62AAD92280070E4E3 /* PetsView.swift */; };
+		B2F9B4F72AAD92280070E4E3 /* PetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4F62AAD92280070E4E3 /* PetListView.swift */; };
 		B2F9B4F92AAD92B80070E4E3 /* Pets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4F82AAD92B80070E4E3 /* Pets.swift */; };
 		B2F9B4FD2AAD99A60070E4E3 /* PetIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4FC2AAD99A60070E4E3 /* PetIdentity.swift */; };
 		B2F9B4FE2AAD99A60070E4E3 /* PetIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4FC2AAD99A60070E4E3 /* PetIdentity.swift */; };
@@ -161,7 +167,11 @@
 		B25819F32ABD2B2A003B9C90 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		B25819F72ABD4B5F003B9C90 /* PetAddOrEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetAddOrEditView.swift; sourceTree = "<group>"; };
 		B25819FA2ABD4BDE003B9C90 /* AddOrEditPet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditPet.swift; sourceTree = "<group>"; };
-		B2581A032ABD60AC003B9C90 /* koppenheim.skybox */ = {isa = PBXFileReference; lastKnownFileType = file.skybox; path = koppenheim.skybox; sourceTree = "<group>"; };
+		B2581A032ABD60AC003B9C90 /* kloppenheim_06.skybox */ = {isa = PBXFileReference; lastKnownFileType = file.skybox; path = kloppenheim_06.skybox; sourceTree = "<group>"; };
+		B2581A062ABD7DF1003B9C90 /* PetDisplayView.RKView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDisplayView.RKView.swift; sourceTree = "<group>"; };
+		B2581A0E2ABE7967003B9C90 /* SimpleBounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBounce.swift; sourceTree = "<group>"; };
+		B2581A132ABE99C2003B9C90 /* AppSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSystem.swift; sourceTree = "<group>"; };
+		B2581A162ABE99D6003B9C90 /* AppComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
 		B25F84D22AA81BA400526045 /* WaitForCloudKitDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitForCloudKitDataView.swift; sourceTree = "<group>"; };
 		B25F84D62AA909DB00526045 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		B25F84E52AA9287E00526045 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
@@ -178,7 +188,7 @@
 		B2F9B4EC2AAD6CB00070E4E3 /* LoggerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerClient.swift; sourceTree = "<group>"; };
 		B2F9B4EF2AAD6D580070E4E3 /* PersistentModelActor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentModelActor.swift; sourceTree = "<group>"; };
 		B2F9B4F22AAD75490070E4E3 /* AudioSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSettingsView.swift; sourceTree = "<group>"; };
-		B2F9B4F62AAD92280070E4E3 /* PetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsView.swift; sourceTree = "<group>"; };
+		B2F9B4F62AAD92280070E4E3 /* PetListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListView.swift; sourceTree = "<group>"; };
 		B2F9B4F82AAD92B80070E4E3 /* Pets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pets.swift; sourceTree = "<group>"; };
 		B2F9B4FC2AAD99A60070E4E3 /* PetIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetIdentity.swift; sourceTree = "<group>"; };
 		B2F9B4FF2AAE5AEE0070E4E3 /* BindingExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExtensions.swift; sourceTree = "<group>"; };
@@ -281,6 +291,7 @@
 		B21911892AA7A762003CE806 /* keepers */ = {
 			isa = PBXGroup;
 			children = (
+				B2581A0D2ABE7932003B9C90 /* ecs */,
 				B2B51A102AAC561B0024E3BA /* views */,
 				B2B51A092AAC4BB90024E3BA /* features */,
 				B25F84CA2AA7EC8A00526045 /* boilerplate */,
@@ -368,20 +379,29 @@
 			path = "keepers-togetherTests";
 			sourceTree = "<group>";
 		};
-		B25819F62ABD2BBF003B9C90 /* ARViews */ = {
-			isa = PBXGroup;
-			children = (
-				B293EB132ABCFAE500ADB49A /* PetDisplayView.swift */,
-			);
-			name = ARViews;
-			sourceTree = "<group>";
-		};
 		B2581A022ABD60A1003B9C90 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				B2581A032ABD60AC003B9C90 /* koppenheim.skybox */,
+				B2581A032ABD60AC003B9C90 /* kloppenheim_06.skybox */,
 			);
 			path = resources;
+			sourceTree = "<group>";
+		};
+		B2581A0D2ABE7932003B9C90 /* ecs */ = {
+			isa = PBXGroup;
+			children = (
+				B2581A0E2ABE7967003B9C90 /* SimpleBounce.swift */,
+			);
+			path = ecs;
+			sourceTree = "<group>";
+		};
+		B2581A122ABE99AF003B9C90 /* ecs */ = {
+			isa = PBXGroup;
+			children = (
+				B2581A132ABE99C2003B9C90 /* AppSystem.swift */,
+				B2581A162ABE99D6003B9C90 /* AppComponent.swift */,
+			);
+			path = ecs;
 			sourceTree = "<group>";
 		};
 		B25F84CA2AA7EC8A00526045 /* boilerplate */ = {
@@ -427,6 +447,7 @@
 		B27F6E2D2AA7B0C000B90F08 /* shared */ = {
 			isa = PBXGroup;
 			children = (
+				B2581A122ABE99AF003B9C90 /* ecs */,
 				B2581A022ABD60A1003B9C90 /* resources */,
 				B2F9B4E12AAD65140070E4E3 /* extensions */,
 				B2F9B4E52AAD6BE80070E4E3 /* dependencies */,
@@ -459,10 +480,11 @@
 		B2B51A102AAC561B0024E3BA /* views */ = {
 			isa = PBXGroup;
 			children = (
-				B25819F62ABD2BBF003B9C90 /* ARViews */,
+				B293EB132ABCFAE500ADB49A /* PetDisplayView.swift */,
+				B2581A062ABD7DF1003B9C90 /* PetDisplayView.RKView.swift */,
 				B2B51A112AAC56260024E3BA /* RootView.swift */,
 				B2F9B4F22AAD75490070E4E3 /* AudioSettingsView.swift */,
-				B2F9B4F62AAD92280070E4E3 /* PetsView.swift */,
+				B2F9B4F62AAD92280070E4E3 /* PetListView.swift */,
 				B25819F72ABD4B5F003B9C90 /* PetAddOrEditView.swift */,
 			);
 			path = views;
@@ -704,7 +726,7 @@
 			files = (
 				B21911952AA7A764003CE806 /* Preview Assets.xcassets in Resources */,
 				B21911912AA7A764003CE806 /* Assets.xcassets in Resources */,
-				B2581A042ABD60AC003B9C90 /* koppenheim.skybox in Resources */,
+				B2581A042ABD60AC003B9C90 /* kloppenheim_06.skybox in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -728,7 +750,7 @@
 			files = (
 				B21911CF2AA7A7ED003CE806 /* Preview Assets.xcassets in Resources */,
 				B21911CC2AA7A7ED003CE806 /* Assets.xcassets in Resources */,
-				B2581A052ABD60AC003B9C90 /* koppenheim.skybox in Resources */,
+				B2581A052ABD60AC003B9C90 /* kloppenheim_06.skybox in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -758,6 +780,7 @@
 				B2F9B5002AAE5AEE0070E4E3 /* BindingExtensions.swift in Sources */,
 				B2EC9FF92AABAC630005D0AB /* Root.swift in Sources */,
 				B2B51A0B2AAC4BDF0024E3BA /* AudioSettings.swift in Sources */,
+				B2581A172ABE99D6003B9C90 /* AppComponent.swift in Sources */,
 				B2B51A0F2AAC55CE0024E3BA /* mainApp.swift in Sources */,
 				B2F9B4F32AAD75490070E4E3 /* AudioSettingsView.swift in Sources */,
 				B293EB142ABCFAE500ADB49A /* PetDisplayView.swift in Sources */,
@@ -767,17 +790,20 @@
 				B25819FB2ABD4BDE003B9C90 /* AddOrEditPet.swift in Sources */,
 				B2F9B4F02AAD6D580070E4E3 /* PersistentModelActor.swift in Sources */,
 				B2F9B5062AAEDDB00070E4E3 /* TimeInvervalExtensions.swift in Sources */,
+				B2581A072ABD7DF1003B9C90 /* PetDisplayView.RKView.swift in Sources */,
 				B25F84D32AA81BA400526045 /* WaitForCloudKitDataView.swift in Sources */,
+				B2581A0F2ABE7967003B9C90 /* SimpleBounce.swift in Sources */,
 				B2F9B4FD2AAD99A60070E4E3 /* PetIdentity.swift in Sources */,
 				B25819F42ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */,
 				B2F9B4ED2AAD6CB00070E4E3 /* LoggerClient.swift in Sources */,
 				B2F9B4F92AAD92B80070E4E3 /* Pets.swift in Sources */,
+				B2581A142ABE99C2003B9C90 /* AppSystem.swift in Sources */,
 				B25F84D72AA909DB00526045 /* Styles.swift in Sources */,
 				B2B51A122AAC56260024E3BA /* RootView.swift in Sources */,
 				B25F84E62AA9287E00526045 /* ErrorView.swift in Sources */,
 				B25819F82ABD4B5F003B9C90 /* PetAddOrEditView.swift in Sources */,
 				B2F9B4E32AAD653C0070E4E3 /* ViewExtensions.swift in Sources */,
-				B2F9B4F72AAD92280070E4E3 /* PetsView.swift in Sources */,
+				B2F9B4F72AAD92280070E4E3 /* PetListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -809,7 +835,9 @@
 				B25F84D92AA909E100526045 /* WaitForCloudKitDataView.swift in Sources */,
 				B21911C82AA7A7EB003CE806 /* ContentView.swift in Sources */,
 				B25819FC2ABD4BDE003B9C90 /* AddOrEditPet.swift in Sources */,
+				B2581A152ABE99C2003B9C90 /* AppSystem.swift in Sources */,
 				B2B51A0C2AAC4BDF0024E3BA /* AudioSettings.swift in Sources */,
+				B2581A182ABE99D6003B9C90 /* AppComponent.swift in Sources */,
 				B2F9B4E82AAD6C0E0070E4E3 /* UserPreferencesClient.swift in Sources */,
 				B2F9B4EE2AAD6CB00070E4E3 /* LoggerClient.swift in Sources */,
 				B2F9B5012AAE5AEE0070E4E3 /* BindingExtensions.swift in Sources */,

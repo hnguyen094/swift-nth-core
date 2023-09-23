@@ -20,6 +20,7 @@ struct PetDisplay: Reducer {
     enum Action {
         case changeSkybox(String)
         case skyboxError(Error)
+        case noop
     }
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
@@ -29,6 +30,8 @@ struct PetDisplay: Reducer {
             return .none
         case .skyboxError(let error):
             logger.error("Failed loading skybox. (\(error))")
+            return .none
+        case .noop:
             return .none
         }
         

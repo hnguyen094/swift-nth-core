@@ -12,6 +12,7 @@ import SwiftData
 
 struct Pets: Reducer {
     @Dependency(\.modelContextActor) var modelContext
+    @Dependency(\.resources) var resources
     @Dependency(\.logger) var logger
 
     struct State: Equatable {
@@ -79,7 +80,7 @@ struct Pets: Reducer {
             case .displayPetTapped(let index):
                 state.destination = .viewInAR(PetDisplay.State(
                     pet: state.pets[index],
-                    skyboxName: "kloppenheim_06_2k"))
+                    skyboxName: resources.skybox))
                 return .none
             }
         }

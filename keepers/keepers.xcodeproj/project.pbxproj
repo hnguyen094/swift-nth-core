@@ -25,6 +25,10 @@
 		B21911CC2AA7A7ED003CE806 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B21911CB2AA7A7ED003CE806 /* Assets.xcassets */; };
 		B21911CF2AA7A7ED003CE806 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B21911CE2AA7A7ED003CE806 /* Preview Assets.xcassets */; };
 		B21911DA2AA7A7EE003CE806 /* keepers_togetherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21911D92AA7A7EE003CE806 /* keepers_togetherTests.swift */; };
+		B21F34142AC1526A00175652 /* ScrollableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21F34132AC1526A00175652 /* ScrollableText.swift */; };
+		B21F34152AC1526A00175652 /* ScrollableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21F34132AC1526A00175652 /* ScrollableText.swift */; };
+		B21F34172AC15D2300175652 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21F34162AC15D2300175652 /* Resources.swift */; };
+		B21F34182AC15D2300175652 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21F34162AC15D2300175652 /* Resources.swift */; };
 		B25819F42ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25819F32ABD2B2A003B9C90 /* UIColorExtensions.swift */; };
 		B25819F52ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25819F32ABD2B2A003B9C90 /* UIColorExtensions.swift */; };
 		B25819F82ABD4B5F003B9C90 /* PetAddOrEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25819F72ABD4B5F003B9C90 /* PetAddOrEditView.swift */; };
@@ -164,6 +168,8 @@
 		B21911D02AA7A7ED003CE806 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B21911D52AA7A7EE003CE806 /* keepers:togetherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "keepers:togetherTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B21911D92AA7A7EE003CE806 /* keepers_togetherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keepers_togetherTests.swift; sourceTree = "<group>"; };
+		B21F34132AC1526A00175652 /* ScrollableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableText.swift; sourceTree = "<group>"; };
+		B21F34162AC15D2300175652 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		B25819F32ABD2B2A003B9C90 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		B25819F72ABD4B5F003B9C90 /* PetAddOrEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetAddOrEditView.swift; sourceTree = "<group>"; };
 		B25819FA2ABD4BDE003B9C90 /* AddOrEditPet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditPet.swift; sourceTree = "<group>"; };
@@ -473,6 +479,7 @@
 			isa = PBXGroup;
 			children = (
 				B2B51A0A2AAC4BDF0024E3BA /* AudioSettings.swift */,
+				B21F34132AC1526A00175652 /* ScrollableText.swift */,
 			);
 			path = features;
 			sourceTree = "<group>";
@@ -509,6 +516,7 @@
 				B2F9B4E62AAD6C0E0070E4E3 /* UserPreferencesClient.swift */,
 				B2F9B4E92AAD6C6E0070E4E3 /* AudioPlayerClient.swift */,
 				B2F9B4EC2AAD6CB00070E4E3 /* LoggerClient.swift */,
+				B21F34162AC15D2300175652 /* Resources.swift */,
 			);
 			path = dependencies;
 			sourceTree = "<group>";
@@ -790,6 +798,7 @@
 				B25819FB2ABD4BDE003B9C90 /* AddOrEditPet.swift in Sources */,
 				B2F9B4F02AAD6D580070E4E3 /* PersistentModelActor.swift in Sources */,
 				B2F9B5062AAEDDB00070E4E3 /* TimeInvervalExtensions.swift in Sources */,
+				B21F34142AC1526A00175652 /* ScrollableText.swift in Sources */,
 				B2581A072ABD7DF1003B9C90 /* PetDisplayView.RKView.swift in Sources */,
 				B25F84D32AA81BA400526045 /* WaitForCloudKitDataView.swift in Sources */,
 				B2581A0F2ABE7967003B9C90 /* SimpleBounce.swift in Sources */,
@@ -797,6 +806,7 @@
 				B25819F42ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */,
 				B2F9B4ED2AAD6CB00070E4E3 /* LoggerClient.swift in Sources */,
 				B2F9B4F92AAD92B80070E4E3 /* Pets.swift in Sources */,
+				B21F34172AC15D2300175652 /* Resources.swift in Sources */,
 				B2581A142ABE99C2003B9C90 /* AppSystem.swift in Sources */,
 				B25F84D72AA909DB00526045 /* Styles.swift in Sources */,
 				B2B51A122AAC56260024E3BA /* RootView.swift in Sources */,
@@ -837,10 +847,12 @@
 				B25819FC2ABD4BDE003B9C90 /* AddOrEditPet.swift in Sources */,
 				B2581A152ABE99C2003B9C90 /* AppSystem.swift in Sources */,
 				B2B51A0C2AAC4BDF0024E3BA /* AudioSettings.swift in Sources */,
+				B21F34182AC15D2300175652 /* Resources.swift in Sources */,
 				B2581A182ABE99D6003B9C90 /* AppComponent.swift in Sources */,
 				B2F9B4E82AAD6C0E0070E4E3 /* UserPreferencesClient.swift in Sources */,
 				B2F9B4EE2AAD6CB00070E4E3 /* LoggerClient.swift in Sources */,
 				B2F9B5012AAE5AEE0070E4E3 /* BindingExtensions.swift in Sources */,
+				B21F34152AC1526A00175652 /* ScrollableText.swift in Sources */,
 				B25819F52ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */,
 				B2F9B4E42AAD653C0070E4E3 /* ViewExtensions.swift in Sources */,
 				B21911C62AA7A7EB003CE806 /* mainApp.swift in Sources */,

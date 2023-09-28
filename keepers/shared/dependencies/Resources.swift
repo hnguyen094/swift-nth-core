@@ -32,7 +32,7 @@ extension Resources: DependencyKey {
     static var liveValue: Self {
         Resources(
             skybox: "kloppenheim_06_2k",
-            attributions: "unimplementedattributions.txt"
+            attributions: "attributions.txt"
         )
     }
 }

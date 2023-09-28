@@ -49,6 +49,7 @@
 		B25F84D92AA909E100526045 /* WaitForCloudKitDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F84D22AA81BA400526045 /* WaitForCloudKitDataView.swift */; };
 		B25F84E62AA9287E00526045 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F84E52AA9287E00526045 /* ErrorView.swift */; };
 		B25F84E72AA9287E00526045 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F84E52AA9287E00526045 /* ErrorView.swift */; };
+		B26B34882AC526C3001C31C4 /* attributions.txt in Resources */ = {isa = PBXBuildFile; fileRef = B26B34872AC526C3001C31C4 /* attributions.txt */; };
 		B293EB142ABCFAE500ADB49A /* PetDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B293EB132ABCFAE500ADB49A /* PetDisplayView.swift */; };
 		B293EB162ABCFC8C00ADB49A /* PetDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B293EB152ABCFC8C00ADB49A /* PetDisplay.swift */; };
 		B2B173DC2AC25D29002AA2D0 /* ScrollableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B173DB2AC25D29002AA2D0 /* ScrollableTextView.swift */; };
@@ -184,6 +185,7 @@
 		B25F84D62AA909DB00526045 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		B25F84E52AA9287E00526045 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		B25F84E82AA932AA00526045 /* keepers-together.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "keepers-together.entitlements"; sourceTree = "<group>"; };
+		B26B34872AC526C3001C31C4 /* attributions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = attributions.txt; sourceTree = "<group>"; };
 		B293EB132ABCFAE500ADB49A /* PetDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDisplayView.swift; sourceTree = "<group>"; };
 		B293EB152ABCFC8C00ADB49A /* PetDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDisplay.swift; sourceTree = "<group>"; };
 		B2B173DB2AC25D29002AA2D0 /* ScrollableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableTextView.swift; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 		B21911892AA7A762003CE806 /* keepers */ = {
 			isa = PBXGroup;
 			children = (
+				B26B34862AC5265E001C31C4 /* resources */,
 				B2581A0D2ABE7932003B9C90 /* ecs */,
 				B2B51A102AAC561B0024E3BA /* views */,
 				B2B51A092AAC4BB90024E3BA /* features */,
@@ -451,6 +454,14 @@
 				B25F84E52AA9287E00526045 /* ErrorView.swift */,
 			);
 			path = views_deprecated;
+			sourceTree = "<group>";
+		};
+		B26B34862AC5265E001C31C4 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				B26B34872AC526C3001C31C4 /* attributions.txt */,
+			);
+			path = resources;
 			sourceTree = "<group>";
 		};
 		B27F6E2D2AA7B0C000B90F08 /* shared */ = {
@@ -746,6 +757,7 @@
 			files = (
 				B21911952AA7A764003CE806 /* Preview Assets.xcassets in Resources */,
 				B21911912AA7A764003CE806 /* Assets.xcassets in Resources */,
+				B26B34882AC526C3001C31C4 /* attributions.txt in Resources */,
 				B2581A042ABD60AC003B9C90 /* kloppenheim_06.skybox in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

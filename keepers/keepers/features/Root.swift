@@ -6,7 +6,10 @@
 //
 
 import ComposableArchitecture
-import Foundation // TODO: remove when moving this file reader into dependency
+
+// TODO: remove when moving this file reader into dependency
+import Foundation
+import SwiftUI
 
 struct Root: Reducer {
     @Dependency(\.resources) var resources
@@ -51,12 +54,12 @@ struct Root: Reducer {
         }
     }
     
-    private func readText(from file: String) throws -> String {
-        let path = Bundle.main.path(forResource: file, ofType: "txt")
+    private func readText(from file: String) throws -> LocalizedStringKey {
+        let path = Bundle.main.path(forResource: file, ofType: nil)
         if path == nil {
             return "[attributions file not found]"
         }
-        return try String.init(contentsOfFile: path!)
+        return try LocalizedStringKey(String.init(contentsOfFile: path!))
     }
     
     struct Destination: Reducer {

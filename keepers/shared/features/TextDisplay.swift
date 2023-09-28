@@ -5,13 +5,13 @@
 //  Created by Hung on 9/25/23.
 //
 
+import SwiftUI
 import ComposableArchitecture
 
 struct TextDisplay: Reducer {
     struct State: Equatable {
-        var autoscroll: Bool = true
         var title: String
-        var text: String
+        var text: LocalizedStringKey
     }
     
     enum Action {}

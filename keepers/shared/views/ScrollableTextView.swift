@@ -14,7 +14,7 @@ struct ScrollableTextView: View {
     var body: some View {
         ScrollView(.vertical) {
             WithViewStore(self.store, observe: identity) { viewStore in
-                Text("\(viewStore.text)")
+                Text(viewStore.text)
             }
         }
         .navigationTitle("Attributions")

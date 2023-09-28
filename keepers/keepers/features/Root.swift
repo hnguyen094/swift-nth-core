@@ -37,7 +37,9 @@ struct Root: Reducer {
             case .attributionButtonTapped:
                 do {
                     var attributions = try readText(from: resources.attributions)
-                    state.destination = .attribution(ScrollableText.State(text: attributions))
+                    state.destination = .attribution(TextDisplay.State(
+                        title: "Attributions",
+                        text: attributions))
                 } catch {
                     logger.error("Failed to read attribution file. (\(error))")
                 }
@@ -61,12 +63,12 @@ struct Root: Reducer {
         enum State {
             case petsList(Pets.State)
             case settings(AudioSettings.State)
-            case attribution(ScrollableText.State)
+            case attribution(TextDisplay.State)
         }
         enum Action {
             case petsList(Pets.Action)
             case settings(AudioSettings.Action)
-            case attribution(ScrollableText.Action)
+            case attribution(TextDisplay.Action)
         }
         
         var body: some ReducerOf<Self> {
@@ -77,7 +79,7 @@ struct Root: Reducer {
                 AudioSettings()
             }
             Scope(state: /State.attribution, action: /Action.attribution) {
-                ScrollableText()
+                TextDisplay()
             }
         }
     }

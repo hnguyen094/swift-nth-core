@@ -14,20 +14,30 @@ struct RootView: View {
         
     var body: some View {
         NavigationStack {
-                Button("Pets") {
-                    store.send(Root.Action.startButtonTapped)
-                }
-                .buttonStyle(.borderedProminent)
+            Button("Pets") {
+                store.send(Root.Action.startButtonTapped)
+            }
+            .buttonStyle(.borderedProminent)
+        
+            Button("Settings") {
+                store.send(Root.Action.settingsButtonTapped)
+            }
+            .buttonStyle(.bordered)
+            Button("Attributions") {
+                store.send(Root.Action.attributionButtonTapped)
+            }
+            .frame(width: nil, height: nil, alignment: .bottomTrailing)
             
-                Button("Settings") {
-                    store.send(Root.Action.settingsButtonTapped)
-                }
-                .buttonStyle(.bordered)
             .sheet(
                 store: store.scope(state: \.$destination, action: { .destination($0) }),
                 state: /Destination.State.settings,
                 action: Destination.Action.settings,
                 content: AudioSettingsView.init(store:))
+            .navigationDestination(
+                store: store.scope(state: \.$destination, action: { .destination($0) }),
+                state: /Destination.State.attribution,
+                action: Destination.Action.attribution,
+                destination: ScrollableTextView.init(store:))
             .navigationDestination(
                 store: store.scope(state: \.$destination, action: { .destination($0) }),
                 state: /Destination.State.petsList,

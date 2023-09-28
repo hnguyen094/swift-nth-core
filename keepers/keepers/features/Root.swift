@@ -7,7 +7,14 @@
 
 import ComposableArchitecture
 
+// TODO: remove when moving this file reader into dependency
+import Foundation
+import SwiftUI
+
 struct Root: Reducer {
+    @Dependency(\.resources) var resources
+    @Dependency(\.logger) var logger
+
     struct State {
         @PresentationState var destination: Destination.State?
     }
@@ -15,6 +22,7 @@ struct Root: Reducer {
     enum Action {
         case startButtonTapped
         case settingsButtonTapped
+        case attributionButtonTapped
         case destination(PresentationAction<Destination.Action>)
     }
     
@@ -29,6 +37,16 @@ struct Root: Reducer {
             case .startButtonTapped:
                 state.destination = .petsList(Pets.State())
                 return .none
+            case .attributionButtonTapped:
+                do {
+                    var attributions = try readText(from: resources.attributions)
+                    state.destination = .attribution(TextDisplay.State(
+                        title: "Attributions",
+                        text: attributions))
+                } catch {
+                    logger.error("Failed to read attribution file. (\(error))")
+                }
+                return .none
             }
         }
         .ifLet(\.$destination, action: /Action.destination) {
@@ -36,14 +54,24 @@ struct Root: Reducer {
         }
     }
     
+    private func readText(from file: String) throws -> LocalizedStringKey {
+        let path = Bundle.main.path(forResource: file, ofType: nil)
+        if path == nil {
+            return "[attributions file not found]"
+        }
+        return try LocalizedStringKey(String.init(contentsOfFile: path!))
+    }
+    
     struct Destination: Reducer {
         enum State {
             case petsList(Pets.State)
             case settings(AudioSettings.State)
+            case attribution(TextDisplay.State)
         }
         enum Action {
             case petsList(Pets.Action)
             case settings(AudioSettings.Action)
+            case attribution(TextDisplay.Action)
         }
         
         var body: some ReducerOf<Self> {
@@ -52,6 +80,9 @@ struct Root: Reducer {
             }
             Scope(state: /State.settings, action: /Action.settings) {
                 AudioSettings()
+            }
+            Scope(state: /State.attribution, action: /Action.attribution) {
+                TextDisplay()
             }
         }
     }

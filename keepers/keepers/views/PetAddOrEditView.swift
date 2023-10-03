@@ -35,7 +35,7 @@ struct PetAddOrEditView: View {
     }
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             WithViewStore(self.store, observe: identity) { viewStore in
                 List() {
                     LabeledContent {
@@ -77,12 +77,14 @@ struct PetAddOrEditView: View {
                     }
                 }
                 .navigationTitle("Pet Modifications")
-                
-                Button("Submit") {
-                    viewStore.send(.submit)
-                }
             }
-            .buttonStyle(.borderedProminent)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Submit") {
+                        store.send(.submit)
+                    }
+                }
+            }                
         }
     }
 }

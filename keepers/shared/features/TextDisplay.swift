@@ -16,7 +16,5 @@ struct TextDisplay: Reducer {
     
     enum Action {}
     
-    func reduce(into state: inout State, action: Action) -> Effect<Action> {
-        return .none
-    }
+    func reduce(into state: inout State, action: Action) -> Effect<Action> { }
 }

@@ -18,7 +18,7 @@ struct PetListView: View {
     var body: some View {
         List {
             WithViewStore(self.store, observe: \.pets) { viewStore in
-                ForEach(Array(viewStore.state.enumerated()), id: \.element.id)
+                ForEach(Array(viewStore.state.enumerated()), id: \.element.persistentModelID)
                 { i, pet in
                     if editMode?.wrappedValue.isEditing == true {
                         Button("Edit `\(pet.name)`'s identity") {

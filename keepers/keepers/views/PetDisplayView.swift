@@ -50,8 +50,9 @@ struct PetDisplayView: View {
 
 #Preview {
     @Dependency(\.resources) var resources
+    @Dependency(\.date) var date
     return PetDisplayView(store: Store(initialState: PetDisplay.State(
-        pet: PetIdentity(name: "Test", personality: .init(), birthDate: Date()),
+        pet: PetIdentity.test,
         skyboxName: resources.skybox
     )) {
         PetDisplay()

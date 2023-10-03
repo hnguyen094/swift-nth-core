@@ -39,7 +39,7 @@ struct Root: Reducer {
                 return .none
             case .attributionButtonTapped:
                 do {
-                    var attributions = try readText(from: resources.attributions)
+                    let attributions = try readText(from: resources.attributions)
                     state.destination = .attribution(TextDisplay.State(
                         title: "Attributions",
                         text: attributions))

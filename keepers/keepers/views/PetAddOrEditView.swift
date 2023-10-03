@@ -35,6 +35,15 @@ struct PetAddOrEditView: View {
             WithViewStore(self.store, observe: identity) { viewStore in
                 List() {
                     LabeledContent {
+                        if viewStore.state.petIdentity != nil {
+                            Text(String(describing: viewStore.state.petIdentity!.persistentModelID.id))
+                        } else {
+                            Text("TBD")
+                        }
+                    } label: {
+                        Text("ID")
+                    }
+                    LabeledContent {
                         TextField("Name",
                             text: viewStore.binding(get: \.name, send: { .set(\.$name, $0) }),
                             prompt: Text("Add a pet name"))
@@ -46,6 +55,14 @@ struct PetAddOrEditView: View {
                     DatePicker("Birth Date", selection: viewStore.binding(
                         get: \.birthDate,
                         send: { .set(\.$birthDate, $0) }))
+                
+                    Picker("Species", selection: viewStore.binding(
+                        get: \.species,
+                        send: { .set(\.$species, $0)})) {
+                            ForEach(PetSpecies.allCases, id: \.self) { opt in
+                                Text(String.init(describing: opt))
+                            }
+                        }
                     
                     Section {
                         createPersonalityAttributeSlider(viewStore: viewStore, keyPath: \.mind)

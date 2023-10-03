@@ -22,16 +22,20 @@ struct PetAddOrEditView: View {
                     in: Float(Int8.min)...Float(Int8.max),
                     step: 1,
                     label: {
-                        Text("\(String(describing: keyPath))")
+                        Text(parseKeyPath(keyPath))
                     })
             } label: {
-                Text("\(String(describing: keyPath.customDumpDescription))")
+                Text(parseKeyPath(keyPath))
             }
-            
+            func parseKeyPath(_ kp: AnyKeyPath) -> String {
+                let str = keyPath.debugDescription
+                let index = str.index(after: str.lastIndex(of: ".")!)
+                return String(str[index...])
+            }
     }
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             WithViewStore(self.store, observe: identity) { viewStore in
                 List() {
                     LabeledContent {
@@ -73,12 +77,14 @@ struct PetAddOrEditView: View {
                     }
                 }
                 .navigationTitle("Pet Modifications")
-                
-                Button("Submit") {
-                    viewStore.send(.submit)
-                }
             }
-            .buttonStyle(.borderedProminent)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Submit") {
+                        store.send(.submit)
+                    }
+                }
+            }                
         }
     }
 }

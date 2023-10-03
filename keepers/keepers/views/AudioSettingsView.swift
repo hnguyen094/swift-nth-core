@@ -13,7 +13,7 @@ struct AudioSettingsView: View {
     let store: StoreOf<AudioSettings>
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             WithViewStore(self.store, observe: identity) { viewStore in
                 List {
                     ForEach(Category.allCases, id: \.self) {

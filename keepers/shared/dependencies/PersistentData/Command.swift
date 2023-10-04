@@ -25,7 +25,9 @@ extension AppSchema.V1 {
         
         enum Action: Codable, Equatable {
             case noop
+            case hatch
             case feed(Int)
+            case play
             case unalive
         }
     }

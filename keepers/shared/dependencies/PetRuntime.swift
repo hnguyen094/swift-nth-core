@@ -19,6 +19,8 @@ extension DependencyValues {
 /// turns a `PetIdentity` into a deterministic runtime state for 
 /// a given point in time.
 struct PetRuntime {
+    @Dependency(\.logger) var logger
+
     var state: State? = nil // should be get-only
     var pet: PetIdentity? = nil // should be get-only
 
@@ -36,8 +38,16 @@ struct PetRuntime {
                 break
             }
             exec(into: &self.state!, command: command)
+            if case .corrupted = self.state {
+                logger.error("""
+                    Pet state is corrupted; unexpected command \
+                    \(String(describing: command.action))
+                    """)
+                // TODO: do something to recover in each situation
+                break // probably, right?! we can't transition corrupt state anw
+            }
         }
-        
+
     }
     func insert(command: Command) {
         // find where I should insert (that is, was this action "too late"?)
@@ -61,9 +71,9 @@ struct PetRuntime {
             exec(into: &aliveState, command: command)
             state = .alive(aliveState)
             
-        case .dead, .corrupted: // these states cannot transition
+        case .corrupted: // these states cannot transition
             return
-        case .egg, .alive:
+        case .egg, .alive, .dead:
             state = .corrupted
         }
     }

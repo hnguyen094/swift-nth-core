@@ -9,7 +9,7 @@ import Foundation
 
 extension Comparable {
     /// Clamps a comparable value to the given Range.
-    /// - Authors: [Ondrej Stocek](https://stackoverflow.com/a/40868784 ).
+    /// - Author: [Ondrej Stocek](https://stackoverflow.com/a/40868784 ).
     func clamped(to limits: ClosedRange<Self>) -> Self {
         return min(max(self, limits.lowerBound), limits.upperBound)
     }

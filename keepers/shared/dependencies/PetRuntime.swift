@@ -37,7 +37,7 @@ struct PetRuntime {
                 // TODO: something should probably be handled here.
                 break
             }
-            exec(into: &self.state!, command: command)
+            Self.exec(into: &self.state!, command: command)
             if case .corrupted = self.state {
                 logger.error("""
                     Pet state is corrupted; unexpected command \
@@ -49,7 +49,8 @@ struct PetRuntime {
         }
 
     }
-    func insert(command: Command) {
+
+    func send(command: Command) {
         // find where I should insert (that is, was this action "too late"?)
         // maybe there could be weirdness here -- what if the pet is dead 5s ago, but the update loop checks every 15?
         // maybe we don't recompute here and just assume pet is still alive.
@@ -57,18 +58,29 @@ struct PetRuntime {
         // also, we should refactor the switch case out to use in here too.
     }
 
+    // what do we return from this function??? Specifically, which state?
+    func observe(at date: Date = .now) {
+        guard case let .alive(aliveState) = state else {
+            // TODO: return something
+            return
+        }
+        let delta = date.timeIntervalSince(aliveState.lastUpdated)
+        
+        // TODO: return something useful
+    }
+    
     // given a command, transform the current state into the next. Use
     // whatever is necessary.
-    func exec(into state: inout State, command: Command) {
+    static func exec(into state: inout State, command: Command) {
         switch state {
         case .egg where command.action == .hatch:
-            state = .alive(AliveState(fullness: 1, happiness: 1))
+            state = .alive(AliveState(fullness: 1, happiness: 1, lastUpdated: command.timestamp))
         case .alive(var aliveState) where command.action != .hatch:
             if case .unalive = command.action {
                 state = .dead
                 break
             }
-            exec(into: &aliveState, command: command)
+            Self.exec(into: &aliveState, command: command)
             state = .alive(aliveState)
             
         case .corrupted: // these states cannot transition
@@ -78,7 +90,8 @@ struct PetRuntime {
         }
     }
     
-    func exec(into state: inout AliveState, command: Command) {
+    static func exec(into state: inout AliveState, command: Command) {
+        state.lastUpdated = command.timestamp
         switch command.action {
         case .feed(let amount):
             state.fullness = (state.fullness + amount).clamped(to: -1...1)
@@ -89,9 +102,15 @@ struct PetRuntime {
         }
     }
     
+    func project(state: AliveState, forwardTo date: Date) -> AliveState {
+        
+    }
+    
     struct AliveState: Equatable {
         var fullness: Double
         var happiness: Double
+        
+        var lastUpdated: Date
         // TODO: add more computed variables as discussed
     }
     

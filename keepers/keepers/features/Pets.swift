@@ -11,7 +11,7 @@ import Dependencies
 import SwiftData
 
 struct Pets: Reducer {
-    @Dependency(\.modelContextActor) var modelContext
+    @Dependency(\.modelContext) var modelContext
     @Dependency(\.resources) var resources
     @Dependency(\.logger) var logger
 
@@ -25,7 +25,7 @@ struct Pets: Reducer {
         var pets: [PetIdentity]
         
         init() {
-            @Dependency(\.modelContextActor) var ctx
+            @Dependency(\.modelContext) var ctx
             do {
                 pets = try ModelContext(ctx.modelContainer)
                     .fetch(FetchDescriptor<PetIdentity>())

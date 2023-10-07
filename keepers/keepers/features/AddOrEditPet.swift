@@ -9,7 +9,7 @@ import Foundation
 import ComposableArchitecture
 
 struct AddOrEditPet: Reducer {
-    @Dependency(\.modelContextActor) var modelContainer
+    @Dependency(\.modelContext) var modelContainer
     @Dependency(\.logger) var logger
     @Dependency(\.dismiss) var dismiss
     

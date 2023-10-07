@@ -29,18 +29,9 @@ extension AppSchema.V1 {
         var seed: Int64 = 0
         /// The entire list of all the things that this pet has & will experience with no additional user inputs.
         @Relationship(deleteRule: .cascade, inverse: \Command.pet)
-        var userInputs: [Command]?
+        var userInputs: [Command]? = [Command]()
         
         init() {}
-        
-//        init(name: String, personality: PetPersonality, birthDate: Date, species: PetSpecies, seed: Int64, userInputs: [Command]) {
-//            self.name = name
-//            self.personality = personality
-//            self.birthDate = birthDate
-//            self.species = species
-//            self.seed = seed
-//            self.userInputs = userInputs
-//        }
         
         static var test: Self {
             let pet = Self.init()

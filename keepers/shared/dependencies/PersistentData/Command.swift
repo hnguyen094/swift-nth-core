@@ -12,7 +12,7 @@ typealias Command = AppSchema.V1.Command
 
 extension AppSchema.V1 {
     @Model
-    final class Command {
+    final class Command: Comparable {
         var timestamp: Date = Date.now
         var action: Action = Action.noop
         var pet: PetIdentity?
@@ -23,6 +23,10 @@ extension AppSchema.V1 {
             self.pet = pet
         }
         
+        static func < (lhs: Command, rhs: Command) -> Bool {
+            lhs.timestamp < rhs.timestamp
+        }
+        
         enum Action: Codable, Equatable {
             case noop
             case hatch
@@ -31,5 +35,4 @@ extension AppSchema.V1 {
             case unalive
         }
     }
-    
 }

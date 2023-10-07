@@ -37,6 +37,7 @@
 		B225E7862ACFEB1B00A79539 /* GaussianDistribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = B225E7842ACFEB1B00A79539 /* GaussianDistribution.swift */; };
 		B225E7892AD0A56D00A79539 /* ReproducibleRandomSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B225E7882AD0A56D00A79539 /* ReproducibleRandomSource.swift */; };
 		B225E78A2AD0A56D00A79539 /* ReproducibleRandomSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B225E7882AD0A56D00A79539 /* ReproducibleRandomSource.swift */; };
+		B225E78D2AD0C86F00A79539 /* SwiftPriorityQueue in Frameworks */ = {isa = PBXBuildFile; productRef = B225E78C2AD0C86F00A79539 /* SwiftPriorityQueue */; };
 		B25819F42ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25819F32ABD2B2A003B9C90 /* UIColorExtensions.swift */; };
 		B25819F52ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25819F32ABD2B2A003B9C90 /* UIColorExtensions.swift */; };
 		B25819F82ABD4B5F003B9C90 /* PetAddOrEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25819F72ABD4B5F003B9C90 /* PetAddOrEditView.swift */; };
@@ -228,6 +229,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B225E78D2AD0C86F00A79539 /* SwiftPriorityQueue in Frameworks */,
 				B217E9302AA97C9B0048C37A /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -612,6 +614,7 @@
 			name = "shared-packages";
 			packageProductDependencies = (
 				B217E92F2AA97C9B0048C37A /* ComposableArchitecture */,
+				B225E78C2AD0C86F00A79539 /* SwiftPriorityQueue */,
 			);
 			productName = "shared-packages";
 			productReference = B217E9262AA97C1E0048C37A /* shared_packages.framework */;
@@ -756,6 +759,7 @@
 			mainGroup = B219117E2AA7A762003CE806;
 			packageReferences = (
 				B217E9202AA97BEB0048C37A /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				B225E78B2AD0C86F00A79539 /* XCRemoteSwiftPackageReference "SwiftPriorityQueue" */,
 			);
 			productRefGroup = B21911882AA7A762003CE806 /* Products */;
 			projectDirPath = "";
@@ -1519,6 +1523,14 @@
 				minimumVersion = 1.2.0;
 			};
 		};
+		B225E78B2AD0C86F00A79539 /* XCRemoteSwiftPackageReference "SwiftPriorityQueue" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/davecom/SwiftPriorityQueue.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1530,6 +1542,11 @@
 		B21911C32AA7A7EB003CE806 /* RealityKitContent */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RealityKitContent;
+		};
+		B225E78C2AD0C86F00A79539 /* SwiftPriorityQueue */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B225E78B2AD0C86F00A79539 /* XCRemoteSwiftPackageReference "SwiftPriorityQueue" */;
+			productName = SwiftPriorityQueue;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

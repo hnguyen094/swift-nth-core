@@ -69,6 +69,8 @@
 		B2B51A0C2AAC4BDF0024E3BA /* AudioSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B51A0A2AAC4BDF0024E3BA /* AudioSettings.swift */; };
 		B2B51A0F2AAC55CE0024E3BA /* mainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B51A0E2AAC55CE0024E3BA /* mainApp.swift */; };
 		B2B51A122AAC56260024E3BA /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B51A112AAC56260024E3BA /* RootView.swift */; };
+		B2D902952AD1F56D00BE02BF /* PetRuntime.Naive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D902942AD1F56D00BE02BF /* PetRuntime.Naive.swift */; };
+		B2D902962AD1F56D00BE02BF /* PetRuntime.Naive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D902942AD1F56D00BE02BF /* PetRuntime.Naive.swift */; };
 		B2EC9FF92AABAC630005D0AB /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EC9FF82AABAC630005D0AB /* Root.swift */; };
 		B2F9B4E32AAD653C0070E4E3 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4E22AAD653C0070E4E3 /* ViewExtensions.swift */; };
 		B2F9B4E42AAD653C0070E4E3 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4E22AAD653C0070E4E3 /* ViewExtensions.swift */; };
@@ -208,6 +210,7 @@
 		B2B51A0A2AAC4BDF0024E3BA /* AudioSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSettings.swift; sourceTree = "<group>"; };
 		B2B51A0E2AAC55CE0024E3BA /* mainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainApp.swift; sourceTree = "<group>"; };
 		B2B51A112AAC56260024E3BA /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		B2D902942AD1F56D00BE02BF /* PetRuntime.Naive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetRuntime.Naive.swift; sourceTree = "<group>"; };
 		B2EC9FF82AABAC630005D0AB /* Root.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Root.swift; sourceTree = "<group>"; };
 		B2F9B4E22AAD653C0070E4E3 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		B2F9B4E62AAD6C0E0070E4E3 /* UserPreferencesClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferencesClient.swift; sourceTree = "<group>"; };
@@ -569,6 +572,7 @@
 				B2F9B4EC2AAD6CB00070E4E3 /* LoggerClient.swift */,
 				B21F34162AC15D2300175652 /* Resources.swift */,
 				B225E7782ACE0E2E00A79539 /* PetRuntime.swift */,
+				B2D902942AD1F56D00BE02BF /* PetRuntime.Naive.swift */,
 			);
 			path = dependencies;
 			sourceTree = "<group>";
@@ -862,6 +866,7 @@
 				B2581A072ABD7DF1003B9C90 /* PetDisplayView.RKView.swift in Sources */,
 				B25F84D32AA81BA400526045 /* WaitForCloudKitDataView.swift in Sources */,
 				B2581A0F2ABE7967003B9C90 /* SimpleBounce.swift in Sources */,
+				B2D902952AD1F56D00BE02BF /* PetRuntime.Naive.swift in Sources */,
 				B225E77F2ACE277D00A79539 /* ComparableExtensions.swift in Sources */,
 				B2F9B4FD2AAD99A60070E4E3 /* PetIdentity.swift in Sources */,
 				B25819F42ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */,
@@ -906,6 +911,7 @@
 				B25819F92ABD4B5F003B9C90 /* PetAddOrEditView.swift in Sources */,
 				B25F84D82AA909DB00526045 /* Styles.swift in Sources */,
 				B25F84D92AA909E100526045 /* WaitForCloudKitDataView.swift in Sources */,
+				B2D902962AD1F56D00BE02BF /* PetRuntime.Naive.swift in Sources */,
 				B21911C82AA7A7EB003CE806 /* ContentView.swift in Sources */,
 				B225E7802ACE277D00A79539 /* ComparableExtensions.swift in Sources */,
 				B2AD3F862ACBA201003BEB9F /* Command.swift in Sources */,

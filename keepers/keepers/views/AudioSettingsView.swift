@@ -31,6 +31,7 @@ struct AudioSettingsView: View {
     ) -> some View {
         return VStack {
             Text("\(String(describing: category))")
+                .font(.headline)
             Slider(
                 value: viewStore.binding(
                     get: \.volumes[category]!,

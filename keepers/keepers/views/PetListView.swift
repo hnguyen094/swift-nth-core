@@ -43,7 +43,9 @@ struct PetListView: View {
             state: /Destination.State.viewInAR,
             action: Destination.Action.viewInAR,
             destination: PetDisplayView.init(store:))
-        
+        .onAppear {
+            store.send(.requestFetch)
+        }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 EditButton()

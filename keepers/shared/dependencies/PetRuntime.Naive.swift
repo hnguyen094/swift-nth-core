@@ -4,8 +4,10 @@
 //
 //  Created by Hung on 10/7/23.
 //
+//  Naive implementation of a functional pet runtime.
 
 import Foundation
+// import SwiftPriorityQueue
 
 extension PetRuntime {
     /// We love naive implementations!

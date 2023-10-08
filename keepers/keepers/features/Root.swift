@@ -42,6 +42,7 @@ struct Root: Reducer {
                     let attributions = try readText(from: resources.attributions)
                     state.destination = .attribution(TextDisplay.State(
                         title: "Attributions",
+                        autoscroll: true,
                         text: attributions))
                 } catch {
                     logger.error("Failed to read attribution file. (\(error))")

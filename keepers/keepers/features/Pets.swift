@@ -22,17 +22,7 @@ struct Pets: Reducer {
         }
         
         @PresentationState var destination: Destination.State?
-        var pets: [PetIdentity]
-        
-        init() {
-            @Dependency(\.modelContext) var ctx
-            do {
-                pets = try ModelContext(ctx.modelContainer)
-                    .fetch(FetchDescriptor<PetIdentity>())
-            } catch {
-                fatalError("Failed to load model container context.")
-            }
-        }
+        var pets: [PetIdentity] = [PetIdentity]()
     }
     
     enum Action {
@@ -42,13 +32,14 @@ struct Pets: Reducer {
         case displayPetTapped(Int)
         case destination(PresentationAction<Destination.Action>)
         
+        case requestFetch
         case receiveFetch([PetIdentity])
     }
     
     var body: some ReducerOf<Self> {
         Reduce<State, Action> { state, action in
             switch action {
-            case .destination(.dismiss):
+            case .destination(.dismiss), .requestFetch:
                 return .run { send in
                     let pets = try await modelContext
                         .fetch(FetchDescriptor<PetIdentity>())

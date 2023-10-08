@@ -39,8 +39,11 @@ struct PetAddOrEditView: View {
             WithViewStore(self.store, observe: identity) { viewStore in
                 List() {
                     LabeledContent {
-                        if viewStore.state.petIdentity != nil {
-                            Text(String(describing: viewStore.state.petIdentity!.persistentModelID.id))
+                        if let id = viewStore.state.petIdentity?.persistentModelID.id {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                Text(String(describing: id))
+                                    .lineLimit(1)
+                            }
                         } else {
                             Text("TBD")
                         }

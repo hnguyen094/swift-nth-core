@@ -71,6 +71,7 @@
 		B2B51A122AAC56260024E3BA /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B51A112AAC56260024E3BA /* RootView.swift */; };
 		B2D902952AD1F56D00BE02BF /* PetRuntime.Naive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D902942AD1F56D00BE02BF /* PetRuntime.Naive.swift */; };
 		B2D902962AD1F56D00BE02BF /* PetRuntime.Naive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D902942AD1F56D00BE02BF /* PetRuntime.Naive.swift */; };
+		B2D9029C2AD2144300BE02BF /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = B2D9029B2AD2144300BE02BF /* Marquee */; };
 		B2EC9FF92AABAC630005D0AB /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EC9FF82AABAC630005D0AB /* Root.swift */; };
 		B2F9B4E32AAD653C0070E4E3 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4E22AAD653C0070E4E3 /* ViewExtensions.swift */; };
 		B2F9B4E42AAD653C0070E4E3 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4E22AAD653C0070E4E3 /* ViewExtensions.swift */; };
@@ -232,6 +233,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2D9029C2AD2144300BE02BF /* Marquee in Frameworks */,
 				B225E78D2AD0C86F00A79539 /* SwiftPriorityQueue in Frameworks */,
 				B217E9302AA97C9B0048C37A /* ComposableArchitecture in Frameworks */,
 			);
@@ -619,6 +621,7 @@
 			packageProductDependencies = (
 				B217E92F2AA97C9B0048C37A /* ComposableArchitecture */,
 				B225E78C2AD0C86F00A79539 /* SwiftPriorityQueue */,
+				B2D9029B2AD2144300BE02BF /* Marquee */,
 			);
 			productName = "shared-packages";
 			productReference = B217E9262AA97C1E0048C37A /* shared_packages.framework */;
@@ -764,6 +767,7 @@
 			packageReferences = (
 				B217E9202AA97BEB0048C37A /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				B225E78B2AD0C86F00A79539 /* XCRemoteSwiftPackageReference "SwiftPriorityQueue" */,
+				B2D9029A2AD2144300BE02BF /* XCRemoteSwiftPackageReference "Marquee" */,
 			);
 			productRefGroup = B21911882AA7A762003CE806 /* Products */;
 			projectDirPath = "";
@@ -1549,6 +1553,14 @@
 				minimumVersion = 1.4.0;
 			};
 		};
+		B2D9029A2AD2144300BE02BF /* XCRemoteSwiftPackageReference "Marquee" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stonko1994/Marquee";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1565,6 +1577,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B225E78B2AD0C86F00A79539 /* XCRemoteSwiftPackageReference "SwiftPriorityQueue" */;
 			productName = SwiftPriorityQueue;
+		};
+		B2D9029B2AD2144300BE02BF /* Marquee */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B2D9029A2AD2144300BE02BF /* XCRemoteSwiftPackageReference "Marquee" */;
+			productName = Marquee;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

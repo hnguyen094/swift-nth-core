@@ -47,14 +47,14 @@ struct PetDisplayView: View {
     }
 }
 
-
-#Preview {
-    @Dependency(\.resources) var resources
-    @Dependency(\.date) var date
-    return PetDisplayView(store: Store(initialState: PetDisplay.State(
-        pet: PetIdentity.test,
-        skyboxName: resources.skybox
-    )) {
-        PetDisplay()
-    })
-}
+//#Preview {
+//    @Dependency(\.modelContext) var modelContext
+//    @Dependency(\.resources) var resources
+//    modelContext.assertIsolated()
+//    return PetDisplayView(store: Store(initialState: PetDisplay.State(
+//        pet: PetIdentity.test,
+//        skyboxName: resources.skybox
+//    )) {
+//        PetDisplay()
+//    })
+//}

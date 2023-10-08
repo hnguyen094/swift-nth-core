@@ -7,16 +7,28 @@
 
 import SwiftUI
 import ComposableArchitecture
+import Marquee
 
 struct ScrollableTextView: View {
     let store: StoreOf<TextDisplay>
         
     var body: some View {
-        ScrollView(.vertical) {
+        NavigationView {
             WithViewStore(self.store, observe: identity) { viewStore in
-                Text(viewStore.text)
+                ScrollView(.vertical) {
+                    Text(viewStore.text)
+                }
+                .navigationTitle(viewStore.title)
             }
         }
-        .navigationTitle("Attributions")
     }
+}
+
+#Preview {
+    ScrollableTextView(store: Store(initialState: TextDisplay.State(
+        title: "Some Preview Title",
+        autoscroll: true,
+        text: "Some _formatted_ text in a `ScrollView`.")) {
+            TextDisplay()
+        })
 }

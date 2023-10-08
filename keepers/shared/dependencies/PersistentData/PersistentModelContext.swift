@@ -63,6 +63,8 @@ extension PersistentModelContext: DependencyKey {
     private static let ephemeralConfig = ModelConfiguration(
         schema: schema,
         isStoredInMemoryOnly: true,
+        allowsSave: false,
+        groupContainer: .none,
         cloudKitDatabase: .none
     )
     

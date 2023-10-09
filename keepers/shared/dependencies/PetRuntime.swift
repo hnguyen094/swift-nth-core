@@ -18,10 +18,16 @@ extension DependencyValues {
 
 /// turns a `PetIdentity` into a deterministic runtime state for a given point in time.
 struct PetRuntime {
-    var observe: (_ pet: PetIdentity, _ date: Date) -> State
-    var submit: (_ pet: PetIdentity, _ action: Command.Action, _ date: Date) -> Void
+    var observeRuntime: (_ pet: PetIdentity, _ date: Date) -> RuntimeState
+    var modify: (_ pet: PetIdentity, _ action: Command.Action, _ date: Date) -> Void
+  
     
-    enum State {
+    struct StableState {
+        var timestamp: Date
+        var state: RuntimeState
+    }
+    
+    enum RuntimeState {
         case egg
         case alive(AliveState)
         case dead
@@ -42,8 +48,13 @@ extension PetRuntime: DependencyKey {
 extension PetRuntime {
     static var naive: Self {
         return .init(
-            observe: Naive.observe(pet:upTo:),
-            submit: Naive.submit(pet:action:at:)
+            observeRuntime: Naive.observeRuntime(pet:upTo:),
+            modify: Naive.modify(pet:action:at:)
         )
+    }
+    enum Naive {
+        typealias StableState = PetRuntime.StableState
+        typealias RuntimeState = PetRuntime.RuntimeState
+        typealias AliveState = PetRuntime.AliveState
     }
 }

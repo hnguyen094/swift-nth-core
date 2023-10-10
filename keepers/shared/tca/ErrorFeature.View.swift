@@ -20,26 +20,26 @@ extension ErrorFeature {
 
 extension ErrorFeature.View {
     var body: some View {
-        NavigationView {
-            WithViewStore(self.store, observe: identity) { viewStore in
-                Text(viewStore.error.localizedDescription)
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            Button("Dismiss") {
-                                store.send(.dismiss)
-                            }
+        WithViewStore(self.store, observe: identity) { viewStore in
+            Text(viewStore.error.localizedDescription)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Dismiss") {
+                            store.send(.dismiss)
                         }
                     }
-                    .navigationTitle("Error Occurred")
-            }
+                }
+                .navigationTitle("Error Occurred")
         }
     }
 }
 
 
 #Preview {
-    ErrorFeature.View(store: Store(initialState: ErrorFeature.State(
-        error: ErrorFeature.SampleError())) {
-            ErrorFeature()
-        })
+    NavigationView {
+        ErrorFeature.View(store: Store(initialState: ErrorFeature.State(
+            error: ErrorFeature.SampleError())) {
+                ErrorFeature()
+            })
+    }
 }

@@ -18,15 +18,14 @@ extension AudioSettings.View {
     typealias Category = AudioPlayerClient.AudioCategory
     
     var body: some SwiftUI.View {
-        NavigationView {
-            WithViewStore(self.store, observe: identity) { viewStore in
-                List {
-                    ForEach(Category.allCases, id: \.self) {
-                        createVolumeSlider(store: viewStore, category: $0)
-                    }
+        WithViewStore(self.store, observe: identity) { viewStore in
+            List {
+                ForEach(Category.allCases, id: \.self) {
+                    createVolumeSlider(store: viewStore, category: $0)
                 }
-                .navigationTitle("Audio Settings")
             }
+            .navigationTitle("Audio Settings")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
     
@@ -56,7 +55,9 @@ extension AudioSettings.View {
 }
 
 #Preview {
-    AudioSettings.View(store: Store(initialState: AudioSettings.State()) {
-        AudioSettings()
-    })
+    NavigationView {
+        AudioSettings.View(store: Store(initialState: AudioSettings.State()) {
+            AudioSettings()
+        })
+    }
 }

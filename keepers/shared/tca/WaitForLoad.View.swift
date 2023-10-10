@@ -16,18 +16,15 @@ extension WaitForLoad {
 
 extension WaitForLoad.View {
     var body: some SwiftUI.View {
-        NavigationView {
-            WithViewStore(self.store, observe: identity) { viewStore in
-                VStack {
-                    ProgressView {
-                        Text(viewStore.loadingText)
-                    }
-                    
-                    Button {
-                        viewStore.send(.cancelTask)
-                    } label: {
-                        Text("cancel")
-                    }
+        WithViewStore(self.store, observe: identity) { viewStore in
+            VStack {
+                ProgressView {
+                    Text(viewStore.loadingText)
+                }
+                Button {
+                    viewStore.send(.cancelTask)
+                } label: {
+                    Text("cancel")
                 }
             }
         }
@@ -35,9 +32,11 @@ extension WaitForLoad.View {
 }
 
 #Preview {
-    WaitForLoad.View(store: Store(initialState: WaitForLoad.State(
-        loadingText: "Loading cats...",
-        task: nil)) {
-            WaitForLoad()
-        })
+    NavigationView {
+        WaitForLoad.View(store: Store(initialState: WaitForLoad.State(
+            loadingText: "Loading cats...",
+            task: nil)) {
+                WaitForLoad()
+            })
+    }
 }

@@ -27,10 +27,12 @@ extension TextDisplay.View {
 }
 
 #Preview {
-    TextDisplay.View(store: Store(initialState: TextDisplay.State(
-        title: "Some Preview Title",
-        autoscroll: true,
-        text: "Some _formatted_ text in a `ScrollView`.")) {
-            TextDisplay()
-        })
+    NavigationView {
+        TextDisplay.View(store: Store(initialState: TextDisplay.State(
+            title: "Some Preview Title",
+            autoscroll: true,
+            text: "Some _formatted_ text in a `ScrollView`.")) {
+                TextDisplay()
+            })
+    }
 }

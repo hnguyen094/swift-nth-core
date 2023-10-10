@@ -31,8 +31,11 @@ extension Root {
                 .sheet(
                     store: store.scope(state: \.$destination, action: { .destination($0) }),
                     state: /Destination.State.settings,
-                    action: Destination.Action.settings,
-                    content: AudioSettings.View.init(store:))
+                    action: Destination.Action.settings) { store in
+                        NavigationView {
+                            AudioSettings.View.init(store: store)
+                        }
+                    }
                 .navigationDestination(
                     store: store.scope(state: \.$destination, action: { .destination($0) }),
                     state: /Destination.State.attribution,

@@ -21,7 +21,7 @@ extension PetList {
                 state: /Destination.State.addOrEdit,
                 action: Destination.Action.addOrEdit,
                 content: { store in
-                    NavigationStack {
+                    NavigationView {
                         AddOrEditPet.View(store: store)
                     }
                 })

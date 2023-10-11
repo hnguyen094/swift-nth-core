@@ -81,7 +81,6 @@ extension PetList {
                                     store.send(.runtimeDebugTapped(i))
                                 }
                                 .tint(Color.secondary)
-
                             }
                         }
                     }

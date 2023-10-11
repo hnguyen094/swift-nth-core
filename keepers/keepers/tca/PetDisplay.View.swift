@@ -52,9 +52,7 @@ extension PetDisplay.View {
 }
 
 //#Preview {
-//    @Dependency(\.modelContext) var modelContext
 //    @Dependency(\.resources) var resources
-//    modelContext.assertIsolated()
 //    return PetDisplayView(store: Store(initialState: PetDisplay.State(
 //        pet: PetIdentity.test,
 //        skyboxName: resources.skybox

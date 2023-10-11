@@ -30,6 +30,7 @@ struct PetList: Reducer {
         case deletePetTapped(IndexSet)
         case editPetTapped(Int)
         case displayPetTapped(Int)
+        case runtimeDebugTapped(Int)
         case destination(PresentationAction<Destination.Action>)
         
         case requestFetch
@@ -73,6 +74,10 @@ struct PetList: Reducer {
                     pet: state.pets[index],
                     skyboxName: resources.skybox))
                 return .none
+            case .runtimeDebugTapped(let index):
+                state.destination = .runtimeDebug(PetRuntimeDebug.State(
+                    pet: state.pets[index]))
+                return .none
             }
         }
         .ifLet(\.$destination, action: /Action.destination) {
@@ -84,11 +89,13 @@ struct PetList: Reducer {
         enum State: Equatable {
             case addOrEdit(AddOrEditPet.State)
             case viewInAR(PetDisplay.State)
+            case runtimeDebug(PetRuntimeDebug.State)
         }
         
         enum Action {
             case addOrEdit(AddOrEditPet.Action)
             case viewInAR(PetDisplay.Action)
+            case runtimeDebug(PetRuntimeDebug.Action)
         }
         
         var body: some ReducerOf<Self> {
@@ -97,6 +104,9 @@ struct PetList: Reducer {
             }
             Scope(state: /State.viewInAR, action: /Action.viewInAR) {
                 PetDisplay()
+            }
+            Scope(state: /State.runtimeDebug, action: /Action.runtimeDebug) {
+                PetRuntimeDebug()
             }
         }
     }

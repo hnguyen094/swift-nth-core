@@ -27,7 +27,7 @@ struct PetRuntime {
         var state: RuntimeState
     }
     
-    enum RuntimeState {
+    enum RuntimeState: Equatable {
         case egg
         case alive(AliveState)
         case dead

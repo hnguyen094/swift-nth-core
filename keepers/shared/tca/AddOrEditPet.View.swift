@@ -17,7 +17,7 @@ extension AddOrEditPet {
 extension AddOrEditPet.View {
     var body: some SwiftUI.View {
         WithViewStore(self.store, observe: identity) { viewStore in
-            List() {
+            List {
                 LabeledContent {
                     if let id = viewStore.state.petIdentity?.persistentModelID.id {
                         ScrollView(.horizontal, showsIndicators: false) {

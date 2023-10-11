@@ -31,12 +31,15 @@ import Foundation
 extension PetRuntime.Naive {
     static func observeRuntime(pet: PetIdentity, upTo date: Date = .now) -> RuntimeState {
         let stable = StableState(timestamp: pet.birthDate, state: .egg)
-        return observeRuntime(commands: pet.userInputs!, starting: stable)
+        let sortedCommands = pet.userInputs!.sorted(by: <)
+        return observeRuntime(commands: sortedCommands, starting: stable, upTo: date)
     }
     
     static func modify(pet: PetIdentity, action: Command.Action, at time: Date) {
-        let command = Command(timestamp: time, action: action, pet: pet)
-        modify(&pet.userInputs!, withNew: command)
+        let command = Command(timestamp: time, action: action, pet: nil)
+        var sortedCommands = pet.userInputs!.sorted(by: <)
+        modify(&sortedCommands, withNew: command)
+        pet.userInputs = sortedCommands
     }
 }
 
@@ -71,7 +74,7 @@ extension PetRuntime.Naive {
     static func observeRuntime(
         commands: [Command]?,
         starting state: StableState,
-        upTo date: Date = .now)
+        upTo date: Date)
     -> RuntimeState {
         let stable = commands != nil
         ? observeStable(commands: commands!, starting: state, upTo: date)
@@ -85,32 +88,35 @@ extension PetRuntime.Naive {
         // handle adding additional future timed actions the pet takes.
         let maybeUnaliveIndex = commands
             .lastIndex(where: {cmd in cmd.action == .unalive })
-        
         if let unaliveIndex = maybeUnaliveIndex {
-            if command.timestamp <= commands[unaliveIndex].timestamp {
+            let unaliveCommand = commands[unaliveIndex]
+            if command.timestamp <= unaliveCommand.timestamp {
                 commands.insert(command, at: unaliveIndex)
-                commands[unaliveIndex].timestamp = deathstamp(fromComplete: commands)
+                unaliveCommand.timestamp = deathstamp(fromComplete: commands)
             }
         } else if case .hatch = command.action {
             commands.append(command)
             commands.append(Command(
                 timestamp: deathstamp(fromComplete: commands),
                 action: .unalive,
-                pet: command.pet!))
+                pet: nil))
         }
-        
         func deathstamp(fromComplete commands: [Command]) -> Date {
             let stableState = observeStable(
                 commands: commands,
-                starting: StableState(timestamp: command.pet!.birthDate, state: .egg),
+                starting: StableState(timestamp: .distantPast, state: .egg),
                 upTo: command.timestamp)
             return calculateDeathTimestamp(stable: stableState)
         }
     }
     
     static func calculateDeathTimestamp(stable state: StableState) -> Date {
-        guard case .alive(let alive) = state.state else {
-            fatalError() // trying calculating death timestamp when pet isn't alive
+        let alive = if case .alive(let aliveState) = state.state {
+            aliveState
+        } else /*if case .egg = state.state*/ {
+            AliveState()
+//        } else {
+//            fatalError() // trying calculating death timestamp when pet isn't alive
         }
         let interval = fullnessVariable.calculateTime(alive.fullness, 0)
         return state.timestamp + interval

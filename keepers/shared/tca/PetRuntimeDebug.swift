@@ -14,11 +14,13 @@ struct PetRuntimeDebug: Reducer {
 
     @Dependency(\.petRuntime) var petRuntime
     @Dependency(\.date) var date
+    @Dependency(\.suspendingClock) var clock
     
     struct State: Equatable {
         var pet: Creature
         var expandedItem: Int? = nil
         var runtimeResult: PetRuntime.RuntimeState? = nil
+        var executionTime: Duration = .zero
         
         @BindingState var time: Date = .now
         @BindingState var action: Record.Action = .noop
@@ -28,7 +30,6 @@ struct PetRuntimeDebug: Reducer {
         case binding(BindingAction<State>)
         case onAppear
         case observeButtonTapped
-        case showObserveResult(PetRuntime.RuntimeState)
         case deleteCommand(IndexSet)
         case submitNewCommand
     }
@@ -43,11 +44,10 @@ struct PetRuntimeDebug: Reducer {
                 state.time = date.now
                 return .none
             case .observeButtonTapped:
-                return .run { [pet = state.pet, time = state.time] send in
-                    let result = petRuntime.observeRuntime(pet, time)
-                    await send(.showObserveResult(result))
+                var result: PetRuntime.RuntimeState? = nil
+                state.executionTime = clock.measure {
+                    result = petRuntime.observeRuntime(state.pet, state.time)
                 }
-            case .showObserveResult(let result):
                 state.runtimeResult = result
                 return .none
             case .deleteCommand(let indexSet):
@@ -60,7 +60,9 @@ struct PetRuntimeDebug: Reducer {
                     logger.error("Failed to save data. (\(error))")
                 }
             case .submitNewCommand:
-                petRuntime.modify(state.pet, state.action, state.time)
+                state.executionTime = clock.measure {
+                    petRuntime.modify(state.pet, state.action, state.time)
+                }
                 return .run { _ in
                     try await modelContext.save()
                 } catch: { error, send in

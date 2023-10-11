@@ -17,7 +17,7 @@ extension AppSchema.V1 {
         var action: Action = Action.noop
         var pet: Creature?
 
-        init(timestamp: Date, action: Action, pet: Creature?) {
+        init(timestamp: Date, action: Action, pet: Creature) {
             self.timestamp = timestamp
             self.action = action
             self.pet = pet

@@ -26,7 +26,7 @@ extension AppSchema.V1 {
         var species: Species = Species.missingno
         
         /// The random seed used for pseudo-random behavior and events.
-        var seed: Int64 = 0
+        var seed: UInt64 = 0
         /// The entire list of all the things that this pet has & will experience with no additional user inputs.
         @Relationship(deleteRule: .cascade, inverse: \Record.pet)
         var records: [Record]? = [Record]()

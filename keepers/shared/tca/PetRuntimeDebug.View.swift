@@ -69,6 +69,12 @@ extension PetRuntimeDebug.View {
                     } else {
                         Text("`N/A`")
                     }
+                    LabeledContent {
+                        
+                        Text(viewStore.executionTime.formatted(.units(allowed: [.nanoseconds, .microseconds])))
+                    } label: {
+                        Text("Execution Time")
+                    }
                 }
             }
         }

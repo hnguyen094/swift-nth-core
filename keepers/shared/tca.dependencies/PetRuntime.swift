@@ -24,6 +24,7 @@ struct PetRuntime {
     
     struct StableState {
         var timestamp: Date
+        var rng: ReproducibleRandomSource
         var state: RuntimeState
     }
     
@@ -52,9 +53,11 @@ extension PetRuntime {
             modify: Naive.modify(pet:action:at:)
         )
     }
-    enum Naive {
-        typealias StableState = PetRuntime.StableState
-        typealias RuntimeState = PetRuntime.RuntimeState
-        typealias AliveState = PetRuntime.AliveState
+    
+    static var cached: Self {
+        var cachedRuntime = Cached()
+        return .init(
+            observeRuntime: { p, t in cachedRuntime.observeRuntime(pet:p, upTo: t) },
+            modify: cachedRuntime.modify(pet:action:at:))
     }
 }

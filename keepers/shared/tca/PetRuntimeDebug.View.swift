@@ -20,7 +20,7 @@ extension PetRuntimeDebug.View {
             List {
                 Section("Commands (sorted)") {
                     ForEach(
-                        Array(viewStore.pet.userInputs!.sorted(by: <).enumerated()),
+                        Array(viewStore.pet.records!.sorted(by: <).enumerated()),
                         id: \.element.persistentModelID)
                     { i, command in
                         HStack {
@@ -47,7 +47,7 @@ extension PetRuntimeDebug.View {
                     Picker("Action", selection: viewStore.binding(
                         get: \.action,
                         send: { .set(\.$action, $0)})) {
-                            ForEach(Command.Action.allCases, id: \.self) { opt in
+                            ForEach(Record.Action.allCases, id: \.self) { opt in
                                 Text(String.init(describing: opt))
                             }
                         }
@@ -76,7 +76,7 @@ extension PetRuntimeDebug.View {
 }
 
 #Preview {
-    PetRuntimeDebug.View(store: Store(initialState: PetRuntimeDebug.State(pet: PetIdentity.test)) {
+    PetRuntimeDebug.View(store: Store(initialState: PetRuntimeDebug.State(pet: Creature.test)) {
         PetRuntimeDebug()
     })
 }

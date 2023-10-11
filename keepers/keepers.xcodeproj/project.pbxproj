@@ -70,8 +70,8 @@
 		B28607C12AD247760011286D /* ErrorFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28607BF2AD247760011286D /* ErrorFeature.swift */; };
 		B293EB142ABCFAE500ADB49A /* PetDisplay.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B293EB132ABCFAE500ADB49A /* PetDisplay.View.swift */; };
 		B293EB162ABCFC8C00ADB49A /* PetDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B293EB152ABCFC8C00ADB49A /* PetDisplay.swift */; };
-		B2AD3F852ACBA201003BEB9F /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AD3F842ACBA201003BEB9F /* Command.swift */; };
-		B2AD3F862ACBA201003BEB9F /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AD3F842ACBA201003BEB9F /* Command.swift */; };
+		B2AD3F852ACBA201003BEB9F /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AD3F842ACBA201003BEB9F /* Record.swift */; };
+		B2AD3F862ACBA201003BEB9F /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AD3F842ACBA201003BEB9F /* Record.swift */; };
 		B2B173DC2AC25D29002AA2D0 /* TextDisplay.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B173DB2AC25D29002AA2D0 /* TextDisplay.View.swift */; };
 		B2B173DD2AC25D29002AA2D0 /* TextDisplay.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B173DB2AC25D29002AA2D0 /* TextDisplay.View.swift */; };
 		B2B51A0B2AAC4BDF0024E3BA /* AudioSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B51A0A2AAC4BDF0024E3BA /* AudioSettings.swift */; };
@@ -99,8 +99,8 @@
 		B2F9B4F32AAD75490070E4E3 /* AudioSettings.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4F22AAD75490070E4E3 /* AudioSettings.View.swift */; };
 		B2F9B4F72AAD92280070E4E3 /* PetList.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4F62AAD92280070E4E3 /* PetList.View.swift */; };
 		B2F9B4F92AAD92B80070E4E3 /* PetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4F82AAD92B80070E4E3 /* PetList.swift */; };
-		B2F9B4FD2AAD99A60070E4E3 /* PetIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4FC2AAD99A60070E4E3 /* PetIdentity.swift */; };
-		B2F9B4FE2AAD99A60070E4E3 /* PetIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4FC2AAD99A60070E4E3 /* PetIdentity.swift */; };
+		B2F9B4FD2AAD99A60070E4E3 /* Creature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4FC2AAD99A60070E4E3 /* Creature.swift */; };
+		B2F9B4FE2AAD99A60070E4E3 /* Creature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4FC2AAD99A60070E4E3 /* Creature.swift */; };
 		B2F9B5002AAE5AEE0070E4E3 /* BindingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4FF2AAE5AEE0070E4E3 /* BindingExtensions.swift */; };
 		B2F9B5012AAE5AEE0070E4E3 /* BindingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4FF2AAE5AEE0070E4E3 /* BindingExtensions.swift */; };
 		B2F9B5062AAEDDB00070E4E3 /* TimeInvervalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B5052AAEDDB00070E4E3 /* TimeInvervalExtensions.swift */; };
@@ -222,7 +222,7 @@
 		B28607BF2AD247760011286D /* ErrorFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorFeature.swift; sourceTree = "<group>"; };
 		B293EB132ABCFAE500ADB49A /* PetDisplay.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDisplay.View.swift; sourceTree = "<group>"; };
 		B293EB152ABCFC8C00ADB49A /* PetDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDisplay.swift; sourceTree = "<group>"; };
-		B2AD3F842ACBA201003BEB9F /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		B2AD3F842ACBA201003BEB9F /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		B2B173DB2AC25D29002AA2D0 /* TextDisplay.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDisplay.View.swift; sourceTree = "<group>"; };
 		B2B51A0A2AAC4BDF0024E3BA /* AudioSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSettings.swift; sourceTree = "<group>"; };
 		B2B51A0E2AAC55CE0024E3BA /* mainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainApp.swift; sourceTree = "<group>"; };
@@ -239,7 +239,7 @@
 		B2F9B4F22AAD75490070E4E3 /* AudioSettings.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSettings.View.swift; sourceTree = "<group>"; };
 		B2F9B4F62AAD92280070E4E3 /* PetList.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetList.View.swift; sourceTree = "<group>"; };
 		B2F9B4F82AAD92B80070E4E3 /* PetList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetList.swift; sourceTree = "<group>"; };
-		B2F9B4FC2AAD99A60070E4E3 /* PetIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetIdentity.swift; sourceTree = "<group>"; };
+		B2F9B4FC2AAD99A60070E4E3 /* Creature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.swift; sourceTree = "<group>"; };
 		B2F9B4FF2AAE5AEE0070E4E3 /* BindingExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExtensions.swift; sourceTree = "<group>"; };
 		B2F9B5052AAEDDB00070E4E3 /* TimeInvervalExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInvervalExtensions.swift; sourceTree = "<group>"; };
 		B2F9B5082AAEEA9C0070E4E3 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
@@ -599,8 +599,8 @@
 			children = (
 				B2F9B4EF2AAD6D580070E4E3 /* PersistentModelContext.swift */,
 				B2F9B50B2AB011000070E4E3 /* AppSchemas.swift */,
-				B2F9B4FC2AAD99A60070E4E3 /* PetIdentity.swift */,
-				B2AD3F842ACBA201003BEB9F /* Command.swift */,
+				B2F9B4FC2AAD99A60070E4E3 /* Creature.swift */,
+				B2AD3F842ACBA201003BEB9F /* Record.swift */,
 			);
 			path = PersistentData;
 			sourceTree = "<group>";
@@ -865,7 +865,7 @@
 				B2F9B4EA2AAD6C6E0070E4E3 /* AudioPlayerClient.swift in Sources */,
 				B2F9B5092AAEEA9C0070E4E3 /* DateExtensions.swift in Sources */,
 				B2F9B5002AAE5AEE0070E4E3 /* BindingExtensions.swift in Sources */,
-				B2AD3F852ACBA201003BEB9F /* Command.swift in Sources */,
+				B2AD3F852ACBA201003BEB9F /* Record.swift in Sources */,
 				B225E7792ACE0E2E00A79539 /* PetRuntime.swift in Sources */,
 				B2EC9FF92AABAC630005D0AB /* Root.swift in Sources */,
 				B225E7852ACFEB1B00A79539 /* GaussianDistribution.swift in Sources */,
@@ -888,7 +888,7 @@
 				B2581A0F2ABE7967003B9C90 /* SimpleBounce.swift in Sources */,
 				B2D902952AD1F56D00BE02BF /* PetRuntime.Naive.swift in Sources */,
 				B225E77F2ACE277D00A79539 /* ComparableExtensions.swift in Sources */,
-				B2F9B4FD2AAD99A60070E4E3 /* PetIdentity.swift in Sources */,
+				B2F9B4FD2AAD99A60070E4E3 /* Creature.swift in Sources */,
 				B25819F42ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */,
 				B2F9B4ED2AAD6CB00070E4E3 /* LoggerClient.swift in Sources */,
 				B2B173DC2AC25D29002AA2D0 /* TextDisplay.View.swift in Sources */,
@@ -942,7 +942,7 @@
 				B28607BB2AD242670011286D /* WaitForLoad.swift in Sources */,
 				B28607C12AD247760011286D /* ErrorFeature.swift in Sources */,
 				B225E7802ACE277D00A79539 /* ComparableExtensions.swift in Sources */,
-				B2AD3F862ACBA201003BEB9F /* Command.swift in Sources */,
+				B2AD3F862ACBA201003BEB9F /* Record.swift in Sources */,
 				B2D958592AD53E1C00D9408E /* PetRuntimeDebug.View.swift in Sources */,
 				B25819FC2ABD4BDE003B9C90 /* AddOrEditPet.swift in Sources */,
 				B2581A152ABE99C2003B9C90 /* AppSystem.swift in Sources */,
@@ -960,7 +960,7 @@
 				B2F9B4E42AAD653C0070E4E3 /* ViewExtensions.swift in Sources */,
 				B2B173DD2AC25D29002AA2D0 /* TextDisplay.View.swift in Sources */,
 				B21911C62AA7A7EB003CE806 /* mainApp.swift in Sources */,
-				B2F9B4FE2AAD99A60070E4E3 /* PetIdentity.swift in Sources */,
+				B2F9B4FE2AAD99A60070E4E3 /* Creature.swift in Sources */,
 				B25F84E72AA9287E00526045 /* ErrorFeature.View.swift in Sources */,
 				B2F9B5072AAEDDB00070E4E3 /* TimeInvervalExtensions.swift in Sources */,
 				B225E78A2AD0A56D00A79539 /* ReproducibleRandomSource.swift in Sources */,

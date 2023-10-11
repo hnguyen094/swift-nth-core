@@ -47,7 +47,7 @@ extension PetDisplay.View {
             // loadSkybox(arView)
         }
         
-        private func createPetEntity(_ pet: PetIdentity) -> ModelEntity {
+        private func createPetEntity(_ pet: Creature) -> ModelEntity {
             let mesh : MeshResource = .generateSphere(radius: 0.25)
             let petEntity = ModelEntity(mesh: mesh)
             petEntity.components[PetComponent.self] = PetComponent()

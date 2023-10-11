@@ -29,17 +29,17 @@ import Foundation
 
 // MARK: for pet runtime
 extension PetRuntime.Naive {
-    static func observeRuntime(pet: PetIdentity, upTo date: Date = .now) -> RuntimeState {
+    static func observeRuntime(pet: Creature, upTo date: Date = .now) -> RuntimeState {
         let stable = StableState(timestamp: pet.birthDate, state: .egg)
-        let sortedCommands = pet.userInputs!.sorted(by: <)
+        let sortedCommands = pet.records!.sorted(by: <)
         return observeRuntime(commands: sortedCommands, starting: stable, upTo: date)
     }
     
-    static func modify(pet: PetIdentity, action: Command.Action, at time: Date) {
-        let command = Command(timestamp: time, action: action, pet: nil)
-        var sortedCommands = pet.userInputs!.sorted(by: <)
+    static func modify(pet: Creature, action: Record.Action, at time: Date) {
+        let command = Record(timestamp: time, action: action, pet: nil)
+        var sortedCommands = pet.records!.sorted(by: <)
         modify(&sortedCommands, withNew: command)
-        pet.userInputs = sortedCommands
+        pet.records = sortedCommands
     }
 }
 
@@ -55,7 +55,7 @@ extension PetRuntime.Naive {
         calculateTime: {i, f in TimeInterval((i - f) * 600 * 60 /* seconds */) })
     
     static func observeStable(
-        commands: [Command],
+        commands: [Record],
         starting state: StableState,
         upTo date: Date = .now)
     -> StableState {
@@ -72,7 +72,7 @@ extension PetRuntime.Naive {
     }
     
     static func observeRuntime(
-        commands: [Command]?,
+        commands: [Record]?,
         starting state: StableState,
         upTo date: Date)
     -> RuntimeState {
@@ -83,7 +83,7 @@ extension PetRuntime.Naive {
         return transition(stable.state, forward: interval)
     }
     
-    static func modify(_ commands: inout [Command], withNew command: Command) {
+    static func modify(_ commands: inout [Record], withNew command: Record) {
         // changes / add unaliveCommand to command list. This could also
         // handle adding additional future timed actions the pet takes.
         let maybeUnaliveIndex = commands
@@ -96,12 +96,12 @@ extension PetRuntime.Naive {
             }
         } else if case .hatch = command.action {
             commands.append(command)
-            commands.append(Command(
+            commands.append(Record(
                 timestamp: deathstamp(fromComplete: commands),
                 action: .unalive,
                 pet: nil))
         }
-        func deathstamp(fromComplete commands: [Command]) -> Date {
+        func deathstamp(fromComplete commands: [Record]) -> Date {
             let stableState = observeStable(
                 commands: commands,
                 starting: StableState(timestamp: .distantPast, state: .egg),
@@ -122,7 +122,7 @@ extension PetRuntime.Naive {
         return state.timestamp + interval
     }
     
-    static func transition(_ state: RuntimeState, with command: Command) -> RuntimeState {
+    static func transition(_ state: RuntimeState, with command: Record) -> RuntimeState {
         switch state {
         case .egg where command.action == .hatch:
                 .alive(transition(alive: AliveState(), with: command))
@@ -144,7 +144,7 @@ extension PetRuntime.Naive {
         }
     }
     
-    private static func transition(alive: AliveState, with command: Command) -> AliveState {
+    private static func transition(alive: AliveState, with command: Record) -> AliveState {
         var state = alive
         switch command.action {
         case .feed(let amount):

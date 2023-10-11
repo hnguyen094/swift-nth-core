@@ -43,7 +43,7 @@ extension Root {
                     destination: TextDisplay.View.init(store:))
                 .navigationDestination(
                     store: store.scope(state: \.$destination, action: { .destination($0) }),
-                    state: /Destination.State.petsList,
+                    state: /Destination.State.petList,
                     action: Destination.Action.petsList,
                     destination: PetList.View.init(store:))
                 .navigationTitle("Keepers")

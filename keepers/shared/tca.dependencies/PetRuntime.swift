@@ -18,8 +18,8 @@ extension DependencyValues {
 
 /// turns a `PetIdentity` into a deterministic runtime state for a given point in time.
 struct PetRuntime {
-    var observeRuntime: (_ pet: PetIdentity, _ date: Date) -> RuntimeState
-    var modify: (_ pet: PetIdentity, _ action: Command.Action, _ date: Date) -> Void
+    var observeRuntime: (_ pet: Creature, _ date: Date) -> RuntimeState
+    var modify: (_ pet: Creature, _ action: Record.Action, _ date: Date) -> Void
   
     
     struct StableState {

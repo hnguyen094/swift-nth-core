@@ -1,5 +1,5 @@
 //
-//  Pets.swift
+//  PetList.swift
 //  keepers
 //
 //  Created by Hung on 9/10/23.
@@ -22,7 +22,7 @@ struct PetList: Reducer {
         }
         
         @PresentationState var destination: Destination.State?
-        var pets: [PetIdentity] = [PetIdentity]()
+        var pets: [Creature] = [Creature]()
     }
     
     enum Action {
@@ -34,7 +34,7 @@ struct PetList: Reducer {
         case destination(PresentationAction<Destination.Action>)
         
         case requestFetch
-        case receiveFetch([PetIdentity])
+        case receiveFetch([Creature])
     }
     
     var body: some ReducerOf<Self> {
@@ -43,7 +43,7 @@ struct PetList: Reducer {
             case .destination(.dismiss), .requestFetch:
                 return .run { send in
                     let pets = try await modelContext
-                        .fetch(FetchDescriptor<PetIdentity>())
+                        .fetch(FetchDescriptor<Creature>())
                     await send(.receiveFetch(pets))
                 } catch: { _, _ in
                     fatalError("Failed to load model container context.")

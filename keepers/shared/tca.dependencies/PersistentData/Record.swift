@@ -8,27 +8,27 @@
 import Foundation
 import SwiftData
 
-typealias Command = AppSchema.V1.Command
+typealias Record = AppSchema.V1.Record
 
 extension AppSchema.V1 {
     @Model
-    final class Command: Comparable {
+    final class Record: Comparable {
         var timestamp: Date = Date.now
         var action: Action = Action.noop
-        var pet: PetIdentity?
+        var pet: Creature?
 
-        init(timestamp: Date, action: Action, pet: PetIdentity?) {
+        init(timestamp: Date, action: Action, pet: Creature?) {
             self.timestamp = timestamp
             self.action = action
             self.pet = pet
         }
         
-        static func < (lhs: Command, rhs: Command) -> Bool {
+        static func < (lhs: Record, rhs: Record) -> Bool {
             lhs.timestamp < rhs.timestamp
         }
         
         enum Action: Codable, CaseIterable, Hashable {
-            static var allCases: [AppSchema.V1.Command.Action] {
+            static var allCases: [AppSchema.V1.Record.Action] {
                 [.noop, .hatch, .feed(0.1), .play, .unalive]
             } // TODO: probably a better way to do this
             

@@ -16,12 +16,12 @@ struct PetRuntimeDebug: Reducer {
     @Dependency(\.date) var date
     
     struct State: Equatable {
-        var pet: PetIdentity
+        var pet: Creature
         var expandedItem: Int? = nil
         var runtimeResult: PetRuntime.RuntimeState? = nil
         
         @BindingState var time: Date = .now
-        @BindingState var action: Command.Action = .noop
+        @BindingState var action: Record.Action = .noop
     }
     
     enum Action: BindableAction {
@@ -51,9 +51,9 @@ struct PetRuntimeDebug: Reducer {
                 state.runtimeResult = result
                 return .none
             case .deleteCommand(let indexSet):
-                var sortedCommands = state.pet.userInputs!.sorted(by: <)
+                var sortedCommands = state.pet.records!.sorted(by: <)
                 sortedCommands.remove(atOffsets: indexSet)
-                state.pet.userInputs = sortedCommands
+                state.pet.records = sortedCommands
                 return .run { _ in
                     try await modelContext.save()
                 } catch: { error, send in

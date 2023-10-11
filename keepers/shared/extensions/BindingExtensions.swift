@@ -8,23 +8,22 @@
 import SwiftUI
 
 public extension Binding {
-    /// Allows converting Int bindings to become Float. Useful for Sliders.
-    ///
-    /// Taken from [here](https://stackoverflow.com/a/74356845 ).
+    /// Allows converting Int bindings to become `Float`. Useful for Sliders.
+    /// - Author: [Mark A. Donohoe](https://stackoverflow.com/a/74356845 ).
     static func convert<TInt, TFloat>(from intBinding: Binding<TInt>) -> Binding<TFloat>
     where TInt:   BinaryInteger,
           TFloat: BinaryFloatingPoint{
-
         Binding<TFloat> (
             get: { TFloat(intBinding.wrappedValue) },
             set: { intBinding.wrappedValue = TInt($0) }
         )
     }
 
+    /// Allows converting Int bindings to become `Float`. Useful for Sliders.
+    /// - Author: [Mark A. Donohoe](https://stackoverflow.com/a/74356845 ).
     static func convert<TFloat, TInt>(from floatBinding: Binding<TFloat>) -> Binding<TInt>
     where TFloat: BinaryFloatingPoint,
           TInt:   BinaryInteger {
-
         Binding<TInt> (
             get: { TInt(floatBinding.wrappedValue) },
             set: { floatBinding.wrappedValue = TFloat($0) }

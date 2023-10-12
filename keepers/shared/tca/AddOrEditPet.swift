@@ -18,7 +18,7 @@ struct AddOrEditPet: Reducer {
     @Dependency(\.date) var date
     
     struct State: Equatable {
-        var petIdentity: Creature? = nil
+        weak var petIdentity: Creature? = nil
         
         @BindingState var name: String = ""
         @BindingState var birthDate: Date = Date()
@@ -34,7 +34,6 @@ struct AddOrEditPet: Reducer {
             personality = pet.personality
             species = pet.species
         }
-        
     }
     
     enum Action: BindableAction {
@@ -62,7 +61,7 @@ struct AddOrEditPet: Reducer {
                 
                 let wasUpsert = state.petIdentity != nil
                 
-                return .run { send in
+                return .run { [unowned pet] send in
                     await modelContainer.insert([pet])
                     try await modelContainer.save()
                     logger.info("""

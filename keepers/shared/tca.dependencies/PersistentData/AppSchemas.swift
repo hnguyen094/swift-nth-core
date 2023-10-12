@@ -35,23 +35,22 @@ extension AppSchema {
         }
         
         static var stages: [MigrationStage] {
-            [V0toV1NoOp().migration]
+            [V0toV1NoOp.migration]
         }
 
-        class V0toV1NoOp {
+        struct V0toV1NoOp {
             @Dependency(\.logger) var logger
             
-            var migration: MigrationStage {
-                return MigrationStage.custom(
+            static let migration: MigrationStage =
+                MigrationStage.custom(
                     fromVersion: AppSchema.V0.self,
                     toVersion: AppSchema.V1.self,
-                    willMigrate: self.willMigrate(_:),
-                    didMigrate: self.didMigrate(_:))
-            }
+                    willMigrate: Self.willMigrate(_:),
+                    didMigrate: Self.didMigrate(_:))
             
-            func willMigrate(_ context: ModelContext) { }
+            static func willMigrate(_ context: ModelContext) { }
             
-            func didMigrate(_ context: ModelContext) { }
+            static func didMigrate(_ context: ModelContext) { }
         }
     }
 }

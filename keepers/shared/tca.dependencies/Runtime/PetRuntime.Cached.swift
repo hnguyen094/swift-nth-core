@@ -28,7 +28,7 @@ extension PetRuntime.Cached {
         let sortedCommands = pet.records!.sorted(by: <)
         guard let index = sortedCommands
             .firstIndex(where: { $0.timestamp > stable.timestamp }) else {
-            return stable.state // no commands after stable timestamp, no action
+            return stable.runtime // no commands after stable timestamp, no action
         }
         let futureCommands = sortedCommands[index...]
         let (endStable, runtime) = observeRuntime(commands: futureCommands, starting: stable, upTo: time)
@@ -63,6 +63,6 @@ extension PetRuntime.Cached {
         ? Naive.observeStable(commands: commands!, starting: state, upTo: date)
         : state
         let interval = date.timeIntervalSince(stable.timestamp)
-        return (stable, Naive.transition(stable.state, forward: interval))
+        return (stable, Naive.transition(stable.runtime, forward: interval))
     }
 }

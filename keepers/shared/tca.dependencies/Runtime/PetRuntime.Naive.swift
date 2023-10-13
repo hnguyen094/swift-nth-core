@@ -44,9 +44,9 @@ extension PetRuntime.Naive {
     
     static func modify(pet: Creature, action: Record.Action, at time: Date) {
         let command = Record(timestamp: time, action: action, pet: pet)
-        var sortedCommands = pet.records!.sorted(by: <)
+        let sortedCommands = pet.records!.sorted(by: <)
         let newCommands = modify(nonpast: sortedCommands, of: pet, withNew: command)
-        pet.records = sortedCommands
+        pet.records = sortedCommands + newCommands
     }
 }
 
@@ -57,9 +57,9 @@ extension PetRuntime.Naive {
         var calculateTime : (_ initial: T, _ final: T) -> TimeInterval
     }
     
-    static var fullnessVariable = TimeDependentVariable<Double>(
-        calculateValueInFuture: {v, t in v - Double(t.minutes) / 600 },
-        calculateTime: {i, f in TimeInterval((i - f) * 600 * 60 /* seconds */) })
+    static var fullnessVariable = TimeDependentVariable<UInt8>(
+        calculateValueInFuture: {v, t in UInt8(Int(v) - t.minutes) },
+        calculateTime: {i, f in TimeInterval(Int(i - f) * 60 /* seconds */) })
     
     static func observeStable(
         commands: any Sequence<Record>,
@@ -72,9 +72,10 @@ extension PetRuntime.Naive {
             computedState = .init(
                 timestamp: command.timestamp,
                 rng: computedState.rng,
-                state: transition(
+                innate: computedState.innate,
+                runtime: transition(
                 transition(
-                    computedState.state,
+                    computedState.runtime,
                     forward: interval),
                 with: command))
         }
@@ -90,7 +91,7 @@ extension PetRuntime.Naive {
         ? observeStable(commands: commands!, starting: state, upTo: date)
         : state
         let interval = date.timeIntervalSince(stable.timestamp)
-        return transition(stable.state, forward: interval)
+        return transition(stable.runtime, forward: interval)
     }
     
     static func modify(
@@ -125,16 +126,32 @@ extension PetRuntime.Naive {
     }
     
     static func generateStartingState(pet: Creature) -> StableState {
-        .init(
+        var stable = StableState(
             timestamp: pet.birthDate,
             rng: .init(
                 seed: pet.seed,
                 with: .LinearCongruential),
-            state: .egg)
+            innate: .init(),
+            runtime: .egg)
+        
+        // random number from uniform output
+        // this is between 0<= and <upperBound
+        stable.innate.activeness = UInt8(stable.rng.nextInt(upperBound: Int(UInt8.max)))
+        
+        // sample number from norm distribution
+        // has guarantees of 100% INSIDE +-3 std so in this case will never go above 130
+        let norm = GaussianDistribution(
+            randomSource: stable.rng,
+            mean: 100,
+            deviation: 10)
+        stable.innate.curiosity = UInt8(norm.nextInt())
+        stable.innate.entertainment = UInt8(norm.nextInt())
+        
+        return stable
     }
     
     static func calculateDeathTimestamp(stable state: StableState) -> Date {
-        let alive: Optional<AliveState> = switch state.state {
+        let alive: Optional<AliveState> = switch state.runtime {
         case .alive(let aliveState):
             aliveState
         case .egg:
@@ -172,9 +189,9 @@ extension PetRuntime.Naive {
         var state = alive
         switch command.action {
         case .feed(let amount):
-            state.fullness = (state.fullness + amount).clamped(to: 0...1)
+            state.fullness = (state.fullness + amount).clamped(to: ...UInt8.max)
         case .play:
-            state.happiness = (state.happiness + 0.1).clamped(to: 0...1)
+            state.happiness = (state.happiness + 1).clamped(to: ...UInt8.max)
         case .hatch, .unalive, .noop:
             break
         }
@@ -186,8 +203,8 @@ extension PetRuntime.Naive {
         let minutes = Double(time.minutes)
         state.fullness = fullnessVariable
             .calculateValueInFuture(state.fullness, time)
-            .clamped(to: 0...1)
-        state.happiness = (state.happiness - minutes / 1800).clamped(to: 0...1)
+            .clamped(to: 0...)
+        state.happiness = (state.happiness - UInt8(minutes / 1800)).clamped(to: 0...)
         return state
     }
 }

@@ -13,4 +13,12 @@ extension Comparable {
     func clamped(to limits: ClosedRange<Self>) -> Self {
         return min(max(self, limits.lowerBound), limits.upperBound)
     }
+    
+    func clamped(to limits: PartialRangeFrom<Self>) -> Self {
+        return max(self, limits.lowerBound)
+    }
+    
+    func clamped(to limits: PartialRangeThrough<Self>) -> Self {
+        return min(self, limits.upperBound)
+    }
 }

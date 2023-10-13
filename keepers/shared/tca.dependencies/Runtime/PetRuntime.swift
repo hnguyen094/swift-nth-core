@@ -25,7 +25,8 @@ struct PetRuntime {
     struct StableState {
         var timestamp: Date
         var rng: ReproducibleRandomSource
-        var state: RuntimeState
+        var innate: Needs
+        var runtime: RuntimeState
     }
     
     enum RuntimeState: Equatable {
@@ -36,9 +37,31 @@ struct PetRuntime {
         case corrupted
     }
     struct AliveState: Equatable {
-        var fullness: Double = 0.5
-        var happiness: Double = 0.5
-        // TODO: add more computed variables as discussed
+        var fullness: UInt8 = 50
+        var hydration: UInt8 = 0
+        var cleanliness: UInt8 = 0
+        var energy: UInt8 = 0
+        var happiness: UInt8 = 0
+        
+        var changingNeeds = Needs()
+
+        // TODO: another way to define the time. Ignore for now.
+        @TimeDependent(
+            valueForward: {value, time in UInt8(Int(value) - time.minutes) },
+            timeBetween: {initial, final in TimeInterval(Int(initial - final) * 60 /* seconds */) })
+        var full: UInt8 = 0
+    }
+    
+    struct Needs: Equatable {
+        var fullness: UInt8 = 0
+        var hydration: UInt8 = 0
+        var cleanliness: UInt8 = 0
+        var energy: UInt8 = 0
+        var activeness: UInt8 = 0
+        var temperature: UInt8 = 0
+        var curiosity: UInt8 = 0
+        var entertainment: UInt8 = 0
+        var sensitivity: UInt8 = 0
     }
 }
 

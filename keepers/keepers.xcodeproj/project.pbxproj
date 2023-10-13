@@ -32,6 +32,10 @@
 		B21F34152AC1526A00175652 /* TextDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21F34132AC1526A00175652 /* TextDisplay.swift */; };
 		B21F34172AC15D2300175652 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21F34162AC15D2300175652 /* Resources.swift */; };
 		B21F34182AC15D2300175652 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21F34162AC15D2300175652 /* Resources.swift */; };
+		B22491F72AD8AD13003D8B75 /* Clamping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22491F62AD8AD13003D8B75 /* Clamping.swift */; };
+		B22491F82AD8AD13003D8B75 /* Clamping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22491F62AD8AD13003D8B75 /* Clamping.swift */; };
+		B22491FA2ADA057E003D8B75 /* TimeDependent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22491F92ADA057E003D8B75 /* TimeDependent.swift */; };
+		B22491FB2ADA057E003D8B75 /* TimeDependent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22491F92ADA057E003D8B75 /* TimeDependent.swift */; };
 		B225E7792ACE0E2E00A79539 /* PetRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = B225E7782ACE0E2E00A79539 /* PetRuntime.swift */; };
 		B225E77A2ACE0E2E00A79539 /* PetRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = B225E7782ACE0E2E00A79539 /* PetRuntime.swift */; };
 		B225E77F2ACE277D00A79539 /* ComparableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B225E77E2ACE277D00A79539 /* ComparableExtensions.swift */; };
@@ -40,7 +44,7 @@
 		B225E7862ACFEB1B00A79539 /* GaussianDistribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = B225E7842ACFEB1B00A79539 /* GaussianDistribution.swift */; };
 		B225E7892AD0A56D00A79539 /* ReproducibleRandomSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B225E7882AD0A56D00A79539 /* ReproducibleRandomSource.swift */; };
 		B225E78A2AD0A56D00A79539 /* ReproducibleRandomSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B225E7882AD0A56D00A79539 /* ReproducibleRandomSource.swift */; };
-		B225E78D2AD0C86F00A79539 /* SwiftPriorityQueue in Frameworks */ = {isa = PBXBuildFile; productRef = B225E78C2AD0C86F00A79539 /* SwiftPriorityQueue */; };
+		B225E78D2AD0C86F00A79539 /* SwiftPriorityQueue in Frameworks */ = {isa = PBXBuildFile; productRef = B225E78C2AD0C86F00A79539 /* SwiftPriorityQueue */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B25819F42ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25819F32ABD2B2A003B9C90 /* UIColorExtensions.swift */; };
 		B25819F52ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25819F32ABD2B2A003B9C90 /* UIColorExtensions.swift */; };
 		B25819F82ABD4B5F003B9C90 /* AddOrEditPet.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25819F72ABD4B5F003B9C90 /* AddOrEditPet.View.swift */; };
@@ -82,7 +86,7 @@
 		B2B51A122AAC56260024E3BA /* Root.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B51A112AAC56260024E3BA /* Root.View.swift */; };
 		B2D902952AD1F56D00BE02BF /* PetRuntime.Naive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D902942AD1F56D00BE02BF /* PetRuntime.Naive.swift */; };
 		B2D902962AD1F56D00BE02BF /* PetRuntime.Naive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D902942AD1F56D00BE02BF /* PetRuntime.Naive.swift */; };
-		B2D9029C2AD2144300BE02BF /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = B2D9029B2AD2144300BE02BF /* Marquee */; };
+		B2D9029C2AD2144300BE02BF /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = B2D9029B2AD2144300BE02BF /* Marquee */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B2D958552AD5385300D9408E /* PetRuntimeDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D958542AD5385300D9408E /* PetRuntimeDebug.swift */; };
 		B2D958562AD5385300D9408E /* PetRuntimeDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D958542AD5385300D9408E /* PetRuntimeDebug.swift */; };
 		B2D958582AD53E1C00D9408E /* PetRuntimeDebug.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D958572AD53E1C00D9408E /* PetRuntimeDebug.View.swift */; };
@@ -204,6 +208,8 @@
 		B21E70A82AD5191E0018E8A6 /* attributions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = attributions.txt; sourceTree = "<group>"; };
 		B21F34132AC1526A00175652 /* TextDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDisplay.swift; sourceTree = "<group>"; };
 		B21F34162AC15D2300175652 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		B22491F62AD8AD13003D8B75 /* Clamping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clamping.swift; sourceTree = "<group>"; };
+		B22491F92ADA057E003D8B75 /* TimeDependent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDependent.swift; sourceTree = "<group>"; };
 		B225E7782ACE0E2E00A79539 /* PetRuntime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetRuntime.swift; sourceTree = "<group>"; };
 		B225E77E2ACE277D00A79539 /* ComparableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparableExtensions.swift; sourceTree = "<group>"; };
 		B225E7842ACFEB1B00A79539 /* GaussianDistribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaussianDistribution.swift; sourceTree = "<group>"; };
@@ -448,12 +454,24 @@
 			path = resources;
 			sourceTree = "<group>";
 		};
+		B22491F22AD8A0B2003D8B75 /* Runtime */ = {
+			isa = PBXGroup;
+			children = (
+				B225E7782ACE0E2E00A79539 /* PetRuntime.swift */,
+				B2D902942AD1F56D00BE02BF /* PetRuntime.Naive.swift */,
+				B275EC7E2AD729AD00791AC0 /* PetRuntime.Cached.swift */,
+				B22491F92ADA057E003D8B75 /* TimeDependent.swift */,
+			);
+			path = Runtime;
+			sourceTree = "<group>";
+		};
 		B225E7872AD0A52C00A79539 /* helpers */ = {
 			isa = PBXGroup;
 			children = (
 				B225E7842ACFEB1B00A79539 /* GaussianDistribution.swift */,
 				B225E7882AD0A56D00A79539 /* ReproducibleRandomSource.swift */,
 				B25F84D62AA909DB00526045 /* Styles.swift */,
+				B22491F62AD8AD13003D8B75 /* Clamping.swift */,
 			);
 			name = helpers;
 			sourceTree = "<group>";
@@ -586,14 +604,12 @@
 		B2F9B4E52AAD6BE80070E4E3 /* tca.dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				B22491F22AD8A0B2003D8B75 /* Runtime */,
 				B2F9B4F52AAD91770070E4E3 /* PersistentData */,
 				B2F9B4E62AAD6C0E0070E4E3 /* UserPreferencesClient.swift */,
 				B2F9B4E92AAD6C6E0070E4E3 /* AudioPlayerClient.swift */,
 				B2F9B4EC2AAD6CB00070E4E3 /* LoggerClient.swift */,
 				B21F34162AC15D2300175652 /* Resources.swift */,
-				B225E7782ACE0E2E00A79539 /* PetRuntime.swift */,
-				B2D902942AD1F56D00BE02BF /* PetRuntime.Naive.swift */,
-				B275EC7E2AD729AD00791AC0 /* PetRuntime.Cached.swift */,
 			);
 			path = tca.dependencies;
 			sourceTree = "<group>";
@@ -880,6 +896,7 @@
 				B2F9B4F32AAD75490070E4E3 /* AudioSettings.View.swift in Sources */,
 				B28607BA2AD242670011286D /* WaitForLoad.swift in Sources */,
 				B293EB142ABCFAE500ADB49A /* PetDisplay.View.swift in Sources */,
+				B22491FA2ADA057E003D8B75 /* TimeDependent.swift in Sources */,
 				B2F9B4E72AAD6C0E0070E4E3 /* UserPreferencesClient.swift in Sources */,
 				B2F9B50C2AB011000070E4E3 /* AppSchemas.swift in Sources */,
 				B293EB162ABCFC8C00ADB49A /* PetDisplay.swift in Sources */,
@@ -895,6 +912,7 @@
 				B225E77F2ACE277D00A79539 /* ComparableExtensions.swift in Sources */,
 				B2F9B4FD2AAD99A60070E4E3 /* Creature.swift in Sources */,
 				B25819F42ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */,
+				B22491F72AD8AD13003D8B75 /* Clamping.swift in Sources */,
 				B2F9B4ED2AAD6CB00070E4E3 /* LoggerClient.swift in Sources */,
 				B2B173DC2AC25D29002AA2D0 /* TextDisplay.View.swift in Sources */,
 				B2F9B4F92AAD92B80070E4E3 /* PetList.swift in Sources */,
@@ -959,6 +977,8 @@
 				B2F9B4E82AAD6C0E0070E4E3 /* UserPreferencesClient.swift in Sources */,
 				B2F9B4EE2AAD6CB00070E4E3 /* LoggerClient.swift in Sources */,
 				B2F9B5012AAE5AEE0070E4E3 /* BindingExtensions.swift in Sources */,
+				B22491F82AD8AD13003D8B75 /* Clamping.swift in Sources */,
+				B22491FB2ADA057E003D8B75 /* TimeDependent.swift in Sources */,
 				B21F34152AC1526A00175652 /* TextDisplay.swift in Sources */,
 				B25819F52ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */,
 				B28607BE2AD244830011286D /* WaitForLoad.View.swift in Sources */,

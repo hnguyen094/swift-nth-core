@@ -7,33 +7,6 @@
 //  Naive implementation of a functional pet runtime.
 
 import Foundation
-
-extension PetRuntime {
-    enum Naive {
-        typealias StableState = PetRuntime.StableState
-        typealias RuntimeState = PetRuntime.RuntimeState
-        typealias AliveState = PetRuntime.AliveState
-    }
-}
-
-/// We love naive implementations!
-///
-/// - ToDo: RNG (how do we propagate cleanly? Do we need a struct to combine multiple dependencies?)
-/// - ToDo: corruption handling! An external user can see corrupted state, but we probably want to handle
-/// cases we can predict ourselves (for some reason.)
-/// - ToDo: Performant and predictable caching behavior! I'd imagine it's expensive for if _every frame_ we
-/// have to re-observe and recompute the entire pet state. It feels like it should be easy to cache with
-/// something else calling this. \
-/// Note that the Stateful version of this runtime should also query the model context dependency
-/// correctly
-/// - ToDo: For cases where we don't observe every frame (which honestly, is lazy) we could be in a situation
-/// where the pet has died but the screen hasn't displayed it. During this window, if the user does something
-/// to the pet, the action would queue _after_ death but to the user this is _before_. Seems bad and
-/// should be avoided at all costs.
-/// - ToDo: Time RNG! Do we have any variables that requires RNG but should be continuous? For example,
-/// the physical location of a pet over time? If we do, we would want to implement 1D perlin noise or
-/// some non-periodic function that is stable between commands (relative to birth date, or something.)
-
 // MARK: for pet runtime
 extension PetRuntime.Naive {
     static func observeRuntime(pet: Creature, upTo date: Date = .now) -> RuntimeState {
@@ -52,34 +25,25 @@ extension PetRuntime.Naive {
 
 // MARK: implementation details
 extension PetRuntime.Naive {
-    struct TimeDependentVariable<T> {
-        var calculateValueInFuture : (_: T, _ forward: TimeInterval) -> T
-        var calculateTime : (_ initial: T, _ final: T) -> TimeInterval
-    }
-    
-    static var fullnessVariable = TimeDependentVariable<UInt8>(
-        calculateValueInFuture: {v, t in UInt8(Int(v) - t.minutes) },
-        calculateTime: {i, f in TimeInterval(Int(i - f) * 60 /* seconds */) })
-    
     static func observeStable(
         commands: any Sequence<Record>,
-        starting state: StableState,
+        starting: StableState,
         upTo date: Date = .now)
     -> StableState {
-        var computedState = state
+        var stable = starting
         for command in commands where command.timestamp <= date {
-            let interval = command.timestamp.timeIntervalSince(computedState.timestamp)
-            computedState = .init(
+            let interval = command.timestamp.timeIntervalSince(stable.timestamp)
+            stable = .init(
                 timestamp: command.timestamp,
-                rng: computedState.rng,
-                innate: computedState.innate,
+                rng: stable.rng,
+                innate: stable.innate,
                 runtime: transition(
                 transition(
-                    computedState.runtime,
+                    stable.runtime,
                     forward: interval),
                 with: command))
         }
-        return computedState
+        return stable
     }
     
     static func observeRuntime(
@@ -136,7 +100,7 @@ extension PetRuntime.Naive {
         
         // random number from uniform output
         // this is between 0<= and <upperBound
-        stable.innate.activeness = UInt8(stable.rng.nextInt(upperBound: Int(UInt8.max)))
+        stable.innate.activenessBias = UInt8(stable.rng.nextInt(upperBound: Int(UInt8.max)))
         
         // sample number from norm distribution
         // has guarantees of 100% INSIDE +-3 std so in this case will never go above 130
@@ -144,23 +108,25 @@ extension PetRuntime.Naive {
             randomSource: stable.rng,
             mean: 100,
             deviation: 10)
-        stable.innate.curiosity = UInt8(norm.nextInt())
-        stable.innate.entertainment = UInt8(norm.nextInt())
+        stable.innate.curiosityBias = UInt8(norm.nextInt())
+        stable.innate.socialBias = UInt8(norm.nextInt())
         
         return stable
     }
     
     static func calculateDeathTimestamp(stable state: StableState) -> Date {
-        let alive: Optional<AliveState> = switch state.runtime {
-        case .alive(let aliveState):
-            aliveState
+        let maybeAlive: Optional<AliveState> = switch state.runtime {
+        case .alive(let alive):
+            alive
         case .egg:
             AliveState()
         case .corrupted, .dead:
             nil
         }
-        let interval = fullnessVariable.calculateTime(alive?.fullness ?? 0, 0)
-        return state.timestamp + interval
+        guard let alive = maybeAlive else {
+            return state.timestamp
+        }
+        return state.timestamp + Fullness.when(valueBecomes: 0, from: alive)
     }
     
     static func transition(_ state: RuntimeState, with command: Record) -> RuntimeState {
@@ -187,24 +153,23 @@ extension PetRuntime.Naive {
     
     private static func transition(alive: AliveState, with command: Record) -> AliveState {
         var state = alive
-        switch command.action {
-        case .feed(let amount):
-            state.fullness = (state.fullness + amount).clamped(to: ...UInt8.max)
-        case .play:
-            state.happiness = (state.happiness + 1).clamped(to: ...UInt8.max)
-        case .hatch, .unalive, .noop:
-            break
-        }
+        state.fullness = Fullness.update(with: command.action, from: alive)
+        // TODO: add other variables that change
         return state
     }
     
     private static func transition(alive: AliveState, forward time: TimeInterval) -> AliveState {
         var state = alive
-        let minutes = Double(time.minutes)
-        state.fullness = fullnessVariable
-            .calculateValueInFuture(state.fullness, time)
-            .clamped(to: 0...)
-        state.happiness = (state.happiness - UInt8(minutes / 1800)).clamped(to: 0...)
+        state.fullness = Fullness.update(over: time, from: alive)
+        // TODO: add other variables that change
         return state
+    }
+}
+
+extension PetRuntime {
+    enum Naive {
+        typealias StableState = PetRuntime.StableState
+        typealias RuntimeState = PetRuntime.RuntimeState
+        typealias AliveState = PetRuntime.AliveState
     }
 }

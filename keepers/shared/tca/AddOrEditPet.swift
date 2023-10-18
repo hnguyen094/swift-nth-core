@@ -23,6 +23,7 @@ struct AddOrEditPet: Reducer {
         @BindingState var name: String = ""
         @BindingState var birthDate: Date = Date()
         @BindingState var species: Species = .missingno
+        @BindingState var seed: UInt64 = 0
         var personality: Personality = Personality()
         
         init() {}
@@ -33,6 +34,7 @@ struct AddOrEditPet: Reducer {
             birthDate = pet.birthDate
             personality = pet.personality
             species = pet.species
+            seed = pet.seed
         }
         
     }
@@ -40,6 +42,7 @@ struct AddOrEditPet: Reducer {
     enum Action: BindableAction {
         case binding(BindingAction<State>)
         case updatePersonality(WritableKeyPath<Personality, Int8>, Int8)
+        case generateRandomSeed
         case submit
     }
     
@@ -53,12 +56,16 @@ struct AddOrEditPet: Reducer {
             case .updatePersonality(let keyPath, let value):
                 state.personality[keyPath: keyPath] = value
                 return .none
+            case .generateRandomSeed:
+                state.seed = UInt64.random(in: 0...UInt64.max)
+                return .none
             case .submit:
                 let pet = state.petIdentity ?? generatePet()
                 pet.name = state.name
                 pet.personality = state.personality
                 pet.birthDate = state.birthDate
                 pet.species = state.species
+                pet.seed = state.seed
                 
                 let wasUpsert = state.petIdentity != nil
                 

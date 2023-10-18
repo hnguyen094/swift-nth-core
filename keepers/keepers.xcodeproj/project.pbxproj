@@ -34,8 +34,6 @@
 		B21F34182AC15D2300175652 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21F34162AC15D2300175652 /* Resources.swift */; };
 		B22491F72AD8AD13003D8B75 /* Clamping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22491F62AD8AD13003D8B75 /* Clamping.swift */; };
 		B22491F82AD8AD13003D8B75 /* Clamping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22491F62AD8AD13003D8B75 /* Clamping.swift */; };
-		B22491FA2ADA057E003D8B75 /* TimeDependent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22491F92ADA057E003D8B75 /* TimeDependent.swift */; };
-		B22491FB2ADA057E003D8B75 /* TimeDependent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22491F92ADA057E003D8B75 /* TimeDependent.swift */; };
 		B225E7792ACE0E2E00A79539 /* PetRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = B225E7782ACE0E2E00A79539 /* PetRuntime.swift */; };
 		B225E77A2ACE0E2E00A79539 /* PetRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = B225E7782ACE0E2E00A79539 /* PetRuntime.swift */; };
 		B225E77F2ACE277D00A79539 /* ComparableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B225E77E2ACE277D00A79539 /* ComparableExtensions.swift */; };
@@ -45,6 +43,8 @@
 		B225E7892AD0A56D00A79539 /* ReproducibleRandomSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B225E7882AD0A56D00A79539 /* ReproducibleRandomSource.swift */; };
 		B225E78A2AD0A56D00A79539 /* ReproducibleRandomSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B225E7882AD0A56D00A79539 /* ReproducibleRandomSource.swift */; };
 		B225E78D2AD0C86F00A79539 /* SwiftPriorityQueue in Frameworks */ = {isa = PBXBuildFile; productRef = B225E78C2AD0C86F00A79539 /* SwiftPriorityQueue */; settings = {ATTRIBUTES = (Weak, ); }; };
+		B23C41862ADF4A0C001750A6 /* Fullness.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23C41852ADF4A0C001750A6 /* Fullness.swift */; };
+		B23C41872ADF4A0C001750A6 /* Fullness.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23C41852ADF4A0C001750A6 /* Fullness.swift */; };
 		B25819F42ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25819F32ABD2B2A003B9C90 /* UIColorExtensions.swift */; };
 		B25819F52ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25819F32ABD2B2A003B9C90 /* UIColorExtensions.swift */; };
 		B25819F82ABD4B5F003B9C90 /* AddOrEditPet.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25819F72ABD4B5F003B9C90 /* AddOrEditPet.View.swift */; };
@@ -76,6 +76,8 @@
 		B28607C12AD247760011286D /* ErrorFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28607BF2AD247760011286D /* ErrorFeature.swift */; };
 		B293EB142ABCFAE500ADB49A /* PetDisplay.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B293EB132ABCFAE500ADB49A /* PetDisplay.View.swift */; };
 		B293EB162ABCFC8C00ADB49A /* PetDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B293EB152ABCFC8C00ADB49A /* PetDisplay.swift */; };
+		B2A4C48C2ADBBE5800535C18 /* VariableMicroSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4C48B2ADBBE5800535C18 /* VariableMicroSystem.swift */; };
+		B2A4C48D2ADBBE5800535C18 /* VariableMicroSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4C48B2ADBBE5800535C18 /* VariableMicroSystem.swift */; };
 		B2AD3F852ACBA201003BEB9F /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AD3F842ACBA201003BEB9F /* Record.swift */; };
 		B2AD3F862ACBA201003BEB9F /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AD3F842ACBA201003BEB9F /* Record.swift */; };
 		B2B173DC2AC25D29002AA2D0 /* TextDisplay.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B173DB2AC25D29002AA2D0 /* TextDisplay.View.swift */; };
@@ -209,11 +211,11 @@
 		B21F34132AC1526A00175652 /* TextDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDisplay.swift; sourceTree = "<group>"; };
 		B21F34162AC15D2300175652 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		B22491F62AD8AD13003D8B75 /* Clamping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clamping.swift; sourceTree = "<group>"; };
-		B22491F92ADA057E003D8B75 /* TimeDependent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDependent.swift; sourceTree = "<group>"; };
 		B225E7782ACE0E2E00A79539 /* PetRuntime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetRuntime.swift; sourceTree = "<group>"; };
 		B225E77E2ACE277D00A79539 /* ComparableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparableExtensions.swift; sourceTree = "<group>"; };
 		B225E7842ACFEB1B00A79539 /* GaussianDistribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaussianDistribution.swift; sourceTree = "<group>"; };
 		B225E7882AD0A56D00A79539 /* ReproducibleRandomSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReproducibleRandomSource.swift; sourceTree = "<group>"; };
+		B23C41852ADF4A0C001750A6 /* Fullness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fullness.swift; sourceTree = "<group>"; };
 		B25819F32ABD2B2A003B9C90 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		B25819F72ABD4B5F003B9C90 /* AddOrEditPet.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditPet.View.swift; sourceTree = "<group>"; };
 		B25819FA2ABD4BDE003B9C90 /* AddOrEditPet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditPet.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 		B28607BF2AD247760011286D /* ErrorFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorFeature.swift; sourceTree = "<group>"; };
 		B293EB132ABCFAE500ADB49A /* PetDisplay.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDisplay.View.swift; sourceTree = "<group>"; };
 		B293EB152ABCFC8C00ADB49A /* PetDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDisplay.swift; sourceTree = "<group>"; };
+		B2A4C48B2ADBBE5800535C18 /* VariableMicroSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableMicroSystem.swift; sourceTree = "<group>"; };
 		B2AD3F842ACBA201003BEB9F /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		B2B173DB2AC25D29002AA2D0 /* TextDisplay.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDisplay.View.swift; sourceTree = "<group>"; };
 		B2B51A0A2AAC4BDF0024E3BA /* AudioSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSettings.swift; sourceTree = "<group>"; };
@@ -460,7 +463,7 @@
 				B225E7782ACE0E2E00A79539 /* PetRuntime.swift */,
 				B2D902942AD1F56D00BE02BF /* PetRuntime.Naive.swift */,
 				B275EC7E2AD729AD00791AC0 /* PetRuntime.Cached.swift */,
-				B22491F92ADA057E003D8B75 /* TimeDependent.swift */,
+				B2A4C4842ADBBBF900535C18 /* Variables */,
 			);
 			path = Runtime;
 			sourceTree = "<group>";
@@ -585,6 +588,15 @@
 				B25F84D12AA81B4000526045 /* views_deprecated */,
 			);
 			path = shared;
+			sourceTree = "<group>";
+		};
+		B2A4C4842ADBBBF900535C18 /* Variables */ = {
+			isa = PBXGroup;
+			children = (
+				B2A4C48B2ADBBE5800535C18 /* VariableMicroSystem.swift */,
+				B23C41852ADF4A0C001750A6 /* Fullness.swift */,
+			);
+			name = Variables;
 			sourceTree = "<group>";
 		};
 		B2F9B4E12AAD65140070E4E3 /* extensions */ = {
@@ -887,6 +899,7 @@
 				B2F9B5002AAE5AEE0070E4E3 /* BindingExtensions.swift in Sources */,
 				B2AD3F852ACBA201003BEB9F /* Record.swift in Sources */,
 				B225E7792ACE0E2E00A79539 /* PetRuntime.swift in Sources */,
+				B23C41862ADF4A0C001750A6 /* Fullness.swift in Sources */,
 				B2EC9FF92AABAC630005D0AB /* Root.swift in Sources */,
 				B225E7852ACFEB1B00A79539 /* GaussianDistribution.swift in Sources */,
 				B225E7892AD0A56D00A79539 /* ReproducibleRandomSource.swift in Sources */,
@@ -896,7 +909,6 @@
 				B2F9B4F32AAD75490070E4E3 /* AudioSettings.View.swift in Sources */,
 				B28607BA2AD242670011286D /* WaitForLoad.swift in Sources */,
 				B293EB142ABCFAE500ADB49A /* PetDisplay.View.swift in Sources */,
-				B22491FA2ADA057E003D8B75 /* TimeDependent.swift in Sources */,
 				B2F9B4E72AAD6C0E0070E4E3 /* UserPreferencesClient.swift in Sources */,
 				B2F9B50C2AB011000070E4E3 /* AppSchemas.swift in Sources */,
 				B293EB162ABCFC8C00ADB49A /* PetDisplay.swift in Sources */,
@@ -919,6 +931,7 @@
 				B28607BD2AD244830011286D /* WaitForLoad.View.swift in Sources */,
 				B21F34172AC15D2300175652 /* Resources.swift in Sources */,
 				B2581A142ABE99C2003B9C90 /* AppSystem.swift in Sources */,
+				B2A4C48C2ADBBE5800535C18 /* VariableMicroSystem.swift in Sources */,
 				B25F84D72AA909DB00526045 /* Styles.swift in Sources */,
 				B28607C02AD247760011286D /* ErrorFeature.swift in Sources */,
 				B2D958552AD5385300D9408E /* PetRuntimeDebug.swift in Sources */,
@@ -978,9 +991,9 @@
 				B2F9B4EE2AAD6CB00070E4E3 /* LoggerClient.swift in Sources */,
 				B2F9B5012AAE5AEE0070E4E3 /* BindingExtensions.swift in Sources */,
 				B22491F82AD8AD13003D8B75 /* Clamping.swift in Sources */,
-				B22491FB2ADA057E003D8B75 /* TimeDependent.swift in Sources */,
 				B21F34152AC1526A00175652 /* TextDisplay.swift in Sources */,
 				B25819F52ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */,
+				B2A4C48D2ADBBE5800535C18 /* VariableMicroSystem.swift in Sources */,
 				B28607BE2AD244830011286D /* WaitForLoad.View.swift in Sources */,
 				B2F9B4E42AAD653C0070E4E3 /* ViewExtensions.swift in Sources */,
 				B2B173DD2AC25D29002AA2D0 /* TextDisplay.View.swift in Sources */,
@@ -988,6 +1001,7 @@
 				B2F9B4FE2AAD99A60070E4E3 /* Creature.swift in Sources */,
 				B25F84E72AA9287E00526045 /* ErrorFeature.View.swift in Sources */,
 				B2F9B5072AAEDDB00070E4E3 /* TimeInvervalExtensions.swift in Sources */,
+				B23C41872ADF4A0C001750A6 /* Fullness.swift in Sources */,
 				B225E78A2AD0A56D00A79539 /* ReproducibleRandomSource.swift in Sources */,
 				B2F9B50A2AAEEA9C0070E4E3 /* DateExtensions.swift in Sources */,
 				B21911CA2AA7A7EB003CE806 /* ImmersiveView.swift in Sources */,

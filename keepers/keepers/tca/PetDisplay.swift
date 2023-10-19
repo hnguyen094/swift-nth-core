@@ -15,11 +15,13 @@ struct PetDisplay: Reducer {
     struct State: Equatable {
         var pet: Creature
         var skyboxName: String
+        var rkShouldBeDeallocated: Bool = false
     }
     
     enum Action {
         case changeSkybox(String)
         case skyboxError(Error)
+        case deallocateRkView
         case noop
     }
     
@@ -30,6 +32,9 @@ struct PetDisplay: Reducer {
             return .none
         case .skyboxError(let error):
             logger.error("Failed loading skybox. (\(error))")
+            return .none
+        case .deallocateRkView:
+            state.rkShouldBeDeallocated = true
             return .none
         case .noop:
             return .none

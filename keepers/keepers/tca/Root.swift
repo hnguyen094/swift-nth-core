@@ -35,13 +35,14 @@ struct Root: Reducer {
                 state.destination = .settings(AudioSettings.State())
                 return .none
             case .startButtonTapped:
-                state.destination = .petsList(Pets.State())
+                state.destination = .petsList(PetList.State())
                 return .none
             case .attributionButtonTapped:
                 do {
-                    var attributions = try readText(from: resources.attributions)
+                    let attributions = try readText(from: resources.attributions)
                     state.destination = .attribution(TextDisplay.State(
                         title: "Attributions",
+                        autoscroll: true,
                         text: attributions))
                 } catch {
                     logger.error("Failed to read attribution file. (\(error))")
@@ -64,19 +65,19 @@ struct Root: Reducer {
     
     struct Destination: Reducer {
         enum State {
-            case petsList(Pets.State)
+            case petsList(PetList.State)
             case settings(AudioSettings.State)
             case attribution(TextDisplay.State)
         }
         enum Action {
-            case petsList(Pets.Action)
+            case petsList(PetList.Action)
             case settings(AudioSettings.Action)
             case attribution(TextDisplay.Action)
         }
         
         var body: some ReducerOf<Self> {
             Scope(state: /State.petsList, action: /Action.petsList) {
-                Pets()
+                PetList()
             }
             Scope(state: /State.settings, action: /Action.settings) {
                 AudioSettings()

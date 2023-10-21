@@ -1,5 +1,5 @@
 //
-//  PetDisplayView.swift
+//  PetDisplay.View.swift
 //  keepers
 //
 //  Created by Hung on 9/21/23.
@@ -8,10 +8,14 @@
 import SwiftUI
 import ComposableArchitecture
 
-struct PetDisplayView: View {
-    let store: StoreOf<PetDisplay>
-    
-    var body: some View {
+extension PetDisplay {
+    struct View: SwiftUI.View {
+        let store: StoreOf<PetDisplay>
+    }
+}
+
+extension PetDisplay.View {
+    var body: some SwiftUI.View {
         WithViewStore(store, observe: identity) { viewStore in
             ZStack {
                 VStack {
@@ -47,13 +51,12 @@ struct PetDisplayView: View {
     }
 }
 
-
-#Preview {
-    @Dependency(\.resources) var resources
-    return PetDisplayView(store: Store(initialState: PetDisplay.State(
-        pet: PetIdentity(name: "Test", personality: .init(), birthDate: Date()),
-        skyboxName: resources.skybox
-    )) {
-        PetDisplay()
-    })
-}
+//#Preview {
+//    @Dependency(\.resources) var resources
+//    return PetDisplayView(store: Store(initialState: PetDisplay.State(
+//        pet: PetIdentity.test,
+//        skyboxName: resources.skybox
+//    )) {
+//        PetDisplay()
+//    })
+//}

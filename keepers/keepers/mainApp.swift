@@ -20,7 +20,7 @@ struct mainApp: App {
     
     var body: some Scene {
         WindowGroup {
-            RootView(store: store)
+            Root.View(store: store)
         }
     }
 }

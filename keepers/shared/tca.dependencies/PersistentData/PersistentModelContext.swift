@@ -1,5 +1,5 @@
 //
-//  PersistentModelActor.swift
+//  PersistentModelContext.swift
 //  keepers
 //
 //  Created by Hung on 9/9/23.
@@ -10,14 +10,14 @@ import Dependencies
 import SwiftData
 
 extension DependencyValues {
-    var modelContextActor: PersistentModelActor {
-        get { self[PersistentModelActor.self] }
-        set { self[PersistentModelActor.self] = newValue }
+    var modelContext: PersistentModelContext {
+        get { self[PersistentModelContext.self] }
+        set { self[PersistentModelContext.self] = newValue }
     }
 }
 
 @ModelActor
-actor PersistentModelActor {
+actor PersistentModelContext {
     func fetch<T>(_ descriptor: FetchDescriptor<T>) throws -> [T] where T : PersistentModel {
         return try modelContext.fetch(descriptor)
     }
@@ -45,10 +45,10 @@ actor PersistentModelActor {
     }
 }
 
-extension PersistentModelActor: DependencyKey {
-    static let liveValue = PersistentModelActor(
+extension PersistentModelContext: DependencyKey {
+    static let liveValue = PersistentModelContext(
         modelContainer: createContainer(from: liveConfig))
-    static let previewValue = PersistentModelActor(
+    static let previewValue = PersistentModelContext(
         modelContainer: createContainer(from: ephemeralConfig))
     
     /// The types that are stored in the data model that fully describes the state of the application.
@@ -63,20 +63,16 @@ extension PersistentModelActor: DependencyKey {
     private static let ephemeralConfig = ModelConfiguration(
         schema: schema,
         isStoredInMemoryOnly: true,
+        allowsSave: false,
+        groupContainer: .none,
         cloudKitDatabase: .none
     )
     
     /// Creates a model container for use with CloudKit.
     private static func createContainer(from config: ModelConfiguration) -> ModelContainer {
-        @Dependency(\.logger) var logger
-        do {
-            return try ModelContainer(
-                for: schema,
-                migrationPlan: AppSchema.AppMigrationPlan.self,
-                configurations: [config])
-        } catch {
-            logger.error("Failed to load the model container. \(error)")
-        }
-        return try! ModelContainer(for: PetIdentity.self)
+        return try! ModelContainer(
+            for: schema,
+            migrationPlan: AppSchema.AppMigrationPlan.self,
+            configurations: [config])
     }
 }

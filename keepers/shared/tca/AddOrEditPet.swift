@@ -9,27 +9,20 @@ import Foundation
 import ComposableArchitecture
 
 struct AddOrEditPet: Reducer {
-    @Dependency(\.modelContextActor) var modelContainer
+    @Dependency(\.modelContext) var modelContainer
     @Dependency(\.logger) var logger
     @Dependency(\.dismiss) var dismiss
     
+    // used in generatePet, probably should be moved out
+    @Dependency(\.uuid) var uuid
+    @Dependency(\.date) var date
+    
     struct State: Equatable {
-        static func == (
-            lhs: AddOrEditPet.State,
-            rhs: AddOrEditPet.State) -> Bool {
-            return lhs.name == rhs.name &&
-            lhs.personality == rhs.personality &&
-            lhs.birthDate == rhs.birthDate && (
-                (lhs.petIdentity == nil && rhs.petIdentity == nil) ||
-                (lhs.petIdentity != nil && rhs.petIdentity != nil &&
-                 lhs.petIdentity!.id == rhs.petIdentity!.id)
-            )
-        }
-        
         var petIdentity: PetIdentity? = nil
         
         @BindingState var name: String = ""
         @BindingState var birthDate: Date = Date()
+        @BindingState var species: PetSpecies = .missingno
         var personality: PetPersonality = PetPersonality()
         
         init() {}
@@ -39,6 +32,7 @@ struct AddOrEditPet: Reducer {
             name = pet.name
             birthDate = pet.birthDate
             personality = pet.personality
+            species = pet.species
         }
         
     }
@@ -60,10 +54,11 @@ struct AddOrEditPet: Reducer {
                 state.personality[keyPath: keyPath] = value
                 return .none
             case .submit:
-                let pet = state.petIdentity ?? PetIdentity()
+                let pet = state.petIdentity ?? generatePet()
                 pet.name = state.name
                 pet.personality = state.personality
                 pet.birthDate = state.birthDate
+                pet.species = state.species
                 
                 let wasUpsert = state.petIdentity != nil
                 
@@ -80,5 +75,11 @@ struct AddOrEditPet: Reducer {
                 }
             }
         }
+    }
+    
+    func generatePet() -> PetIdentity {
+        let pet = PetIdentity()
+        pet.name = "\(Int.random(in: 1..<1000))"
+        return pet
     }
 }

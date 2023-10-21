@@ -1,5 +1,5 @@
 //
-//  PetDisplayRKView.swift
+//  PetDisplay.View.RKView.swift
 //  keepers
 //
 //  Created by Hung on 9/22/23.
@@ -9,7 +9,7 @@ import SwiftUI
 import RealityKit
 import ComposableArchitecture
 
-extension PetDisplayView {
+extension PetDisplay.View {
     struct RKView: UIViewRepresentable {
         let viewStore: ViewStoreOf<PetDisplay>
         @Binding var skyboxName: String

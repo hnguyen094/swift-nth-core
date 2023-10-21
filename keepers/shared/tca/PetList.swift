@@ -10,29 +10,19 @@ import ComposableArchitecture
 import Dependencies
 import SwiftData
 
-struct Pets: Reducer {
-    @Dependency(\.modelContextActor) var modelContext
+struct PetList: Reducer {
+    @Dependency(\.modelContext) var modelContext
     @Dependency(\.resources) var resources
     @Dependency(\.logger) var logger
 
     struct State: Equatable {
-        static func == (lhs: Pets.State, rhs: Pets.State) -> Bool {
+        static func == (lhs: PetList.State, rhs: PetList.State) -> Bool {
             lhs.destination == rhs.destination &&
             lhs.pets.count == rhs.pets.count
         }
         
         @PresentationState var destination: Destination.State?
-        var pets: [PetIdentity]
-        
-        init() {
-            @Dependency(\.modelContextActor) var ctx
-            do {
-                pets = try ModelContext(ctx.modelContainer)
-                    .fetch(FetchDescriptor<PetIdentity>())
-            } catch {
-                fatalError("Failed to load model container context.")
-            }
-        }
+        var pets: [PetIdentity] = [PetIdentity]()
     }
     
     enum Action {
@@ -40,15 +30,17 @@ struct Pets: Reducer {
         case deletePetTapped(IndexSet)
         case editPetTapped(Int)
         case displayPetTapped(Int)
+        case runtimeDebugTapped(Int)
         case destination(PresentationAction<Destination.Action>)
         
+        case requestFetch
         case receiveFetch([PetIdentity])
     }
     
     var body: some ReducerOf<Self> {
         Reduce<State, Action> { state, action in
             switch action {
-            case .destination(.dismiss):
+            case .destination(.dismiss), .requestFetch:
                 return .run { send in
                     let pets = try await modelContext
                         .fetch(FetchDescriptor<PetIdentity>())
@@ -82,6 +74,10 @@ struct Pets: Reducer {
                     pet: state.pets[index],
                     skyboxName: resources.skybox))
                 return .none
+            case .runtimeDebugTapped(let index):
+                state.destination = .runtimeDebug(PetRuntimeDebug.State(
+                    pet: state.pets[index]))
+                return .none
             }
         }
         .ifLet(\.$destination, action: /Action.destination) {
@@ -93,11 +89,13 @@ struct Pets: Reducer {
         enum State: Equatable {
             case addOrEdit(AddOrEditPet.State)
             case viewInAR(PetDisplay.State)
+            case runtimeDebug(PetRuntimeDebug.State)
         }
         
         enum Action {
             case addOrEdit(AddOrEditPet.Action)
             case viewInAR(PetDisplay.Action)
+            case runtimeDebug(PetRuntimeDebug.Action)
         }
         
         var body: some ReducerOf<Self> {
@@ -106,6 +104,9 @@ struct Pets: Reducer {
             }
             Scope(state: /State.viewInAR, action: /Action.viewInAR) {
                 PetDisplay()
+            }
+            Scope(state: /State.runtimeDebug, action: /Action.runtimeDebug) {
+                PetRuntimeDebug()
             }
         }
     }

@@ -11,12 +11,19 @@ import ComposableArchitecture
 struct TextDisplay: Reducer {
     struct State: Equatable {
         var title: String
+        var autoscroll: Bool
         var text: LocalizedStringKey
     }
     
-    enum Action {}
+    enum Action {
+        case cancelAutoscroll
+    }
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
-        return .none
+        switch action {
+        case .cancelAutoscroll:
+            state.autoscroll = false
+            return .none
+        }
     }
 }

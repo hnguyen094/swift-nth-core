@@ -1,5 +1,5 @@
 //
-//  AudioSettingsView.swift
+//  AudioSettings.View.swift
 //  keepers
 //
 //  Created by Hung on 9/9/23.
@@ -8,29 +8,34 @@
 import SwiftUI
 import ComposableArchitecture
 
-struct AudioSettingsView: View {
+extension AudioSettings {
+    struct View: SwiftUI.View {
+        let store: StoreOf<AudioSettings>
+    }
+}
+
+extension AudioSettings.View {
     typealias Category = AudioPlayerClient.AudioCategory
-    let store: StoreOf<AudioSettings>
     
-    var body: some View {
-        NavigationStack {
-            WithViewStore(self.store, observe: identity) { viewStore in
-                List {
-                    ForEach(Category.allCases, id: \.self) {
-                        createVolumeSlider(store: viewStore, category: $0)
-                    }
+    var body: some SwiftUI.View {
+        WithViewStore(self.store, observe: identity) { viewStore in
+            List {
+                ForEach(Category.allCases, id: \.self) {
+                    createVolumeSlider(store: viewStore, category: $0)
                 }
-                .navigationTitle("Audio Settings")
             }
+            .navigationTitle("Audio Settings")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
     
     private func createVolumeSlider(
         store viewStore: ViewStoreOf<AudioSettings>,
         category: Category
-    ) -> some View {
+    ) -> some SwiftUI.View {
         return VStack {
             Text("\(String(describing: category))")
+                .font(.headline)
             Slider(
                 value: viewStore.binding(
                     get: \.volumes[category]!,
@@ -50,7 +55,9 @@ struct AudioSettingsView: View {
 }
 
 #Preview {
-    AudioSettingsView(store: Store(initialState: AudioSettings.State()) {
-        AudioSettings()
-    })
+    NavigationView {
+        AudioSettings.View(store: Store(initialState: AudioSettings.State()) {
+            AudioSettings()
+        })
+    }
 }

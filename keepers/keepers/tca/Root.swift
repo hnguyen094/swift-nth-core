@@ -35,7 +35,7 @@ struct Root: Reducer {
                 state.destination = .settings(AudioSettings.State())
                 return .none
             case .startButtonTapped:
-                state.destination = .petsList(PetList.State())
+                state.destination = .petList(PetList.State())
                 return .none
             case .attributionButtonTapped:
                 do {
@@ -65,7 +65,7 @@ struct Root: Reducer {
     
     struct Destination: Reducer {
         enum State {
-            case petsList(PetList.State)
+            case petList(PetList.State)
             case settings(AudioSettings.State)
             case attribution(TextDisplay.State)
         }
@@ -76,7 +76,7 @@ struct Root: Reducer {
         }
         
         var body: some ReducerOf<Self> {
-            Scope(state: /State.petsList, action: /Action.petsList) {
+            Scope(state: /State.petList, action: /Action.petsList) {
                 PetList()
             }
             Scope(state: /State.settings, action: /Action.settings) {

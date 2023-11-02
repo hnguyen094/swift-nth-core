@@ -7,7 +7,14 @@
 //  Naive implementation of a functional pet runtime.
 
 import Foundation
-// import SwiftPriorityQueue
+
+extension PetRuntime {
+    enum Naive {
+        typealias StableState = PetRuntime.StableState
+        typealias RuntimeState = PetRuntime.RuntimeState
+        typealias AliveState = PetRuntime.AliveState
+    }
+}
 
 /// We love naive implementations!
 ///
@@ -29,17 +36,17 @@ import Foundation
 
 // MARK: for pet runtime
 extension PetRuntime.Naive {
-    static func observeRuntime(pet: PetIdentity, upTo date: Date = .now) -> RuntimeState {
-        let stable = StableState(timestamp: pet.birthDate, state: .egg)
-        let sortedCommands = pet.userInputs!.sorted(by: <)
+    static func observeRuntime(pet: Creature, upTo date: Date = .now) -> RuntimeState {
+        let stable = generateStartingState(pet: pet)
+        let sortedCommands = pet.records!.sorted(by: <)
         return observeRuntime(commands: sortedCommands, starting: stable, upTo: date)
     }
     
-    static func modify(pet: PetIdentity, action: Command.Action, at time: Date) {
-        let command = Command(timestamp: time, action: action, pet: nil)
-        var sortedCommands = pet.userInputs!.sorted(by: <)
-        modify(&sortedCommands, withNew: command)
-        pet.userInputs = sortedCommands
+    static func modify(pet: Creature, action: Record.Action, at time: Date) {
+        let command = Record(timestamp: time, action: action, pet: pet)
+        var sortedCommands = pet.records!.sorted(by: <)
+        let newCommands = modify(nonpast: sortedCommands, of: pet, withNew: command)
+        pet.records = sortedCommands
     }
 }
 
@@ -55,14 +62,17 @@ extension PetRuntime.Naive {
         calculateTime: {i, f in TimeInterval((i - f) * 600 * 60 /* seconds */) })
     
     static func observeStable(
-        commands: [Command],
+        commands: any Sequence<Record>,
         starting state: StableState,
         upTo date: Date = .now)
     -> StableState {
         var computedState = state
         for command in commands where command.timestamp <= date {
             let interval = command.timestamp.timeIntervalSince(computedState.timestamp)
-            computedState = .init(timestamp: command.timestamp, state: transition(
+            computedState = .init(
+                timestamp: command.timestamp,
+                rng: computedState.rng,
+                state: transition(
                 transition(
                     computedState.state,
                     forward: interval),
@@ -72,7 +82,7 @@ extension PetRuntime.Naive {
     }
     
     static func observeRuntime(
-        commands: [Command]?,
+        commands: (any Sequence<Record>)?,
         starting state: StableState,
         upTo date: Date)
     -> RuntimeState {
@@ -83,46 +93,60 @@ extension PetRuntime.Naive {
         return transition(stable.state, forward: interval)
     }
     
-    static func modify(_ commands: inout [Command], withNew command: Command) {
+    static func modify(
+        nonpast commands: any BidirectionalCollection<Record>,
+        of pet: Creature,
+        withNew command: Record,
+        from maybeStable: StableState? = nil) -> [Record]
+    {
+        let stable = maybeStable ?? generateStartingState(pet: pet)
+        var outRecords = [Record]()
+        
         // changes / add unaliveCommand to command list. This could also
         // handle adding additional future timed actions the pet takes.
-        let maybeUnaliveIndex = commands
-            .lastIndex(where: {cmd in cmd.action == .unalive })
-        if let unaliveIndex = maybeUnaliveIndex {
-            let unaliveCommand = commands[unaliveIndex]
-            if command.timestamp <= unaliveCommand.timestamp {
-                commands.insert(command, at: unaliveIndex)
-                unaliveCommand.timestamp = deathstamp(fromComplete: commands)
-            }
+        let maybeUnalive = commands
+            .last(where: {cmd in cmd.action == .unalive })
+        if let unalive = maybeUnalive {
+            unalive.timestamp = deathstamp()
         } else if case .hatch = command.action {
-            commands.append(command)
-            commands.append(Command(
-                timestamp: deathstamp(fromComplete: commands),
+            outRecords.append(Record(
+                timestamp: deathstamp(),
                 action: .unalive,
-                pet: nil))
+                pet: pet))
         }
-        func deathstamp(fromComplete commands: [Command]) -> Date {
+        return outRecords
+        func deathstamp() -> Date {
             let stableState = observeStable(
                 commands: commands,
-                starting: StableState(timestamp: .distantPast, state: .egg),
+                starting: stable,
                 upTo: command.timestamp)
             return calculateDeathTimestamp(stable: stableState)
         }
     }
     
+    static func generateStartingState(pet: Creature) -> StableState {
+        .init(
+            timestamp: pet.birthDate,
+            rng: .init(
+                seed: pet.seed,
+                with: .LinearCongruential),
+            state: .egg)
+    }
+    
     static func calculateDeathTimestamp(stable state: StableState) -> Date {
-        let alive = if case .alive(let aliveState) = state.state {
+        let alive: Optional<AliveState> = switch state.state {
+        case .alive(let aliveState):
             aliveState
-        } else /*if case .egg = state.state*/ {
+        case .egg:
             AliveState()
-//        } else {
-//            fatalError() // trying calculating death timestamp when pet isn't alive
+        case .corrupted, .dead:
+            nil
         }
-        let interval = fullnessVariable.calculateTime(alive.fullness, 0)
+        let interval = fullnessVariable.calculateTime(alive?.fullness ?? 0, 0)
         return state.timestamp + interval
     }
     
-    static func transition(_ state: RuntimeState, with command: Command) -> RuntimeState {
+    static func transition(_ state: RuntimeState, with command: Record) -> RuntimeState {
         switch state {
         case .egg where command.action == .hatch:
                 .alive(transition(alive: AliveState(), with: command))
@@ -144,7 +168,7 @@ extension PetRuntime.Naive {
         }
     }
     
-    private static func transition(alive: AliveState, with command: Command) -> AliveState {
+    private static func transition(alive: AliveState, with command: Record) -> AliveState {
         var state = alive
         switch command.action {
         case .feed(let amount):

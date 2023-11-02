@@ -46,7 +46,7 @@ extension AddOrEditPet.View {
                 Picker("Species", selection: viewStore.binding(
                     get: \.species,
                     send: { .set(\.$species, $0)})) {
-                        ForEach(PetSpecies.allCases, id: \.self) { opt in
+                        ForEach(Species.allCases, id: \.self) { opt in
                             Text(String.init(describing: opt))
                         }
                     }
@@ -73,7 +73,7 @@ extension AddOrEditPet.View {
     
     private func createPersonalityAttributeSlider(
         viewStore: ViewStoreOf<AddOrEditPet>,
-        keyPath: WritableKeyPath<PetPersonality, Int8>) 
+        keyPath: WritableKeyPath<Personality, Int8>) 
     -> some SwiftUI.View {
         return LabeledContent {
             Slider(

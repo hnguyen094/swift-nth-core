@@ -13,7 +13,7 @@ struct PetDisplay: Reducer {
     @Dependency(\.logger) var logger
 
     struct State: Equatable {
-        var pet: PetIdentity
+        var pet: Creature
         var skyboxName: String
     }
     

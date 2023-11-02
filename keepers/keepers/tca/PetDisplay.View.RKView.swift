@@ -47,7 +47,8 @@ extension PetDisplay.View {
             // loadSkybox(arView)
         }
         
-        private func createPetEntity(_ pet: PetIdentity) -> ModelEntity {
+
+        private func createPetEntity(_ pet: Creature) -> ModelEntity {
             var petEntity: ModelEntity
             do {
                 let entity = try Entity.load(named: "models/penguin_placeholder")

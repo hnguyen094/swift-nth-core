@@ -50,6 +50,27 @@ extension AddOrEditPet.View {
                             Text(String.init(describing: opt))
                         }
                     }
+//                Slider(
+//                    value: .convert(from: viewStore.binding(
+//                        get: \.seed,
+//                        send: { .set(\.$seed, $0) })),
+//                    in: Double(UInt64.min)...Double(UInt64.max))
+                HStack {
+                    LabeledContent {
+                        TextField("Seed",
+                                  text: .convert(from: viewStore.binding(
+                                    get: \.seed,
+                                    send: { .set(\.$seed, $0) })))
+                    } label: {
+                        Text("Seed")
+                    }
+                    .multilineTextAlignment(.trailing)
+                    Button {
+                        store.send(.generateRandomSeed)
+                    } label: {
+                        Image(systemName: "shuffle")
+                    }
+                }
                 
                 Section {
                     createPersonalityAttributeSlider(viewStore: viewStore, keyPath: \.mind)

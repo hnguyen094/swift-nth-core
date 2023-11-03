@@ -15,7 +15,7 @@ typealias Species = AppSchema.V1.Species
 extension AppSchema.V1 {
     /// Pet Identity used with SwiftData to create a persistent data model.
     @Model
-    final class Creature {
+    final class Creature: Hashable {
         /// Name of pet.
         var name: String = ""
         /// Personality of pet.

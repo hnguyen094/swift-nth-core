@@ -29,4 +29,18 @@ public extension Binding {
             set: { floatBinding.wrappedValue = TFloat($0) }
         )
     }
+    
+    static func convert<TInt>(from intBinding: Binding<TInt>) -> Binding<String>
+    where TInt: BinaryInteger {
+        Binding<String> (
+            get: { String(intBinding.wrappedValue) },
+            set: {v in
+                do {
+                    intBinding.wrappedValue = try TInt.init(v, format: IntegerFormatStyle.init(), lenient: true)
+                } catch {
+                    intBinding.wrappedValue = 0
+                }
+            }
+        )
+    }
 }

@@ -54,9 +54,19 @@ extension PetDisplay.View {
             }
         }
         
+
         private func createPetEntity(_ pet: Creature) -> ModelEntity {
-            let mesh : MeshResource = .generateSphere(radius: 0.25)
-            let petEntity = ModelEntity(mesh: mesh)
+            var petEntity: ModelEntity
+            do {
+                let entity = try Entity.load(named: "models/penguin_placeholder")
+                petEntity = ModelEntity()
+                petEntity.transform.rotation = simd_quatf(angle: .pi, axis: [0.0,1.0,0.0])
+                petEntity.addChild(entity)
+            } catch {
+                print(error)
+                let mesh : MeshResource = .generateSphere(radius: 0.25)
+                petEntity = ModelEntity(mesh: mesh)
+            }
             petEntity.components[PetComponent.self] = PetComponent()
             petEntity.components[AppComponent.Bounce.self] = AppComponent.Bounce(
                 amplitude: (Float(energy) + Float(Int8.max)) / 200.0,

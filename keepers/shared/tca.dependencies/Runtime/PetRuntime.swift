@@ -25,7 +25,8 @@ struct PetRuntime {
     struct StableState {
         var timestamp: Date
         var rng: ReproducibleRandomSource
-        var state: RuntimeState
+        var innate: Needs
+        var runtime: RuntimeState
     }
     
     enum RuntimeState: Equatable {
@@ -36,9 +37,51 @@ struct PetRuntime {
         case corrupted
     }
     struct AliveState: Equatable {
-        var fullness: Double = 0.5
-        var happiness: Double = 0.5
-        // TODO: add more computed variables as discussed
+        // these are the bars
+        var fullness: UInt8 = 50
+        var liquidFullness: UInt8 = 0
+        var cleanliness: UInt8 = 0
+        var energy: UInt8 = 0
+        var happiness: UInt8 = 0
+        
+        var changingNeeds = Needs()
+    }
+    
+    struct Needs: Equatable {
+        // food
+        var hungerRate: UInt8 = 0 // some units of food per time
+        var foodBias: UInt8 = 0
+        var fullnessCapacity: UInt8 = 0
+        
+        // hydration
+        var thirstRate: UInt8 = 0
+        var liquidBias: UInt8 = 0
+        var liquidCapacity: UInt8 = 0
+        
+        // cleanliness
+        var dirtyRate: UInt8 = 0
+        var selfCleanCapability: UInt8 = 0
+        var cleanlinessBias: UInt8 = 0
+        
+        // energy + activeness
+        var energyConsumptionRate: UInt8 = 0
+        var energyCapacity: UInt8 = 0
+        var activenessBias: UInt8 = 0
+        
+        // temperature
+        var minimumTemperature: UInt8 = 0
+        var maximumTemperature: UInt8 = 0
+        var preferredTemperature: UInt8 = 0
+        
+        // curiosity, attention
+        var curiosityBias: UInt8 = 0
+        var attentionBias: UInt8 = 0
+        
+        // happiness
+        var happinessSensitivity: UInt8 = 0
+        
+        // social/confidence
+        var socialBias: UInt8 = 0
     }
 }
 

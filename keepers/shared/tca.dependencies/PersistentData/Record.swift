@@ -29,12 +29,12 @@ extension AppSchema.V1 {
         
         enum Action: Codable, CaseIterable, Hashable {
             static var allCases: [AppSchema.V1.Record.Action] {
-                [.noop, .hatch, .feed(0.1), .play, .unalive]
+                [.noop, .hatch, .feed(1), .play, .unalive]
             } // TODO: probably a better way to do this
             
             case noop
             case hatch
-            case feed(Double)
+            case feed(UInt8)
             case play
             case unalive
         }

@@ -68,7 +68,7 @@ struct AddOrEditPet: Reducer {
                 
                 let wasUpsert = state.petIdentity != nil
                 
-                return .run { [pet] send in
+                return .run { send in
                     await modelContainer.insert([pet])
                     try await modelContainer.save()
                     logger.info("""

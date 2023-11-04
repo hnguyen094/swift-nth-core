@@ -14,6 +14,7 @@ extension PetDisplay.View {
         let viewStore: ViewStoreOf<PetDisplay>
         @Binding var skyboxName: String
         @Binding var energy: Int8
+        @Binding var shouldBeDeallocated: Bool
         
         init(viewStore store: ViewStoreOf<PetDisplay>) {
             viewStore = store
@@ -22,7 +23,10 @@ extension PetDisplay.View {
                 send: { .changeSkybox($0) })
             _energy = viewStore.binding(
                 get: { $0.pet.personality.energy },
-                send: .noop )
+                send: .noop)
+            _shouldBeDeallocated = viewStore.binding(
+                get: { $0.rkShouldBeDeallocated },
+                send: .noop)
         }
         
         func makeUIView(context: Context) -> ARView {
@@ -45,6 +49,9 @@ extension PetDisplay.View {
         
         func updateUIView(_ arView: UIViewType, context: Context) {
             // loadSkybox(arView)
+            if shouldBeDeallocated {
+                arView.removeFromSuperview()
+            }
         }
         
 

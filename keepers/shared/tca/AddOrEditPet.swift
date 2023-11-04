@@ -36,7 +36,6 @@ struct AddOrEditPet: Reducer {
             species = pet.species
             seed = pet.seed
         }
-        
     }
     
     enum Action: BindableAction {

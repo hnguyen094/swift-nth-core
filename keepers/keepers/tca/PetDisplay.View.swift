@@ -24,6 +24,9 @@ extension PetDisplay.View {
                 createOverlay(viewStore)
             }
             .navigationTitle("\(viewStore.pet.name)")
+            .onDisappear {
+                store.send(.deallocateRkView)
+            }
         }
     }
     

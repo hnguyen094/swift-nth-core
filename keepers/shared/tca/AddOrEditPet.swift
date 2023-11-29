@@ -8,6 +8,7 @@
 import Foundation
 import ComposableArchitecture
 
+@Reducer
 struct AddOrEditPet: Reducer {
     @Dependency(\.modelContext) var modelContainer
     @Dependency(\.logger) var logger

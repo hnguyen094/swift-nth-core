@@ -11,6 +11,7 @@ import ComposableArchitecture
 import Foundation
 import SwiftUI
 
+@Reducer
 struct Root: Reducer {
     @Dependency(\.resources) var resources
     @Dependency(\.logger) var logger
@@ -35,7 +36,7 @@ struct Root: Reducer {
                 state.destination = .settings(AudioSettings.State())
                 return .none
             case .startButtonTapped:
-                state.destination = .petList(PetList.State())
+                state.destination = .petsList(PetsList.State())
                 return .none
             case .attributionButtonTapped:
                 do {
@@ -63,26 +64,27 @@ struct Root: Reducer {
         return try LocalizedStringKey(String.init(contentsOfFile: path!))
     }
     
+    @Reducer
     struct Destination: Reducer {
         enum State {
-            case petList(PetList.State)
+            case petsList(PetsList.State)
             case settings(AudioSettings.State)
             case attribution(TextDisplay.State)
         }
         enum Action {
-            case petsList(PetList.Action)
+            case petsList(PetsList.Action)
             case settings(AudioSettings.Action)
             case attribution(TextDisplay.Action)
         }
         
         var body: some ReducerOf<Self> {
-            Scope(state: /State.petList, action: /Action.petsList) {
-                PetList()
+            Scope(state: \.petsList, action: \.petsList) {
+                PetsList()
             }
-            Scope(state: /State.settings, action: /Action.settings) {
+            Scope(state: \.settings, action: \.settings) {
                 AudioSettings()
             }
-            Scope(state: /State.attribution, action: /Action.attribution) {
+            Scope(state: \.attribution, action: \.attribution) {
                 TextDisplay()
             }
         }

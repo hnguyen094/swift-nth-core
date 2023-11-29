@@ -9,6 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 import RealityKit
 
+@Reducer
 struct PetDisplay: Reducer {
     @Dependency(\.logger) var logger
 

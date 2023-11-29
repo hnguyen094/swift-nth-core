@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B217E9292AA97C1E0048C37A /* shared_packages.h in Headers */ = {isa = PBXBuildFile; fileRef = B217E9282AA97C1E0048C37A /* shared_packages.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B217E9302AA97C9B0048C37A /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = B217E92F2AA97C9B0048C37A /* ComposableArchitecture */; };
 		B217E9312AA97CC70048C37A /* shared_packages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B217E9262AA97C1E0048C37A /* shared_packages.framework */; };
 		B217E9322AA97CC70048C37A /* shared_packages.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B217E9262AA97C1E0048C37A /* shared_packages.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B217E9362AA97CD00048C37A /* shared_packages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B217E9262AA97C1E0048C37A /* shared_packages.framework */; };
@@ -25,8 +24,6 @@
 		B21911CC2AA7A7ED003CE806 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B21911CB2AA7A7ED003CE806 /* Assets.xcassets */; };
 		B21911CF2AA7A7ED003CE806 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B21911CE2AA7A7ED003CE806 /* Preview Assets.xcassets */; };
 		B21911DA2AA7A7EE003CE806 /* keepers_togetherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21911D92AA7A7EE003CE806 /* keepers_togetherTests.swift */; };
-		B21E70A52AD5188C0018E8A6 /* kloppenheim_06.skybox in Resources */ = {isa = PBXBuildFile; fileRef = B21E70A42AD5188C0018E8A6 /* kloppenheim_06.skybox */; };
-		B21E70A62AD5188C0018E8A6 /* kloppenheim_06.skybox in Resources */ = {isa = PBXBuildFile; fileRef = B21E70A42AD5188C0018E8A6 /* kloppenheim_06.skybox */; };
 		B21E70A92AD5191E0018E8A6 /* attributions.txt in Resources */ = {isa = PBXBuildFile; fileRef = B21E70A82AD5191E0018E8A6 /* attributions.txt */; };
 		B21F34142AC1526A00175652 /* TextDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21F34132AC1526A00175652 /* TextDisplay.swift */; };
 		B21F34152AC1526A00175652 /* TextDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21F34132AC1526A00175652 /* TextDisplay.swift */; };
@@ -47,7 +44,7 @@
 		B225E78D2AD0C86F00A79539 /* SwiftPriorityQueue in Frameworks */ = {isa = PBXBuildFile; productRef = B225E78C2AD0C86F00A79539 /* SwiftPriorityQueue */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B23C41862ADF4A0C001750A6 /* Fullness.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23C41852ADF4A0C001750A6 /* Fullness.swift */; };
 		B23C41872ADF4A0C001750A6 /* Fullness.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23C41852ADF4A0C001750A6 /* Fullness.swift */; };
-    B24CC1FC2AE106E4008AACCB /* models in Resources */ = {isa = PBXBuildFile; fileRef = B24CC1FB2AE106E4008AACCB /* models */; };
+		B24CC1FC2AE106E4008AACCB /* models in Resources */ = {isa = PBXBuildFile; fileRef = B24CC1FB2AE106E4008AACCB /* models */; };
 		B24CC1FD2AE106E4008AACCB /* models in Resources */ = {isa = PBXBuildFile; fileRef = B24CC1FB2AE106E4008AACCB /* models */; };
 		B25819F42ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25819F32ABD2B2A003B9C90 /* UIColorExtensions.swift */; };
 		B25819F52ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25819F32ABD2B2A003B9C90 /* UIColorExtensions.swift */; };
@@ -61,9 +58,8 @@
 		B2581A152ABE99C2003B9C90 /* AppSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2581A132ABE99C2003B9C90 /* AppSystem.swift */; };
 		B2581A172ABE99D6003B9C90 /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2581A162ABE99D6003B9C90 /* AppComponent.swift */; };
 		B2581A182ABE99D6003B9C90 /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2581A162ABE99D6003B9C90 /* AppComponent.swift */; };
-		B25A02E72AD4C4CA0057DF0E /* PetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4F82AAD92B80070E4E3 /* PetList.swift */; };
-		B25A02E82AD4C4CF0057DF0E /* PetList.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4F62AAD92280070E4E3 /* PetList.View.swift */; };
 		B25A02EF2AD503B20057DF0E /* AudioSettings.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4F22AAD75490070E4E3 /* AudioSettings.View.swift */; };
+		B25D88E92B17456800BF624D /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = B25D88E82B17456800BF624D /* ComposableArchitecture */; };
 		B25F84D32AA81BA400526045 /* WaitForCloudKitDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F84D22AA81BA400526045 /* WaitForCloudKitDataView.swift */; };
 		B25F84D72AA909DB00526045 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F84D62AA909DB00526045 /* Styles.swift */; };
 		B25F84D82AA909DB00526045 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F84D62AA909DB00526045 /* Styles.swift */; };
@@ -110,7 +106,7 @@
 		B2F9B4F12AAD6D580070E4E3 /* PersistentModelContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4EF2AAD6D580070E4E3 /* PersistentModelContext.swift */; };
 		B2F9B4F32AAD75490070E4E3 /* AudioSettings.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4F22AAD75490070E4E3 /* AudioSettings.View.swift */; };
 		B2F9B4F72AAD92280070E4E3 /* PetList.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4F62AAD92280070E4E3 /* PetList.View.swift */; };
-		B2F9B4F92AAD92B80070E4E3 /* PetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4F82AAD92B80070E4E3 /* PetList.swift */; };
+		B2F9B4F92AAD92B80070E4E3 /* PetsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4F82AAD92B80070E4E3 /* PetsList.swift */; };
 		B2F9B4FD2AAD99A60070E4E3 /* Creature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4FC2AAD99A60070E4E3 /* Creature.swift */; };
 		B2F9B4FE2AAD99A60070E4E3 /* Creature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4FC2AAD99A60070E4E3 /* Creature.swift */; };
 		B2F9B5002AAE5AEE0070E4E3 /* BindingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F9B4FF2AAE5AEE0070E4E3 /* BindingExtensions.swift */; };
@@ -189,7 +185,6 @@
 /* Begin PBXFileReference section */
 		B217E9262AA97C1E0048C37A /* shared_packages.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = shared_packages.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B217E9282AA97C1E0048C37A /* shared_packages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shared_packages.h; sourceTree = "<group>"; };
-		B217E92E2AA97C700048C37A /* swift-composable-architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "swift-composable-architecture"; path = "/Users/hung/Library/Developer/Xcode/DerivedData/keepers-eevzdgcsacduujdnuunuggyjjqgs/SourcePackages/checkouts/swift-composable-architecture"; sourceTree = "<absolute>"; };
 		B21911872AA7A762003CE806 /* keepers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = keepers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B21911902AA7A764003CE806 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B21911922AA7A764003CE806 /* keepers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = keepers.entitlements; sourceTree = "<group>"; };
@@ -210,7 +205,6 @@
 		B21911D02AA7A7ED003CE806 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B21911D52AA7A7EE003CE806 /* keepers:togetherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "keepers:togetherTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B21911D92AA7A7EE003CE806 /* keepers_togetherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keepers_togetherTests.swift; sourceTree = "<group>"; };
-		B21E70A42AD5188C0018E8A6 /* kloppenheim_06.skybox */ = {isa = PBXFileReference; lastKnownFileType = file.skybox; path = kloppenheim_06.skybox; sourceTree = "<group>"; };
 		B21E70A82AD5191E0018E8A6 /* attributions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = attributions.txt; sourceTree = "<group>"; };
 		B21F34132AC1526A00175652 /* TextDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDisplay.swift; sourceTree = "<group>"; };
 		B21F34162AC15D2300175652 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
@@ -256,7 +250,7 @@
 		B2F9B4EF2AAD6D580070E4E3 /* PersistentModelContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentModelContext.swift; sourceTree = "<group>"; };
 		B2F9B4F22AAD75490070E4E3 /* AudioSettings.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSettings.View.swift; sourceTree = "<group>"; };
 		B2F9B4F62AAD92280070E4E3 /* PetList.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetList.View.swift; sourceTree = "<group>"; };
-		B2F9B4F82AAD92B80070E4E3 /* PetList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetList.swift; sourceTree = "<group>"; };
+		B2F9B4F82AAD92B80070E4E3 /* PetsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsList.swift; sourceTree = "<group>"; };
 		B2F9B4FC2AAD99A60070E4E3 /* Creature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.swift; sourceTree = "<group>"; };
 		B2F9B4FF2AAE5AEE0070E4E3 /* BindingExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExtensions.swift; sourceTree = "<group>"; };
 		B2F9B5052AAEDDB00070E4E3 /* TimeInvervalExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInvervalExtensions.swift; sourceTree = "<group>"; };
@@ -271,7 +265,7 @@
 			files = (
 				B2D9029C2AD2144300BE02BF /* Marquee in Frameworks */,
 				B225E78D2AD0C86F00A79539 /* SwiftPriorityQueue in Frameworks */,
-				B217E9302AA97C9B0048C37A /* ComposableArchitecture in Frameworks */,
+				B25D88E92B17456800BF624D /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,7 +321,6 @@
 		B217E92D2AA97C700048C37A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B217E92E2AA97C700048C37A /* swift-composable-architecture */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -451,7 +444,6 @@
 			isa = PBXGroup;
 			children = (
 				B24CC1FB2AE106E4008AACCB /* models */,
-				B2581A032ABD60AC003B9C90 /* kloppenheim_06.skybox */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -509,6 +501,8 @@
 			children = (
 				B2EC9FF82AABAC630005D0AB /* Root.swift */,
 				B2B51A112AAC56260024E3BA /* Root.View.swift */,
+				B2F9B4F82AAD92B80070E4E3 /* PetsList.swift */,
+				B2F9B4F62AAD92280070E4E3 /* PetList.View.swift */,
 				B293EB152ABCFC8C00ADB49A /* PetDisplay.swift */,
 				B293EB132ABCFAE500ADB49A /* PetDisplay.View.swift */,
 				B2581A062ABD7DF1003B9C90 /* PetDisplay.View.RKView.swift */,
@@ -521,8 +515,6 @@
 			children = (
 				B2B51A0A2AAC4BDF0024E3BA /* AudioSettings.swift */,
 				B2F9B4F22AAD75490070E4E3 /* AudioSettings.View.swift */,
-				B2F9B4F82AAD92B80070E4E3 /* PetList.swift */,
-				B2F9B4F62AAD92280070E4E3 /* PetList.View.swift */,
 				B25819FA2ABD4BDE003B9C90 /* AddOrEditPet.swift */,
 				B25819F72ABD4B5F003B9C90 /* AddOrEditPet.View.swift */,
 				B2D958542AD5385300D9408E /* PetRuntimeDebug.swift */,
@@ -674,9 +666,9 @@
 			);
 			name = "shared-packages";
 			packageProductDependencies = (
-				B217E92F2AA97C9B0048C37A /* ComposableArchitecture */,
 				B225E78C2AD0C86F00A79539 /* SwiftPriorityQueue */,
 				B2D9029B2AD2144300BE02BF /* Marquee */,
+				B25D88E82B17456800BF624D /* ComposableArchitecture */,
 			);
 			productName = "shared-packages";
 			productReference = B217E9262AA97C1E0048C37A /* shared_packages.framework */;
@@ -875,11 +867,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B21E70A62AD5188C0018E8A6 /* kloppenheim_06.skybox in Resources */,
 				B21911CF2AA7A7ED003CE806 /* Preview Assets.xcassets in Resources */,
 				B21911CC2AA7A7ED003CE806 /* Assets.xcassets in Resources */,
 				B24CC1FD2AE106E4008AACCB /* models in Resources */,
-				B2581A052ABD60AC003B9C90 /* kloppenheim_06.skybox in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -937,7 +927,7 @@
 				B22491F72AD8AD13003D8B75 /* Clamping.swift in Sources */,
 				B2F9B4ED2AAD6CB00070E4E3 /* LoggerClient.swift in Sources */,
 				B2B173DC2AC25D29002AA2D0 /* TextDisplay.View.swift in Sources */,
-				B2F9B4F92AAD92B80070E4E3 /* PetList.swift in Sources */,
+				B2F9B4F92AAD92B80070E4E3 /* PetsList.swift in Sources */,
 				B28607BD2AD244830011286D /* WaitForLoad.View.swift in Sources */,
 				B21F34172AC15D2300175652 /* Resources.swift in Sources */,
 				B2581A142ABE99C2003B9C90 /* AppSystem.swift in Sources */,
@@ -980,7 +970,6 @@
 				B2F9B50D2AB011000070E4E3 /* AppSchemas.swift in Sources */,
 				B2F9B4EB2AAD6C6E0070E4E3 /* AudioPlayerClient.swift in Sources */,
 				B225E77A2ACE0E2E00A79539 /* PetRuntime.swift in Sources */,
-				B25A02E72AD4C4CA0057DF0E /* PetList.swift in Sources */,
 				B25819F92ABD4B5F003B9C90 /* AddOrEditPet.View.swift in Sources */,
 				B25F84D82AA909DB00526045 /* Styles.swift in Sources */,
 				B25F84D92AA909E100526045 /* WaitForCloudKitDataView.swift in Sources */,
@@ -995,7 +984,6 @@
 				B2581A152ABE99C2003B9C90 /* AppSystem.swift in Sources */,
 				B25A02EF2AD503B20057DF0E /* AudioSettings.View.swift in Sources */,
 				B2B51A0C2AAC4BDF0024E3BA /* AudioSettings.swift in Sources */,
-				B25A02E82AD4C4CF0057DF0E /* PetList.View.swift in Sources */,
 				B21F34182AC15D2300175652 /* Resources.swift in Sources */,
 				B2581A182ABE99D6003B9C90 /* AppComponent.swift in Sources */,
 				B22491F12AD88413003D8B75 /* WeakBox.swift in Sources */,
@@ -1644,11 +1632,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B217E92F2AA97C9B0048C37A /* ComposableArchitecture */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B217E9202AA97BEB0048C37A /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
-			productName = ComposableArchitecture;
-		};
 		B21911C32AA7A7EB003CE806 /* RealityKitContent */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RealityKitContent;
@@ -1657,6 +1640,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B225E78B2AD0C86F00A79539 /* XCRemoteSwiftPackageReference "SwiftPriorityQueue" */;
 			productName = SwiftPriorityQueue;
+		};
+		B25D88E82B17456800BF624D /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B217E9202AA97BEB0048C37A /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
 		};
 		B2D9029B2AD2144300BE02BF /* Marquee */ = {
 			isa = XCSwiftPackageProductDependency;

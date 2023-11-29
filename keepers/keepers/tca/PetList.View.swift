@@ -1,5 +1,5 @@
 //
-//  PetList.View.swift
+//  PetsList.View.swift
 //  keepers
 //
 //  Created by Hung on 9/10/23.
@@ -9,31 +9,31 @@ import SwiftUI
 import ComposableArchitecture
 import Dependencies
 
-extension PetList {
+extension PetsList {
     struct View: SwiftUI.View {
-        let store: StoreOf<PetList>
+        let store: StoreOf<PetsList>
         @Environment(\.editMode) private var editMode
         
         var body: some SwiftUI.View {
             petList
             .popover(
-                store: store.scope(state: \.$destination, action: { .destination($0) }),
-                state: /Destination.State.addOrEdit,
-                action: Destination.Action.addOrEdit,
-                content: { store in
-                    NavigationView {
-                        AddOrEditPet.View(store: store)
-                    }
-                })
+                store: store.scope(
+                    state: \.$destination.addOrEdit,
+                    action: \.destination.addOrEdit)
+            ) { store in
+                NavigationView {
+                    AddOrEditPet.View(store: store)
+                }
+            }
             .navigationDestination(
-                store: store.scope(state: \.$destination, action: { .destination($0) }),
-                state: /Destination.State.viewInAR,
-                action: Destination.Action.viewInAR,
+                store: store.scope(
+                    state: \.$destination.viewInAR,
+                    action: \.destination.viewInAR),
                 destination: PetDisplay.View.init(store:))
             .navigationDestination(
-                store: store.scope(state: \.$destination, action: { .destination($0) }),
-                state: /Destination.State.runtimeDebug,
-                action: Destination.Action.runtimeDebug,
+                store: store.scope(
+                    state: \.$destination.runtimeDebug,
+                    action: \.destination.runtimeDebug),
                 destination: PetRuntimeDebug.View.init(store:))
             .onAppear {
                 store.send(.requestFetch)
@@ -92,7 +92,7 @@ extension PetList {
 }
 
 #Preview {
-    PetList.View(store: Store(initialState: PetList.State()) {
-        PetList()
+    PetsList.View(store: Store(initialState: PetsList.State()) {
+        PetsList()
     })
 }

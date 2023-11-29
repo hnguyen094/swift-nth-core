@@ -10,11 +10,15 @@ import ComposableArchitecture
 
 @main
 struct mainApp: App {
+    private var store = Store(initialState: Root.State()) {
+        Root()
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        ImmersiveSpace(id: "ImmersiveSpace") {
+        ImmersiveSpace(id: ImmersiveView.Id) {
             ImmersiveView()
         }
     }

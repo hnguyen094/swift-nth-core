@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B208E5A02B0F55B400D2D043 /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = B208E59F2B0F55B400D2D043 /* Root.swift */; };
+		B208E5A22B0F56FF00D2D043 /* FileReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B208E5A12B0F56FF00D2D043 /* FileReader.swift */; };
+		B208E5A32B0F56FF00D2D043 /* FileReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B208E5A12B0F56FF00D2D043 /* FileReader.swift */; };
+		B208E5A52B0F5B6600D2D043 /* Root.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B208E5A42B0F5B6600D2D043 /* Root.View.swift */; };
 		B217E9292AA97C1E0048C37A /* shared_packages.h in Headers */ = {isa = PBXBuildFile; fileRef = B217E9282AA97C1E0048C37A /* shared_packages.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B217E9312AA97CC70048C37A /* shared_packages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B217E9262AA97C1E0048C37A /* shared_packages.framework */; };
 		B217E9322AA97CC70048C37A /* shared_packages.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B217E9262AA97C1E0048C37A /* shared_packages.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -24,6 +28,7 @@
 		B21911CC2AA7A7ED003CE806 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B21911CB2AA7A7ED003CE806 /* Assets.xcassets */; };
 		B21911CF2AA7A7ED003CE806 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B21911CE2AA7A7ED003CE806 /* Preview Assets.xcassets */; };
 		B21911DA2AA7A7EE003CE806 /* keepers_togetherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21911D92AA7A7EE003CE806 /* keepers_togetherTests.swift */; };
+		B21E70A62AD5188C0018E8A6 /* kloppenheim_06.skybox in Resources */ = {isa = PBXBuildFile; fileRef = B21E70A42AD5188C0018E8A6 /* kloppenheim_06.skybox */; };
 		B21E70A92AD5191E0018E8A6 /* attributions.txt in Resources */ = {isa = PBXBuildFile; fileRef = B21E70A82AD5191E0018E8A6 /* attributions.txt */; };
 		B21F34142AC1526A00175652 /* TextDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21F34132AC1526A00175652 /* TextDisplay.swift */; };
 		B21F34152AC1526A00175652 /* TextDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21F34132AC1526A00175652 /* TextDisplay.swift */; };
@@ -183,6 +188,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B208E59F2B0F55B400D2D043 /* Root.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Root.swift; sourceTree = "<group>"; };
+		B208E5A12B0F56FF00D2D043 /* FileReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileReader.swift; sourceTree = "<group>"; };
+		B208E5A42B0F5B6600D2D043 /* Root.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Root.View.swift; sourceTree = "<group>"; };
 		B217E9262AA97C1E0048C37A /* shared_packages.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = shared_packages.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B217E9282AA97C1E0048C37A /* shared_packages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shared_packages.h; sourceTree = "<group>"; };
 		B21911872AA7A762003CE806 /* keepers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = keepers.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -310,6 +318,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B208E59B2B0E7DFC00D2D043 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				B21E70A42AD5188C0018E8A6 /* kloppenheim_06.skybox */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		B208E59C2B0E95A000D2D043 /* tca */ = {
+			isa = PBXGroup;
+			children = (
+				B208E59F2B0F55B400D2D043 /* Root.swift */,
+				B208E5A42B0F5B6600D2D043 /* Root.View.swift */,
+			);
+			path = tca;
+			sourceTree = "<group>";
+		};
 		B217E9272AA97C1E0048C37A /* shared-packages */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,6 +359,7 @@
 				B217E9272AA97C1E0048C37A /* shared-packages */,
 				B21911882AA7A762003CE806 /* Products */,
 				B217E92D2AA97C700048C37A /* Frameworks */,
+				B208E59B2B0E7DFC00D2D043 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -409,9 +435,9 @@
 		B21911C02AA7A7EB003CE806 /* keepers-together */ = {
 			isa = PBXGroup;
 			children = (
-				B25F84CF2AA7F2AE00526045 /* boilerplate */,
+				B208E59C2B0E95A000D2D043 /* tca */,
 				B25F84D02AA7F2C600526045 /* views */,
-				B21911C52AA7A7EB003CE806 /* mainApp.swift */,
+				B25F84CF2AA7F2AE00526045 /* boilerplate */,
 			);
 			path = "keepers-together";
 			sourceTree = "<group>";
@@ -552,6 +578,7 @@
 		B25F84CF2AA7F2AE00526045 /* boilerplate */ = {
 			isa = PBXGroup;
 			children = (
+				B21911C52AA7A7EB003CE806 /* mainApp.swift */,
 				B25F84E82AA932AA00526045 /* keepers-together.entitlements */,
 				B21911CB2AA7A7ED003CE806 /* Assets.xcassets */,
 				B21911D02AA7A7ED003CE806 /* Info.plist */,
@@ -620,8 +647,9 @@
 				B2F9B4F52AAD91770070E4E3 /* PersistentData */,
 				B2F9B4E62AAD6C0E0070E4E3 /* UserPreferencesClient.swift */,
 				B2F9B4E92AAD6C6E0070E4E3 /* AudioPlayerClient.swift */,
-				B2F9B4EC2AAD6CB00070E4E3 /* LoggerClient.swift */,
+				B208E5A12B0F56FF00D2D043 /* FileReader.swift */,
 				B21F34162AC15D2300175652 /* Resources.swift */,
+				B2F9B4EC2AAD6CB00070E4E3 /* LoggerClient.swift */,
 			);
 			path = tca.dependencies;
 			sourceTree = "<group>";
@@ -931,6 +959,7 @@
 				B28607BD2AD244830011286D /* WaitForLoad.View.swift in Sources */,
 				B21F34172AC15D2300175652 /* Resources.swift in Sources */,
 				B2581A142ABE99C2003B9C90 /* AppSystem.swift in Sources */,
+				B208E5A22B0F56FF00D2D043 /* FileReader.swift in Sources */,
 				B22491F02AD88413003D8B75 /* WeakBox.swift in Sources */,
 				B2A4C48C2ADBBE5800535C18 /* VariableMicroSystem.swift in Sources */,
 				B25F84D72AA909DB00526045 /* Styles.swift in Sources */,
@@ -967,6 +996,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2D958562AD5385300D9408E /* PetRuntimeDebug.swift in Sources */,
+				B208E5A52B0F5B6600D2D043 /* Root.View.swift in Sources */,
 				B2F9B50D2AB011000070E4E3 /* AppSchemas.swift in Sources */,
 				B2F9B4EB2AAD6C6E0070E4E3 /* AudioPlayerClient.swift in Sources */,
 				B225E77A2ACE0E2E00A79539 /* PetRuntime.swift in Sources */,
@@ -979,6 +1009,7 @@
 				B28607C12AD247760011286D /* ErrorFeature.swift in Sources */,
 				B225E7802ACE277D00A79539 /* ComparableExtensions.swift in Sources */,
 				B2AD3F862ACBA201003BEB9F /* Record.swift in Sources */,
+				B208E5A02B0F55B400D2D043 /* Root.swift in Sources */,
 				B2D958592AD53E1C00D9408E /* PetRuntimeDebug.View.swift in Sources */,
 				B25819FC2ABD4BDE003B9C90 /* AddOrEditPet.swift in Sources */,
 				B2581A152ABE99C2003B9C90 /* AppSystem.swift in Sources */,
@@ -992,6 +1023,7 @@
 				B2F9B5012AAE5AEE0070E4E3 /* BindingExtensions.swift in Sources */,
 				B22491F82AD8AD13003D8B75 /* Clamping.swift in Sources */,
 				B21F34152AC1526A00175652 /* TextDisplay.swift in Sources */,
+				B208E5A32B0F56FF00D2D043 /* FileReader.swift in Sources */,
 				B25819F52ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */,
 				B2A4C48D2ADBBE5800535C18 /* VariableMicroSystem.swift in Sources */,
 				B28607BE2AD244830011286D /* WaitForLoad.View.swift in Sources */,

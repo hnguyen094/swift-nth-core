@@ -10,6 +10,8 @@ import RealityKit
 import RealityKitContent
 
 struct ImmersiveView: View {
+    static let Id: String = "ImmersiveSpace"
+    
     var body: some View {
         RealityView { content in
             // Add the initial RealityKit content

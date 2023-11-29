@@ -1,5 +1,5 @@
 //
-//  PetList.swift
+//  PetsList.swift
 //  keepers
 //
 //  Created by Hung on 9/10/23.
@@ -10,13 +10,14 @@ import ComposableArchitecture
 import Dependencies
 import SwiftData
 
-struct PetList: Reducer {
+@Reducer
+struct PetsList: Reducer {
     @Dependency(\.modelContext) var modelContext
     @Dependency(\.resources) var resources
     @Dependency(\.logger) var logger
 
     struct State: Equatable {
-        static func == (lhs: PetList.State, rhs: PetList.State) -> Bool {
+        static func == (lhs: PetsList.State, rhs: PetsList.State) -> Bool {
             lhs.destination == rhs.destination &&
             lhs.pets.count == rhs.pets.count
         }
@@ -80,11 +81,12 @@ struct PetList: Reducer {
                 return .none
             }
         }
-        .ifLet(\.$destination, action: /Action.destination) {
+        .ifLet(\.$destination, action: \.destination) {
             Destination()
         }
     }
     
+    @Reducer
     struct Destination: Reducer {
         enum State: Equatable {
             case addOrEdit(AddOrEditPet.State)
@@ -99,13 +101,13 @@ struct PetList: Reducer {
         }
         
         var body: some ReducerOf<Self> {
-            Scope(state: /State.addOrEdit, action: /Action.addOrEdit) {
+            Scope(state: \.addOrEdit, action: \.addOrEdit) {
                 AddOrEditPet()
             }
-            Scope(state: /State.viewInAR, action: /Action.viewInAR) {
+            Scope(state: \.viewInAR, action: \.viewInAR) {
                 PetDisplay()
             }
-            Scope(state: /State.runtimeDebug, action: /Action.runtimeDebug) {
+            Scope(state: \.runtimeDebug, action: \.runtimeDebug) {
                 PetRuntimeDebug()
             }
         }

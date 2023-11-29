@@ -29,23 +29,24 @@ extension Root {
                 .frame(width: nil, height: nil, alignment: .bottomTrailing)
                 
                 .sheet(
-                    store: store.scope(state: \.$destination, action: { .destination($0) }),
-                    state: /Destination.State.settings,
-                    action: Destination.Action.settings) { store in
-                        NavigationView {
-                            AudioSettings.View.init(store: store)
-                        }
+                    store: store.scope(
+                        state: \.$destination.settings,
+                        action: \.destination.settings))
+                { store in
+                    NavigationView {
+                        AudioSettings.View.init(store: store)
                     }
+                }
                 .navigationDestination(
-                    store: store.scope(state: \.$destination, action: { .destination($0) }),
-                    state: /Destination.State.attribution,
-                    action: Destination.Action.attribution,
+                    store: store.scope(
+                        state: \.$destination.attribution,
+                        action: \.destination.attribution),
                     destination: TextDisplay.View.init(store:))
                 .navigationDestination(
-                    store: store.scope(state: \.$destination, action: { .destination($0) }),
-                    state: /Destination.State.petList,
-                    action: Destination.Action.petsList,
-                    destination: PetList.View.init(store:))
+                    store: store.scope(
+                        state: \.$destination.petsList,
+                        action: \.destination.petsList),
+                    destination: PetsList.View.init(store:))
                 .navigationTitle("Keepers")
             }
         }

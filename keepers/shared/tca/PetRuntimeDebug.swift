@@ -8,6 +8,7 @@
 import Foundation
 import ComposableArchitecture
 
+@Reducer
 struct PetRuntimeDebug: Reducer {
     @Dependency(\.modelContext) var modelContext
     @Dependency(\.logger) var logger

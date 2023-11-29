@@ -7,6 +7,7 @@
 
 import ComposableArchitecture
 
+@Reducer
 struct AudioSettings: Reducer {
     typealias Category = AudioPlayerClient.AudioCategory
     

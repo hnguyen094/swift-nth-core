@@ -1,5 +1,5 @@
 //
-//  ImmersiveView.swift
+//  SampleImmersiveView.swift
 //  keepers:together
 //
 //  Created by Hung on 9/5/23.
@@ -9,8 +9,8 @@ import SwiftUI
 import RealityKit
 import RealityKitContent
 
-struct ImmersiveView: View {
-    static let Id: String = "ImmersiveSpace"
+struct SampleImmersiveView: View {
+    static let Id: String = "SampleImmersiveSpace"
     
     var body: some View {
         RealityView { content in
@@ -23,6 +23,6 @@ struct ImmersiveView: View {
 }
 
 #Preview {
-    ImmersiveView()
+    SampleImmersiveView()
         .previewLayout(.sizeThatFits)
 }

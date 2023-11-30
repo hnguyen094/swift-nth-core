@@ -11,6 +11,7 @@
 		B208E5A22B0F56FF00D2D043 /* FileReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B208E5A12B0F56FF00D2D043 /* FileReader.swift */; };
 		B208E5A32B0F56FF00D2D043 /* FileReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B208E5A12B0F56FF00D2D043 /* FileReader.swift */; };
 		B208E5A52B0F5B6600D2D043 /* Root.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B208E5A42B0F5B6600D2D043 /* Root.View.swift */; };
+		B20A692F2B188A2600622175 /* WorldTrackerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20A692E2B188A2600622175 /* WorldTrackerClient.swift */; };
 		B217E9292AA97C1E0048C37A /* shared_packages.h in Headers */ = {isa = PBXBuildFile; fileRef = B217E9282AA97C1E0048C37A /* shared_packages.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B217E9312AA97CC70048C37A /* shared_packages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B217E9262AA97C1E0048C37A /* shared_packages.framework */; };
 		B217E9322AA97CC70048C37A /* shared_packages.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B217E9262AA97C1E0048C37A /* shared_packages.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -24,11 +25,10 @@
 		B21911C42AA7A7EB003CE806 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = B21911C32AA7A7EB003CE806 /* RealityKitContent */; };
 		B21911C62AA7A7EB003CE806 /* mainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21911C52AA7A7EB003CE806 /* mainApp.swift */; };
 		B21911C82AA7A7EB003CE806 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21911C72AA7A7EB003CE806 /* ContentView.swift */; };
-		B21911CA2AA7A7EB003CE806 /* ImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21911C92AA7A7EB003CE806 /* ImmersiveView.swift */; };
+		B21911CA2AA7A7EB003CE806 /* SampleImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21911C92AA7A7EB003CE806 /* SampleImmersiveView.swift */; };
 		B21911CC2AA7A7ED003CE806 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B21911CB2AA7A7ED003CE806 /* Assets.xcassets */; };
 		B21911CF2AA7A7ED003CE806 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B21911CE2AA7A7ED003CE806 /* Preview Assets.xcassets */; };
 		B21911DA2AA7A7EE003CE806 /* keepers_togetherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21911D92AA7A7EE003CE806 /* keepers_togetherTests.swift */; };
-		B21E70A62AD5188C0018E8A6 /* kloppenheim_06.skybox in Resources */ = {isa = PBXBuildFile; fileRef = B21E70A42AD5188C0018E8A6 /* kloppenheim_06.skybox */; };
 		B21E70A92AD5191E0018E8A6 /* attributions.txt in Resources */ = {isa = PBXBuildFile; fileRef = B21E70A82AD5191E0018E8A6 /* attributions.txt */; };
 		B21F34142AC1526A00175652 /* TextDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21F34132AC1526A00175652 /* TextDisplay.swift */; };
 		B21F34152AC1526A00175652 /* TextDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21F34132AC1526A00175652 /* TextDisplay.swift */; };
@@ -191,6 +191,7 @@
 		B208E59F2B0F55B400D2D043 /* Root.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Root.swift; sourceTree = "<group>"; };
 		B208E5A12B0F56FF00D2D043 /* FileReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileReader.swift; sourceTree = "<group>"; };
 		B208E5A42B0F5B6600D2D043 /* Root.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Root.View.swift; sourceTree = "<group>"; };
+		B20A692E2B188A2600622175 /* WorldTrackerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTrackerClient.swift; sourceTree = "<group>"; };
 		B217E9262AA97C1E0048C37A /* shared_packages.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = shared_packages.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B217E9282AA97C1E0048C37A /* shared_packages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shared_packages.h; sourceTree = "<group>"; };
 		B21911872AA7A762003CE806 /* keepers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = keepers.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,7 +208,7 @@
 		B21911C22AA7A7EB003CE806 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		B21911C52AA7A7EB003CE806 /* mainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainApp.swift; sourceTree = "<group>"; };
 		B21911C72AA7A7EB003CE806 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		B21911C92AA7A7EB003CE806 /* ImmersiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveView.swift; sourceTree = "<group>"; };
+		B21911C92AA7A7EB003CE806 /* SampleImmersiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleImmersiveView.swift; sourceTree = "<group>"; };
 		B21911CB2AA7A7ED003CE806 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B21911CE2AA7A7ED003CE806 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B21911D02AA7A7ED003CE806 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -321,7 +322,6 @@
 		B208E59B2B0E7DFC00D2D043 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				B21E70A42AD5188C0018E8A6 /* kloppenheim_06.skybox */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -333,6 +333,22 @@
 				B208E5A42B0F5B6600D2D043 /* Root.View.swift */,
 			);
 			path = tca;
+			sourceTree = "<group>";
+		};
+		B20A692C2B1886D900622175 /* immersive */ = {
+			isa = PBXGroup;
+			children = (
+				B21911C92AA7A7EB003CE806 /* SampleImmersiveView.swift */,
+			);
+			path = immersive;
+			sourceTree = "<group>";
+		};
+		B20A692D2B1889FE00622175 /* tca.dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				B20A692E2B188A2600622175 /* WorldTrackerClient.swift */,
+			);
+			path = tca.dependencies;
 			sourceTree = "<group>";
 		};
 		B217E9272AA97C1E0048C37A /* shared-packages */ = {
@@ -436,7 +452,9 @@
 			isa = PBXGroup;
 			children = (
 				B208E59C2B0E95A000D2D043 /* tca */,
-				B25F84D02AA7F2C600526045 /* views */,
+				B20A692D2B1889FE00622175 /* tca.dependencies */,
+				B25F84D02AA7F2C600526045 /* views_deprecated */,
+				B20A692C2B1886D900622175 /* immersive */,
 				B25F84CF2AA7F2AE00526045 /* boilerplate */,
 			);
 			path = "keepers-together";
@@ -587,13 +605,12 @@
 			name = boilerplate;
 			sourceTree = "<group>";
 		};
-		B25F84D02AA7F2C600526045 /* views */ = {
+		B25F84D02AA7F2C600526045 /* views_deprecated */ = {
 			isa = PBXGroup;
 			children = (
 				B21911C72AA7A7EB003CE806 /* ContentView.swift */,
-				B21911C92AA7A7EB003CE806 /* ImmersiveView.swift */,
 			);
-			path = views;
+			path = views_deprecated;
 			sourceTree = "<group>";
 		};
 		B25F84D12AA81B4000526045 /* views_deprecated */ = {
@@ -995,6 +1012,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B20A692F2B188A2600622175 /* WorldTrackerClient.swift in Sources */,
 				B2D958562AD5385300D9408E /* PetRuntimeDebug.swift in Sources */,
 				B208E5A52B0F5B6600D2D043 /* Root.View.swift in Sources */,
 				B2F9B50D2AB011000070E4E3 /* AppSchemas.swift in Sources */,
@@ -1036,7 +1054,7 @@
 				B23C41872ADF4A0C001750A6 /* Fullness.swift in Sources */,
 				B225E78A2AD0A56D00A79539 /* ReproducibleRandomSource.swift in Sources */,
 				B2F9B50A2AAEEA9C0070E4E3 /* DateExtensions.swift in Sources */,
-				B21911CA2AA7A7EB003CE806 /* ImmersiveView.swift in Sources */,
+				B21911CA2AA7A7EB003CE806 /* SampleImmersiveView.swift in Sources */,
 				B275EC802AD729AD00791AC0 /* PetRuntime.Cached.swift in Sources */,
 				B225E7862ACFEB1B00A79539 /* GaussianDistribution.swift in Sources */,
 				B2F9B4F12AAD6D580070E4E3 /* PersistentModelContext.swift in Sources */,

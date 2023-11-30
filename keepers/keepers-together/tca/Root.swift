@@ -8,6 +8,7 @@
 import ComposableArchitecture
 import SwiftUI
 
+@Reducer
 struct Root: Reducer {
     @Dependency(\.fileReader) var fileReader
     @Dependency(\.resources) var resources
@@ -38,7 +39,7 @@ struct Root: Reducer {
             case .startButtonTapped:
                 // TODO: Implement
                 return .run { send in
-                    _ = await openImmersiveSpace(id: ImmersiveView.Id)
+                    _ = await openImmersiveSpace(id: SampleImmersiveView.Id)
                 }
             case .settingsButtonTapped:
                 state.destination = .settings(AudioSettings.State())
@@ -58,6 +59,7 @@ struct Root: Reducer {
         }
     }
     
+    @Reducer
     struct Destination: Reducer {
         enum State {
             case immersiveView
@@ -71,10 +73,10 @@ struct Root: Reducer {
         }
         
         var body: some ReducerOf<Self> {
-            Scope(state: /State.settings, action: /Action.settings) {
+            Scope(state: \.settings, action: \.settings) {
                 AudioSettings()
             }
-            Scope(state: /State.attribution, action: /Action.attribution) {
+            Scope(state: \.attribution, action: \.attribution) {
                 TextDisplay()
             }
         }

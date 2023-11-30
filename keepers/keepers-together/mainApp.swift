@@ -16,10 +16,10 @@ struct mainApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Root.View(store: store)
         }
-        ImmersiveSpace(id: ImmersiveView.Id) {
-            ImmersiveView()
+        ImmersiveSpace(id: SampleImmersiveView.Id) {
+            SampleImmersiveView()
         }
     }
 }

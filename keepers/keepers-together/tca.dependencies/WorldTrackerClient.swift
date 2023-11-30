@@ -5,7 +5,6 @@
 //  Created by Hung on 11/30/23.
 //
 
-import Foundation
 import ARKit
 import Dependencies
 
@@ -27,26 +26,32 @@ struct WorldTrackerClient {
         worldInfo = WorldTrackingProvider()
     }
     
-    async func run() {
+    func run() async {
         let results = await session.requestAuthorization(for: [.worldSensing])
-        if results[.worldSensing] == .allowed {
+        switch results[.worldSensing] {
+        case .allowed:
             do {
                 try await session.run([worldInfo])
             } catch {
                 logger.error("Failed to start ARKitSession (\(error))")
             }
+        case .denied, .notDetermined:
+            fallthrough
+        default:
+            logger.error("World sensing authorization missing.")
         }
     }
     
-    async func beginAnchorUpdates() {
+    func beginAnchorUpdates() async {
         for await update in worldInfo.anchorUpdates {
-             switch update.event {
-             case .added, .updated:
-                 // Update the app's understanding of this world anchor.
-                 print("Anchor position updated.")
-             case .removed:
-                 // Remove content related to this anchor.
-                 print("Anchor position now unknown.")
+            switch update.event {
+            case .added, .updated:
+                // Update the app's understanding of this world anchor.
+                print("Anchor position updated.")
+            case .removed:
+                // Remove content related to this anchor.
+                print("Anchor position now unknown.")
+            }
          }
     }
 }

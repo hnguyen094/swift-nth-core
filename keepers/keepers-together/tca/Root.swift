@@ -14,6 +14,8 @@ struct Root: Reducer {
     @Dependency(\.resources) var resources
     @Dependency(\.logger) var logger
     
+    @Dependency(\.worldTracker) var worldTracker
+    
     // TODO: this might not work outside a view. We might need to inject it from the mainApp
     @Environment(\.openImmersiveSpace)
     var openImmersiveSpace: OpenImmersiveSpaceAction
@@ -26,6 +28,7 @@ struct Root: Reducer {
     
     enum Action {
         case startButtonTapped
+        case debugButtonTapped
         case settingsButtonTapped
         case attributionButtonTapped
         case destination(PresentationAction<Destination.Action>)
@@ -40,7 +43,14 @@ struct Root: Reducer {
                 // TODO: Implement
                 return .run { send in
                     _ = await openImmersiveSpace(id: SampleImmersiveView.Id)
+                    await worldTracker.run()
+                    await worldTracker.beginMeshAnchorUpdates()
+                    await worldTracker.beginPlaneAnchorUpdates()
+                    await worldTracker.beginWorldAnchorUpdates()
                 }
+            case .debugButtonTapped:
+                state.destination = .debug(WorldTrackerDebug.State())
+                return .none
             case .settingsButtonTapped:
                 state.destination = .settings(AudioSettings.State())
                 return .none
@@ -63,16 +73,21 @@ struct Root: Reducer {
     struct Destination: Reducer {
         enum State {
             case immersiveView
+            case debug(WorldTrackerDebug.State)
             case settings(AudioSettings.State)
             case attribution(TextDisplay.State)
         }
         enum Action {
             case immersiveView
+            case debug(WorldTrackerDebug.Action)
             case settings(AudioSettings.Action)
             case attribution(TextDisplay.Action)
         }
         
         var body: some ReducerOf<Self> {
+            Scope(state: \.debug, action: \.debug) {
+                WorldTrackerDebug()
+            }
             Scope(state: \.settings, action: \.settings) {
                 AudioSettings()
             }

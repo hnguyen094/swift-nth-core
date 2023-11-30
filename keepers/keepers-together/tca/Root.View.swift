@@ -15,16 +15,20 @@ extension Root {
         var body: some SwiftUI.View {
             NavigationStack {
                 Button("Immerse") {
-                    store.send(Root.Action.startButtonTapped)
+                    store.send(.startButtonTapped)
                 }
                 .buttonStyle(.borderedProminent)
                 
+                Button("Debug World Tracker") {
+                    store.send(.debugButtonTapped)
+                }
+                .buttonStyle(.bordered)
                 Button("Settings") {
-                    store.send(Root.Action.settingsButtonTapped)
+                    store.send(.settingsButtonTapped)
                 }
                 .buttonStyle(.bordered)
                 Button("Attributions") {
-                    store.send(Root.Action.attributionButtonTapped)
+                    store.send(.attributionButtonTapped)
                 }
                 .frame(width: nil, height: nil, alignment: .bottomTrailing)
                 
@@ -34,7 +38,7 @@ extension Root {
                         action: \.destination.settings))
                 { store in
                     NavigationView {
-                        AudioSettings.View.init(store: store)
+                        AudioSettings.View(store: store)
                     }
                 }
                 .navigationDestination(

@@ -91,6 +91,8 @@
 		B2B51A0C2AAC4BDF0024E3BA /* AudioSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B51A0A2AAC4BDF0024E3BA /* AudioSettings.swift */; };
 		B2B51A0F2AAC55CE0024E3BA /* mainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B51A0E2AAC55CE0024E3BA /* mainApp.swift */; };
 		B2B51A122AAC56260024E3BA /* Root.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B51A112AAC56260024E3BA /* Root.View.swift */; };
+		B2CE8DD62B18E8450088129A /* WorldTrackerDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CE8DD52B18E8450088129A /* WorldTrackerDebug.swift */; };
+		B2CE8DD82B18E9980088129A /* WorldTrackerDebug.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CE8DD72B18E9980088129A /* WorldTrackerDebug.View.swift */; };
 		B2D902952AD1F56D00BE02BF /* PetRuntime.Naive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D902942AD1F56D00BE02BF /* PetRuntime.Naive.swift */; };
 		B2D902962AD1F56D00BE02BF /* PetRuntime.Naive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D902942AD1F56D00BE02BF /* PetRuntime.Naive.swift */; };
 		B2D9029C2AD2144300BE02BF /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = B2D9029B2AD2144300BE02BF /* Marquee */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -248,6 +250,8 @@
 		B2B51A0A2AAC4BDF0024E3BA /* AudioSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSettings.swift; sourceTree = "<group>"; };
 		B2B51A0E2AAC55CE0024E3BA /* mainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainApp.swift; sourceTree = "<group>"; };
 		B2B51A112AAC56260024E3BA /* Root.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Root.View.swift; sourceTree = "<group>"; };
+		B2CE8DD52B18E8450088129A /* WorldTrackerDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTrackerDebug.swift; sourceTree = "<group>"; };
+		B2CE8DD72B18E9980088129A /* WorldTrackerDebug.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTrackerDebug.View.swift; sourceTree = "<group>"; };
 		B2D902942AD1F56D00BE02BF /* PetRuntime.Naive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetRuntime.Naive.swift; sourceTree = "<group>"; };
 		B2D958542AD5385300D9408E /* PetRuntimeDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetRuntimeDebug.swift; sourceTree = "<group>"; };
 		B2D958572AD53E1C00D9408E /* PetRuntimeDebug.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetRuntimeDebug.View.swift; sourceTree = "<group>"; };
@@ -331,6 +335,8 @@
 			children = (
 				B208E59F2B0F55B400D2D043 /* Root.swift */,
 				B208E5A42B0F5B6600D2D043 /* Root.View.swift */,
+				B2CE8DD52B18E8450088129A /* WorldTrackerDebug.swift */,
+				B2CE8DD72B18E9980088129A /* WorldTrackerDebug.View.swift */,
 			);
 			path = tca;
 			sourceTree = "<group>";
@@ -1028,6 +1034,7 @@
 				B225E7802ACE277D00A79539 /* ComparableExtensions.swift in Sources */,
 				B2AD3F862ACBA201003BEB9F /* Record.swift in Sources */,
 				B208E5A02B0F55B400D2D043 /* Root.swift in Sources */,
+				B2CE8DD62B18E8450088129A /* WorldTrackerDebug.swift in Sources */,
 				B2D958592AD53E1C00D9408E /* PetRuntimeDebug.View.swift in Sources */,
 				B25819FC2ABD4BDE003B9C90 /* AddOrEditPet.swift in Sources */,
 				B2581A152ABE99C2003B9C90 /* AppSystem.swift in Sources */,
@@ -1054,6 +1061,7 @@
 				B23C41872ADF4A0C001750A6 /* Fullness.swift in Sources */,
 				B225E78A2AD0A56D00A79539 /* ReproducibleRandomSource.swift in Sources */,
 				B2F9B50A2AAEEA9C0070E4E3 /* DateExtensions.swift in Sources */,
+				B2CE8DD82B18E9980088129A /* WorldTrackerDebug.View.swift in Sources */,
 				B21911CA2AA7A7EB003CE806 /* SampleImmersiveView.swift in Sources */,
 				B275EC802AD729AD00791AC0 /* PetRuntime.Cached.swift in Sources */,
 				B225E7862ACFEB1B00A79539 /* GaussianDistribution.swift in Sources */,
@@ -1506,7 +1514,7 @@
 				SUPPORTED_PLATFORMS = "xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = 7;
 				XROS_DEPLOYMENT_TARGET = 1.0;
 			};
 			name = Debug;
@@ -1535,7 +1543,7 @@
 				SUPPORTED_PLATFORMS = "xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = 7;
 				VALIDATE_PRODUCT = YES;
 				XROS_DEPLOYMENT_TARGET = 1.0;
 			};

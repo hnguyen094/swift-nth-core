@@ -18,41 +18,73 @@ extension DependencyValues {
 struct WorldTrackerClient {
     @Dependency(\.logger) var logger
     
-    let session: ARKitSession
-    let worldInfo: WorldTrackingProvider
+    let session = ARKitSession()
+    let worldInfo = WorldTrackingProvider()
+    let planeData = PlaneDetectionProvider(alignments: [.horizontal])
+    let meshData = SceneReconstructionProvider(modes: [.classification])
     
-    init() {
-        session = ARKitSession()
-        worldInfo = WorldTrackingProvider()
-    }
+    var planes : Dictionary<UUID, PlaneAnchor> = [:]
+    var meshes : Dictionary<UUID, MeshAnchor> = [:]
     
     func run() async {
-        let results = await session.requestAuthorization(for: [.worldSensing])
-        switch results[.worldSensing] {
-        case .allowed:
-            do {
-                try await session.run([worldInfo])
-            } catch {
-                logger.error("Failed to start ARKitSession (\(error))")
-            }
-        case .denied, .notDetermined:
-            fallthrough
-        default:
-            logger.error("World sensing authorization missing.")
+        do {
+            try await session.run([worldInfo, planeData, meshData])
+        } catch {
+            logger.error("Failed to start ARKitSession (\(error))")
         }
+
+//        let results = await session.requestAuthorization(for: [.worldSensing])
+//        switch results[.worldSensing] {
+//        case .allowed:
+//            do {
+//                try await session.run([worldInfo])
+//            } catch {
+//                logger.error("Failed to start ARKitSession (\(error))")
+//            }
+//        case .denied, .notDetermined:
+//            fallthrough
+//        default:
+//            logger.error("World sensing authorization missing.")
+//        }
     }
     
-    func beginAnchorUpdates() async {
+    func beginWorldAnchorUpdates() async {
         for await update in worldInfo.anchorUpdates {
             switch update.event {
             case .added, .updated:
                 // Update the app's understanding of this world anchor.
-                print("Anchor position updated.")
+                logger.debug("World anchor[\(update.anchor.originFromAnchorTransform.debugDescription)] position updated.")
             case .removed:
                 // Remove content related to this anchor.
-                print("Anchor position now unknown.")
+                logger.debug("World anchor[\(update.anchor.originFromAnchorTransform.debugDescription)] position now unknown.")
             }
          }
+    }
+    
+    func beginPlaneAnchorUpdates() async {
+        for await update in planeData.anchorUpdates {
+            switch update.event {
+            case .added, .updated:
+                // Update the app's understanding of this plane anchor.
+                logger.debug("Plane anchor[\(update.anchor.classification.description)] position updated.")
+            case .removed:
+                // Remove content related to this anchor.
+                logger.debug("Plane anchor[\(update.anchor.classification.description)] position now unknown.\n")
+            }
+        }
+    }
+    
+    func beginMeshAnchorUpdates() async {
+        for await update in meshData.anchorUpdates {
+            switch update.event {
+            case .added, .updated:
+                // Update the app's understanding of this plane anchor.
+                logger.debug("Mesh anchor[\(update.anchor.geometry.description)] position updated.")
+            case .removed:
+                // Remove content related to this anchor.
+                logger.debug("Mesh anchor[\(update.anchor.geometry.description)] position now unknown.\n")
+            }
+        }
     }
 }
 

@@ -43,6 +43,11 @@ extension Root {
                 }
                 .navigationDestination(
                     store: store.scope(
+                        state: \.$destination.debug,
+                        action: \.destination.debug),
+                    destination: WorldTrackerDebug.View.init(store:))
+                .navigationDestination(
+                    store: store.scope(
                         state: \.$destination.attribution,
                         action: \.destination.attribution),
                     destination: TextDisplay.View.init(store:))
@@ -50,10 +55,4 @@ extension Root {
             }
         }
     }
-}
-
-#Preview {
-    Root.View(store: Store(initialState: Root.State()) {
-        Root()
-    })
 }

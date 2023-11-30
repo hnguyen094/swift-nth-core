@@ -27,6 +27,7 @@ struct WorldTrackerClient {
     var meshes : Dictionary<UUID, MeshAnchor> = [:]
     
     func run() async {
+        print("running")
         do {
             try await session.run([worldInfo, planeData, meshData])
         } catch {

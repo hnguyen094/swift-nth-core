@@ -10,17 +10,14 @@ import SwiftUI
 
 @Reducer
 struct Root: Reducer {
+    var openImmersiveSpace: OpenImmersiveSpaceAction
+    var dismissImmersiveSpace: DismissImmersiveSpaceAction
+
     @Dependency(\.fileReader) var fileReader
     @Dependency(\.resources) var resources
     @Dependency(\.logger) var logger
     
     @Dependency(\.worldTracker) var worldTracker
-    
-    // TODO: this might not work outside a view. We might need to inject it from the mainApp
-    @Environment(\.openImmersiveSpace)
-    var openImmersiveSpace: OpenImmersiveSpaceAction
-    @Environment(\.dismissImmersiveSpace)
-    var dismissImmersiveSpace: DismissImmersiveSpaceAction
     
     struct State {
         @PresentationState var destination: Destination.State?
@@ -43,10 +40,6 @@ struct Root: Reducer {
                 // TODO: Implement
                 return .run { send in
                     _ = await openImmersiveSpace(id: SampleImmersiveView.Id)
-                    await worldTracker.run()
-                    await worldTracker.beginMeshAnchorUpdates()
-                    await worldTracker.beginPlaneAnchorUpdates()
-                    await worldTracker.beginWorldAnchorUpdates()
                 }
             case .debugButtonTapped:
                 state.destination = .debug(WorldTrackerDebug.State())

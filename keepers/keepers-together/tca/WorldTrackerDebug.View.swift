@@ -16,9 +16,9 @@ extension WorldTrackerDebug {
 
 extension WorldTrackerDebug.View {
     var body: some SwiftUI.View {
-        List {
+        VStack {
             Button("run session") {
-                store.send(.toggleMeshTracking(true))
+                store.send(.runARSession)
             }
             Button("mesh tracking") {
                 store.send(.toggleMeshTracking(true))
@@ -30,5 +30,6 @@ extension WorldTrackerDebug.View {
                 store.send(.toggleWorldTracking(true))
             }
         }
+        .navigationTitle("Debug menu")
     }
 }

@@ -10,8 +10,13 @@ import ComposableArchitecture
 
 @main
 struct mainApp: App {
-    private var store = Store(initialState: Root.State()) {
-        Root()
+    @Environment(\.openImmersiveSpace) var openImmersiveSpace
+    @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
+    
+    private var store: StoreOf<Root> {
+        Store(initialState: Root.State()) {
+            Root(openImmersiveSpace: openImmersiveSpace, dismissImmersiveSpace: dismissImmersiveSpace)
+        }
     }
     
     var body: some Scene {

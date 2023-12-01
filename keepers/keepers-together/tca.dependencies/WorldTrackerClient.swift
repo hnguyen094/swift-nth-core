@@ -21,15 +21,16 @@ struct WorldTrackerClient {
     let session = ARKitSession()
     let worldInfo = WorldTrackingProvider()
     let planeData = PlaneDetectionProvider(alignments: [.horizontal])
-    let meshData = SceneReconstructionProvider(modes: [.classification])
+    let meshData = SceneReconstructionProvider()
     
     var planes : Dictionary<UUID, PlaneAnchor> = [:]
     var meshes : Dictionary<UUID, MeshAnchor> = [:]
     
     func run() async {
-        print("running")
         do {
-            try await session.run([worldInfo, planeData, meshData])
+            // TODO: planeData and meshData are not supported on simulator
+            try await session.run([worldInfo])
+            logger.debug("begin ARKitSession")
         } catch {
             logger.error("Failed to start ARKitSession (\(error))")
         }
@@ -50,6 +51,7 @@ struct WorldTrackerClient {
     }
     
     func beginWorldAnchorUpdates() async {
+        logger.debug("begin world anchor updates")
         for await update in worldInfo.anchorUpdates {
             switch update.event {
             case .added, .updated:

@@ -22,12 +22,9 @@ struct WorldTrackerDebug: Reducer {
     }
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
-        print("reduce")
         switch action {
         case .runARSession:
-            print("run or smth")
             return .run { _ in
-                print("Trying to run")
                 await worldTracker.run()
             }
         case .toggleMeshTracking(let toggle):

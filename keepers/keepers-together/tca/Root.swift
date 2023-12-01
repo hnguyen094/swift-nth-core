@@ -37,6 +37,7 @@ struct Root: Reducer {
             case .destination:
                 return .none
             case .startButtonTapped:
+                state.destination = nil
                 // TODO: Implement
                 return .run { send in
                     _ = await openImmersiveSpace(id: SampleImmersiveView.Id)
@@ -60,18 +61,19 @@ struct Root: Reducer {
                 return .none
             }
         }
+        .ifLet(\.$destination, action: \.destination) {
+            Destination()
+        }
     }
     
     @Reducer
     struct Destination: Reducer {
         enum State {
-            case immersiveView
             case debug(WorldTrackerDebug.State)
             case settings(AudioSettings.State)
             case attribution(TextDisplay.State)
         }
         enum Action {
-            case immersiveView
             case debug(WorldTrackerDebug.Action)
             case settings(AudioSettings.Action)
             case attribution(TextDisplay.Action)

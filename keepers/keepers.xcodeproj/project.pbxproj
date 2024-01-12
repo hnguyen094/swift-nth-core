@@ -81,6 +81,47 @@
 		B28607C12AD247760011286D /* ErrorFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28607BF2AD247760011286D /* ErrorFeature.swift */; };
 		B293EB142ABCFAE500ADB49A /* PetDisplay.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B293EB132ABCFAE500ADB49A /* PetDisplay.View.swift */; };
 		B293EB162ABCFC8C00ADB49A /* PetDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B293EB152ABCFC8C00ADB49A /* PetDisplay.swift */; };
+		B2A085072B5154AC003AD224 /* absurd.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085062B5154AC003AD224 /* absurd.swift */; };
+		B2A085082B5154AC003AD224 /* absurd.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085062B5154AC003AD224 /* absurd.swift */; };
+		B2A0850A2B5154DC003AD224 /* CustomTimingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085092B5154DB003AD224 /* CustomTimingFunction.swift */; };
+		B2A0850B2B5154DC003AD224 /* CustomTimingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085092B5154DB003AD224 /* CustomTimingFunction.swift */; };
+		B2A0850D2B51551C003AD224 /* SNClassifySoundRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A0850C2B51551C003AD224 /* SNClassifySoundRequestExtensions.swift */; };
+		B2A0850E2B51551C003AD224 /* SNClassifySoundRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A0850C2B51551C003AD224 /* SNClassifySoundRequestExtensions.swift */; };
+		B2A085102B515522003AD224 /* VPTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A0850F2B515522003AD224 /* VPTree.swift */; };
+		B2A085112B515522003AD224 /* VPTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A0850F2B515522003AD224 /* VPTree.swift */; };
+		B2A085182B515578003AD224 /* CGImagePropertyOrientationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085122B515578003AD224 /* CGImagePropertyOrientationExtensions.swift */; };
+		B2A085192B515578003AD224 /* CGImagePropertyOrientationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085122B515578003AD224 /* CGImagePropertyOrientationExtensions.swift */; };
+		B2A0851A2B515578003AD224 /* CMSampleBufferExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085132B515578003AD224 /* CMSampleBufferExtensions.swift */; };
+		B2A0851B2B515578003AD224 /* CMSampleBufferExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085132B515578003AD224 /* CMSampleBufferExtensions.swift */; };
+		B2A0851C2B515578003AD224 /* AnimationResourceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085142B515578003AD224 /* AnimationResourceExtensions.swift */; };
+		B2A0851D2B515578003AD224 /* AnimationResourceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085142B515578003AD224 /* AnimationResourceExtensions.swift */; };
+		B2A0851E2B515578003AD224 /* AVAudioPCMBufferExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085152B515578003AD224 /* AVAudioPCMBufferExtensions.swift */; };
+		B2A0851F2B515578003AD224 /* AVAudioPCMBufferExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085152B515578003AD224 /* AVAudioPCMBufferExtensions.swift */; };
+		B2A085202B515578003AD224 /* CVImageBufferExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085162B515578003AD224 /* CVImageBufferExtensions.swift */; };
+		B2A085212B515578003AD224 /* CVImageBufferExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085162B515578003AD224 /* CVImageBufferExtensions.swift */; };
+		B2A085222B515578003AD224 /* UIInterfaceOrientationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085172B515578003AD224 /* UIInterfaceOrientationExtensions.swift */; };
+		B2A085232B515578003AD224 /* UIInterfaceOrientationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085172B515578003AD224 /* UIInterfaceOrientationExtensions.swift */; };
+		B2A085252B515697003AD224 /* machine_learning in Resources */ = {isa = PBXBuildFile; fileRef = B2A085242B515697003AD224 /* machine_learning */; };
+		B2A085262B515697003AD224 /* machine_learning in Resources */ = {isa = PBXBuildFile; fileRef = B2A085242B515697003AD224 /* machine_learning */; };
+		B2A085282B515824003AD224 /* MachineLearningClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085272B515824003AD224 /* MachineLearningClient.swift */; };
+		B2A085292B515824003AD224 /* MachineLearningClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085272B515824003AD224 /* MachineLearningClient.swift */; };
+		B2A085322B515892003AD224 /* Recognizer.Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A0852E2B515892003AD224 /* Recognizer.Sound.swift */; };
+		B2A085332B515892003AD224 /* Recognizer.Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A0852E2B515892003AD224 /* Recognizer.Sound.swift */; };
+		B2A085342B515892003AD224 /* Recognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A0852F2B515892003AD224 /* Recognizer.swift */; };
+		B2A085352B515892003AD224 /* Recognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A0852F2B515892003AD224 /* Recognizer.swift */; };
+		B2A085362B515892003AD224 /* Recognizer.Sound.SoundType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085302B515892003AD224 /* Recognizer.Sound.SoundType.swift */; };
+		B2A085372B515892003AD224 /* Recognizer.Sound.SoundType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085302B515892003AD224 /* Recognizer.Sound.SoundType.swift */; };
+		B2A085382B515892003AD224 /* Recognizer.Vision.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085312B515892003AD224 /* Recognizer.Vision.swift */; };
+		B2A085392B515892003AD224 /* Recognizer.Vision.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085312B515892003AD224 /* Recognizer.Vision.swift */; };
+		B2A0853B2B515994003AD224 /* ARUpdates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A0853A2B515994003AD224 /* ARUpdates.swift */; };
+		B2A0853C2B515994003AD224 /* ARUpdates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A0853A2B515994003AD224 /* ARUpdates.swift */; };
+		B2A0853E2B515AD2003AD224 /* ARUpdates+Concrete.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A0853D2B515AD2003AD224 /* ARUpdates+Concrete.swift */; };
+		B2A085402B515CB5003AD224 /* ARUpdates+Facades.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A0853F2B515CB5003AD224 /* ARUpdates+Facades.swift */; };
+		B2A085412B515CB5003AD224 /* ARUpdates+Facades.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A0853F2B515CB5003AD224 /* ARUpdates+Facades.swift */; };
+		B2A085442B516350003AD224 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = B2A085432B516350003AD224 /* Collections */; };
+		B2A085462B516350003AD224 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = B2A085452B516350003AD224 /* DequeModule */; };
+		B2A085482B516350003AD224 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = B2A085472B516350003AD224 /* OrderedCollections */; };
+		B2A0854D2B5166DD003AD224 /* ARUpdates+Concrete.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A0854C2B5166DD003AD224 /* ARUpdates+Concrete.swift */; };
 		B2A4C48C2ADBBE5800535C18 /* VariableMicroSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4C48B2ADBBE5800535C18 /* VariableMicroSystem.swift */; };
 		B2A4C48D2ADBBE5800535C18 /* VariableMicroSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4C48B2ADBBE5800535C18 /* VariableMicroSystem.swift */; };
 		B2AD3F852ACBA201003BEB9F /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AD3F842ACBA201003BEB9F /* Record.swift */; };
@@ -244,6 +285,26 @@
 		B28607BF2AD247760011286D /* ErrorFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorFeature.swift; sourceTree = "<group>"; };
 		B293EB132ABCFAE500ADB49A /* PetDisplay.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDisplay.View.swift; sourceTree = "<group>"; };
 		B293EB152ABCFC8C00ADB49A /* PetDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDisplay.swift; sourceTree = "<group>"; };
+		B2A085062B5154AC003AD224 /* absurd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = absurd.swift; sourceTree = "<group>"; };
+		B2A085092B5154DB003AD224 /* CustomTimingFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTimingFunction.swift; sourceTree = "<group>"; };
+		B2A0850C2B51551C003AD224 /* SNClassifySoundRequestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNClassifySoundRequestExtensions.swift; sourceTree = "<group>"; };
+		B2A0850F2B515522003AD224 /* VPTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPTree.swift; sourceTree = "<group>"; };
+		B2A085122B515578003AD224 /* CGImagePropertyOrientationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGImagePropertyOrientationExtensions.swift; sourceTree = "<group>"; };
+		B2A085132B515578003AD224 /* CMSampleBufferExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CMSampleBufferExtensions.swift; sourceTree = "<group>"; };
+		B2A085142B515578003AD224 /* AnimationResourceExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationResourceExtensions.swift; sourceTree = "<group>"; };
+		B2A085152B515578003AD224 /* AVAudioPCMBufferExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioPCMBufferExtensions.swift; sourceTree = "<group>"; };
+		B2A085162B515578003AD224 /* CVImageBufferExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVImageBufferExtensions.swift; sourceTree = "<group>"; };
+		B2A085172B515578003AD224 /* UIInterfaceOrientationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIInterfaceOrientationExtensions.swift; sourceTree = "<group>"; };
+		B2A085242B515697003AD224 /* machine_learning */ = {isa = PBXFileReference; lastKnownFileType = folder; path = machine_learning; sourceTree = "<group>"; };
+		B2A085272B515824003AD224 /* MachineLearningClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachineLearningClient.swift; sourceTree = "<group>"; };
+		B2A0852E2B515892003AD224 /* Recognizer.Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recognizer.Sound.swift; sourceTree = "<group>"; };
+		B2A0852F2B515892003AD224 /* Recognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recognizer.swift; sourceTree = "<group>"; };
+		B2A085302B515892003AD224 /* Recognizer.Sound.SoundType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recognizer.Sound.SoundType.swift; sourceTree = "<group>"; };
+		B2A085312B515892003AD224 /* Recognizer.Vision.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recognizer.Vision.swift; sourceTree = "<group>"; };
+		B2A0853A2B515994003AD224 /* ARUpdates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARUpdates.swift; sourceTree = "<group>"; };
+		B2A0853D2B515AD2003AD224 /* ARUpdates+Concrete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARUpdates+Concrete.swift"; sourceTree = "<group>"; };
+		B2A0853F2B515CB5003AD224 /* ARUpdates+Facades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARUpdates+Facades.swift"; sourceTree = "<group>"; };
+		B2A0854C2B5166DD003AD224 /* ARUpdates+Concrete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARUpdates+Concrete.swift"; sourceTree = "<group>"; };
 		B2A4C48B2ADBBE5800535C18 /* VariableMicroSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableMicroSystem.swift; sourceTree = "<group>"; };
 		B2AD3F842ACBA201003BEB9F /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		B2B173DB2AC25D29002AA2D0 /* TextDisplay.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDisplay.View.swift; sourceTree = "<group>"; };
@@ -278,6 +339,9 @@
 			files = (
 				B2D9029C2AD2144300BE02BF /* Marquee in Frameworks */,
 				B225E78D2AD0C86F00A79539 /* SwiftPriorityQueue in Frameworks */,
+				B2A085482B516350003AD224 /* OrderedCollections in Frameworks */,
+				B2A085462B516350003AD224 /* DequeModule in Frameworks */,
+				B2A085442B516350003AD224 /* Collections in Frameworks */,
 				B25D88E92B17456800BF624D /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -333,6 +397,7 @@
 		B208E59C2B0E95A000D2D043 /* tca */ = {
 			isa = PBXGroup;
 			children = (
+				B2A0854B2B5166C7003AD224 /* concrete */,
 				B208E59F2B0F55B400D2D043 /* Root.swift */,
 				B208E5A42B0F5B6600D2D043 /* Root.View.swift */,
 				B2CE8DD52B18E8450088129A /* WorldTrackerDebug.swift */,
@@ -493,6 +558,7 @@
 		B21E70A32AD5186C0018E8A6 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				B2A085242B515697003AD224 /* machine_learning */,
 				B24CC1FB2AE106E4008AACCB /* models */,
 			);
 			path = resources;
@@ -520,11 +586,14 @@
 		B225E7872AD0A52C00A79539 /* helpers */ = {
 			isa = PBXGroup;
 			children = (
+				B2A085092B5154DB003AD224 /* CustomTimingFunction.swift */,
+				B2A085062B5154AC003AD224 /* absurd.swift */,
 				B225E7842ACFEB1B00A79539 /* GaussianDistribution.swift */,
 				B225E7882AD0A56D00A79539 /* ReproducibleRandomSource.swift */,
 				B25F84D62AA909DB00526045 /* Styles.swift */,
 				B22491EF2AD88413003D8B75 /* WeakBox.swift */,
 				B22491F62AD8AD13003D8B75 /* Clamping.swift */,
+				B2A0850F2B515522003AD224 /* VPTree.swift */,
 			);
 			name = helpers;
 			sourceTree = "<group>";
@@ -549,6 +618,7 @@
 		B25A02ED2AD4CE6A0057DF0E /* tca */ = {
 			isa = PBXGroup;
 			children = (
+				B2A0854A2B5166BB003AD224 /* concrete */,
 				B2EC9FF82AABAC630005D0AB /* Root.swift */,
 				B2B51A112AAC56260024E3BA /* Root.View.swift */,
 				B2F9B4F82AAD92B80070E4E3 /* PetsList.swift */,
@@ -563,12 +633,15 @@
 		B25A02EE2AD503510057DF0E /* tca */ = {
 			isa = PBXGroup;
 			children = (
+				B2A085492B51668B003AD224 /* facades */,
+				B2A0853A2B515994003AD224 /* ARUpdates.swift */,
 				B2B51A0A2AAC4BDF0024E3BA /* AudioSettings.swift */,
 				B2F9B4F22AAD75490070E4E3 /* AudioSettings.View.swift */,
 				B25819FA2ABD4BDE003B9C90 /* AddOrEditPet.swift */,
 				B25819F72ABD4B5F003B9C90 /* AddOrEditPet.View.swift */,
 				B2D958542AD5385300D9408E /* PetRuntimeDebug.swift */,
 				B2D958572AD53E1C00D9408E /* PetRuntimeDebug.View.swift */,
+				B2A0852D2B515892003AD224 /* ml */,
 				B25A02F02AD5055F0057DF0E /* nonspecific */,
 			);
 			path = tca;
@@ -640,6 +713,41 @@
 			path = shared;
 			sourceTree = "<group>";
 		};
+		B2A0852D2B515892003AD224 /* ml */ = {
+			isa = PBXGroup;
+			children = (
+				B2A0852E2B515892003AD224 /* Recognizer.Sound.swift */,
+				B2A0852F2B515892003AD224 /* Recognizer.swift */,
+				B2A085302B515892003AD224 /* Recognizer.Sound.SoundType.swift */,
+				B2A085312B515892003AD224 /* Recognizer.Vision.swift */,
+			);
+			path = ml;
+			sourceTree = "<group>";
+		};
+		B2A085492B51668B003AD224 /* facades */ = {
+			isa = PBXGroup;
+			children = (
+				B2A0853F2B515CB5003AD224 /* ARUpdates+Facades.swift */,
+			);
+			path = facades;
+			sourceTree = "<group>";
+		};
+		B2A0854A2B5166BB003AD224 /* concrete */ = {
+			isa = PBXGroup;
+			children = (
+				B2A0853D2B515AD2003AD224 /* ARUpdates+Concrete.swift */,
+			);
+			path = concrete;
+			sourceTree = "<group>";
+		};
+		B2A0854B2B5166C7003AD224 /* concrete */ = {
+			isa = PBXGroup;
+			children = (
+				B2A0854C2B5166DD003AD224 /* ARUpdates+Concrete.swift */,
+			);
+			path = concrete;
+			sourceTree = "<group>";
+		};
 		B2A4C4842ADBBBF900535C18 /* Variables */ = {
 			isa = PBXGroup;
 			children = (
@@ -659,6 +767,13 @@
 				B2F9B5082AAEEA9C0070E4E3 /* DateExtensions.swift */,
 				B25819F32ABD2B2A003B9C90 /* UIColorExtensions.swift */,
 				B225E77E2ACE277D00A79539 /* ComparableExtensions.swift */,
+				B2A0850C2B51551C003AD224 /* SNClassifySoundRequestExtensions.swift */,
+				B2A085142B515578003AD224 /* AnimationResourceExtensions.swift */,
+				B2A085152B515578003AD224 /* AVAudioPCMBufferExtensions.swift */,
+				B2A085122B515578003AD224 /* CGImagePropertyOrientationExtensions.swift */,
+				B2A085132B515578003AD224 /* CMSampleBufferExtensions.swift */,
+				B2A085162B515578003AD224 /* CVImageBufferExtensions.swift */,
+				B2A085172B515578003AD224 /* UIInterfaceOrientationExtensions.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -673,6 +788,7 @@
 				B208E5A12B0F56FF00D2D043 /* FileReader.swift */,
 				B21F34162AC15D2300175652 /* Resources.swift */,
 				B2F9B4EC2AAD6CB00070E4E3 /* LoggerClient.swift */,
+				B2A085272B515824003AD224 /* MachineLearningClient.swift */,
 			);
 			path = tca.dependencies;
 			sourceTree = "<group>";
@@ -720,6 +836,9 @@
 				B225E78C2AD0C86F00A79539 /* SwiftPriorityQueue */,
 				B2D9029B2AD2144300BE02BF /* Marquee */,
 				B25D88E82B17456800BF624D /* ComposableArchitecture */,
+				B2A085432B516350003AD224 /* Collections */,
+				B2A085452B516350003AD224 /* DequeModule */,
+				B2A085472B516350003AD224 /* OrderedCollections */,
 			);
 			productName = "shared-packages";
 			productReference = B217E9262AA97C1E0048C37A /* shared_packages.framework */;
@@ -866,6 +985,7 @@
 				B217E9202AA97BEB0048C37A /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				B225E78B2AD0C86F00A79539 /* XCRemoteSwiftPackageReference "SwiftPriorityQueue" */,
 				B2D9029A2AD2144300BE02BF /* XCRemoteSwiftPackageReference "Marquee" */,
+				B2A085422B516350003AD224 /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = B21911882AA7A762003CE806 /* Products */;
 			projectDirPath = "";
@@ -896,6 +1016,7 @@
 				B24CC1FC2AE106E4008AACCB /* models in Resources */,
 				B21911952AA7A764003CE806 /* Preview Assets.xcassets in Resources */,
 				B21E70A92AD5191E0018E8A6 /* attributions.txt in Resources */,
+				B2A085252B515697003AD224 /* machine_learning in Resources */,
 				B21911912AA7A764003CE806 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -919,6 +1040,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B21911CF2AA7A7ED003CE806 /* Preview Assets.xcassets in Resources */,
+				B2A085262B515697003AD224 /* machine_learning in Resources */,
 				B21911CC2AA7A7ED003CE806 /* Assets.xcassets in Resources */,
 				B24CC1FD2AE106E4008AACCB /* models in Resources */,
 			);
@@ -947,20 +1069,29 @@
 			files = (
 				B2F9B4EA2AAD6C6E0070E4E3 /* AudioPlayerClient.swift in Sources */,
 				B2F9B5092AAEEA9C0070E4E3 /* DateExtensions.swift in Sources */,
+				B2A0850D2B51551C003AD224 /* SNClassifySoundRequestExtensions.swift in Sources */,
 				B2F9B5002AAE5AEE0070E4E3 /* BindingExtensions.swift in Sources */,
+				B2A0851C2B515578003AD224 /* AnimationResourceExtensions.swift in Sources */,
 				B2AD3F852ACBA201003BEB9F /* Record.swift in Sources */,
 				B225E7792ACE0E2E00A79539 /* PetRuntime.swift in Sources */,
 				B23C41862ADF4A0C001750A6 /* Fullness.swift in Sources */,
 				B2EC9FF92AABAC630005D0AB /* Root.swift in Sources */,
 				B225E7852ACFEB1B00A79539 /* GaussianDistribution.swift in Sources */,
 				B225E7892AD0A56D00A79539 /* ReproducibleRandomSource.swift in Sources */,
+				B2A085102B515522003AD224 /* VPTree.swift in Sources */,
 				B2B51A0B2AAC4BDF0024E3BA /* AudioSettings.swift in Sources */,
 				B2581A172ABE99D6003B9C90 /* AppComponent.swift in Sources */,
+				B2A085182B515578003AD224 /* CGImagePropertyOrientationExtensions.swift in Sources */,
+				B2A085402B515CB5003AD224 /* ARUpdates+Facades.swift in Sources */,
+				B2A085222B515578003AD224 /* UIInterfaceOrientationExtensions.swift in Sources */,
 				B2B51A0F2AAC55CE0024E3BA /* mainApp.swift in Sources */,
 				B2F9B4F32AAD75490070E4E3 /* AudioSettings.View.swift in Sources */,
 				B28607BA2AD242670011286D /* WaitForLoad.swift in Sources */,
+				B2A085362B515892003AD224 /* Recognizer.Sound.SoundType.swift in Sources */,
 				B293EB142ABCFAE500ADB49A /* PetDisplay.View.swift in Sources */,
+				B2A0853B2B515994003AD224 /* ARUpdates.swift in Sources */,
 				B2F9B4E72AAD6C0E0070E4E3 /* UserPreferencesClient.swift in Sources */,
+				B2A085342B515892003AD224 /* Recognizer.swift in Sources */,
 				B2F9B50C2AB011000070E4E3 /* AppSchemas.swift in Sources */,
 				B293EB162ABCFC8C00ADB49A /* PetDisplay.swift in Sources */,
 				B25819FB2ABD4BDE003B9C90 /* AddOrEditPet.swift in Sources */,
@@ -973,22 +1104,31 @@
 				B2D902952AD1F56D00BE02BF /* PetRuntime.Naive.swift in Sources */,
 				B275EC7F2AD729AD00791AC0 /* PetRuntime.Cached.swift in Sources */,
 				B225E77F2ACE277D00A79539 /* ComparableExtensions.swift in Sources */,
+				B2A0850A2B5154DC003AD224 /* CustomTimingFunction.swift in Sources */,
 				B2F9B4FD2AAD99A60070E4E3 /* Creature.swift in Sources */,
 				B25819F42ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */,
+				B2A085322B515892003AD224 /* Recognizer.Sound.swift in Sources */,
 				B22491F72AD8AD13003D8B75 /* Clamping.swift in Sources */,
 				B2F9B4ED2AAD6CB00070E4E3 /* LoggerClient.swift in Sources */,
 				B2B173DC2AC25D29002AA2D0 /* TextDisplay.View.swift in Sources */,
 				B2F9B4F92AAD92B80070E4E3 /* PetsList.swift in Sources */,
 				B28607BD2AD244830011286D /* WaitForLoad.View.swift in Sources */,
+				B2A0853E2B515AD2003AD224 /* ARUpdates+Concrete.swift in Sources */,
 				B21F34172AC15D2300175652 /* Resources.swift in Sources */,
+				B2A0851E2B515578003AD224 /* AVAudioPCMBufferExtensions.swift in Sources */,
 				B2581A142ABE99C2003B9C90 /* AppSystem.swift in Sources */,
 				B208E5A22B0F56FF00D2D043 /* FileReader.swift in Sources */,
+				B2A085382B515892003AD224 /* Recognizer.Vision.swift in Sources */,
 				B22491F02AD88413003D8B75 /* WeakBox.swift in Sources */,
 				B2A4C48C2ADBBE5800535C18 /* VariableMicroSystem.swift in Sources */,
+				B2A085072B5154AC003AD224 /* absurd.swift in Sources */,
 				B25F84D72AA909DB00526045 /* Styles.swift in Sources */,
+				B2A085202B515578003AD224 /* CVImageBufferExtensions.swift in Sources */,
+				B2A085282B515824003AD224 /* MachineLearningClient.swift in Sources */,
 				B28607C02AD247760011286D /* ErrorFeature.swift in Sources */,
 				B2D958552AD5385300D9408E /* PetRuntimeDebug.swift in Sources */,
 				B2B51A122AAC56260024E3BA /* Root.View.swift in Sources */,
+				B2A0851A2B515578003AD224 /* CMSampleBufferExtensions.swift in Sources */,
 				B25F84E62AA9287E00526045 /* ErrorFeature.View.swift in Sources */,
 				B2D958582AD53E1C00D9408E /* PetRuntimeDebug.View.swift in Sources */,
 				B25819F82ABD4B5F003B9C90 /* AddOrEditPet.View.swift in Sources */,
@@ -1022,8 +1162,12 @@
 				B2D958562AD5385300D9408E /* PetRuntimeDebug.swift in Sources */,
 				B208E5A52B0F5B6600D2D043 /* Root.View.swift in Sources */,
 				B2F9B50D2AB011000070E4E3 /* AppSchemas.swift in Sources */,
+				B2A085082B5154AC003AD224 /* absurd.swift in Sources */,
 				B2F9B4EB2AAD6C6E0070E4E3 /* AudioPlayerClient.swift in Sources */,
+				B2A085372B515892003AD224 /* Recognizer.Sound.SoundType.swift in Sources */,
+				B2A085352B515892003AD224 /* Recognizer.swift in Sources */,
 				B225E77A2ACE0E2E00A79539 /* PetRuntime.swift in Sources */,
+				B2A0850E2B51551C003AD224 /* SNClassifySoundRequestExtensions.swift in Sources */,
 				B25819F92ABD4B5F003B9C90 /* AddOrEditPet.View.swift in Sources */,
 				B25F84D82AA909DB00526045 /* Styles.swift in Sources */,
 				B25F84D92AA909E100526045 /* WaitForCloudKitDataView.swift in Sources */,
@@ -1031,15 +1175,22 @@
 				B21911C82AA7A7EB003CE806 /* ContentView.swift in Sources */,
 				B28607BB2AD242670011286D /* WaitForLoad.swift in Sources */,
 				B28607C12AD247760011286D /* ErrorFeature.swift in Sources */,
+				B2A0850B2B5154DC003AD224 /* CustomTimingFunction.swift in Sources */,
+				B2A085192B515578003AD224 /* CGImagePropertyOrientationExtensions.swift in Sources */,
+				B2A0853C2B515994003AD224 /* ARUpdates.swift in Sources */,
 				B225E7802ACE277D00A79539 /* ComparableExtensions.swift in Sources */,
 				B2AD3F862ACBA201003BEB9F /* Record.swift in Sources */,
+				B2A0851B2B515578003AD224 /* CMSampleBufferExtensions.swift in Sources */,
 				B208E5A02B0F55B400D2D043 /* Root.swift in Sources */,
 				B2CE8DD62B18E8450088129A /* WorldTrackerDebug.swift in Sources */,
 				B2D958592AD53E1C00D9408E /* PetRuntimeDebug.View.swift in Sources */,
+				B2A085392B515892003AD224 /* Recognizer.Vision.swift in Sources */,
+				B2A085112B515522003AD224 /* VPTree.swift in Sources */,
 				B25819FC2ABD4BDE003B9C90 /* AddOrEditPet.swift in Sources */,
 				B2581A152ABE99C2003B9C90 /* AppSystem.swift in Sources */,
 				B25A02EF2AD503B20057DF0E /* AudioSettings.View.swift in Sources */,
 				B2B51A0C2AAC4BDF0024E3BA /* AudioSettings.swift in Sources */,
+				B2A085332B515892003AD224 /* Recognizer.Sound.swift in Sources */,
 				B21F34182AC15D2300175652 /* Resources.swift in Sources */,
 				B2581A182ABE99D6003B9C90 /* AppComponent.swift in Sources */,
 				B22491F12AD88413003D8B75 /* WeakBox.swift in Sources */,
@@ -1048,22 +1199,29 @@
 				B2F9B5012AAE5AEE0070E4E3 /* BindingExtensions.swift in Sources */,
 				B22491F82AD8AD13003D8B75 /* Clamping.swift in Sources */,
 				B21F34152AC1526A00175652 /* TextDisplay.swift in Sources */,
+				B2A085232B515578003AD224 /* UIInterfaceOrientationExtensions.swift in Sources */,
 				B208E5A32B0F56FF00D2D043 /* FileReader.swift in Sources */,
 				B25819F52ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */,
 				B2A4C48D2ADBBE5800535C18 /* VariableMicroSystem.swift in Sources */,
+				B2A0851D2B515578003AD224 /* AnimationResourceExtensions.swift in Sources */,
+				B2A0854D2B5166DD003AD224 /* ARUpdates+Concrete.swift in Sources */,
 				B28607BE2AD244830011286D /* WaitForLoad.View.swift in Sources */,
 				B2F9B4E42AAD653C0070E4E3 /* ViewExtensions.swift in Sources */,
 				B2B173DD2AC25D29002AA2D0 /* TextDisplay.View.swift in Sources */,
 				B21911C62AA7A7EB003CE806 /* mainApp.swift in Sources */,
+				B2A0851F2B515578003AD224 /* AVAudioPCMBufferExtensions.swift in Sources */,
+				B2A085292B515824003AD224 /* MachineLearningClient.swift in Sources */,
 				B2F9B4FE2AAD99A60070E4E3 /* Creature.swift in Sources */,
 				B25F84E72AA9287E00526045 /* ErrorFeature.View.swift in Sources */,
 				B2F9B5072AAEDDB00070E4E3 /* TimeInvervalExtensions.swift in Sources */,
+				B2A085412B515CB5003AD224 /* ARUpdates+Facades.swift in Sources */,
 				B23C41872ADF4A0C001750A6 /* Fullness.swift in Sources */,
 				B225E78A2AD0A56D00A79539 /* ReproducibleRandomSource.swift in Sources */,
 				B2F9B50A2AAEEA9C0070E4E3 /* DateExtensions.swift in Sources */,
 				B2CE8DD82B18E9980088129A /* WorldTrackerDebug.View.swift in Sources */,
 				B21911CA2AA7A7EB003CE806 /* SampleImmersiveView.swift in Sources */,
 				B275EC802AD729AD00791AC0 /* PetRuntime.Cached.swift in Sources */,
+				B2A085212B515578003AD224 /* CVImageBufferExtensions.swift in Sources */,
 				B225E7862ACFEB1B00A79539 /* GaussianDistribution.swift in Sources */,
 				B2F9B4F12AAD6D580070E4E3 /* PersistentModelContext.swift in Sources */,
 			);
@@ -1679,6 +1837,14 @@
 				minimumVersion = 1.4.0;
 			};
 		};
+		B2A085422B516350003AD224 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.6;
+			};
+		};
 		B2D9029A2AD2144300BE02BF /* XCRemoteSwiftPackageReference "Marquee" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stonko1994/Marquee";
@@ -1703,6 +1869,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B217E9202AA97BEB0048C37A /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		B2A085432B516350003AD224 /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B2A085422B516350003AD224 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		B2A085452B516350003AD224 /* DequeModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B2A085422B516350003AD224 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = DequeModule;
+		};
+		B2A085472B516350003AD224 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B2A085422B516350003AD224 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
 		};
 		B2D9029B2AD2144300BE02BF /* Marquee */ = {
 			isa = XCSwiftPackageProductDependency;

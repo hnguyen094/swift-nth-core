@@ -16,9 +16,19 @@ struct CustomTimingFunction {
     }
     
     static let linear: Self = .init { $0 }
-    static let easeInCubic: Self = cubicBezier(p1: [0.32, 0], p2: [0.67, 0])
-    static let easeOutCubic: Self = cubicBezier(p1: [0.33, 1], p2: [0.68, 1])
-    static let easeInOutCubic: Self = cubicBezier(p1: [0.65, 0], p2: [0.35, 1])
+    
+    static let easeInSine: Self = .init { 1 - cos(($0 * .pi) / 2) }
+    static let easeOutSine: Self = .init { sin(($0 * .pi) / 2) }
+    static let easeInOutSine: Self = .init { -(cos(.pi * $0) - 1) / 2 }
+
+    
+    static let easeInCubic: Self = .init { pow($0, 3) }
+    static let easeOutCubic: Self = .init { 1 - pow(1 - $0, 3) }
+    static let easeInOutCubic: Self = .init { t in
+        t < 0.5
+        ? 4 * pow(t, 3)
+        : 1 - pow(-2 * t + 2, 3) / 2
+    }
     
     // https://blog.maximeheckel.com/posts/cubic-bezier-from-math-to-motion/
     static func cubicBezier(p1: SIMD2<Double>, p2: SIMD2<Double>) -> Self {
@@ -45,7 +55,7 @@ struct CustomTimingFunction {
     }
 
     static let easeInBack: Self = .init { Self.c3 * pow($0, 3) - Self.c1 * pow($0, 2) }
-    static let easeOutBack: Self = .init { 1 + Self.c3 + pow($0 - 1, 3) + Self.c1 * pow($0 - 1, 2) }
+    static let easeOutBack: Self = .init { 1 + Self.c3 * pow($0 - 1, 3) + Self.c1 * pow($0 - 1, 2) }
     static let easeInOutBack: Self = .init { t in
         if t < 0.5 {
             (pow(2 * t, 2) * ((Self.c2 + 1) * 2 * t - Self.c2)) / 2

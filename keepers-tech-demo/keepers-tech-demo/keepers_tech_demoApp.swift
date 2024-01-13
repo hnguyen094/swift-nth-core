@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 import ARKit
 
 @main
@@ -13,13 +14,17 @@ struct keepers_tech_demoApp: App {
     @State var session = ARKitSession()
     @State var size: CGSize = .init(width: 400, height: 400)
     
+    private let store = Store(initialState: Creature.Feature.State()) {
+        Creature.Feature()
+    }
+    
     init() {
         Emoting.System.registerSystem()
     }
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(store: store)
                 .frame(
                     minWidth: size.width, maxWidth: size.width,
                     minHeight: size.height, maxHeight: size.height)

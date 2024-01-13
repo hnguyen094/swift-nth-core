@@ -11,8 +11,11 @@
 		B22C8E312B523A850076CC12 /* CustomTimingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E302B523A850076CC12 /* CustomTimingFunction.swift */; };
 		B22C8E332B5241B50076CC12 /* DataProviderExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E322B5241B50076CC12 /* DataProviderExtensions.swift */; };
 		B22C8E372B524D490076CC12 /* Emoting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E362B524D490076CC12 /* Emoting.swift */; };
-		B22C8E392B5257290076CC12 /* Creature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E382B5257290076CC12 /* Creature.swift */; };
+		B22C8E392B5257290076CC12 /* Creature.Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E382B5257290076CC12 /* Creature.Entity.swift */; };
 		B22C8E3B2B5268EC0076CC12 /* Emoting.Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E3A2B5268EC0076CC12 /* Emoting.Animation.swift */; };
+		B22C8E3D2B52AF870076CC12 /* SequenceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E3C2B52AF870076CC12 /* SequenceExtensions.swift */; };
+		B22C8E402B52EA3A0076CC12 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = B22C8E3F2B52EA3A0076CC12 /* ComposableArchitecture */; };
+		B22C8E432B52EAE40076CC12 /* Creature.Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E422B52EAE40076CC12 /* Creature.Feature.swift */; };
 		B2372A392B5231AE0015B8EA /* ImmersiveID.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2372A382B5231AE0015B8EA /* ImmersiveID.swift */; };
 		B2A085612B52287F003AD224 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = B2A085602B52287F003AD224 /* RealityKitContent */; };
 		B2A085632B52287F003AD224 /* keepers_tech_demoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085622B52287F003AD224 /* keepers_tech_demoApp.swift */; };
@@ -27,8 +30,10 @@
 		B22C8E302B523A850076CC12 /* CustomTimingFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimingFunction.swift; sourceTree = "<group>"; };
 		B22C8E322B5241B50076CC12 /* DataProviderExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderExtensions.swift; sourceTree = "<group>"; };
 		B22C8E362B524D490076CC12 /* Emoting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoting.swift; sourceTree = "<group>"; };
-		B22C8E382B5257290076CC12 /* Creature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.swift; sourceTree = "<group>"; };
+		B22C8E382B5257290076CC12 /* Creature.Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.Entity.swift; sourceTree = "<group>"; };
 		B22C8E3A2B5268EC0076CC12 /* Emoting.Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoting.Animation.swift; sourceTree = "<group>"; };
+		B22C8E3C2B52AF870076CC12 /* SequenceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtensions.swift; sourceTree = "<group>"; };
+		B22C8E422B52EAE40076CC12 /* Creature.Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.Feature.swift; sourceTree = "<group>"; };
 		B2372A382B5231AE0015B8EA /* ImmersiveID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveID.swift; sourceTree = "<group>"; };
 		B2A0855B2B52287F003AD224 /* keepers-tech-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "keepers-tech-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2A0855F2B52287F003AD224 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
@@ -46,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B22C8E402B52EA3A0076CC12 /* ComposableArchitecture in Frameworks */,
 				B2A085612B52287F003AD224 /* RealityKitContent in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -53,6 +59,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B22C8E412B52EA430076CC12 /* tca */ = {
+			isa = PBXGroup;
+			children = (
+				B22C8E422B52EAE40076CC12 /* Creature.Feature.swift */,
+			);
+			path = tca;
+			sourceTree = "<group>";
+		};
 		B2A085522B52287F003AD224 = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +88,7 @@
 		B2A0855D2B52287F003AD224 /* keepers-tech-demo */ = {
 			isa = PBXGroup;
 			children = (
+				B22C8E412B52EA430076CC12 /* tca */,
 				B2E1306D2B522F15002CBE8A /* helpers */,
 				B2E1306A2B522EDF002CBE8A /* ecs */,
 				B2A085622B52287F003AD224 /* keepers_tech_demoApp.swift */,
@@ -115,7 +130,7 @@
 			children = (
 				B22C8E362B524D490076CC12 /* Emoting.swift */,
 				B22C8E3A2B5268EC0076CC12 /* Emoting.Animation.swift */,
-				B22C8E382B5257290076CC12 /* Creature.swift */,
+				B22C8E382B5257290076CC12 /* Creature.Entity.swift */,
 			);
 			path = ecs;
 			sourceTree = "<group>";
@@ -127,6 +142,7 @@
 				B22C8E2E2B523A720076CC12 /* AnimationResourceExtensions.swift */,
 				B22C8E302B523A850076CC12 /* CustomTimingFunction.swift */,
 				B22C8E322B5241B50076CC12 /* DataProviderExtensions.swift */,
+				B22C8E3C2B52AF870076CC12 /* SequenceExtensions.swift */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -149,6 +165,7 @@
 			name = "keepers-tech-demo";
 			packageProductDependencies = (
 				B2A085602B52287F003AD224 /* RealityKitContent */,
+				B22C8E3F2B52EA3A0076CC12 /* ComposableArchitecture */,
 			);
 			productName = "keepers-tech-demo";
 			productReference = B2A0855B2B52287F003AD224 /* keepers-tech-demo.app */;
@@ -178,6 +195,9 @@
 				Base,
 			);
 			mainGroup = B2A085522B52287F003AD224;
+			packageReferences = (
+				B22C8E3E2B52EA3A0076CC12 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			productRefGroup = B2A0855C2B52287F003AD224 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -206,10 +226,12 @@
 			files = (
 				B2A085652B52287F003AD224 /* ContentView.swift in Sources */,
 				B2A085632B52287F003AD224 /* keepers_tech_demoApp.swift in Sources */,
-				B22C8E392B5257290076CC12 /* Creature.swift in Sources */,
+				B22C8E432B52EAE40076CC12 /* Creature.Feature.swift in Sources */,
+				B22C8E392B5257290076CC12 /* Creature.Entity.swift in Sources */,
 				B2372A392B5231AE0015B8EA /* ImmersiveID.swift in Sources */,
 				B22C8E372B524D490076CC12 /* Emoting.swift in Sources */,
 				B2A085672B52287F003AD224 /* ImmersiveView.swift in Sources */,
+				B22C8E3D2B52AF870076CC12 /* SequenceExtensions.swift in Sources */,
 				B22C8E332B5241B50076CC12 /* DataProviderExtensions.swift in Sources */,
 				B22C8E312B523A850076CC12 /* CustomTimingFunction.swift in Sources */,
 				B22C8E2F2B523A720076CC12 /* AnimationResourceExtensions.swift in Sources */,
@@ -416,7 +438,23 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		B22C8E3E2B52EA3A0076CC12 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		B22C8E3F2B52EA3A0076CC12 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B22C8E3E2B52EA3A0076CC12 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
 		B2A085602B52287F003AD224 /* RealityKitContent */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RealityKitContent;

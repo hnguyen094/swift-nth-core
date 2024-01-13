@@ -17,7 +17,10 @@ extension ARUpdates.AnchorFacade {
                 classification: .init(plane.classification)
             ))
         case let mesh as ARMeshAnchor:
-            self = .mesh
+            self = .mesh(.init(
+                center: Transform(matrix: mesh.transform).translation,
+                classifications: mesh.geometry.allClassifications()
+                    .map(ARUpdates.MeshFacade.Classification.init)))
         case is ARImageAnchor: self = .image
         case is ARFaceAnchor: self = .face
         case is ARBodyAnchor: self = .body
@@ -64,6 +67,31 @@ extension ARUpdates.PlaneFacade.Classification.Status {
                 .unknown
         @unknown default:
                 .unknown
+        }
+    }
+}
+
+extension ARUpdates.MeshFacade.Classification {
+    init(_ classification: ARMeshClassification) {
+        self = switch classification {
+        case .none:
+                .none
+        case .wall:
+                .wall
+        case .floor:
+                .floor
+        case .ceiling:
+                .ceiling
+        case .table:
+                .table
+        case .seat:
+                .seat
+        case .window:
+                .window
+        case .door:
+                .door
+        @unknown default:
+                .none
         }
     }
 }

@@ -122,6 +122,8 @@
 		B2A085462B516350003AD224 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = B2A085452B516350003AD224 /* DequeModule */; };
 		B2A085482B516350003AD224 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = B2A085472B516350003AD224 /* OrderedCollections */; };
 		B2A0854D2B5166DD003AD224 /* ARUpdates+Concrete.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A0854C2B5166DD003AD224 /* ARUpdates+Concrete.swift */; };
+		B2A0854F2B521D21003AD224 /* ARMeshGeometryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A0854E2B521D21003AD224 /* ARMeshGeometryExtensions.swift */; };
+		B2A085512B521D52003AD224 /* ARMeshGeometryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085502B521D52003AD224 /* ARMeshGeometryExtensions.swift */; };
 		B2A4C48C2ADBBE5800535C18 /* VariableMicroSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4C48B2ADBBE5800535C18 /* VariableMicroSystem.swift */; };
 		B2A4C48D2ADBBE5800535C18 /* VariableMicroSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4C48B2ADBBE5800535C18 /* VariableMicroSystem.swift */; };
 		B2AD3F852ACBA201003BEB9F /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AD3F842ACBA201003BEB9F /* Record.swift */; };
@@ -305,6 +307,8 @@
 		B2A0853D2B515AD2003AD224 /* ARUpdates+Concrete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARUpdates+Concrete.swift"; sourceTree = "<group>"; };
 		B2A0853F2B515CB5003AD224 /* ARUpdates+Facades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARUpdates+Facades.swift"; sourceTree = "<group>"; };
 		B2A0854C2B5166DD003AD224 /* ARUpdates+Concrete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARUpdates+Concrete.swift"; sourceTree = "<group>"; };
+		B2A0854E2B521D21003AD224 /* ARMeshGeometryExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARMeshGeometryExtensions.swift; sourceTree = "<group>"; };
+		B2A085502B521D52003AD224 /* ARMeshGeometryExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARMeshGeometryExtensions.swift; sourceTree = "<group>"; };
 		B2A4C48B2ADBBE5800535C18 /* VariableMicroSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableMicroSystem.swift; sourceTree = "<group>"; };
 		B2AD3F842ACBA201003BEB9F /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		B2B173DB2AC25D29002AA2D0 /* TextDisplay.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDisplay.View.swift; sourceTree = "<group>"; };
@@ -735,6 +739,7 @@
 		B2A0854A2B5166BB003AD224 /* concrete */ = {
 			isa = PBXGroup;
 			children = (
+				B2A0854E2B521D21003AD224 /* ARMeshGeometryExtensions.swift */,
 				B2A0853D2B515AD2003AD224 /* ARUpdates+Concrete.swift */,
 			);
 			path = concrete;
@@ -743,6 +748,7 @@
 		B2A0854B2B5166C7003AD224 /* concrete */ = {
 			isa = PBXGroup;
 			children = (
+				B2A085502B521D52003AD224 /* ARMeshGeometryExtensions.swift */,
 				B2A0854C2B5166DD003AD224 /* ARUpdates+Concrete.swift */,
 			);
 			path = concrete;
@@ -1080,6 +1086,7 @@
 				B225E7892AD0A56D00A79539 /* ReproducibleRandomSource.swift in Sources */,
 				B2A085102B515522003AD224 /* VPTree.swift in Sources */,
 				B2B51A0B2AAC4BDF0024E3BA /* AudioSettings.swift in Sources */,
+				B2A0854F2B521D21003AD224 /* ARMeshGeometryExtensions.swift in Sources */,
 				B2581A172ABE99D6003B9C90 /* AppComponent.swift in Sources */,
 				B2A085182B515578003AD224 /* CGImagePropertyOrientationExtensions.swift in Sources */,
 				B2A085402B515CB5003AD224 /* ARUpdates+Facades.swift in Sources */,
@@ -1202,6 +1209,7 @@
 				B2A085232B515578003AD224 /* UIInterfaceOrientationExtensions.swift in Sources */,
 				B208E5A32B0F56FF00D2D043 /* FileReader.swift in Sources */,
 				B25819F52ABD2B2A003B9C90 /* UIColorExtensions.swift in Sources */,
+				B2A085512B521D52003AD224 /* ARMeshGeometryExtensions.swift in Sources */,
 				B2A4C48D2ADBBE5800535C18 /* VariableMicroSystem.swift in Sources */,
 				B2A0851D2B515578003AD224 /* AnimationResourceExtensions.swift in Sources */,
 				B2A0854D2B5166DD003AD224 /* ARUpdates+Concrete.swift in Sources */,

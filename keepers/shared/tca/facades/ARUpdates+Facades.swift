@@ -12,7 +12,7 @@ import simd
 extension ARUpdates {
     enum AnchorFacade {
         case plane(PlaneFacade)
-        case mesh
+        case mesh(MeshFacade)
         case image
         case face
         case body
@@ -43,6 +43,28 @@ extension ARUpdates {
                 case undetermined
                 case unknown
             }
+        }
+    }
+    
+    struct MeshFacade {
+        let center: simd_float3
+        let classifications: [Classification]
+        
+        enum Classification {
+            case none
+            case wall
+            case floor
+            case ceiling
+            case table
+            case seat
+            case window
+            case door
+            case stairs
+            case bed
+            case cabinet
+            case homeAppliance
+            case tv
+            case plant
         }
     }
         

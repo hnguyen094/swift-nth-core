@@ -16,7 +16,7 @@ extension Creature {
         
         enum Action {
             case setEmotionAnimation(Emoting.Animation)
-            case setRandom
+            case next
         }
         
         var body: some ReducerOf<Self> {
@@ -25,8 +25,9 @@ extension Creature {
                 case .setEmotionAnimation(let newValue):
                     state.emotionAnimation = newValue
                     return .none
-                case .setRandom:
-                    state.emotionAnimation = state.emotionAnimation == .idle ? .excitedBounce : .idle
+                case .next:
+                    let index = Emoting.Animation.allCases.firstIndex(of: state.emotionAnimation)!
+                    state.emotionAnimation = Emoting.Animation.allCases[(index + 1) % (Emoting.Animation.allCases.count - 1)]
                     return .none
                 }
             }

@@ -24,13 +24,7 @@ enum Emoting {
                 defer { entity.components.set(component) }
                 
                 if let current = component.current, current.identifier == component.desiredAnimation, !current.controller.isComplete { return }
-                // we now need to identify what we need to do.
-                // if current is nil, we start our desired animation
-                // if identifier is desired (but controller is completed), we TODO it
-                // if identifier is NOT desired, we transition
-                // if idtentifier is transition, wait for it to complete
-                // if identifier is transition, and it is complete, we start our desired animation
-                
+
                 guard let current = component.current else {
                     startDesiredAnimation(&component, entity: entity)
                     return
@@ -39,10 +33,10 @@ enum Emoting {
                 switch (current.identifier, current.controller.isComplete) {
                 case (.transitioning, true):
                     startDesiredAnimation(&component, entity: entity)
-                case let (currentAnimation, true) where currentAnimation == component.desiredAnimation:
+                case let (animation, true) where animation == component.desiredAnimation:
                     // TODO: What to do when desired animation completes.
                     break
-                case let (currentAnimation, _) where currentAnimation != component.desiredAnimation && currentAnimation != .transitioning:
+                case let (animation, _) where animation != component.desiredAnimation && animation != .transitioning:
                     current.controller.stop() // TODO: stop with blendout? need to wait for completion?
                     startTransitionAnimation(&component, entity: entity)
                 default:

@@ -29,7 +29,7 @@ struct ContentView: View {
 //                .toggleStyle(.button)
             
             Button {
-                store.send(.setRandom)
+                store.send(.next)
             } label: {
                 Text("Change animation")
                     .frame(maxWidth: .infinity, maxHeight: .infinity)

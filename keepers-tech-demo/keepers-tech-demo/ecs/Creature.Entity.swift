@@ -24,7 +24,7 @@ enum Creature {
         }
         
         private func initialConfiguration(windowed: Bool) {
-            let mesh = MeshResource.generateBox(width: 0.1, height: 0.1, depth: 0.01, cornerRadius: 0.01)
+            let mesh = MeshResource.generateBox(width: 0.1, height: 0.1, depth: 0.035, cornerRadius: 0.025)
             let material = SimpleMaterial(color: .cyan, roughness: 0.5, isMetallic: true)
 
             let body = ModelEntity(mesh: mesh, materials: [material])

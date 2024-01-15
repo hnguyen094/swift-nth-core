@@ -10,6 +10,7 @@ import RealityKit
 extension Emoting {
     enum Animation: CaseIterable, Hashable {
         case idle
+        case slowLookAround
         case backflip
         case headShake
         case doubleNod
@@ -23,8 +24,72 @@ extension Emoting {
 }
 
 extension Emoting.System {
+    static func returnAnimation(from: Transform) -> AnimationResource? {
+        .sampledFromTo(
+            from: from,
+            to: .identity,
+            duration: 0.25,
+            timing: .easeInOutSine
+        )
+    }
+    
+    // MARK: idle
+    fileprivate static let idle: AnimationResource? = try? .sequence(with: [
+        .sampledFromTo(
+            to: Transform(translation: [0, 0.01, 0]),
+            duration: 2,
+            timing: .easeInOutSine,
+            repeatMode: .autoReverse,
+            trimDuration: 10
+        )
+        // TODO: add a flare idle animation here
+    ].compact())
+    
+    // MARK: slowLookAround
+    fileprivate static let slowLookAround: AnimationResource? =
+        try? .group(with: [
+            try? .sequence(with: [
+                .sampledFromTo(
+                    to: Transform(rotation: .init(angle: .pi / 8, axis: [0, 1, 0])),
+                    duration: 0.5,
+                    trimDuration: 5
+                ),
+                .sampledFromTo(
+                    from: Transform(rotation: .init(angle: .pi / 8, axis: [0, 1, 0])),
+                    to: Transform(rotation: .init(angle: -.pi / 8, axis: [0, 1, 0])),
+                    trimDuration: 5
+                ),
+                .sampledFromTo(
+                    from: Transform(rotation: .init(angle: -.pi / 8, axis: [0, 1, 0])),
+                    to: .identity,
+                    duration: 0.5
+                )
+            ].compact()).repeat(),
+            try? .sequence(with: [
+                .sampledFromTo(
+                    to: Transform(rotation: .init(angle: .pi / 16, axis: [1, 0, 0])),
+                    duration: 0.5,
+                    isAdditive: true,
+                    trimDuration: 15
+                ),
+                .sampledFromTo(
+//                    from: Transform(rotation: .init(angle: .pi / 16, axis: [1, 0, 0])),
+                    to: Transform(rotation: .init(angle: -.pi / 8, axis: [1, 0, 0])),
+                    isAdditive: true,
+                    trimDuration: 15
+                ),
+                .sampledFromTo(
+                    to: Transform(rotation: .init(angle: .pi / 16, axis: [1, 0, 0])),
+                    duration: 0.5,
+                    isAdditive: true
+                )
+            ].compact()).repeat()
+        ].compact())
+    
     static let animations: [Emoting.Animation: AnimationResource?] = [
-        .idle: .sampledFromTo(),
+        .idle: Self.idle,
+        
+        .slowLookAround: Self.slowLookAround,
         
         // MARK: backflip
         .backflip: try? .sequence(with: [
@@ -71,27 +136,13 @@ extension Emoting.System {
                         duration: 0.5,
                         timing: .easeOutCircle,
                         frameInterval: 0.00001,
-                    isAdditive: true)
+                    isAdditive: true),
+                    .sampledFromTo(
+                        from: .identity,
+                        to: .identity,
+                        duration: 0)
                 ].compact())
             ].compact())
-//            ,
-//            
-//            .sampledFromTo(
-//                to: Transform(
-//                    rotation: .init(angle: -.pi, axis: [1, 0, 0]),
-//                    translation: [0, 0.05, -0.01]),
-//                duration: 0.5,
-//                timing: .easeInSine,
-//                frameInterval: 0.00001,
-//                isAdditive: true),
-//            .sampledFromTo(
-//                to: Transform(
-//                    rotation: .init(angle: -.pi, axis: [1, 0, 0]),
-//                    translation: [0, 0.05, 0.01]),
-//                duration: 0.5,
-//                timing: .easeOutBounce,
-//                frameInterval: 0.00001,
-//                isAdditive: true)
         ].compact()),
         
         // MARK: headShake
@@ -303,13 +354,4 @@ extension Emoting.System {
                 speed: 4)
         ].compact())
     ]
-    
-    static func returnAnimation(from: Transform) -> AnimationResource? {
-        .sampledFromTo(
-            from: from,
-            to: .identity,
-            duration: 0.25,
-            timing: .easeInOutSine
-        )
-    }
 }

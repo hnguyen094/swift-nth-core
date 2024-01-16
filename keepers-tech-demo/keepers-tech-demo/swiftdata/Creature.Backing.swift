@@ -5,9 +5,10 @@
 //  Created by hung on 1/15/24.
 //
 
+import SwiftData
+
 import Foundation
 import SwiftUI
-import SwiftData
 
 extension Creature {
     typealias Backing = AppSchema.V1.CreatureBacking
@@ -16,7 +17,11 @@ extension Creature {
 extension AppSchema.V1 {
     @Model
     final class CreatureBacking: Hashable {
+        typealias Color = SwiftUI.Color
+                
         var birthDate: Date = Date.now
+        var color: ColorData = ColorData(red: 0.5, green: 0.5, blue: 0.5)
+        
         init() {}
     }
 }

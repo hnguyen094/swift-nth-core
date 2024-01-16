@@ -14,7 +14,7 @@ enum Creature {
         private let viewStore: ViewStoreOf<Feature>
         private var cancellables: Set<AnyCancellable> = []
         
-        private var body: RealityKit.Entity? = .none
+        private var body: ModelEntity? = .none
         
         @MainActor init(store: StoreOf<Feature>, windowed: Bool) {
             self.viewStore = ViewStore(store, observe: { $0 })
@@ -32,9 +32,9 @@ enum Creature {
         }
 
         private func addBody(windowed: Bool) {
-            let mesh = MeshResource.generateBox(width: 1, height: 1, depth: 0.35, cornerRadius: 0.5)
+            let mesh = MeshResource.generateBox(width: 1, height: 1, depth: 0.35, cornerRadius: 0.35)
 //            let mesh = MeshResource.generateBox(size: [1, 1, 0.35], majorCornerRadius: 0.5, minorCornerRadius: 0.1)
-            let material = SimpleMaterial(color: .cyan, roughness: 0.5, isMetallic: true)
+            let material = SimpleMaterial(color: .cyan, roughness: 0.5, isMetallic: false)
 
             let body = ModelEntity(mesh: mesh, materials: [material])
             body.name = "creature_body"
@@ -55,6 +55,11 @@ enum Creature {
                 var component = body!.components[Emoting.Component.self]!
                 component.desiredAnimation = newValue
                 body!.components.set(component)
+            }
+            .store(in: &cancellables)
+            viewStore.publisher.color.sink { [weak self] color in
+                guard let self = self, let body = self.body else { return }
+                body.model!.materials = [SimpleMaterial(color: .init(color), isMetallic: false)]
             }
             .store(in: &cancellables)
         }

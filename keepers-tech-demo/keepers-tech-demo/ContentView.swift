@@ -19,32 +19,39 @@ struct ContentView: View {
 
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
+    
+    @Dependency(\.logger) var logger
+    @Dependency(\.arkitSessionManager.worldTrackingData) var worldTracker
 
     var body: some View {
         ZStack {
-//            Toggle(isOn: $showImmersiveSpace) {
-//                Text("Show Immersive Space")
-//                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-//            }
-//                .toggleStyle(.button)
-
             RealityView { content in
                 let ent = Creature.Entity(store: store, windowed: true)
                 ent.transform.translation = [0, 0, 0]
                 content.add(ent)
             }
 //            .frame(depth: 0, alignment: .back)
-//            .gesture(TapGesture().targetedToAnyEntity()
-//                .onEnded { _ in
-//                    store.send(._nextAnimation)
-//                })
+            .gesture(SpatialTapGesture().targetedToAnyEntity().onEnded { value in
+                logger.debug("SpatialTap at \(value.location3D)")
+                store.send(._nextAnimation)
+            })
             VStack {
                 Spacer()
-                Button("Change Animation") {
+                Toggle(isOn: $showImmersiveSpace) {
+                    Text("Show Immersive Space")
+                }
+                .toggleStyle(.button)
+                Button("Change Animation/Color") {
                     store.send(._nextAnimation)
+                    let randomColor: SwiftUI.Color = .init(
+                        hue: .random(in: 0...1),
+                        saturation: .random(in: 0.5...1),
+                        brightness: 1)
+                    store.send(.set(\.$color, .init(randomColor)))
                 }
             }
         }
+        .onAppear { store.send(.onLoad) }
         
         .padding()
         .onChange(of: showImmersiveSpace) { _, newValue in

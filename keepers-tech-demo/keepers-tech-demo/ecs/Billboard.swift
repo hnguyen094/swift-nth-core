@@ -17,16 +17,17 @@ enum Billboard {
 
     struct System: RealityKit.System {
         @Dependency(\.arkitSessionManager.worldTrackingData) var worldTrackingData
-        @Dependency(\.windowed) var isWindowed
+        @Dependency(\.logger) var logger
         
         static let query = EntityQuery(where: .has(Component.self))
 
-        init(scene: Scene) { }
+        init(scene: Scene) {
+            logger.debug("Billboard System: started in scene [\(scene.id)]")
+        }
         
         func update(context: SceneUpdateContext) {
-            print(isWindowed)
             guard let deviceAnchor = worldTrackingData?
-                .queryDeviceAnchor(atTimestamp: CACurrentMediaTime()),
+                .queryDeviceAnchor(atTimestamp: CACurrentMediaTime()), // TODO: call less b/c expensive
                   deviceAnchor.isTracked
             else { return }
             let deviceTransform = Transform(matrix: deviceAnchor.originFromAnchorTransform)

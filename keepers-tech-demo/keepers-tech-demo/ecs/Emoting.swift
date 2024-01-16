@@ -50,7 +50,7 @@ enum Emoting {
         
         private func startDesiredAnimation(_ component: inout Component, entity: Entity) {
             guard case .some(.some(let animation)) = Self.animations[component.desiredAnimation] else { return }
-            logger.debug("New animation started")
+            logger.debug("New animation started.")
             component.current = .init(
                 identifier: component.desiredAnimation,
                 controller: entity.playAnimation(animation.repeat(), transitionDuration: 0, startsPaused: false))
@@ -58,7 +58,7 @@ enum Emoting {
         
         private func startTransitionAnimation(_ component: inout Component, entity: Entity) {
             guard case .some(let animation) = Self.returnAnimation(from: entity.transform) else { return }
-            logger.debug("Return animation started")
+            logger.debug("Return animation started.")
             component.current = .init(
                 identifier: .transitioning,
                 controller: entity.playAnimation(animation, transitionDuration: 0, startsPaused: false))

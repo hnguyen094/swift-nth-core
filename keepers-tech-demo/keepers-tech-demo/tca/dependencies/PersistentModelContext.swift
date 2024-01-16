@@ -18,6 +18,10 @@ extension DependencyValues {
 
 @ModelActor
 actor PersistentModelContext {
+    func enableAutosave() {
+        modelContext.autosaveEnabled = true
+    }
+    
     func fetch<T>(_ descriptor: FetchDescriptor<T>) throws -> [T] where T : PersistentModel {
         return try modelContext.fetch(descriptor)
     }

@@ -13,7 +13,6 @@
 		B221ED0B2B550B0F006C24DF /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221ED092B550B0F006C24DF /* Logger.swift */; };
 		B221ED0D2B551FC3006C24DF /* ARKitSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221ED0C2B551FC3006C24DF /* ARKitSessionManager.swift */; };
 		B221ED0F2B55581F006C24DF /* Billboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221ED0E2B55581F006C24DF /* Billboard.swift */; };
-		B221ED132B5668A8006C24DF /* Windowed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221ED122B5668A8006C24DF /* Windowed.swift */; };
 		B22C8E2F2B523A720076CC12 /* AnimationResourceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E2E2B523A720076CC12 /* AnimationResourceExtensions.swift */; };
 		B22C8E312B523A850076CC12 /* CustomTimingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E302B523A850076CC12 /* CustomTimingFunction.swift */; };
 		B22C8E332B5241B50076CC12 /* DataProviderExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E322B5241B50076CC12 /* DataProviderExtensions.swift */; };
@@ -30,6 +29,7 @@
 		B2A085672B52287F003AD224 /* ImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085662B52287F003AD224 /* ImmersiveView.swift */; };
 		B2A085692B522881003AD224 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2A085682B522881003AD224 /* Assets.xcassets */; };
 		B2A0856C2B522881003AD224 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2A0856B2B522881003AD224 /* Preview Assets.xcassets */; };
+		B2DFE0B82B569645008CD4C1 /* ColorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DFE0B72B569645008CD4C1 /* ColorData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +39,6 @@
 		B221ED092B550B0F006C24DF /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B221ED0C2B551FC3006C24DF /* ARKitSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARKitSessionManager.swift; sourceTree = "<group>"; };
 		B221ED0E2B55581F006C24DF /* Billboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Billboard.swift; sourceTree = "<group>"; };
-		B221ED122B5668A8006C24DF /* Windowed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Windowed.swift; sourceTree = "<group>"; };
 		B22C8E2E2B523A720076CC12 /* AnimationResourceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationResourceExtensions.swift; sourceTree = "<group>"; };
 		B22C8E302B523A850076CC12 /* CustomTimingFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimingFunction.swift; sourceTree = "<group>"; };
 		B22C8E322B5241B50076CC12 /* DataProviderExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderExtensions.swift; sourceTree = "<group>"; };
@@ -59,6 +58,7 @@
 		B2A0856D2B522881003AD224 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2A085742B522BFD003AD224 /* RealityFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealityFoundation.framework; path = System/Library/Frameworks/RealityFoundation.framework; sourceTree = SDKROOT; };
 		B2D3E9332B53BCFA003009C1 /* keepers-tech-demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "keepers-tech-demo.entitlements"; sourceTree = "<group>"; };
+		B2DFE0B72B569645008CD4C1 /* ColorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +80,6 @@
 				B221ED082B550B0F006C24DF /* PersistentModelContext.swift */,
 				B221ED092B550B0F006C24DF /* Logger.swift */,
 				B221ED0C2B551FC3006C24DF /* ARKitSessionManager.swift */,
-				B221ED122B5668A8006C24DF /* Windowed.swift */,
 			);
 			path = dependencies;
 			sourceTree = "<group>";
@@ -90,6 +89,7 @@
 			children = (
 				B221ED002B54E702006C24DF /* AppSchemas.swift */,
 				B221ED062B54F86B006C24DF /* Creature.Backing.swift */,
+				B2DFE0B72B569645008CD4C1 /* ColorData.swift */,
 			);
 			path = swiftdata;
 			sourceTree = "<group>";
@@ -273,13 +273,13 @@
 				B22C8E372B524D490076CC12 /* Emoting.swift in Sources */,
 				B221ED0B2B550B0F006C24DF /* Logger.swift in Sources */,
 				B221ED0A2B550B0F006C24DF /* PersistentModelContext.swift in Sources */,
-				B221ED132B5668A8006C24DF /* Windowed.swift in Sources */,
 				B2A085672B52287F003AD224 /* ImmersiveView.swift in Sources */,
 				B22C8E3D2B52AF870076CC12 /* SequenceExtensions.swift in Sources */,
 				B221ED072B54F86B006C24DF /* Creature.Backing.swift in Sources */,
 				B221ED0F2B55581F006C24DF /* Billboard.swift in Sources */,
 				B22C8E332B5241B50076CC12 /* DataProviderExtensions.swift in Sources */,
 				B22C8E312B523A850076CC12 /* CustomTimingFunction.swift in Sources */,
+				B2DFE0B82B569645008CD4C1 /* ColorData.swift in Sources */,
 				B22C8E2F2B523A720076CC12 /* AnimationResourceExtensions.swift in Sources */,
 				B22C8E3B2B5268EC0076CC12 /* Emoting.Animation.swift in Sources */,
 			);

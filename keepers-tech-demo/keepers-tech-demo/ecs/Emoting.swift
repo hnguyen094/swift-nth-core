@@ -7,6 +7,8 @@
 
 import RealityKit
 
+import Dependencies
+
 enum Emoting {
     struct Component: RealityKit.Component {
         var desiredAnimation: Animation = .excitedBounce
@@ -14,6 +16,7 @@ enum Emoting {
     }
     
     struct System: RealityKit.System {
+        @Dependency(\.logger) private var logger
         static let query = EntityQuery(where: .has(Component.self))
 
         init(scene: Scene) {}
@@ -42,13 +45,12 @@ enum Emoting {
                 default:
                     break
                 }
-                
             }
         }
         
         private func startDesiredAnimation(_ component: inout Component, entity: Entity) {
             guard case .some(.some(let animation)) = Self.animations[component.desiredAnimation] else { return }
-            print("New animation started")
+            logger.debug("New animation started")
             component.current = .init(
                 identifier: component.desiredAnimation,
                 controller: entity.playAnimation(animation.repeat(), transitionDuration: 0, startsPaused: false))
@@ -56,7 +58,7 @@ enum Emoting {
         
         private func startTransitionAnimation(_ component: inout Component, entity: Entity) {
             guard case .some(let animation) = Self.returnAnimation(from: entity.transform) else { return }
-            print("Return animation started")
+            logger.debug("Return animation started")
             component.current = .init(
                 identifier: .transitioning,
                 controller: entity.playAnimation(animation, transitionDuration: 0, startsPaused: false))

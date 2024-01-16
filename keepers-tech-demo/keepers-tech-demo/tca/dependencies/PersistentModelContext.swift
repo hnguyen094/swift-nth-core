@@ -22,6 +22,10 @@ actor PersistentModelContext {
         return try modelContext.fetch(descriptor)
     }
     
+    func fetch<T: PersistentModel>() throws -> [T] { // TODO: a convenience function?
+        return try modelContext.fetch(FetchDescriptor<T>())
+    }
+    
     func insert<T>(_ models: [T]) where T : PersistentModel {
         for model in models {
             modelContext.insert(model)
@@ -47,7 +51,7 @@ actor PersistentModelContext {
 
 extension PersistentModelContext: DependencyKey {
     static let liveValue = PersistentModelContext(
-        modelContainer: createContainer(from: liveConfig))
+        modelContainer: createContainer(from: localConfig)) // TODO: change back to live
     static let previewValue = PersistentModelContext(
         modelContainer: createContainer(from: ephemeralConfig))
     
@@ -58,6 +62,12 @@ extension PersistentModelContext: DependencyKey {
         schema: schema,
         isStoredInMemoryOnly: false,
         cloudKitDatabase: .automatic
+    )
+
+    private static let localConfig = ModelConfiguration(
+        schema: schema,
+        isStoredInMemoryOnly: false,
+        cloudKitDatabase: .none
     )
     
     private static let ephemeralConfig = ModelConfiguration(

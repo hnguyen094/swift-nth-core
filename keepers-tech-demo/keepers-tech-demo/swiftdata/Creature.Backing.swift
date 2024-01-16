@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import SwiftData
 
 extension Creature {
@@ -16,7 +17,6 @@ extension AppSchema.V1 {
     @Model
     final class CreatureBacking: Hashable {
         var birthDate: Date = Date.now
-        
         init() {}
     }
 }

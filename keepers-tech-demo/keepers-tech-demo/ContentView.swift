@@ -27,21 +27,23 @@ struct ContentView: View {
 //                    .frame(maxWidth: .infinity, maxHeight: .infinity)
 //            }
 //                .toggleStyle(.button)
-            
-            Button {
-                store.send(.next)
-            } label: {
-                Text("Change animation")
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            }
 
             RealityView { content in
                 let ent = Creature.Entity(store: store, windowed: true)
-                ent.transform.translation = [0, 0, 0.05]
+                ent.transform.translation = [0, 0, 0]
                 content.add(ent)
             }
-            .frame(depth: 0, alignment: .front)
-            
+//            .frame(depth: 0, alignment: .back)
+//            .gesture(TapGesture().targetedToAnyEntity()
+//                .onEnded { _ in
+//                    store.send(._nextAnimation)
+//                })
+            VStack {
+                Spacer()
+                Button("Change Animation") {
+                    store.send(._nextAnimation)
+                }
+            }
         }
         
         .padding()

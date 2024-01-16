@@ -10,6 +10,11 @@ import RealityKit
 extension Emoting {
     enum Animation: CaseIterable, Hashable {
         case idle
+        // case nap
+        // case snack -- eat 
+        // case watchTV
+        // case curiousPoke // at plants or home applicances
+        // case heardHumming // 
         case slowLookAround
         case backflip
         case headShake
@@ -37,11 +42,11 @@ extension Emoting.System {
     // MARK: idle
     fileprivate static let idle: AnimationResource? = try? .sequence(with: [
         .sampledFromTo(
-            to: Transform(translation: [0, 0.01, 0]),
+            to: Transform(translation: [0, 0.1, 0]),
             duration: 2,
             timing: .easeInOutSine,
             repeatMode: .autoReverse,
-            trimDuration: 10
+            trimDuration: 12
         )
         // TODO: add a flare idle animation here
     ].compact())
@@ -95,28 +100,28 @@ extension Emoting.System {
         // MARK: backflip
         .backflip: try? .sequence(with: [
             .sampledFromTo(
-                to: Transform(translation: [0, 0.025, 0.01]),
+                to: Transform(translation: [0, 0.25, 0.1]),
                 duration: 0.1,
                 timing: .easeOutSine),
             .sampledFromTo(
-                from: Transform(translation: [0, 0.025, 0.01]),
-                to: Transform(translation: [0, 0, 0.02]),
+                from: Transform(translation: [0, 0.25, 0.1]),
+                to: Transform(translation: [0, 0, 0.2]),
                 duration: 0.1,
                 timing: .easeInSine),
             .sampledFromTo(
-                from: Transform(translation: [0, 0, 0.02]),
-                to: Transform(scale: [1, 0.85, 1], translation: [0, -0.0075, 0.02]),
+                from: Transform(translation: [0, 0, 0.2]),
+                to: Transform(scale: [1, 0.85, 1], translation: [0, -0.075, 0.2]),
                 duration: 1.5,
                 timing: .easeOutBack),
             try? .group(with: [
                 try? .sequence(with: [
                     .sampledFromTo(
-                        from: Transform(scale: [1, 0.85, 1], translation: [0, 0, 0.02]),
-                        to: Transform(scale: [1, 1.15, 1], translation: [0, 0.05, 0.01]),
+                        from: Transform(scale: [1, 0.85, 1], translation: [0, 0, 0.2]),
+                        to: Transform(scale: [1, 1.15, 1], translation: [0, 0.5, 0.1]),
                         duration: 0.5,
                         timing: .easeOutCircle),
                     .sampledFromTo(
-                        from: Transform(scale: [1, 1.15, 1], translation: [0, 0.05, 0.01]),
+                        from: Transform(scale: [1, 1.15, 1], translation: [0, 0.5, 0.1]),
                         to: .identity,
                         timing: .easeOutBounce)
                 ].compact()),
@@ -201,7 +206,7 @@ extension Emoting.System {
         .dance: try? .sequence(with: [
             try? .group(with: [
                 .sampledFromTo(
-                    to: Transform(translation: [0.05, 0, 0]),
+                    to: Transform(translation: [0.5, 0, 0]),
                     duration: 0.5,
                     timing: .easeInCircle,
                     trimDuration: 0.85),
@@ -216,7 +221,7 @@ extension Emoting.System {
             ].compact()),
             try? .group(with: [
                 .sampledFromTo(
-                    to: Transform(translation: [-0.05, 0, 0]),
+                    to: Transform(translation: [-0.5, 0, 0]),
                     duration: 0.5,
                     timing: .easeInCircle,
                     isAdditive: true,
@@ -233,7 +238,7 @@ extension Emoting.System {
             ].compact()),
             try? .group(with: [
                 .sampledFromTo(
-                    to: Transform(translation: [-0.05, 0, 0]),
+                    to: Transform(translation: [-0.5, 0, 0]),
                     duration: 0.5,
                     timing: .easeInCircle,
                     isAdditive: true,
@@ -250,7 +255,7 @@ extension Emoting.System {
             ].compact()),
             try? .group(with: [
                 .sampledFromTo(
-                    to: Transform(translation: [0.05, 0, 0]),
+                    to: Transform(translation: [0.5, 0, 0]),
                     duration: 0.5,
                     timing: .easeInCircle,
                     isAdditive: true,
@@ -271,33 +276,33 @@ extension Emoting.System {
             .sampledFromTo(
             to: Transform(
                 rotation: .init(angle: .pi / 4, axis: [1, 0, 0]),
-                translation: [0, 0, -0.02]),
+                translation: [0, 0, -0.2]),
             duration: 2,
             timing: .easeOutCubic),
             try? .sequence(with: [
                 .sampledFromTo(
                     from: Transform(
                         rotation: .init(angle: .pi / 4, axis: [1, 0, 0]),
-                        translation: [0, 0, -0.02]),
+                        translation: [0, 0, -0.2]),
                     to: Transform(
                         rotation: .init(angle: .pi / 4, axis: [1, 0.1, 0]),
-                        translation: [0, 0, -0.02]),
+                        translation: [0, 0, -0.2]),
                     duration: 0.2),
                 .sampledFromTo(
                     from: Transform(
                         rotation: .init(angle: .pi / 4, axis: [1, 0.1, 0]),
-                        translation: [0, 0, -0.02]),
+                        translation: [0, 0, -0.2]),
                     to: Transform(
                         rotation: .init(angle: .pi / 4, axis: [1, -0.1, 0]),
-                        translation: [0, 0, -0.02]),
+                        translation: [0, 0, -0.2]),
                     duration: 0.4),
                 .sampledFromTo(
                     from: Transform(
                         rotation: .init(angle: .pi / 4, axis: [1, -0.1, 0]),
-                        translation: [0, 0, -0.02]),
+                        translation: [0, 0, -0.2]),
                     to: Transform(
                         rotation: .init(angle: .pi / 4, axis: [1, 0, 0]),
-                        translation: [0, 0, -0.02]),
+                        translation: [0, 0, -0.2]),
                     duration: 0.2,
                     trimDuration: 3)
             ].compact()).repeat()
@@ -306,7 +311,7 @@ extension Emoting.System {
         // MARK: excitedBounce
         .excitedBounce: try? .group(with: [
             .sampledFromTo(
-                to: Transform(translation: [0, 0.05, 0]),
+                to: Transform(translation: [0, 0.5, 0]),
                 timing: .easeOutCubic,
                 isAdditive: true,
                 repeatMode: .autoReverse,

@@ -22,9 +22,18 @@ enum Creature {
             initialConfiguration(windowed: windowed)
             subscribeToStore()
         }
-        
+
         private func initialConfiguration(windowed: Bool) {
-            let mesh = MeshResource.generateBox(width: 0.1, height: 0.1, depth: 0.035, cornerRadius: 0.025)
+//            components.set(Billboard.Component(mode: .lazy(0.25)))
+//            components.set(Billboard.Component(mode: .direct))
+            scale = [0.2, 0.2, 0.2]
+            
+            addBody(windowed: windowed)
+        }
+
+        private func addBody(windowed: Bool) {
+            let mesh = MeshResource.generateBox(width: 1, height: 1, depth: 0.35, cornerRadius: 0.5)
+//            let mesh = MeshResource.generateBox(size: [1, 1, 0.35], majorCornerRadius: 0.5, minorCornerRadius: 0.1)
             let material = SimpleMaterial(color: .cyan, roughness: 0.5, isMetallic: true)
 
             let body = ModelEntity(mesh: mesh, materials: [material])
@@ -39,7 +48,7 @@ enum Creature {
             
             addChild(body)
         }
-
+        
         private func subscribeToStore() {
             viewStore.publisher.emotionAnimation.sink { [weak self] newValue in
                 guard let self = self else { return }

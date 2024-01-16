@@ -21,13 +21,13 @@ extension DependencyValues {
     }
 }
 
-struct LoggerClient {
+fileprivate struct LoggerClient {
     private static let subsystem = Bundle.main.bundleIdentifier!
 
     enum Main: DependencyKey {
-        static let liveValue = Logger(subsystem: subsystem, category: "Keepers")
+        static let liveValue = Logger(subsystem: subsystem, category: "keepers")
     }
     enum Stats: DependencyKey {
-        static let liveValue = Logger(subsystem: subsystem, category: "Keepers.Stats")
+        static let liveValue = Logger(subsystem: subsystem, category: "keepers.stats")
     }
 }

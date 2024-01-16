@@ -16,7 +16,7 @@ enum AppSchema {
     enum V1: VersionedSchema {
         static var versionIdentifier: Schema.Version = Schema.Version(0, 0, 1)
         static var models: [any PersistentModel.Type] {
-            [Creature.Source.self]
+            [Creature.Backing.self]
         }
     }
     

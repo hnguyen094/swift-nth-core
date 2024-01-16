@@ -25,9 +25,9 @@ struct LoggerClient {
     private static let subsystem = Bundle.main.bundleIdentifier!
 
     enum Main: DependencyKey {
-        static let liveValue = Logger(subsystem: subsystem, category: "keepers")
+        static let liveValue = Logger(subsystem: subsystem, category: "Keepers")
     }
     enum Stats: DependencyKey {
-        static let liveValue = Logger(subsystem: subsystem, category: "keepers.stats")
+        static let liveValue = Logger(subsystem: subsystem, category: "Keepers.Stats")
     }
 }

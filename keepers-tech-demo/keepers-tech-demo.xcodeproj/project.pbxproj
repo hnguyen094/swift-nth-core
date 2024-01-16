@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B221ED022B54E702006C24DF /* AppSchemas.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221ED002B54E702006C24DF /* AppSchemas.swift */; };
+		B221ED072B54F86B006C24DF /* Creature.Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221ED062B54F86B006C24DF /* Creature.Source.swift */; };
+		B221ED0A2B550B0F006C24DF /* PersistentModelContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221ED082B550B0F006C24DF /* PersistentModelContext.swift */; };
+		B221ED0B2B550B0F006C24DF /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221ED092B550B0F006C24DF /* Logger.swift */; };
 		B22C8E2F2B523A720076CC12 /* AnimationResourceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E2E2B523A720076CC12 /* AnimationResourceExtensions.swift */; };
 		B22C8E312B523A850076CC12 /* CustomTimingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E302B523A850076CC12 /* CustomTimingFunction.swift */; };
 		B22C8E332B5241B50076CC12 /* DataProviderExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E322B5241B50076CC12 /* DataProviderExtensions.swift */; };
@@ -26,6 +30,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B221ED002B54E702006C24DF /* AppSchemas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSchemas.swift; sourceTree = "<group>"; };
+		B221ED062B54F86B006C24DF /* Creature.Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.Source.swift; sourceTree = "<group>"; };
+		B221ED082B550B0F006C24DF /* PersistentModelContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentModelContext.swift; sourceTree = "<group>"; };
+		B221ED092B550B0F006C24DF /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B22C8E2E2B523A720076CC12 /* AnimationResourceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationResourceExtensions.swift; sourceTree = "<group>"; };
 		B22C8E302B523A850076CC12 /* CustomTimingFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimingFunction.swift; sourceTree = "<group>"; };
 		B22C8E322B5241B50076CC12 /* DataProviderExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderExtensions.swift; sourceTree = "<group>"; };
@@ -60,9 +68,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B221ECFE2B54E6D9006C24DF /* dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				B221ED082B550B0F006C24DF /* PersistentModelContext.swift */,
+				B221ED092B550B0F006C24DF /* Logger.swift */,
+			);
+			path = dependencies;
+			sourceTree = "<group>";
+		};
+		B221ED032B54EADC006C24DF /* swiftdata */ = {
+			isa = PBXGroup;
+			children = (
+				B221ED002B54E702006C24DF /* AppSchemas.swift */,
+				B221ED062B54F86B006C24DF /* Creature.Source.swift */,
+			);
+			path = swiftdata;
+			sourceTree = "<group>";
+		};
 		B22C8E412B52EA430076CC12 /* tca */ = {
 			isa = PBXGroup;
 			children = (
+				B221ECFE2B54E6D9006C24DF /* dependencies */,
 				B22C8E422B52EAE40076CC12 /* Creature.Feature.swift */,
 			);
 			path = tca;
@@ -90,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				B2D3E9332B53BCFA003009C1 /* keepers-tech-demo.entitlements */,
+				B221ED032B54EADC006C24DF /* swiftdata */,
 				B22C8E412B52EA430076CC12 /* tca */,
 				B2E1306D2B522F15002CBE8A /* helpers */,
 				B2E1306A2B522EDF002CBE8A /* ecs */,
@@ -226,14 +254,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B221ED022B54E702006C24DF /* AppSchemas.swift in Sources */,
 				B2A085652B52287F003AD224 /* ContentView.swift in Sources */,
 				B2A085632B52287F003AD224 /* keepers_tech_demoApp.swift in Sources */,
 				B22C8E432B52EAE40076CC12 /* Creature.Feature.swift in Sources */,
 				B22C8E392B5257290076CC12 /* Creature.Entity.swift in Sources */,
 				B2372A392B5231AE0015B8EA /* ImmersiveID.swift in Sources */,
 				B22C8E372B524D490076CC12 /* Emoting.swift in Sources */,
+				B221ED0B2B550B0F006C24DF /* Logger.swift in Sources */,
+				B221ED0A2B550B0F006C24DF /* PersistentModelContext.swift in Sources */,
 				B2A085672B52287F003AD224 /* ImmersiveView.swift in Sources */,
 				B22C8E3D2B52AF870076CC12 /* SequenceExtensions.swift in Sources */,
+				B221ED072B54F86B006C24DF /* Creature.Source.swift in Sources */,
 				B22C8E332B5241B50076CC12 /* DataProviderExtensions.swift in Sources */,
 				B22C8E312B523A850076CC12 /* CustomTimingFunction.swift in Sources */,
 				B22C8E2F2B523A720076CC12 /* AnimationResourceExtensions.swift in Sources */,

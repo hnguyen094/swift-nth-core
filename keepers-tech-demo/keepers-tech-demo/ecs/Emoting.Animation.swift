@@ -19,6 +19,7 @@ extension Emoting {
         case sad
         case excitedBounce
         case curiousHeadTilt
+
         case transitioning
     }
 }
@@ -138,7 +139,6 @@ extension Emoting.System {
                         frameInterval: 0.00001,
                     isAdditive: true),
                     .sampledFromTo(
-                        from: .identity,
                         to: .identity,
                         duration: 0)
                 ].compact())

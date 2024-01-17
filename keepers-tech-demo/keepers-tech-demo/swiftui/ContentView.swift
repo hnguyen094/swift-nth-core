@@ -7,7 +7,9 @@
 
 import SwiftUI
 import RealityKit
+import RealityKitContent
 import ComposableArchitecture
+
 
 struct ContentView: View {
     let store: StoreOf<Creature.Feature>
@@ -34,7 +36,11 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             RealityView { content in
-                let ent = Creature.Entity(store: store, windowed: true)
+                let creatureMaterial = try? await ShaderGraphMaterial(
+                    named: "/Root/CelShadedMaterial",
+                    from: "Materials/CustomMaterials",
+                    in: realityKitContentBundle)
+                let ent = Creature.Entity(store: store, material: creatureMaterial, windowed: true)
                 ent.transform.translation = [0, -Float(volumeSize.height / 2), 0] // grounding
                 content.add(ent)
             }
@@ -49,7 +55,7 @@ struct ContentView: View {
                 Button("Change Color") {
                     let randomColor: SwiftUI.Color = .init(
                         hue: .random(in: 0...1),
-                        saturation: .random(in: 0.5...1),
+                        saturation: 1,
                         brightness: 1)
                     store.send(.set(\.$color, .init(randomColor)))
                 }

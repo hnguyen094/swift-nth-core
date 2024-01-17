@@ -21,7 +21,7 @@ extension Creature {
             @BindingState var emotionAnimation: Emoting.Animation = .idle
             @BindingState var color: Backing.Color = .clear
             
-            var _backing: Backing? = .none
+            fileprivate var _backing: Backing? = .none
             // store which classifications is approved, which unknown,(& implicitly which denied)
         }
         
@@ -79,7 +79,7 @@ extension Creature {
                     case \.$emotionAnimation:
                         return .none
                     default:
-                        logger.warning("Missing glue for binding action \(bindedAction.customDumpDescription).")
+                        logger.warning("Missing glue for binding action [\(bindedAction.customDumpDescription)].")
                         return .none
                     }
                 case .onBackingLoad(let backing):

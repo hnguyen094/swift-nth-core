@@ -11,14 +11,18 @@ import Combine
 
 enum Creature {
     class Entity: RealityKit.Entity {
+        @Dependency(\.logger) private var logger
+        
         private let viewStore: ViewStoreOf<Feature>
         private var cancellables: Set<AnyCancellable> = []
         
         private var body: ModelEntity? = .none
+        private var customMaterialSource: ShaderGraphMaterial? = .none
         private var windowed: Bool = true
         
-        @MainActor init(store: StoreOf<Feature>, windowed: Bool) {
+        @MainActor init(store: StoreOf<Feature>, material: ShaderGraphMaterial?, windowed: Bool) {
             self.viewStore = ViewStore(store, observe: { $0 })
+            self.customMaterialSource = material
             self.windowed = windowed
             super.init()
             initialConfiguration()
@@ -45,16 +49,39 @@ enum Creature {
             }
             .store(in: &cancellables)
             viewStore.publisher.color.sink { [weak self] color in
-                guard let self = self, let body = self.body else { return }
-                body.model!.materials = [SimpleMaterial(color: .init(color), roughness: 0.5, isMetallic: false)]
+                guard let self = self,
+                      let body = self.body,
+                      let material = body.model!.materials.first
+                else { return }
+                switch material {
+                case is SimpleMaterial:
+                    let new = SimpleMaterial(color: .init(color), roughness: 0.5, isMetallic: false)
+                    body.model!.materials = [new]
+                case var shaderGraph as ShaderGraphMaterial:
+                    try? shaderGraph.setParameter(name: "BaseColor", value: .color(.init(color)))
+                    body.model!.materials = [shaderGraph]
+                    break
+                default:
+                    logger.fault("Unexpected shader type. Falling back to SimpleMaterial")
+                    let new = SimpleMaterial(color: .init(color), roughness: 0.5, isMetallic: false)
+                    body.model!.materials = [new]
+                }
             }
             .store(in: &cancellables)
         }
         
         private func addBody() {
-            let mesh = MeshResource.generateBox(width: 1, height: 1, depth: 0.35, cornerRadius: 0.35)
-//            let mesh = MeshResource.generateBox(size: [1, 1, 0.35], majorCornerRadius: 0.5, minorCornerRadius: 0.1)
-            let material = SimpleMaterial(color: .init(viewStore.color), roughness: 0.5, isMetallic: false)
+            if case .none = self.customMaterialSource {
+                logger.fault("Custom material missing when initializing Creature.")
+            }
+            
+//            let mesh = MeshResource.generateBox(width: 1, height: 1, depth: 0.35, cornerRadius: 0.35)
+            let mesh = MeshResource.generateBox(size: [1, 1, 0.35], majorCornerRadius: 0.5, minorCornerRadius: 0.1)
+
+            try? customMaterialSource?.setParameter(name: "Strength", value: .float(0.8))
+            
+            let material: Material = customMaterialSource ?? SimpleMaterial(color: .init(viewStore.color), roughness: 0.5, isMetallic: false)
+//            let customMaterial = Shader
 
             let body = ModelEntity(mesh: mesh, materials: [material])
             body.components.set(Emoting.Component())
@@ -72,10 +99,10 @@ enum Creature {
         private func addHighlightContainer() {
             guard let body = self.body else { return }
             
-            let radius: Float = 0.8
+            let radius: Float = 0.75
             
             let mesh = MeshResource.generateSphere(radius: radius)
-            let material = SimpleMaterial(color: .clear, roughness: 0, isMetallic: false)
+            let material = SimpleMaterial(color: .clear, roughness: 0.5, isMetallic: false)
 
             let model = ModelEntity(mesh: mesh, materials: [material])
             model.scale = .init(repeating: -1)
@@ -83,7 +110,7 @@ enum Creature {
             let container = RealityKit.Entity()
             container.components.set(HoverEffectComponent())
             container.components.set(CollisionComponent(shapes: [.generateSphere(radius: radius)]))
-            container.components.set(Follow.Component(following: body.id))
+            container.components.set(Follow.Component(followeeID: body.id))
             
             container.addChild(model)
             

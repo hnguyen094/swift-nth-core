@@ -9,7 +9,7 @@ import RealityKit
 
 enum Follow {
     struct Component: RealityKit.Component, Codable {
-        var following: Entity.ID? = .none
+        var followeeID: Entity.ID? = .none
     }
     
     struct System: RealityKit.System {
@@ -19,11 +19,11 @@ enum Follow {
         
         func update(context: SceneUpdateContext) {
             context.entities(matching: Self.query, updatingSystemWhen: .rendering).forEach { entity in
-                guard let entityID = entity.components[Component.self]!.following,
-                      let followingEntity = context.scene.findEntity(id: entityID)
+                guard let entityID = entity.components[Component.self]!.followeeID,
+                      let followee = context.scene.findEntity(id: entityID)
                 else { return }
 
-                entity.setPosition(followingEntity.position(relativeTo: .none), relativeTo: .none)
+                entity.setPosition(followee.position(relativeTo: .none), relativeTo: .none)
             }
         }
     }

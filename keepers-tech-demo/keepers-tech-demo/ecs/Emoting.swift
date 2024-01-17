@@ -10,9 +10,13 @@ import RealityKit
 import Dependencies
 
 enum Emoting {
-    struct Component: RealityKit.Component {
+    struct Component: RealityKit.Component, Codable {
         var desiredAnimation: Animation = .excitedBounce
         fileprivate var current: IdentifiedAnimationController? = .none
+
+        enum CodingKeys: CodingKey {
+            case desiredAnimation
+        }
     }
     
     struct System: RealityKit.System {

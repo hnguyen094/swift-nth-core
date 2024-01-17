@@ -11,7 +11,10 @@ import ARKit
 
 @main
 struct keepers_tech_demoApp: App {
+    @Dependency(\.modelContext) private var modelContext
     @Dependency(\.arkitSessionManager) private var sessionManager
+    
+    @State private var volumeSize: Size3D = .init(width: 0.2, height: 0.2, depth: 0.05)
 
     private let store = Store(initialState: Creature.Feature.State()) {
         Creature.Feature()
@@ -19,17 +22,19 @@ struct keepers_tech_demoApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(store: store)
+            ContentView(store: store, volumeSize: volumeSize)
                 .task {
+                    await modelContext.enableAutosave()
                     await sessionManager.attemptStartARKitSession()
                 }
         }
         .windowStyle(.volumetric)
-        .defaultSize(width: 0.25, height: 0.25, depth: 0.05, in: .meters)
+        .defaultSize(volumeSize, in: .meters)
 
         ImmersiveSpace(id: ImmersiveView.ID) {
             ImmersiveView()
                 .task {
+                    await modelContext.enableAutosave()
                     await sessionManager.attemptStartARKitSession()
                 }
         }
@@ -40,5 +45,7 @@ struct keepers_tech_demoApp: App {
         Emoting.System.registerSystem()
         Billboard.Component.registerComponent()
         Billboard.System.registerSystem()
+        Follow.Component.registerComponent()
+        Follow.System.registerSystem()
     }
 }

@@ -7,13 +7,12 @@
 
 import SwiftUI
 import RealityKit
-import RealityKitContent
-
 import ComposableArchitecture
 
 struct ContentView: View {
     let store: StoreOf<Creature.Feature>
     
+    @State var volumeSize: Size3D
     @State private var showImmersiveSpace = false
     @State private var immersiveSpaceIsShown = false
 
@@ -23,37 +22,42 @@ struct ContentView: View {
     @Dependency(\.logger) var logger
     @Dependency(\.arkitSessionManager.worldTrackingData) var worldTracker
 
+    var tap: some Gesture {
+        SpatialTapGesture()
+            .targetedToAnyEntity()
+            .onEnded { event in
+                logger.debug("Spatial tap happened at \(event.location3D)")
+                store.send(._nextAnimation)
+            }
+    }
+    
     var body: some View {
         ZStack {
             RealityView { content in
                 let ent = Creature.Entity(store: store, windowed: true)
-                ent.transform.translation = [0, 0, 0]
+                ent.transform.translation = [0, -Float(volumeSize.height / 2), 0] // grounding
                 content.add(ent)
             }
-//            .frame(depth: 0, alignment: .back)
-            .gesture(SpatialTapGesture().targetedToAnyEntity().onEnded { value in
-                logger.debug("SpatialTap at \(value.location3D)")
-                store.send(._nextAnimation)
-            })
+//            .frame(depth: 100)
+            .gesture(tap)
             VStack {
-                Spacer()
                 Toggle(isOn: $showImmersiveSpace) {
                     Text("Show Immersive Space")
                 }
                 .toggleStyle(.button)
-                Button("Change Animation/Color") {
-                    store.send(._nextAnimation)
+                .glassBackgroundEffect()
+                Button("Change Color") {
                     let randomColor: SwiftUI.Color = .init(
                         hue: .random(in: 0...1),
                         saturation: .random(in: 0.5...1),
                         brightness: 1)
                     store.send(.set(\.$color, .init(randomColor)))
                 }
+                .glassBackgroundEffect()
+                Spacer()
             }
         }
         .onAppear { store.send(.onLoad) }
-        
-        .padding()
         .onChange(of: showImmersiveSpace) { _, newValue in
             Task {
                 if newValue {
@@ -76,5 +80,8 @@ struct ContentView: View {
 }
 
 #Preview(windowStyle: .automatic) {
-    ContentView(store: Store(initialState: Creature.Feature.State(), reducer: { Creature.Feature() } ))
+    ContentView(
+        store: Store(initialState: Creature.Feature.State(), reducer: { Creature.Feature() }),
+        volumeSize: .init(width: 1, height: 1, depth: 0.25)
+    )
 }

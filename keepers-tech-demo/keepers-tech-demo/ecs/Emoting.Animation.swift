@@ -8,7 +8,7 @@
 import RealityKit
 
 extension Emoting {
-    enum Animation: CaseIterable, Hashable {
+    enum Animation: CaseIterable, Codable, Hashable {
         case idle
         // case nap
         // case snack -- eat 

@@ -43,17 +43,13 @@ extension Creature {
                 switch action {
                 case .onLoad:
                     return .run { send in
-                        await modelContext.enableAutosave()
-
                         var backing: Creature.Backing? = try await modelContext.fetch().first
                         if case .none = backing {
-                            logger.debug("Creating & inserting new backing.")
+                            logger.debug("Didn't find existing backing. Creating & inserting a new one.")
                             let newBacking = Backing()
                             await modelContext.insert([newBacking])
                             backing = newBacking
                         }
-                        logger.debug("\(255 * backing!.color.red), \(255 * backing!.color.green), \(255 * backing!.color.blue)")
-
                         await send(.onBackingLoad(backing))
                     } catch: { error, _ in
                         logger.error("Failed to load model container context. \(error)")
@@ -78,13 +74,12 @@ extension Creature {
                     switch bindedAction {
                     case \.$color:
                         guard let backing = state._backing else { return .none }
-                        let color = state.color
-                        logger.debug("Changed backing color \(color)")
                         backing.color = state.color.toColorData()
                         return .none
                     case \.$emotionAnimation:
                         return .none
                     default:
+                        logger.warning("Missing glue for binding action \(bindedAction.customDumpDescription).")
                         return .none
                     }
                 case .onBackingLoad(let backing):

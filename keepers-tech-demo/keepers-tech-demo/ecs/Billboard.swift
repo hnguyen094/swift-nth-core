@@ -11,7 +11,7 @@ import Dependencies
 import UIKit
 
 enum Billboard {
-    struct Component: RealityKit.Component {
+    struct Component: RealityKit.Component, Codable {
         var mode: Mode
     }
 
@@ -52,7 +52,7 @@ enum Billboard {
 }
 
 extension Billboard {
-    enum Mode {
+    enum Mode: Codable {
         case direct
         case lazy(Double)
     }

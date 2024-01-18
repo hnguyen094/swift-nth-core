@@ -21,6 +21,8 @@ extension Creature {
             @BindingState var emotionAnimation: Emoting.Animation = .idle
             @BindingState var color: Backing.Color = .clear
             
+            @BindingState var useCustomMaterial: Bool = true
+            
             fileprivate var _backing: Backing? = .none
             // store which classifications is approved, which unknown,(& implicitly which denied)
         }

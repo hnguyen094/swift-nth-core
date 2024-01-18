@@ -17,6 +17,7 @@ struct ContentView: View {
     @State var volumeSize: Size3D
     @State private var showImmersiveSpace = false
     @State private var immersiveSpaceIsShown = false
+    @State private var shouldUseCustomMaterial = true
 
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
@@ -28,7 +29,6 @@ struct ContentView: View {
         SpatialTapGesture()
             .targetedToAnyEntity()
             .onEnded { event in
-                logger.debug("Spatial tap happened at \(event.location3D)")
                 store.send(._nextAnimation)
             }
     }
@@ -37,7 +37,7 @@ struct ContentView: View {
         ZStack {
             RealityView { content in
                 let creatureMaterial = try? await ShaderGraphMaterial(
-                    named: "/Root/CelShadedMaterial",
+                    named: "/Root/CelShading",
                     from: "Materials/CustomMaterials",
                     in: realityKitContentBundle)
                 let ent = Creature.Entity(store: store, material: creatureMaterial, windowed: true)
@@ -60,10 +60,19 @@ struct ContentView: View {
                     store.send(.set(\.$color, .init(randomColor)))
                 }
                 .glassBackgroundEffect()
+                                
+                Toggle(isOn: $shouldUseCustomMaterial) {
+                    Text("Use Custom Material")
+                }
+                .toggleStyle(.button)
+                .glassBackgroundEffect()
                 Spacer()
             }
         }
         .onAppear { store.send(.onLoad) }
+        .onChange(of: shouldUseCustomMaterial) { _, newValue in
+            store.send(.set (\.$useCustomMaterial, newValue))
+        }
         .onChange(of: showImmersiveSpace) { _, newValue in
             Task {
                 if newValue {

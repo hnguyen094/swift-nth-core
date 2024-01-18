@@ -60,10 +60,25 @@ enum Creature {
                 case var shaderGraph as ShaderGraphMaterial:
                     try? shaderGraph.setParameter(name: "BaseColor", value: .color(.init(color)))
                     body.model!.materials = [shaderGraph]
-                    break
                 default:
                     logger.fault("Unexpected shader type. Falling back to SimpleMaterial")
                     let new = SimpleMaterial(color: .init(color), roughness: 0.5, isMetallic: false)
+                    body.model!.materials = [new]
+                }
+            }
+            .store(in: &cancellables)
+            viewStore.publisher.useCustomMaterial.sink { [weak self]  useCustomMaterial in
+                guard let self = self, 
+                      let body = self.body,
+                      let customMaterial = customMaterialSource
+                else { return }
+
+                if useCustomMaterial {
+                    var new = customMaterial
+                    try? new.setParameter(name: "BaseColor", value: .color(.init(viewStore.color)))
+                    body.model!.materials = [new]
+                } else {
+                    let new = SimpleMaterial(color: .init(viewStore.color), roughness: 0.5, isMetallic: false)
                     body.model!.materials = [new]
                 }
             }
@@ -74,9 +89,9 @@ enum Creature {
             if case .none = self.customMaterialSource {
                 logger.fault("Custom material missing when initializing Creature.")
             }
-            
-//            let mesh = MeshResource.generateBox(width: 1, height: 1, depth: 0.35, cornerRadius: 0.35)
-            let mesh = MeshResource.generateBox(size: [1, 1, 0.35], majorCornerRadius: 0.5, minorCornerRadius: 0.1)
+//            let mesh = MeshResource.generateSphere(radius: 0.5)
+            let mesh = MeshResource.generateBox(width: 1, height: 1, depth: 0.35, cornerRadius: 0.35)
+//            let mesh = MeshResource.generateBox(size: [1, 1, 0.35], majorCornerRadius: 0.5, minorCornerRadius: 0.1)
 
             try? customMaterialSource?.setParameter(name: "Strength", value: .float(0.8))
             

@@ -52,26 +52,17 @@
       [
         "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
         "Root",
-        "CelShading",
-        "Cel_Effect"
+        "Capsule_1"
       ],
       {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
+        "isExpanded" : false,
+        "isLocked" : true
       },
       [
         "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
         "Root",
-        "CelShadedMaterial",
-        "Fresnel_Effect"
+        "CelShading_1",
+        "Cel_Effect_Corrected"
       ],
       {
         "isExpanded" : true,
@@ -89,55 +80,7 @@
       [
         "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
         "Root",
-        "CelShading_1",
-        "WorleyNoise_Helper"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
-        "Root",
-        "CelShadingOld",
-        "Cel_Effect"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
-        "Root",
-        "CelShading_1",
-        "Cel_Effect_Corrected"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
-        "Root",
-        "Glass"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
-        "Root",
-        "CelShadingOld"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
-        "Root",
-        "Capsule_1"
+        "CelShading_1"
       ],
       {
         "isExpanded" : false,
@@ -147,7 +90,45 @@
         "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
         "Root",
         "CelShadedMaterial",
-        "Cel_Effect"
+        "Fresnel_Effect"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
+        "Root",
+        "CelShading",
+        "Cel_Effect_Corrected"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
+        "Root",
+        "Edge",
+        "Depth"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
+        "Root",
+        "CelShading_1",
+        "WorleyNoise_Helper"
       ],
       {
         "isExpanded" : true,
@@ -166,15 +147,6 @@
       [
         "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
         "Root",
-        "Capsule"
-      ],
-      {
-        "isExpanded" : false,
-        "isLocked" : true
-      },
-      [
-        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
-        "Root",
         "Capsule_2"
       ],
       {
@@ -184,8 +156,7 @@
       [
         "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
         "Root",
-        "CelShading",
-        "WorleyNoise_Helper"
+        "Edge"
       ],
       {
         "isExpanded" : true,
@@ -195,11 +166,49 @@
         "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
         "Root",
         "CelShading",
-        "Cel_Effect_Corrected"
+        "Cel_Effect_Lighter"
       ],
       {
         "isExpanded" : true,
         "isLocked" : false
+      },
+      [
+        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
+        "Root",
+        "Glass"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
+        "Root",
+        "CelShadedMaterial",
+        "Cel_Effect"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
+        "Root",
+        "Depth",
+        "Depth"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
+        "Root",
+        "Capsule"
+      ],
+      {
+        "isExpanded" : false,
+        "isLocked" : true
       }
     ]
   },
@@ -219,6 +228,14 @@
     "objectMetadataList" : [
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
         "GridMaterial"
       ],
@@ -229,7 +246,7 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "Sphere_Left"
+        "CustomMaterials"
       ],
       {
         "isExpanded" : true,
@@ -246,7 +263,9 @@
       },
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root"
+        "Root",
+        "CustomMaterials",
+        "GlassMaterial"
       ],
       {
         "isExpanded" : true,
@@ -265,17 +284,7 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "CustomMaterials"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root",
-        "CustomMaterials",
-        "GlassMaterial"
+        "Sphere_Left"
       ],
       {
         "isExpanded" : true,
@@ -287,7 +296,8 @@
     "objectMetadataList" : [
       [
         "CB766F92-EE55-4A63-9401-E7B8C009764D",
-        "Root"
+        "Root",
+        "GridMaterial"
       ],
       {
         "isExpanded" : true,
@@ -295,8 +305,7 @@
       },
       [
         "CB766F92-EE55-4A63-9401-E7B8C009764D",
-        "Root",
-        "GridMaterial"
+        "Root"
       ],
       {
         "isExpanded" : true,

@@ -35,17 +35,6 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            RealityView { content in
-                let creatureMaterial = try? await ShaderGraphMaterial(
-                    named: "/Root/CelShading",
-                    from: "Materials/CustomMaterials",
-                    in: realityKitContentBundle)
-                let ent = Creature.Entity(store: store, material: creatureMaterial, windowed: true)
-                ent.transform.translation = [0, -Float(volumeSize.height / 2), 0] // grounding
-                content.add(ent)
-            }
-//            .frame(depth: 100)
-            .gesture(tap)
             VStack {
                 Toggle(isOn: $showImmersiveSpace) {
                     Text("Show Immersive Space")
@@ -68,6 +57,17 @@ struct ContentView: View {
                 .glassBackgroundEffect()
                 Spacer()
             }
+            RealityView { content in
+                let creatureMaterial = try? await ShaderGraphMaterial(
+                    named: "/Root/CelShading",
+                    from: "Materials/CustomMaterials",
+                    in: realityKitContentBundle)
+                let ent = Creature.Entity(store: store, material: creatureMaterial, windowed: true)
+                ent.transform.translation = [0, -Float(volumeSize.height / 2), 0] // grounding
+                content.add(ent)
+            }
+//            .frame(depth: 100)
+            .gesture(tap)
         }
         .onAppear { store.send(.onLoad) }
         .onChange(of: shouldUseCustomMaterial) { _, newValue in

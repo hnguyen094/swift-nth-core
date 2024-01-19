@@ -24,6 +24,7 @@ struct ContentView: View {
     
     @Dependency(\.logger) var logger
     @Dependency(\.arkitSessionManager.worldTrackingData) var worldTracker
+    @Dependency(\.audioSession) var audioSession
 
     var tap: some Gesture {
         SpatialTapGesture()
@@ -65,13 +66,16 @@ struct ContentView: View {
                 let ent = Creature.Entity(store: store, material: creatureMaterial, windowed: true)
                 ent.transform.translation = [0, -Float(volumeSize.height / 2), 0] // grounding
                 content.add(ent)
+            } update: { _ in
+                audioSession.
+                logger.debug("\(audioSession.anotherAppIsPlayingMusic), \(audioSession.anotherAppIsPlayingSound)")
             }
 //            .frame(depth: 100)
             .gesture(tap)
         }
         .onAppear { store.send(.onLoad) }
         .onChange(of: shouldUseCustomMaterial) { _, newValue in
-            store.send(.set (\.$useCustomMaterial, newValue))
+            store.send(.set (\.$_useCustomMaterial, newValue))
         }
         .onChange(of: showImmersiveSpace) { _, newValue in
             Task {

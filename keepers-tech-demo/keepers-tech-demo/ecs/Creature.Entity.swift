@@ -67,7 +67,7 @@ enum Creature {
                 }
             }
             .store(in: &cancellables)
-            viewStore.publisher.useCustomMaterial.sink { [weak self]  useCustomMaterial in
+            viewStore.publisher._useCustomMaterial.sink { [weak self]  useCustomMaterial in
                 guard let self = self, 
                       let body = self.body,
                       let customMaterial = customMaterialSource

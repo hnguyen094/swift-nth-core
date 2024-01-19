@@ -12,23 +12,23 @@ import SwiftUI
 extension Creature {
     @Reducer
     struct Feature {
-        @Environment(\.self) var environment
-
         @Dependency(\.modelContext) private var modelContext
         @Dependency(\.logger) private var logger
 
         struct State: Equatable {
             @BindingState var emotionAnimation: Emoting.Animation = .idle
             @BindingState var color: Backing.Color = .clear
-            
-            @BindingState var useCustomMaterial: Bool = true
-            
-            fileprivate var _backing: Backing? = .none
+                        
+            var understanding: Understanding.State = .init()
+            @BindingState var _useCustomMaterial: Bool = true
+
+            fileprivate var backing: Backing? = .none
             // store which classifications is approved, which unknown,(& implicitly which denied)
         }
         
         enum Action: BindableAction {
             case binding(BindingAction<State>)
+            case understanding(Understanding.Action)
 
             case onLoad
             case onBackingLoad(Creature.Backing?)
@@ -38,34 +38,44 @@ extension Creature {
         
         var body: some ReducerOf<Self> {
             BindingReducer()
-            
+            Scope(state: \.understanding, action: /Action.understanding) {
+                Understanding()
+            }
+
             bindingBackingGlue
             
             Reduce { state, action in
                 switch action {
                 case .onLoad:
-                    return .run { send in
-                        var backing: Creature.Backing? = try await modelContext.fetch().first
-                        if case .none = backing {
-                            logger.debug("Didn't find existing backing. Creating & inserting a new one.")
-                            let newBacking = Backing()
-                            await modelContext.insert([newBacking])
-                            backing = newBacking
-                        }
-                        await send(.onBackingLoad(backing))
-                    } catch: { error, _ in
-                        logger.error("Failed to load model container context. \(error)")
-                    }
+                    return .merge(
+                        loadBacking,
+                        .send(.understanding(.onLoad))
+                    )
                 case .onBackingLoad(let backing):
-                    state._backing = backing
+                    state.backing = backing
                     return .none
                 case ._nextAnimation:
                     let index = Emoting.Animation.allCases.firstIndex(of: state.emotionAnimation)!
                     state.emotionAnimation = Emoting.Animation.allCases[(index + 1) % (Emoting.Animation.allCases.count - 1)]
                     return .none
-                case .binding:
+                case .binding, .understanding:
                     return .none
                 }
+            }
+        }
+        
+        var loadBacking: EffectOf<Self> {
+            .run { send in
+                var backing: Creature.Backing? = try await modelContext.fetch().first
+                if case .none = backing {
+                    logger.debug("Didn't find existing backing. Creating & inserting a new one.")
+                    let newBacking = Backing()
+                    await modelContext.insert([newBacking])
+                    backing = newBacking
+                }
+                await send(.onBackingLoad(backing))
+            } catch: { error, _ in
+                logger.error("Failed to load model container context. \(error)")
             }
         }
         
@@ -75,7 +85,7 @@ extension Creature {
                 case .binding(let bindedAction):
                     switch bindedAction {
                     case \.$color:
-                        guard let backing = state._backing else { return .none }
+                        guard let backing = state.backing else { return .none }
                         backing.color = state.color.toColorData()
                         return .none
                     case \.$emotionAnimation:

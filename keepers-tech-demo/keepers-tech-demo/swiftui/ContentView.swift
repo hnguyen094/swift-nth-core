@@ -66,9 +66,6 @@ struct ContentView: View {
                 let ent = Creature.Entity(store: store, material: creatureMaterial, windowed: true)
                 ent.transform.translation = [0, -Float(volumeSize.height / 2), 0] // grounding
                 content.add(ent)
-            } update: { _ in
-                audioSession.
-                logger.debug("\(audioSession.anotherAppIsPlayingMusic), \(audioSession.anotherAppIsPlayingSound)")
             }
 //            .frame(depth: 100)
             .gesture(tap)

@@ -12,9 +12,11 @@ extension Creature {
     struct Understanding {
         @Dependency(\.logger) private var logger
         @Dependency(\.audioSession) private var audio
+        @Dependency(\.soundAnalysis) private var soundAnalysis
         
         struct State: Equatable {
-            @BindingState var listeningToMusic: Bool = false
+            @BindingState var mightBeListeningToMusic: Bool = false // reliably false -- so must be correct when true.
+            @BindingState var soundAnalysisResult: SoundAnalysisClient.Result? = .none
         }
         
         enum Action: BindableAction {
@@ -27,7 +29,7 @@ extension Creature {
             Reduce { state, action in
                 switch action {
                 case .onLoad:
-                    return .merge(listeningToMusicTask)
+                    return .merge(listeningToMusicTask, soundAnalysisTask)
                 case .binding:
                     doShit(with: state)
                     return .none
@@ -36,8 +38,6 @@ extension Creature {
         }
         
         private func doShit(with state: borrowing State) {
-            let value = state.listeningToMusic
-            logger.debug("Listening to music: \(value)")
         }
     }
 }
@@ -45,14 +45,23 @@ extension Creature {
 // MARK: Task Effects for onLoad
 extension Creature.Understanding {
     fileprivate var listeningToMusicTask: EffectOf<Self> { .run(priority: .utility) { send in
-        logger.debug("listening task started")
         for await otherIsPlayingStatus in audio.anotherAppIsPlayingMusicUpdates {
             let listening = switch otherIsPlayingStatus {
             case .begin: true
             case .end: false
             @unknown default: false
             }
-            await send(.set(\.$listeningToMusic, listening))
+            await send(.set(\.$mightBeListeningToMusic, listening))
+        }
+    }}
+    
+    fileprivate var soundAnalysisTask: EffectOf<Self> { .run(priority: .background) { send in
+        for await result in soundAnalysis.classificationUpdates() {
+            // TODO: could probably handle some processing here
+            for classification in result.classifications {
+                logger.debug("\(classification.label.rawValue): \(classification.confidence)")
+            }
+            await send(.set(\.$soundAnalysisResult, result))
         }
     }}
 }

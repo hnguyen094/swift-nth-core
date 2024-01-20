@@ -16,7 +16,7 @@ enum Creature {
         private let viewStore: ViewStoreOf<Feature>
         private var cancellables: Set<AnyCancellable> = []
         
-        private var body: ModelEntity? = .none
+        private(set) var body: ModelEntity? = .none
         private var customMaterialSource: ShaderGraphMaterial? = .none
         private var windowed: Bool = true
         
@@ -112,7 +112,7 @@ enum Creature {
         private func addHighlightContainer() {
             guard let body = self.body else { return }
             
-            let radius: Float = 0.75
+            let radius: Float = 0.65
             
             let mesh = MeshResource.generateSphere(radius: radius)
             let material = SimpleMaterial(color: .clear, roughness: 0.5, isMetallic: false)

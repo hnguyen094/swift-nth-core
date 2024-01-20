@@ -10,6 +10,7 @@ import RealityKit
 enum Follow {
     struct Component: RealityKit.Component, Codable {
         var followeeID: Entity.ID? = .none
+        var offset: SIMD3<Float> = .zero
     }
     
     struct System: RealityKit.System {
@@ -19,11 +20,15 @@ enum Follow {
         
         func update(context: SceneUpdateContext) {
             context.entities(matching: Self.query, updatingSystemWhen: .rendering).forEach { entity in
-                guard let entityID = entity.components[Component.self]!.followeeID,
+                let component = entity.components[Component.self]!
+
+                guard let entityID = component.followeeID,
                       let followee = context.scene.findEntity(id: entityID)
                 else { return }
 
-                entity.setPosition(followee.position(relativeTo: .none), relativeTo: .none)
+                entity.setPosition(
+                    followee.position(relativeTo: .none) + component.offset,
+                    relativeTo: .none)
             }
         }
     }

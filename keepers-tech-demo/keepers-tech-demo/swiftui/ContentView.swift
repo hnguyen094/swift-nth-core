@@ -18,6 +18,7 @@ struct ContentView: View {
     @State private var showImmersiveSpace = false
     @State private var immersiveSpaceIsShown = false
     @State private var shouldUseCustomMaterial = true
+    @State private var shouldShowTextBubble = true
 
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
@@ -51,7 +52,13 @@ struct ContentView: View {
                     store.send(.set(\.$color, .init(randomColor)))
                 }
                 .glassBackgroundEffect()
-
+                
+                Toggle(isOn: $shouldShowTextBubble) {
+                    Text("Toggle bubble")
+                }
+                .toggleStyle(.button)
+                .glassBackgroundEffect()
+                
                 Toggle(isOn: $shouldUseCustomMaterial) {
                     Text("Use Custom Material")
                 }
@@ -68,17 +75,15 @@ struct ContentView: View {
                 ent.transform.translation = [0, -Float(volumeSize.height / 2), 0] // grounding
                 content.add(ent)
                 
-                if let buttonAttachment = attachments.entity(for: "Button") {
-                    ent.addChild(buttonAttachment)
-                    buttonAttachment.transform.translation = [0, 0, 1]
+                if let buttonAttachment = attachments.entity(for: TextBubble.ID) {
+                    content.add(buttonAttachment)
+                    buttonAttachment.components.set(Follow.Component(
+                        followeeID: ent.body?.id ?? ent.id,
+                        offset: [0, 0.095, 0]))
                 }
             } attachments: {
-                Attachment(id: "Button") {
-                    Toggle(isOn: $showImmersiveSpace) {
-                        Text("Show Immersive Space")
-                    }
-                    .toggleStyle(.button)
-                    .glassBackgroundEffect()
+                Attachment(id: TextBubble.ID) {
+                    TextBubble(store: store)
                 }
             }
 //            .frame(depth: 100)
@@ -87,6 +92,9 @@ struct ContentView: View {
         .onAppear { store.send(.onLoad) }
         .onChange(of: shouldUseCustomMaterial) { _, newValue in
             store.send(.set (\.$_useCustomMaterial, newValue))
+        }
+        .onChange(of: shouldShowTextBubble) { _, newValue in
+            store.send(.set(\.$textBubble, newValue ? "Hello World" : .none))
         }
         .onChange(of: showImmersiveSpace) { _, newValue in
             Task {

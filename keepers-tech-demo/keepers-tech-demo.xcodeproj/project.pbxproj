@@ -36,6 +36,7 @@
 		B2BE58C32B5B23AA00B28316 /* SoundAnalyser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58C22B5B23AA00B28316 /* SoundAnalyser.swift */; };
 		B2BE58C52B5B278000B28316 /* SoundAnalyser.SoundType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58C42B5B278000B28316 /* SoundAnalyser.SoundType.swift */; };
 		B2BE58C72B5BF25F00B28316 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58C62B5BF25F00B28316 /* AudioEngine.swift */; };
+		B2BE58C92B5C247300B28316 /* TextBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58C82B5C247300B28316 /* TextBubble.swift */; };
 		B2DFE0B82B569645008CD4C1 /* ColorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DFE0B72B569645008CD4C1 /* ColorData.swift */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,7 @@
 		B2BE58C22B5B23AA00B28316 /* SoundAnalyser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundAnalyser.swift; sourceTree = "<group>"; };
 		B2BE58C42B5B278000B28316 /* SoundAnalyser.SoundType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundAnalyser.SoundType.swift; sourceTree = "<group>"; };
 		B2BE58C62B5BF25F00B28316 /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
+		B2BE58C82B5C247300B28316 /* TextBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBubble.swift; sourceTree = "<group>"; };
 		B2D3E9332B53BCFA003009C1 /* keepers-tech-demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "keepers-tech-demo.entitlements"; sourceTree = "<group>"; };
 		B2DFE0B72B569645008CD4C1 /* ColorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,6 +129,7 @@
 			children = (
 				B2A085642B52287F003AD224 /* ContentView.swift */,
 				B2A085662B52287F003AD224 /* ImmersiveView.swift */,
+				B2BE58C82B5C247300B28316 /* TextBubble.swift */,
 			);
 			path = swiftui;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				B2A085672B52287F003AD224 /* ImmersiveView.swift in Sources */,
 				B22C8E3D2B52AF870076CC12 /* SequenceExtensions.swift in Sources */,
 				B221ED072B54F86B006C24DF /* Creature.Backing.swift in Sources */,
+				B2BE58C92B5C247300B28316 /* TextBubble.swift in Sources */,
 				B221ED0F2B55581F006C24DF /* Billboard.swift in Sources */,
 				B2BE58C52B5B278000B28316 /* SoundAnalyser.SoundType.swift in Sources */,
 				B2B777FC2B57B7CF00F82646 /* Follow.swift in Sources */,

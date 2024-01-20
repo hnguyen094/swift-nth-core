@@ -17,6 +17,7 @@ extension Creature {
 
         struct State: Equatable {
             @BindingState var emotionAnimation: Emoting.Animation = .idle
+            @BindingState var textBubble: LocalizedStringKey? = "Hello world!"
             @BindingState var color: Backing.Color = .clear
                         
             var understanding: Understanding.State = .init()
@@ -88,7 +89,7 @@ extension Creature {
                         guard let backing = state.backing else { return .none }
                         backing.color = state.color.toColorData()
                         return .none
-                    case \.$emotionAnimation:
+                    case \.$textBubble, \.$emotionAnimation:
                         return .none
                     default:
                         logger.warning("Missing glue for binding action [\(bindedAction.customDumpDescription)].")

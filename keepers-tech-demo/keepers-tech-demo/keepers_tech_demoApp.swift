@@ -14,7 +14,7 @@ struct keepers_tech_demoApp: App {
     @Dependency(\.modelContext) private var modelContext
     @Dependency(\.arkitSessionManager) private var sessionManager
     
-    @State private var volumeSize: Size3D = .init(width: 0.2, height: 0.2, depth: 0.05)
+    @State private var volumeSize: Size3D = .init(width: 0.2, height: 0.3, depth: 0.05)
 
     private let store = Store(initialState: Creature.Feature.State()) {
         Creature.Feature()

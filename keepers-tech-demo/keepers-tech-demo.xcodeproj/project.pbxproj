@@ -34,7 +34,7 @@
 		B2BE58B02B5A8B5500B28316 /* Creature.Understanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58AF2B5A8B5400B28316 /* Creature.Understanding.swift */; };
 		B2BE58BF2B5B226D00B28316 /* SNClassifySoundRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58B92B5B226D00B28316 /* SNClassifySoundRequestExtensions.swift */; };
 		B2BE58C32B5B23AA00B28316 /* SoundAnalyser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58C22B5B23AA00B28316 /* SoundAnalyser.swift */; };
-		B2BE58C52B5B278000B28316 /* SoundAnalysisClient.SoundType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58C42B5B278000B28316 /* SoundAnalysisClient.SoundType.swift */; };
+		B2BE58C52B5B278000B28316 /* SoundAnalyser.SoundType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58C42B5B278000B28316 /* SoundAnalyser.SoundType.swift */; };
 		B2BE58C72B5BF25F00B28316 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58C62B5BF25F00B28316 /* AudioEngine.swift */; };
 		B2DFE0B82B569645008CD4C1 /* ColorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DFE0B72B569645008CD4C1 /* ColorData.swift */; };
 /* End PBXBuildFile section */
@@ -69,7 +69,7 @@
 		B2BE58AF2B5A8B5400B28316 /* Creature.Understanding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.Understanding.swift; sourceTree = "<group>"; };
 		B2BE58B92B5B226D00B28316 /* SNClassifySoundRequestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNClassifySoundRequestExtensions.swift; sourceTree = "<group>"; };
 		B2BE58C22B5B23AA00B28316 /* SoundAnalyser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundAnalyser.swift; sourceTree = "<group>"; };
-		B2BE58C42B5B278000B28316 /* SoundAnalysisClient.SoundType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundAnalysisClient.SoundType.swift; sourceTree = "<group>"; };
+		B2BE58C42B5B278000B28316 /* SoundAnalyser.SoundType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundAnalyser.SoundType.swift; sourceTree = "<group>"; };
 		B2BE58C62B5BF25F00B28316 /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
 		B2D3E9332B53BCFA003009C1 /* keepers-tech-demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "keepers-tech-demo.entitlements"; sourceTree = "<group>"; };
 		B2DFE0B72B569645008CD4C1 /* ColorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorData.swift; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 				B221ED0C2B551FC3006C24DF /* ARKitSessionManager.swift */,
 				B2BE58AD2B5A7E8F00B28316 /* AudioSession.swift */,
 				B2BE58C22B5B23AA00B28316 /* SoundAnalyser.swift */,
-				B2BE58C42B5B278000B28316 /* SoundAnalysisClient.SoundType.swift */,
+				B2BE58C42B5B278000B28316 /* SoundAnalyser.SoundType.swift */,
 				B2BE58C62B5BF25F00B28316 /* AudioEngine.swift */,
 			);
 			path = dependencies;
@@ -310,7 +310,7 @@
 				B22C8E3D2B52AF870076CC12 /* SequenceExtensions.swift in Sources */,
 				B221ED072B54F86B006C24DF /* Creature.Backing.swift in Sources */,
 				B221ED0F2B55581F006C24DF /* Billboard.swift in Sources */,
-				B2BE58C52B5B278000B28316 /* SoundAnalysisClient.SoundType.swift in Sources */,
+				B2BE58C52B5B278000B28316 /* SoundAnalyser.SoundType.swift in Sources */,
 				B2B777FC2B57B7CF00F82646 /* Follow.swift in Sources */,
 				B22C8E332B5241B50076CC12 /* DataProviderExtensions.swift in Sources */,
 				B22C8E312B523A850076CC12 /* CustomTimingFunction.swift in Sources */,

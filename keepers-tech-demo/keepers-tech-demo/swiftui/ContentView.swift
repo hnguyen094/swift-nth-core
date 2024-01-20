@@ -70,7 +70,7 @@ struct ContentView: View {
                 
                 if let buttonAttachment = attachments.entity(for: "Button") {
                     ent.addChild(buttonAttachment)
-                    buttonAttachment.transform.translation = [0, 1, 0]
+                    buttonAttachment.transform.translation = [0, 0, 1]
                 }
             } attachments: {
                 Attachment(id: "Button") {

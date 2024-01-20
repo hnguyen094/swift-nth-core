@@ -17,16 +17,20 @@ extension DependencyValues {
 
 struct AudioEngine {
     @Dependency(\.logger) var logger
-
+    @Dependency(\.audioSession) var audioSession
+    
     private let audioEngine: AVAudioEngine = .init()
     private let inputBus = AVAudioNodeBus(0)
     private let inputNode: AVAudioInputNode
-    init() {
-        inputNode = audioEngine.inputNode // required to start engine
+    
+    var validInputFormat: AVAudioFormat? {
+        guard audioSession.isActive else { return .none } // necessary to initialize audioSession
+        let format = inputNode.inputFormat(forBus: inputBus)
+        return format.isValid() ? format : .none
     }
-
-    func inputFormat() -> AVAudioFormat {
-        inputNode.inputFormat(forBus: inputBus)
+    
+    init() {
+        inputNode = audioEngine.inputNode
     }
 
     func installInputTap(block tapBlock: @escaping AVAudioNodeTapBlock) {
@@ -53,4 +57,10 @@ struct AudioEngine {
 
 extension AudioEngine: DependencyKey {
     static let liveValue: AudioEngine = .init()
+}
+
+extension AVAudioFormat {
+    func isValid() -> Bool {
+        channelCount != 0 && sampleRate != 0
+    }
 }

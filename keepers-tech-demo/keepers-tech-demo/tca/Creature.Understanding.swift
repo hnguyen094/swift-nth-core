@@ -59,9 +59,6 @@ extension Creature.Understanding {
     fileprivate var soundAnalysisTask: EffectOf<Self> { .run(priority: .background) { send in
         for await result in soundAnalysis.classificationUpdates() {
             // TODO: could probably handle some processing here
-            for classification in result.classifications {
-                logger.debug("\(classification.label.rawValue): \(classification.confidence)")
-            }
             await send(.set(\.$soundAnalysisResult, result))
         }
     }}

@@ -16,7 +16,7 @@ extension DependencyValues {
 }
 
 struct SoundAnalyser {
-    private let streamAnalyzer: SNAudioStreamAnalyzer
+    private let streamAnalyzer: SNAudioStreamAnalyzer?
     fileprivate let observer: SNObserver = SNObserver()
     fileprivate static let analysisQueue = DispatchQueue(label: "com.nth.soundanalysis")
 
@@ -24,7 +24,10 @@ struct SoundAnalyser {
         @Dependency(\.audioEngine) var audioEngine
         @Dependency(\.logger) var logger
 
-        let inputFormat = audioEngine.inputFormat()
+        guard let inputFormat = audioEngine.validInputFormat else {
+            streamAnalyzer = .none
+            return
+        }
         streamAnalyzer = .init(format: inputFormat)
         
         do {
@@ -32,11 +35,11 @@ struct SoundAnalyser {
             if let windowDuration = request.getWindowDuration(preferredDuration: 2) {
                 request.windowDuration = windowDuration
             }
-            try streamAnalyzer.add(request, withObserver: observer)
+            try streamAnalyzer!.add(request, withObserver: observer)
 
             audioEngine.installInputTap { [streamAnalyzer] buffer, time in
                 Self.analysisQueue.async {
-                    streamAnalyzer.analyze(buffer, atAudioFramePosition: time.sampleTime)
+                    streamAnalyzer!.analyze(buffer, atAudioFramePosition: time.sampleTime)
                 }
             }
         } catch {

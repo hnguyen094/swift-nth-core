@@ -19,11 +19,14 @@ struct AudioSession {
     @Dependency(\.logger) private var logger
     private var session = AVAudioSession.sharedInstance()
     
+    private(set) var isActive: Bool = false
+    
     init() {
+        logger.debug("Audio session starting.")
         guard session.availableCategories.contains(.playAndRecord),
                   session.availableModes.contains(.measurement)
         else {
-            logger.error("selected audio categories are not supported on this device.")
+            logger.error("Selected audio categories are not supported on this device.")
             return
         }
         
@@ -37,7 +40,7 @@ struct AudioSession {
                             .overrideMutedMicrophoneInterruption,
                             .mixWithOthers])
             try session.setActive(true)
-
+            isActive = true
         } catch {
             logger.error("Failed to start audio session \(error)")
         }

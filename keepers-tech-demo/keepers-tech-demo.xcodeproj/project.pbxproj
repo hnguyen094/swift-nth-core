@@ -33,8 +33,9 @@
 		B2BE58AE2B5A7E8F00B28316 /* AudioSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58AD2B5A7E8F00B28316 /* AudioSession.swift */; };
 		B2BE58B02B5A8B5500B28316 /* Creature.Understanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58AF2B5A8B5400B28316 /* Creature.Understanding.swift */; };
 		B2BE58BF2B5B226D00B28316 /* SNClassifySoundRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58B92B5B226D00B28316 /* SNClassifySoundRequestExtensions.swift */; };
-		B2BE58C32B5B23AA00B28316 /* SoundAnalysisClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58C22B5B23AA00B28316 /* SoundAnalysisClient.swift */; };
+		B2BE58C32B5B23AA00B28316 /* SoundAnalyser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58C22B5B23AA00B28316 /* SoundAnalyser.swift */; };
 		B2BE58C52B5B278000B28316 /* SoundAnalysisClient.SoundType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58C42B5B278000B28316 /* SoundAnalysisClient.SoundType.swift */; };
+		B2BE58C72B5BF25F00B28316 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58C62B5BF25F00B28316 /* AudioEngine.swift */; };
 		B2DFE0B82B569645008CD4C1 /* ColorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DFE0B72B569645008CD4C1 /* ColorData.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,8 +68,9 @@
 		B2BE58AD2B5A7E8F00B28316 /* AudioSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSession.swift; sourceTree = "<group>"; };
 		B2BE58AF2B5A8B5400B28316 /* Creature.Understanding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.Understanding.swift; sourceTree = "<group>"; };
 		B2BE58B92B5B226D00B28316 /* SNClassifySoundRequestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNClassifySoundRequestExtensions.swift; sourceTree = "<group>"; };
-		B2BE58C22B5B23AA00B28316 /* SoundAnalysisClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundAnalysisClient.swift; sourceTree = "<group>"; };
+		B2BE58C22B5B23AA00B28316 /* SoundAnalyser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundAnalyser.swift; sourceTree = "<group>"; };
 		B2BE58C42B5B278000B28316 /* SoundAnalysisClient.SoundType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundAnalysisClient.SoundType.swift; sourceTree = "<group>"; };
+		B2BE58C62B5BF25F00B28316 /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
 		B2D3E9332B53BCFA003009C1 /* keepers-tech-demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "keepers-tech-demo.entitlements"; sourceTree = "<group>"; };
 		B2DFE0B72B569645008CD4C1 /* ColorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,8 +95,9 @@
 				B221ED092B550B0F006C24DF /* Logger.swift */,
 				B221ED0C2B551FC3006C24DF /* ARKitSessionManager.swift */,
 				B2BE58AD2B5A7E8F00B28316 /* AudioSession.swift */,
-				B2BE58C22B5B23AA00B28316 /* SoundAnalysisClient.swift */,
+				B2BE58C22B5B23AA00B28316 /* SoundAnalyser.swift */,
 				B2BE58C42B5B278000B28316 /* SoundAnalysisClient.SoundType.swift */,
+				B2BE58C62B5BF25F00B28316 /* AudioEngine.swift */,
 			);
 			path = dependencies;
 			sourceTree = "<group>";
@@ -292,13 +295,14 @@
 				B221ED022B54E702006C24DF /* AppSchemas.swift in Sources */,
 				B2A085652B52287F003AD224 /* ContentView.swift in Sources */,
 				B221ED0D2B551FC3006C24DF /* ARKitSessionManager.swift in Sources */,
-				B2BE58C32B5B23AA00B28316 /* SoundAnalysisClient.swift in Sources */,
+				B2BE58C32B5B23AA00B28316 /* SoundAnalyser.swift in Sources */,
 				B2A085632B52287F003AD224 /* keepers_tech_demoApp.swift in Sources */,
 				B22C8E432B52EAE40076CC12 /* Creature.Feature.swift in Sources */,
 				B22C8E392B5257290076CC12 /* Creature.Entity.swift in Sources */,
 				B2BE58BF2B5B226D00B28316 /* SNClassifySoundRequestExtensions.swift in Sources */,
 				B2372A392B5231AE0015B8EA /* ImmersiveID.swift in Sources */,
 				B22C8E372B524D490076CC12 /* Emoting.swift in Sources */,
+				B2BE58C72B5BF25F00B28316 /* AudioEngine.swift in Sources */,
 				B221ED0B2B550B0F006C24DF /* Logger.swift in Sources */,
 				B2BE58B02B5A8B5500B28316 /* Creature.Understanding.swift in Sources */,
 				B221ED0A2B550B0F006C24DF /* PersistentModelContext.swift in Sources */,

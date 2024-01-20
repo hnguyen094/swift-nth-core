@@ -11,12 +11,13 @@ extension Creature {
     @Reducer
     struct Understanding {
         @Dependency(\.logger) private var logger
+
         @Dependency(\.audioSession) private var audio
         @Dependency(\.soundAnalysis) private var soundAnalysis
         
         struct State: Equatable {
-            @BindingState var mightBeListeningToMusic: Bool = false // reliably false -- so must be correct when true.
-            @BindingState var soundAnalysisResult: SoundAnalysisClient.Result? = .none
+            @BindingState var mightBeListeningToMusic: Bool = false
+            @BindingState var soundAnalysisResult: SoundAnalyser.Result? = .none
         }
         
         enum Action: BindableAction {

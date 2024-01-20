@@ -21,6 +21,7 @@ struct ContentView: View {
 
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
+    @Environment(\.physicalMetrics) var metrics
     
     @Dependency(\.logger) var logger
     @Dependency(\.arkitSessionManager.worldTrackingData) var worldTracker
@@ -50,7 +51,7 @@ struct ContentView: View {
                     store.send(.set(\.$color, .init(randomColor)))
                 }
                 .glassBackgroundEffect()
-                                
+
                 Toggle(isOn: $shouldUseCustomMaterial) {
                     Text("Use Custom Material")
                 }
@@ -58,7 +59,7 @@ struct ContentView: View {
                 .glassBackgroundEffect()
                 Spacer()
             }
-            RealityView { content in
+            RealityView { content, attachments in
                 let creatureMaterial = try? await ShaderGraphMaterial(
                     named: "/Root/CelShading",
                     from: "Materials/CustomMaterials",
@@ -66,6 +67,19 @@ struct ContentView: View {
                 let ent = Creature.Entity(store: store, material: creatureMaterial, windowed: true)
                 ent.transform.translation = [0, -Float(volumeSize.height / 2), 0] // grounding
                 content.add(ent)
+                
+                if let buttonAttachment = attachments.entity(for: "Button") {
+                    ent.addChild(buttonAttachment)
+                    buttonAttachment.transform.translation = [0, 1, 0]
+                }
+            } attachments: {
+                Attachment(id: "Button") {
+                    Toggle(isOn: $showImmersiveSpace) {
+                        Text("Show Immersive Space")
+                    }
+                    .toggleStyle(.button)
+                    .glassBackgroundEffect()
+                }
             }
 //            .frame(depth: 100)
             .gesture(tap)

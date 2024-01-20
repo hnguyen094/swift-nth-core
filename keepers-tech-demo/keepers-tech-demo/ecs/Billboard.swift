@@ -26,25 +26,31 @@ enum Billboard {
         }
         
         func update(context: SceneUpdateContext) {
-            guard let deviceAnchor = worldTrackingData?
-                .queryDeviceAnchor(atTimestamp: CACurrentMediaTime()), // TODO: call less b/c expensive
+            let entities = context.entities(matching: Self.query, updatingSystemWhen: .rendering)
+
+            guard case .some = entities.first(where: {_ in true }),
+                  let deviceAnchor = worldTrackingData?
+                .queryDeviceAnchor(atTimestamp: CACurrentMediaTime()),
                   deviceAnchor.isTracked
             else { return }
             let deviceTransform = Transform(matrix: deviceAnchor.originFromAnchorTransform)
             
-            context.entities(matching: Self.query, updatingSystemWhen: .rendering).forEach { entity in
+            for entity in entities {
                 let mode = entity.components[Component.self]!.mode
                 var transform = entity.transform
-
-//                entity.convert(transform: <#T##Transform#>, to: <#T##Entity?#>)
                 
-                print("\(deviceTransform.translation), \(entity.position(relativeTo: nil))")
+                logger.debug("\(deviceTransform.translation), \(entity.position(relativeTo: nil))")
                 
-                entity.look(at: deviceTransform.translation, from: entity.position(relativeTo: nil), relativeTo: nil)
+                entity.look(at: deviceTransform.translation, 
+                            from: entity.position(relativeTo: nil),
+                            relativeTo: nil,
+                            forward: .positiveZ)
                 if case .direct = mode { return }
                 defer { entity.transform = transform }
                 
-                guard case .lazy(let value) = mode else { return } // TODO: log issue, missing impl
+                guard case .lazy(let value) = mode else { 
+                    logger.error("Missing implementation for \(String(describing: mode)) in billboard system.")
+                    return } // TODO: log issue, missing impl
                 transform.rotation = simd_slerp(transform.rotation, entity.transform.rotation, Float(context.deltaTime * value))
             }
         }

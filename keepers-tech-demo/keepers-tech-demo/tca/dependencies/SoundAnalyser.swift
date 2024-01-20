@@ -1,5 +1,5 @@
 //
-//  SoundAnalysisClient.swift
+//  SoundAnalyser.swift
 //  keepers-tech-demo
 //
 //  Created by hung on 1/19/24.
@@ -9,24 +9,14 @@ import Dependencies
 import SoundAnalysis
 
 extension DependencyValues {
-    var audioEngine: AVAudioEngine {
-        get { self[AudioEngineKey.self] }
-        set { self[AudioEngineKey.self] = newValue }
-    }
-    
-    var soundAnalysis: SoundAnalysisClient {
-        get { self[SoundAnalysisClient.self] }
-        set { self[SoundAnalysisClient.self] = newValue }
-    }
-
-    private enum AudioEngineKey: DependencyKey {
-        static let liveValue: AVAudioEngine = .init()
+    var soundAnalysis: SoundAnalyser {
+        get { self[SoundAnalyser.self] }
+        set { self[SoundAnalyser.self] = newValue }
     }
 }
 
-struct SoundAnalysisClient {
-    var streamAnalyzer: SNAudioStreamAnalyzer
-    
+struct SoundAnalyser {
+    private let streamAnalyzer: SNAudioStreamAnalyzer
     fileprivate let observer: SNObserver = SNObserver()
     fileprivate static let analysisQueue = DispatchQueue(label: "com.nth.soundanalysis")
 
@@ -34,23 +24,17 @@ struct SoundAnalysisClient {
         @Dependency(\.audioEngine) var audioEngine
         @Dependency(\.logger) var logger
 
-        let inputBus = AVAudioNodeBus(0)
-        let inputFormat = audioEngine.inputNode.inputFormat(forBus: inputBus)
+        let inputFormat = audioEngine.inputFormat()
         streamAnalyzer = .init(format: inputFormat)
-
+        
         do {
-            try audioEngine.start()
             let request = try SNClassifySoundRequest(classifierIdentifier: .version1)
             if let windowDuration = request.getWindowDuration(preferredDuration: 2) {
                 request.windowDuration = windowDuration
             }
             try streamAnalyzer.add(request, withObserver: observer)
 
-            audioEngine.inputNode.installTap(
-                onBus: inputBus,
-                bufferSize: 8192,
-                format: inputFormat
-            ) { [streamAnalyzer] buffer, time in
+            audioEngine.installInputTap { [streamAnalyzer] buffer, time in
                 Self.analysisQueue.async {
                     streamAnalyzer.analyze(buffer, atAudioFramePosition: time.sampleTime)
                 }
@@ -67,8 +51,8 @@ struct SoundAnalysisClient {
     }
 }
 
-extension SoundAnalysisClient: DependencyKey {
-    static let liveValue: SoundAnalysisClient = .init()
+extension SoundAnalyser: DependencyKey {
+    static let liveValue: SoundAnalyser = .init()
     
     /// An observer that receives results from a classify sound request.
     fileprivate class SNObserver: NSObject, SNResultsObserving {

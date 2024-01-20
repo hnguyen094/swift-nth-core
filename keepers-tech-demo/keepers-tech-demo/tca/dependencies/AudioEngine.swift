@@ -45,7 +45,8 @@ struct AudioEngine {
     }
     
     private func startEngine() {
-        guard !audioEngine.isRunning else { return }
+        guard audioSession.isActive, !audioEngine.isRunning
+        else { return }
 
         do {
             try audioEngine.start()

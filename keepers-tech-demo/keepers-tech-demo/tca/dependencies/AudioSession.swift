@@ -19,7 +19,7 @@ struct AudioSession {
     @Dependency(\.logger) private var logger
     private var session = AVAudioSession.sharedInstance()
     
-    private(set) var isActive: Bool = false
+    private(set) var isActive: Bool = false // TODO: fix implicitly using this as a way to call init
     
     init() {
         logger.debug("Audio session starting.")

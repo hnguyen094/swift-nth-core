@@ -18,7 +18,7 @@ struct ContentView: View {
     @State private var showImmersiveSpace = false
     @State private var immersiveSpaceIsShown = false
     @State private var shouldUseCustomMaterial = true
-    @State private var shouldShowTextBubble = true
+    @State private var shouldShowTextBubble = false
 
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
@@ -89,11 +89,11 @@ struct ContentView: View {
             .gesture(tap)
         }
         .onAppear { store.send(.onLoad) }
-        .onChange(of: shouldUseCustomMaterial) { _, newValue in
-            store.send(.set (\.$_useCustomMaterial, newValue))
+        .onChange(of: shouldUseCustomMaterial) { _, use in
+            store.send(.set (\.$_useCustomMaterial, use))
         }
-        .onChange(of: shouldShowTextBubble) { _, newValue in
-            store.send(.set(\.$textBubble, newValue ? "Hello World!" : .none))
+        .onChange(of: shouldShowTextBubble) { _, show in
+            store.send(._toggleTextBubble(show))
         }
         .onChange(of: showImmersiveSpace) { _, newValue in
             Task {

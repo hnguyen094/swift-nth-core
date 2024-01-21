@@ -21,10 +21,14 @@ extension Creature {
             @BindingState var soundAnalysisResult: SoundAnalyser.Result? = .none
             @BindingState var surfaces: ARKitSessionManager.AvailableSurfaces = .init()
             @BindingState var meshes: ARKitSessionManager.AvailableMeshes = .init()
+            
+            var dirty: Bool = true
         }
         
         enum Action: BindableAction {
             case onLoad
+            case computeIntent
+            case newIntent(Intent)
             case binding(BindingAction<State>)
         }
         
@@ -34,24 +38,65 @@ extension Creature {
                 switch action {
                 case .onLoad:
                     return .merge(
+                        intentComputeTask,
                         listeningToMusicTask,
                         soundAnalysisTask,
                         meshUpdatesTask,
                         planeUpdatesTask)
+                case .computeIntent:
+                    if let intent = generateIntent(from: state) {
+                        state.dirty = false
+                        return .send(.newIntent(intent))
+                    }
+                    return .none
                 case .binding:
-                    doShit(with: &state)
+                    state.dirty = true
+                    return .none
+                case .newIntent:
                     return .none
                 }
             }
         }
         
-        func doShit(with state: inout State) {
+        func generateIntent(from state: State) -> Intent? {
+            if !state.dirty { return .none }
+            var intent = Intent()
+            
+            if state.mightBeListeningToMusic && audio.anotherAppIsPlayingMusic {
+                intent.textBubble = "🎧"
+                intent.emotionAnimation = .dance
+                return intent
+            }
+
+            if let soundAnalysisResult = state.soundAnalysisResult {
+                let confidentResults = soundAnalysisResult.classifications
+                    .filter { $0.confidence > 0.7 }
+                
+                let result = confidentResults
+                    .compactMap({ SoundAnalyser.soundTypeEmojiMapping[$0.label] })
+                    .reduce(into: "") { result, mappedEmoji in
+                    result = result + " " + mappedEmoji
+                }
+                if let hasMusic = confidentResults.first(where: { $0.label == .music }) {
+                    intent.emotionAnimation = .dance
+                }
+                intent.textBubble = result == "" ? .none : result
+            }
+            return intent
         }
     }
 }
 
 // MARK: Task Effects for onLoad
 extension Creature.Understanding {
+    private var intentComputeTask: EffectOf<Self> { .run(priority: .utility) { send in
+        while(true) {
+            let milliseconds = (1 + UInt64.random(in: 0...1)) * 3000
+            try await Task.sleep(for: .milliseconds(milliseconds))
+            await send(.computeIntent)
+        }
+    }}
+    
     private var listeningToMusicTask: EffectOf<Self> { .run(priority: .utility) { send in
         for await otherIsPlayingStatus in audio.anotherAppIsPlayingMusicUpdates {
             let listening = switch otherIsPlayingStatus {

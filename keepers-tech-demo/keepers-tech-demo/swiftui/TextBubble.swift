@@ -16,7 +16,7 @@ struct TextBubble: View {
     @Dependency(\.logger) var logger
 
     var body: some View {
-        WithViewStore(store, observe: \.textBubble) { viewStore in
+        WithViewStore(store, observe: \.intent.textBubble) { viewStore in
             let visible = viewStore.state != .none
             ZStack {
                 Text(text)

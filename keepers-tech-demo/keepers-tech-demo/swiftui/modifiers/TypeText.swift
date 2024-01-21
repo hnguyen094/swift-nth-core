@@ -48,7 +48,7 @@ private struct TypeTextModifier: ViewModifier {
                     text = ""
                     return
                 }
-                if isAnimated == false {
+                if isAnimated == false || finalText == text {
                     text = finalText
                     return
                 }

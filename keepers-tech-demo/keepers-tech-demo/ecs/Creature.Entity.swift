@@ -41,11 +41,14 @@ enum Creature {
         }
 
         private func subscribeToStore() {
-            viewStore.publisher.emotionAnimation.sink { [weak self] newValue in
-                guard let self = self, let body = self.body else { return }
-                var component = body.components[Emoting.Component.self]!
-                component.desiredAnimation = newValue
-                body.components.set(component)
+            viewStore.publisher.intent.sink { [weak self] newIntent in
+                guard let self = self, let body = self.body,
+                      var emotingComponent = body.components[Emoting.Component.self]
+                else { return }
+                defer {
+                    body.components.set(emotingComponent)
+                }
+                emotingComponent.desiredAnimation = newIntent.emotionAnimation
             }
             .store(in: &cancellables)
             viewStore.publisher.color.sink { [weak self] color in
@@ -89,13 +92,8 @@ enum Creature {
             if case .none = self.customMaterialSource {
                 logger.fault("Custom material missing when initializing Creature.")
             }
-//            let mesh = MeshResource.generateSphere(radius: 0.5)
             let mesh = MeshResource.generateBox(width: 1, height: 1, depth: 0.35, cornerRadius: 0.35)
-//            let mesh = MeshResource.generateBox(size: [1, 1, 0.35], majorCornerRadius: 0.5, minorCornerRadius: 0.1)
-            
             let material: Material = customMaterialSource ?? SimpleMaterial(color: .init(viewStore.color), roughness: 0.5, isMetallic: false)
-//            let customMaterial = Shader
-
             let body = ModelEntity(mesh: mesh, materials: [material])
             body.components.set(Emoting.Component())
             

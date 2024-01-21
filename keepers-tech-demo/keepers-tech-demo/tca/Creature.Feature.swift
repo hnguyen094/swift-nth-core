@@ -16,8 +16,7 @@ extension Creature {
         @Dependency(\.logger) private var logger
 
         struct State: Equatable {
-            @BindingState var emotionAnimation: Emoting.Animation = .idle
-            @BindingState var textBubble: String? = "Hello world!"
+            @BindingState var intent: Intent = .init()
             @BindingState var color: Backing.Color = .clear
                         
             var understanding: Understanding.State = .init()
@@ -35,6 +34,7 @@ extension Creature {
             case onBackingLoad(Creature.Backing?)
             
             case _nextAnimation
+            case _toggleTextBubble(Bool)
         }
         
         var body: some ReducerOf<Self> {
@@ -56,9 +56,16 @@ extension Creature {
                     state.backing = backing
                     return .none
                 case ._nextAnimation:
-                    let index = Emoting.Animation.allCases.firstIndex(of: state.emotionAnimation)!
-                    state.emotionAnimation = Emoting.Animation.allCases[(index + 1) % (Emoting.Animation.allCases.count - 1)]
+                    let index = Emoting.Animation.allCases.firstIndex(of: state.intent.emotionAnimation)!
+                    state.intent.emotionAnimation = Emoting.Animation.allCases[(index + 1) % (Emoting.Animation.allCases.count - 1)]
                     return .none
+                case ._toggleTextBubble(let shouldShow):
+                    state.intent.textBubble = shouldShow
+                    ? "Hello World!"
+                    : .none
+                    return .none
+                case .understanding(.newIntent(let intent)):
+                    return .send(.set(\.$intent, intent))
                 case .binding, .understanding:
                     return .none
                 }
@@ -89,7 +96,7 @@ extension Creature {
                         guard let backing = state.backing else { return .none }
                         backing.color = state.color.toColorData()
                         return .none
-                    case \.$textBubble, \.$emotionAnimation:
+                    case \.$intent:
                         return .none
                     default:
                         logger.warning("Missing glue for binding action [\(bindedAction.customDumpDescription)].")

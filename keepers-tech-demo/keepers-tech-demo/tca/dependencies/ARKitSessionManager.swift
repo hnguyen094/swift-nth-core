@@ -13,7 +13,6 @@ extension DependencyValues {
         get { self[ARKitSessionManager.self] }
         set { self[ARKitSessionManager.self] = newValue }
     }
-
 }
 
 @MainActor
@@ -67,4 +66,88 @@ class ARKitSessionManager {
 
 extension ARKitSessionManager : DependencyKey {
     static let liveValue: ARKitSessionManager = .init()
+    
+    struct AvailableSurfaces: Equatable {
+        private(set) var classifications: [PlaneAnchor.Classification: Set<PlaneAnchor.ID>] = [:]
+        private var reversedClassifications: [PlaneAnchor.ID: PlaneAnchor.Classification] = [:]
+        
+        mutating func handleUpdate(_ update: AnchorUpdate<PlaneAnchor>) {
+            let anchorID = update.anchor.id
+            let classification = update.anchor.classification
+            switch update.event {
+            case .added:
+                classifications[classification, default: .init()].insert(anchorID)
+                reversedClassifications[anchorID] = classification
+            case .updated:
+                if let oldClassification = reversedClassifications[anchorID],
+                   classification != oldClassification
+                {
+                    classifications[oldClassification]?.remove(anchorID)
+                    if classifications[oldClassification]?.isEmpty ?? false {
+                        classifications.removeValue(forKey: oldClassification)
+                    }
+                }
+                classifications[classification, default: .init()].insert(anchorID)
+                reversedClassifications[anchorID] = classification
+            case .removed:
+                classifications[classification]?.remove(anchorID)
+                if classifications[classification]?.isEmpty ?? false {
+                    classifications.removeValue(forKey: classification)
+                }
+                reversedClassifications.removeValue(forKey: anchorID)
+            }
+        }
+    }
+    
+    struct AvailableMeshes: Equatable {
+        private(set) var classifications: [MeshAnchor.MeshClassification : Set<MeshAnchor.ID>] = [:]
+        private var reversedClassifications: [MeshAnchor.ID: Set<MeshAnchor.MeshClassification>] = [:]
+        
+        mutating func handleUpdate(_ update: AnchorUpdate<MeshAnchor>) {
+            let anchorID = update.anchor.id
+            switch update.event {
+            case .added:
+                let values = update.anchor.geometry.allClassifications()
+                let classificationSet = Set(values)
+                
+                reversedClassifications[anchorID] = classificationSet
+                
+                classificationSet.forEach { classification in
+                    classifications[classification, default: .init()].insert(anchorID)
+                }
+            case .updated:
+                let values = update.anchor.geometry.allClassifications()
+                let classificationSet = Set(values)
+                
+                let previousClassifications = reversedClassifications[anchorID] ?? .init()
+                
+                let toAdd = classificationSet.subtracting(previousClassifications)
+                let toRemove = previousClassifications.subtracting(classificationSet)
+                
+                toAdd.forEach { classification in
+                    classifications[classification, default: .init()].insert(anchorID)
+                }
+                
+                toRemove.forEach { classification in
+                    classifications[classification]?.remove(anchorID)
+                    if classifications[classification]?.isEmpty ?? false {
+                        classifications.removeValue(forKey: classification)
+                    }
+                }
+                reversedClassifications[anchorID] = classificationSet
+            case .removed:
+                let values = update.anchor.geometry.allClassifications()
+                let classificationSet = Set(values)
+                
+                reversedClassifications.removeValue(forKey: anchorID)
+                
+                classificationSet.forEach { classification in
+                    classifications[classification]?.remove(anchorID)
+                    if classifications[classification]?.isEmpty ?? false {
+                        classifications.removeValue(forKey: classification)
+                    }
+                }
+            }
+        }
+    }
 }

@@ -102,7 +102,7 @@ enum Creature {
             if !windowed { body.generateCollisionShapes(recursive: false) }
             
             let bodyOffset = RealityKit.Entity()
-            bodyOffset.position = [0, 0.65, 0]
+            bodyOffset.position = [0, 0.7, 0]
             
             bodyOffset.addChild(body)
             addChild(bodyOffset)
@@ -112,10 +112,10 @@ enum Creature {
         private func addHighlightContainer() {
             guard let body = self.body else { return }
             
-            let radius: Float = 0.65
+            let radius: Float = 0.7
             
             let mesh = MeshResource.generateSphere(radius: radius)
-            let material = SimpleMaterial(color: .clear, roughness: 0.5, isMetallic: false)
+            let material = SimpleMaterial(color: .init(white: 0, alpha: 0.2), roughness: 0.5, isMetallic: false)
 
             let model = ModelEntity(mesh: mesh, materials: [material])
             model.scale = .init(repeating: -1)

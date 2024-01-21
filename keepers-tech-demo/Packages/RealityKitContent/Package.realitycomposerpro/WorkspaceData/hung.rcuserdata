@@ -2,8 +2,7 @@
   "advancedEditorSelectedIdentifier" : "ShaderGraphEditorPluginID",
   "openSceneRelativePaths" : [
     "Immersive.usda",
-    "Materials\/GridMaterial.usda",
-    "Materials\/CustomMaterials.usda"
+    "Materials\/GridMaterial.usda"
   ],
   "recentIdentifiers" : {
     "6DA38358-6CF4-4602-8C09-F60846E31BCA" : [
@@ -93,6 +92,28 @@
       }
     ],
     "79EE70CF-A324-4201-ABC2-2BDA3D9E9665" : [
+      {
+        "date" : 727538756.286599,
+        "title" : "Untitled",
+        "transform" : [
+          0.9971595,
+          -1.2332063e-08,
+          0.07531895,
+          0,
+          0.026061393,
+          0.9382295,
+          -0.34503075,
+          0,
+          -0.070666455,
+          0.3460136,
+          0.93556446,
+          0,
+          -0.05728624,
+          0.31350827,
+          0.46508273,
+          1
+        ]
+      },
       {
         "date" : 727314846.04962,
         "title" : "Untitled",
@@ -288,28 +309,6 @@
           0.12567365,
           0.2592772,
           0.49070162,
-          1
-        ]
-      },
-      {
-        "date" : 727289687.686127,
-        "title" : "Untitled",
-        "transform" : [
-          0.9997823,
-          2.2756474e-10,
-          0.02086701,
-          0,
-          0.0089714,
-          0.90286124,
-          -0.4298386,
-          0,
-          -0.018840013,
-          0.42993218,
-          0.9026646,
-          0,
-          0.08770072,
-          0.18093525,
-          0.3424336,
           1
         ]
       }
@@ -585,5 +584,5 @@
       }
     ]
   },
-  "selectedSceneRelativePath" : "Materials\/CustomMaterials.usda"
+  "selectedSceneRelativePath" : "Materials\/GridMaterial.usda"
 }

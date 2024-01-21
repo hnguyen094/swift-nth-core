@@ -52,7 +52,27 @@
       [
         "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
         "Root",
-        "Capsule_1"
+        "CelShadedMaterial",
+        "Cel_Effect"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
+        "Root",
+        "CelShading_1",
+        "Cel_Effect_Corrected"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
+        "Root",
+        "Capsule_2"
       ],
       {
         "isExpanded" : false,
@@ -61,8 +81,8 @@
       [
         "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
         "Root",
-        "CelShading_1",
-        "Cel_Effect_Corrected"
+        "CelShading",
+        "Cel_Effect_Lighter"
       ],
       {
         "isExpanded" : true,
@@ -80,6 +100,53 @@
       [
         "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
         "Root",
+        "Edge"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
+        "Root",
+        "Depth",
+        "Depth"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
+        "Root",
+        "Capsule"
+      ],
+      {
+        "isExpanded" : false,
+        "isLocked" : true
+      },
+      [
+        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
+        "Root",
+        "CelShading_Old",
+        "Cel_Effect"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
+        "Root",
+        "Capsule_1"
+      ],
+      {
+        "isExpanded" : false,
+        "isLocked" : true
+      },
+      [
+        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
+        "Root",
         "CelShading_1"
       ],
       {
@@ -89,8 +156,8 @@
       [
         "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
         "Root",
-        "CelShadedMaterial",
-        "Fresnel_Effect"
+        "CelShading_1",
+        "WorleyNoise_Helper"
       ],
       {
         "isExpanded" : true,
@@ -118,55 +185,17 @@
       },
       [
         "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
+        "Root",
+        "CelShadedMaterial",
+        "Fresnel_Effect"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
         "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
-        "Root",
-        "CelShading_1",
-        "WorleyNoise_Helper"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
-        "Root",
-        "CelShading_Old",
-        "Cel_Effect"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
-        "Root",
-        "Capsule_2"
-      ],
-      {
-        "isExpanded" : false,
-        "isLocked" : true
-      },
-      [
-        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
-        "Root",
-        "Edge"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
-        "Root",
-        "CelShading",
-        "Cel_Effect_Lighter"
       ],
       {
         "isExpanded" : true,
@@ -180,35 +209,6 @@
       {
         "isExpanded" : true,
         "isLocked" : false
-      },
-      [
-        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
-        "Root",
-        "CelShadedMaterial",
-        "Cel_Effect"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
-        "Root",
-        "Depth",
-        "Depth"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "79EE70CF-A324-4201-ABC2-2BDA3D9E9665",
-        "Root",
-        "Capsule"
-      ],
-      {
-        "isExpanded" : false,
-        "isLocked" : true
       }
     ]
   },
@@ -237,35 +237,7 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "GridMaterial"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root",
-        "CustomMaterials"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root",
         "Sphere_Right"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root",
-        "CustomMaterials",
-        "GlassMaterial"
       ],
       {
         "isExpanded" : true,
@@ -284,7 +256,35 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
+        "CustomMaterials"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "CustomMaterials",
+        "GlassMaterial"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
         "Sphere_Left"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "GridMaterial"
       ],
       {
         "isExpanded" : true,
@@ -296,8 +296,7 @@
     "objectMetadataList" : [
       [
         "CB766F92-EE55-4A63-9401-E7B8C009764D",
-        "Root",
-        "GridMaterial"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -305,7 +304,8 @@
       },
       [
         "CB766F92-EE55-4A63-9401-E7B8C009764D",
-        "Root"
+        "Root",
+        "GridMaterial"
       ],
       {
         "isExpanded" : true,

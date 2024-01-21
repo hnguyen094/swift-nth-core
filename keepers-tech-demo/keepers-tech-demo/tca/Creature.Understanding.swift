@@ -14,10 +14,13 @@ extension Creature {
 
         @Dependency(\.audioSession) private var audio
         @Dependency(\.soundAnalysis) private var soundAnalysis
+        @Dependency(\.arkitSessionManager) private var arkitSession
         
         struct State: Equatable {
             @BindingState var mightBeListeningToMusic: Bool = false
             @BindingState var soundAnalysisResult: SoundAnalyser.Result? = .none
+            @BindingState var surfaces: ARKitSessionManager.AvailableSurfaces = .init()
+            @BindingState var meshes: ARKitSessionManager.AvailableMeshes = .init()
         }
         
         enum Action: BindableAction {
@@ -30,22 +33,26 @@ extension Creature {
             Reduce { state, action in
                 switch action {
                 case .onLoad:
-                    return .merge(listeningToMusicTask, soundAnalysisTask)
+                    return .merge(
+                        listeningToMusicTask,
+                        soundAnalysisTask,
+                        meshUpdatesTask,
+                        planeUpdatesTask)
                 case .binding:
-                    doShit(with: state)
+                    doShit(with: &state)
                     return .none
                 }
             }
         }
         
-        private func doShit(with state: borrowing State) {
+        func doShit(with state: inout State) {
         }
     }
 }
 
 // MARK: Task Effects for onLoad
 extension Creature.Understanding {
-    fileprivate var listeningToMusicTask: EffectOf<Self> { .run(priority: .utility) { send in
+    private var listeningToMusicTask: EffectOf<Self> { .run(priority: .utility) { send in
         for await otherIsPlayingStatus in audio.anotherAppIsPlayingMusicUpdates {
             let listening = switch otherIsPlayingStatus {
             case .begin: true
@@ -55,11 +62,30 @@ extension Creature.Understanding {
             await send(.set(\.$mightBeListeningToMusic, listening))
         }
     }}
-    
-    fileprivate var soundAnalysisTask: EffectOf<Self> { .run(priority: .background) { send in
+
+    private var soundAnalysisTask: EffectOf<Self> { .run(priority: .background) { send in
         for await result in soundAnalysis.classificationUpdates() {
             // TODO: could probably handle some processing here
             await send(.set(\.$soundAnalysisResult, result))
+        }
+    }}
+    
+    private var planeUpdatesTask: EffectOf<Self> { .run(priority: .background) { send in
+        guard let planeData = await arkitSession.planeData else { return }
+        var classifications: ARKitSessionManager.AvailableSurfaces = .init()
+        for await update in planeData.anchorUpdates {
+            classifications.handleUpdate(update)
+            await send(.set(\.$surfaces, classifications))
+        }
+    }}
+
+    private var meshUpdatesTask: EffectOf<Self> { .run(priority: .background) { send in
+        guard let sceneReconstructionData = await arkitSession.sceneReconstructionData
+        else { return }
+        var classifications: ARKitSessionManager.AvailableMeshes = .init()
+        for await update in sceneReconstructionData.anchorUpdates {
+            classifications.handleUpdate(update)
+            await send(.set(\.$meshes, classifications))
         }
     }}
 }

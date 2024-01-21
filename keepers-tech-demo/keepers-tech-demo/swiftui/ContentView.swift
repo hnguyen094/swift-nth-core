@@ -93,7 +93,7 @@ struct ContentView: View {
             store.send(.set (\.$_useCustomMaterial, newValue))
         }
         .onChange(of: shouldShowTextBubble) { _, newValue in
-            store.send(.set(\.$textBubble, newValue ? "Hello World" : .none))
+            store.send(.set(\.$textBubble, newValue ? "Hello World!" : .none))
         }
         .onChange(of: showImmersiveSpace) { _, newValue in
             Task {

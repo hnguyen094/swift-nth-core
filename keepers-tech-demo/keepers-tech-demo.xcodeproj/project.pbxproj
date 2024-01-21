@@ -39,6 +39,7 @@
 		B2BE58C92B5C247300B28316 /* TextBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58C82B5C247300B28316 /* TextBubble.swift */; };
 		B2BE58CE2B5C6FA400B28316 /* TypeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58CD2B5C6FA400B28316 /* TypeText.swift */; };
 		B2BE58D02B5C92E800B28316 /* TaskExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58CF2B5C92E800B28316 /* TaskExtensions.swift */; };
+		B2BE58D22B5D389E00B28316 /* MeshAnchor.GeometryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58D12B5D389E00B28316 /* MeshAnchor.GeometryExtensions.swift */; };
 		B2DFE0B82B569645008CD4C1 /* ColorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DFE0B72B569645008CD4C1 /* ColorData.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,7 @@
 		B2BE58C82B5C247300B28316 /* TextBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBubble.swift; sourceTree = "<group>"; };
 		B2BE58CD2B5C6FA400B28316 /* TypeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeText.swift; sourceTree = "<group>"; };
 		B2BE58CF2B5C92E800B28316 /* TaskExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskExtensions.swift; sourceTree = "<group>"; };
+		B2BE58D12B5D389E00B28316 /* MeshAnchor.GeometryExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshAnchor.GeometryExtensions.swift; sourceTree = "<group>"; };
 		B2D3E9332B53BCFA003009C1 /* keepers-tech-demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "keepers-tech-demo.entitlements"; sourceTree = "<group>"; };
 		B2DFE0B72B569645008CD4C1 /* ColorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -228,6 +230,7 @@
 				B22C8E3C2B52AF870076CC12 /* SequenceExtensions.swift */,
 				B2BE58B92B5B226D00B28316 /* SNClassifySoundRequestExtensions.swift */,
 				B2BE58CF2B5C92E800B28316 /* TaskExtensions.swift */,
+				B2BE58D12B5D389E00B28316 /* MeshAnchor.GeometryExtensions.swift */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				B221ED0B2B550B0F006C24DF /* Logger.swift in Sources */,
 				B2BE58B02B5A8B5500B28316 /* Creature.Understanding.swift in Sources */,
 				B221ED0A2B550B0F006C24DF /* PersistentModelContext.swift in Sources */,
+				B2BE58D22B5D389E00B28316 /* MeshAnchor.GeometryExtensions.swift in Sources */,
 				B2A085672B52287F003AD224 /* ImmersiveView.swift in Sources */,
 				B22C8E3D2B52AF870076CC12 /* SequenceExtensions.swift in Sources */,
 				B221ED072B54F86B006C24DF /* Creature.Backing.swift in Sources */,

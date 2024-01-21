@@ -86,7 +86,6 @@ struct ContentView: View {
                     TextBubble(store: store)
                 }
             }
-//            .frame(depth: 100)
             .gesture(tap)
         }
         .onAppear { store.send(.onLoad) }

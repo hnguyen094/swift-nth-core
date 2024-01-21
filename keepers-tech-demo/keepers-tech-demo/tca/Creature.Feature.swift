@@ -17,7 +17,7 @@ extension Creature {
 
         struct State: Equatable {
             @BindingState var emotionAnimation: Emoting.Animation = .idle
-            @BindingState var textBubble: LocalizedStringKey? = "Hello world!"
+            @BindingState var textBubble: String? = "Hello world!"
             @BindingState var color: Backing.Color = .clear
                         
             var understanding: Understanding.State = .init()

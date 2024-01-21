@@ -37,6 +37,8 @@
 		B2BE58C52B5B278000B28316 /* SoundAnalyser.SoundType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58C42B5B278000B28316 /* SoundAnalyser.SoundType.swift */; };
 		B2BE58C72B5BF25F00B28316 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58C62B5BF25F00B28316 /* AudioEngine.swift */; };
 		B2BE58C92B5C247300B28316 /* TextBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58C82B5C247300B28316 /* TextBubble.swift */; };
+		B2BE58CE2B5C6FA400B28316 /* TypeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58CD2B5C6FA400B28316 /* TypeText.swift */; };
+		B2BE58D02B5C92E800B28316 /* TaskExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58CF2B5C92E800B28316 /* TaskExtensions.swift */; };
 		B2DFE0B82B569645008CD4C1 /* ColorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DFE0B72B569645008CD4C1 /* ColorData.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +75,8 @@
 		B2BE58C42B5B278000B28316 /* SoundAnalyser.SoundType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundAnalyser.SoundType.swift; sourceTree = "<group>"; };
 		B2BE58C62B5BF25F00B28316 /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
 		B2BE58C82B5C247300B28316 /* TextBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBubble.swift; sourceTree = "<group>"; };
+		B2BE58CD2B5C6FA400B28316 /* TypeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeText.swift; sourceTree = "<group>"; };
+		B2BE58CF2B5C92E800B28316 /* TaskExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskExtensions.swift; sourceTree = "<group>"; };
 		B2D3E9332B53BCFA003009C1 /* keepers-tech-demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "keepers-tech-demo.entitlements"; sourceTree = "<group>"; };
 		B2DFE0B72B569645008CD4C1 /* ColorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,6 +131,7 @@
 		B28AD6C32B56E9EB0071D32C /* swiftui */ = {
 			isa = PBXGroup;
 			children = (
+				B2BE58CC2B5C6F7100B28316 /* modifiers */,
 				B2A085642B52287F003AD224 /* ContentView.swift */,
 				B2A085662B52287F003AD224 /* ImmersiveView.swift */,
 				B2BE58C82B5C247300B28316 /* TextBubble.swift */,
@@ -193,6 +198,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B2BE58CC2B5C6F7100B28316 /* modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				B2BE58CD2B5C6FA400B28316 /* TypeText.swift */,
+			);
+			path = modifiers;
+			sourceTree = "<group>";
+		};
 		B2E1306A2B522EDF002CBE8A /* ecs */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +227,7 @@
 				B22C8E322B5241B50076CC12 /* DataProviderExtensions.swift */,
 				B22C8E3C2B52AF870076CC12 /* SequenceExtensions.swift */,
 				B2BE58B92B5B226D00B28316 /* SNClassifySoundRequestExtensions.swift */,
+				B2BE58CF2B5C92E800B28316 /* TaskExtensions.swift */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -295,6 +309,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2BE58CE2B5C6FA400B28316 /* TypeText.swift in Sources */,
 				B221ED022B54E702006C24DF /* AppSchemas.swift in Sources */,
 				B2A085652B52287F003AD224 /* ContentView.swift in Sources */,
 				B221ED0D2B551FC3006C24DF /* ARKitSessionManager.swift in Sources */,
@@ -318,6 +333,7 @@
 				B2B777FC2B57B7CF00F82646 /* Follow.swift in Sources */,
 				B22C8E332B5241B50076CC12 /* DataProviderExtensions.swift in Sources */,
 				B22C8E312B523A850076CC12 /* CustomTimingFunction.swift in Sources */,
+				B2BE58D02B5C92E800B28316 /* TaskExtensions.swift in Sources */,
 				B2DFE0B82B569645008CD4C1 /* ColorData.swift in Sources */,
 				B22C8E2F2B523A720076CC12 /* AnimationResourceExtensions.swift in Sources */,
 				B22C8E3B2B5268EC0076CC12 /* Emoting.Animation.swift in Sources */,

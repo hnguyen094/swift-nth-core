@@ -51,7 +51,7 @@ enum Creature {
                     body.model = modelComponent
                 }
                 emotingComponent.desiredAnimation = newIntent.emotionAnimation
-                
+
                 let mesh = generateMesh(squareness: newIntent.squareness)
                 try? modelComponent.mesh.replace(with: mesh.contents)
             }

@@ -42,7 +42,7 @@ extension StepView {
 
             And it definitely sees you. Btw, does your index finger have something on it?
             """,
-            buttons: [.next, .arPermissions]),
+            buttons: [.standard, .arPermissions]),
         .futureDevelopment: .init(
             title: "are dreams just memes?",
             body: """
@@ -54,6 +54,6 @@ extension StepView {
 
             Send @nth_ami a follow on Twitter to let me know you’re interested. Alternatively, you can press this button. If there’s no interest, maybe it’s time I find a job again…
             """,
-            buttons: [.close, .showInterest])
+            buttons: [.previous, .close, .showInterest])
     ]
 }

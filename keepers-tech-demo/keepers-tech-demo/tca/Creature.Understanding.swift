@@ -23,6 +23,7 @@ extension Creature {
             @BindingState var meshes: ARKitSessionManager.AvailableMeshes = .init()
             
             var dirty: Bool = true
+            var runOptions: RunOptions = .all
         }
         
         enum Action: BindableAction {
@@ -37,12 +38,15 @@ extension Creature {
             Reduce { state, action in
                 switch action {
                 case .onLoad:
-                    return .merge(
+                    let runOptions = state.runOptions
+                    let tasks: [EffectOf<Self>] = [
                         intentComputeTask,
-                        listeningToMusicTask,
-                        soundAnalysisTask,
-                        meshUpdatesTask,
-                        planeUpdatesTask)
+                        runOptions.contains(.listenToMusic) ? listeningToMusicTask : .none,
+                        runOptions.contains(.soundAnalysis) ? soundAnalysisTask : .none,
+                        runOptions.contains(.planeUpdates) ? planeUpdatesTask : .none,
+                        runOptions.contains(.meshUpdates) ? meshUpdatesTask : .none
+                    ].compact()
+                    return .merge(tasks)
                 case .computeIntent:
                     if let intent = generateIntent(from: state) {
                         state.dirty = false
@@ -84,6 +88,19 @@ extension Creature {
             }
             return intent
         }
+    }
+}
+
+// MARK: Run Options
+extension Creature.Understanding {
+    struct RunOptions: OptionSet {
+        let rawValue: Int
+        static let listenToMusic = Self(rawValue: 1 << 0)
+        static let soundAnalysis = Self(rawValue: 1 << 1)
+        static let planeUpdates = Self(rawValue: 1 << 2)
+        static let meshUpdates = Self(rawValue: 1 << 3)
+        
+        static let all = Self(rawValue: ~0)
     }
 }
 

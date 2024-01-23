@@ -18,9 +18,9 @@ extension Creature {
         struct State: Equatable {
             @BindingState var intent: Intent = .init()
             @BindingState var color: Backing.Color = .clear
-                        
-            var understanding: Understanding.State = .init()
             @BindingState var _useCustomMaterial: Bool = true
+
+            var understanding: Understanding.State? = .none
 
             fileprivate var backing: Backing? = .none
             // store which classifications is approved, which unknown,(& implicitly which denied)
@@ -32,6 +32,9 @@ extension Creature {
 
             case onLoad
             case onBackingLoad(Creature.Backing?)
+
+            case runUnderstanding(Understanding.RunOptions)
+            case stopUnderstanding
             
             case _nextAnimation
             case _toggleTextBubble(Bool)
@@ -40,21 +43,21 @@ extension Creature {
         
         var body: some ReducerOf<Self> {
             BindingReducer()
-            Scope(state: \.understanding, action: /Action.understanding) {
-                Understanding()
-            }
 
             bindingBackingGlue
             
             Reduce { state, action in
                 switch action {
                 case .onLoad:
-                    return .merge(
-                        loadBacking,
-                        .send(.understanding(.onLoad))
-                    )
+                    return loadBacking
                 case .onBackingLoad(let backing):
                     state.backing = backing
+                    return .none
+                case .runUnderstanding(let runOptions):
+                    state.understanding = .init(runOptions: runOptions)
+                    return .send(.understanding(.onLoad))
+                case .stopUnderstanding:
+                    state.understanding = .none
                     return .none
                 case ._nextAnimation:
                     let index = Emoting.Animation.allCases.firstIndex(of: state.intent.emotionAnimation)!
@@ -73,6 +76,9 @@ extension Creature {
                 case .binding, .understanding:
                     return .none
                 }
+            }
+            .ifLet(\.understanding, action: /Action.understanding) {
+                Understanding()
             }
         }
         

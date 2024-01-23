@@ -10,14 +10,19 @@ import ComposableArchitecture
 extension keepers_tech_demoApp {
     @Reducer
     struct Feature: Reducer {
-        struct State: Equatable {
+        struct State {
             var step: Step
-            var name: String
+            var name: String = "Ami"
+            var creature: Creature.Feature.State? = .none
         }
         
         enum Action {
             case next
+            case previous
             case skipAll
+            
+            case enableCreature
+            case creature(Creature.Feature.Action)
         }
         
         var body: some ReducerOf<Self> {
@@ -26,10 +31,20 @@ extension keepers_tech_demoApp {
                 case .next:
                     state.step.next()
                     return .none
+                case .previous:
+                    state.step.previous()
+                    return .none
                 case .skipAll:
-                    state.step = Step.allCases.last!
+                    state.step = .futureDevelopment
+                    return .none
+                case .enableCreature:
+                    state.creature = .init()
+                    return .none
+                case .creature:
                     return .none
                 }
+            }.ifLet(\.creature, action: /Action.creature) {
+                Creature.Feature()
             }
         }
     }

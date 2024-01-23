@@ -1,11 +1,11 @@
 //
-//  StepView.Content.swift
+//  StepData.Content.swift
 //  keepers-tech-demo
 //
 //  Created by hung on 1/22/24.
 //
 
-extension StepView {
+extension demoApp {
     static let stepData: [Step: StepData] = [
         .welcomeAbstract: .init(
             title: "dreaming of a modern virtual pet",
@@ -26,7 +26,7 @@ extension StepView {
         .immersiveIntro: .init(
             title: "everywhere all at once",
             body: """
-            Once %@ does have your attention, there are no bounds. It should be able to go anywhere it wants. Imagination’s the limit.
+            Once your critter, %@, does have your attention, there are no bounds. It should be able to go anywhere it wants. Imagination’s the limit.
             """,
             buttons: .standard),
         .soundAnalyserIntro: .init(
@@ -52,8 +52,12 @@ extension StepView {
 
             With enough development resources, it would be able to learn your habits, how you like to show affection, or what tricks it needs to learn to get the best treats. And so much more.
 
-            Send @nth_ami a follow on Twitter to let me know you’re interested. Alternatively, you can press this button. If there’s no interest, maybe it’s time I find a job again…
+            Send @nth_ami a follow on Twitter to let me know you’re interested. Alternatively, you can press the thumbs up button. If there’s no interest, maybe it’s time I find a job again…
             """,
-            buttons: [.previous, .close, .showInterest])
+            buttons: [.previous, .goToControls, .showInterest]),
+        .controls: .init(
+            title: "",
+            body: "",
+            buttons: [.showInterest, .restart])
     ]
 }

@@ -6,26 +6,40 @@
 //
 
 import ComposableArchitecture
+import SwiftUI
 
-extension keepers_tech_demoApp {
+extension demoApp {
     @Reducer
     struct Feature: Reducer {
+        @Dependency(\.logger) var logger
+        
+        @Environment(\.openImmersiveSpace) var openImmersiveSpace
+        @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
+        @Environment(\.openWindow) var openWindow
+        @Environment(\.dismissWindow) var dismissWindow
+        
         struct State {
-            var step: Step
-            var name: String = "Ami"
-            var creature: Creature.Feature.State? = .none
+            @BindingState var step: Step
+            @BindingState var name: String = "Ami"
+            @BindingState var creature: Creature.Feature.State? = .none
+            
+            @BindingState var isVolumeOpen: Bool = false
+            @BindingState var isImmersiveSpaceOpen: Bool = false
         }
         
-        enum Action {
+        enum Action: BindableAction {
+            case binding(BindingAction<State>)
+
             case next
             case previous
-            case skipAll
+            case run(EnvironmentAction)
             
-            case enableCreature
             case creature(Creature.Feature.Action)
         }
         
         var body: some ReducerOf<Self> {
+            BindingReducer()
+
             Reduce { state, action in
                 switch action {
                 case .next:
@@ -34,23 +48,37 @@ extension keepers_tech_demoApp {
                 case .previous:
                     state.step.previous()
                     return .none
-                case .skipAll:
-                    state.step = .futureDevelopment
-                    return .none
-                case .enableCreature:
-                    state.creature = .init()
-                    return .none
-                case .creature:
+                case .run(let environmentAction):
+                    return .run { send in
+                        switch environmentAction {
+                        case .openImmersiveSpace(let id):
+                            await openImmersiveSpace(id: id)
+                        case .dismissImmersiveSpace:
+                            await dismissImmersiveSpace()
+                        case .openWindow(let id):
+                            openWindow(id: id)
+                        case .dismissWindow(let id):
+                            dismissWindow(id: id)
+                        }
+                    }
+                case .creature, .binding:
                     return .none
                 }
             }.ifLet(\.creature, action: /Action.creature) {
                 Creature.Feature()
             }
         }
+        
+        enum EnvironmentAction: Equatable {
+            case openImmersiveSpace(String)
+            case dismissImmersiveSpace
+            case openWindow(String)
+            case dismissWindow(String)
+        }
     }
 }
 
-extension keepers_tech_demoApp {
+extension demoApp {
     enum Step: Int, CaseIterable, Comparable, Equatable {
         case heroScreen
         case welcomeAbstract
@@ -59,7 +87,7 @@ extension keepers_tech_demoApp {
         case soundAnalyserIntro
         case meshClassificationIntro
         case futureDevelopment
-        case complete
+        case controls
         
         mutating func next() {
             self = Self(rawValue: self.rawValue + 1) ?? Self.allCases.last!

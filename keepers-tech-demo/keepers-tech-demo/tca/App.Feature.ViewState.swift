@@ -7,13 +7,15 @@
 
 import Foundation
 
-extension keepers_tech_demoApp {
+extension demoApp {
     struct ViewState: Equatable {
         var step: Step
         var name: String
         var showCreature: Bool
-        
-        init(state: keepers_tech_demoApp.Feature.State) {
+        var isVolumeOpen: Bool
+        var isImmersiveSpaceOpen: Bool
+
+        init(state: demoApp.Feature.State) {
             step = state.step
             name = state.name
             if case .none = state.creature {
@@ -21,10 +23,12 @@ extension keepers_tech_demoApp {
             } else {
                 showCreature = true
             }
+            isVolumeOpen = state.isVolumeOpen
+            isImmersiveSpaceOpen = state.isImmersiveSpaceOpen
         }
     }
 }
 
-extension keepers_tech_demoApp.Feature.State {
-    var viewState: keepers_tech_demoApp.ViewState { .init(state: self) }
+extension demoApp.Feature.State {
+    var viewState: demoApp.ViewState { .init(state: self) }
 }

@@ -69,9 +69,9 @@ private struct TypeTextModifier: ViewModifier {
                         // Blink the cursor a few times.
                         for _ in 0..<2 {
                             text = startText + cursor
-                            try await Task.sleep(for: .milliseconds(5 * speed))
+                            try await Task.sleep(for: .milliseconds(500))
                             text = startText
-                            try await Task.sleep(for: .milliseconds(2 * speed))
+                            try await Task.sleep(for: .milliseconds(200))
                         }
                         
                         // Delete the old text.
@@ -93,18 +93,18 @@ private struct TypeTextModifier: ViewModifier {
                         // Blink the cursor a few times.
                         for _ in 0..<2 {
                             text = finalText + cursor
-                            try await Task.sleep(for: .milliseconds(3 * speed))
+                            try await Task.sleep(for: .milliseconds(500))
                             text = finalText
-                            try await Task.sleep(for: .milliseconds(2 * speed))
+                            try await Task.sleep(for: .milliseconds(200))
                         }
 //                        
 //                        // Wrap up the animation.
 //                        try await Task.sleep(for: .milliseconds(4 * speed))
                         text = finalText
+                        isFinished = true
                     } catch is CancellationError {
                         text = ""
                     }
-                    isFinished = true
                 }.eraseToAnyCancellable()
             }
     }

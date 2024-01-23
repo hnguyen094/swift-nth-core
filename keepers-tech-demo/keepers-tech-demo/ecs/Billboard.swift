@@ -21,9 +21,7 @@ enum Billboard {
         
         static let query = EntityQuery(where: .has(Component.self))
 
-        init(scene: Scene) {
-            logger.debug("Billboard System: started in scene [\(scene.id)]")
-        }
+        init(scene: Scene) { }
         
         func update(context: SceneUpdateContext) {
             let entities = context.entities(matching: Self.query, updatingSystemWhen: .rendering)
@@ -48,9 +46,10 @@ enum Billboard {
                 if case .direct = mode { return }
                 defer { entity.transform = transform }
                 
-                guard case .lazy(let value) = mode else { 
+                guard case .lazy(let value) = mode else {
                     logger.error("Missing implementation for \(String(describing: mode)) in billboard system.")
-                    return } // TODO: log issue, missing impl
+                    return
+                } // TODO: log issue, missing impl
                 transform.rotation = simd_slerp(transform.rotation, entity.transform.rotation, Float(context.deltaTime * value))
             }
         }

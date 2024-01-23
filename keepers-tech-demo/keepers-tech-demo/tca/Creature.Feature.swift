@@ -35,6 +35,7 @@ extension Creature {
             
             case _nextAnimation
             case _toggleTextBubble(Bool)
+            case _changeSquareness(Float)
         }
         
         var body: some ReducerOf<Self> {
@@ -63,6 +64,9 @@ extension Creature {
                     state.intent.textBubble = shouldShow
                     ? "Hello World!"
                     : .none
+                    return .none
+                case ._changeSquareness(let squareness):
+                    state.intent.squareness = squareness
                     return .none
                 case .understanding(.newIntent(let intent)):
                     return .send(.set(\.$intent, intent))

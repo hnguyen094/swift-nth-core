@@ -16,6 +16,11 @@ extension DependencyValues {
 }
 
 struct SoundAnalyser {
+    // time between updates = [duration * (1 - overlapFactor)]
+    static let preferredWindowDuration: Double = 2
+    static let preferredOverlapFactor: Double? = .none
+    static let minimumConfidenceThreshold: Double = 0.2
+    
     private let streamAnalyzer: SNAudioStreamAnalyzer?
     fileprivate let observer: SNObserver = SNObserver()
     fileprivate static let analysisQueue = DispatchQueue(label: "com.nth.soundanalysis")
@@ -32,8 +37,11 @@ struct SoundAnalyser {
         
         do {
             let request = try SNClassifySoundRequest(classifierIdentifier: .version1)
-            if let windowDuration = request.getWindowDuration(preferredDuration: 2) {
+            if let windowDuration = request.getWindowDuration(preferredDuration: Self.preferredWindowDuration) {
                 request.windowDuration = windowDuration
+            }
+            if let overlapFactor = Self.preferredOverlapFactor {
+            request.overlapFactor = overlapFactor
             }
             try streamAnalyzer!.add(request, withObserver: observer)
 
@@ -74,7 +82,7 @@ extension SoundAnalyser: DependencyKey {
             continuation?.yield(.init(
                 timeRange: result.timeRange.start.seconds..<result.timeRange.end.seconds,
                 classifications: result.classifications
-                    .filter({ $0.confidence > 0.25 })
+                    .filter({ $0.confidence > SoundAnalyser.minimumConfidenceThreshold })
                     .map({ Classification(from: $0) })))
         }
         

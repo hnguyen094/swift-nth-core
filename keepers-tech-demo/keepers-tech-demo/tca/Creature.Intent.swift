@@ -11,5 +11,6 @@ extension Creature {
     struct Intent: Equatable, Codable {
         var emotionAnimation: Emoting.Animation = .idle
         var textBubble: String? = .none
+        var squareness: Float = 1
     }
 }

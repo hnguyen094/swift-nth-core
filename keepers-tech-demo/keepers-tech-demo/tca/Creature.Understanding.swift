@@ -70,16 +70,16 @@ extension Creature {
 
             if let soundAnalysisResult = state.soundAnalysisResult {
                 let confidentResults = soundAnalysisResult.classifications
-                    .filter { $0.confidence > 0.7 }
+                    .filter { $0.confidence > 0.5 }
                 
                 let result = confidentResults
                     .compactMap({ SoundAnalyser.soundTypeEmojiMapping[$0.label] })
                     .reduce(into: "") { result, mappedEmoji in
-                    result = result + " " + mappedEmoji
+                    result = result + mappedEmoji
                 }
-                if let hasMusic = confidentResults.first(where: { $0.label == .music }) {
-                    intent.emotionAnimation = .dance
-                }
+//                if let hasMusic = confidentResults.first(where: { $0.label == .music }) {
+//                    intent.emotionAnimation = .dance
+//                }
                 intent.textBubble = result == "" ? .none : result
             }
             return intent
@@ -91,7 +91,7 @@ extension Creature {
 extension Creature.Understanding {
     private var intentComputeTask: EffectOf<Self> { .run(priority: .utility) { send in
         while(true) {
-            let milliseconds = (1 + UInt64.random(in: 0...1)) * 3000
+            let milliseconds = /*(1 + UInt64.random(in: 0...1)) * */2000
             try await Task.sleep(for: .milliseconds(milliseconds))
             await send(.computeIntent)
         }
@@ -111,6 +111,17 @@ extension Creature.Understanding {
     private var soundAnalysisTask: EffectOf<Self> { .run(priority: .background) { send in
         for await result in soundAnalysis.classificationUpdates() {
             // TODO: could probably handle some processing here
+            var msg = "\(result.timeRange):\n"
+            var wasHigh = true
+            for classification in result.classifications {
+                if wasHigh && classification.confidence < 0.5 {
+                    msg += "\n"
+                    wasHigh = false
+                }
+                let confidence = String(format: "%.2f", classification.confidence)
+                msg += "\(confidence): \(classification.label.rawValue)\n"
+            }
+            logger.debug("\(msg)")
             await send(.set(\.$soundAnalysisResult, result))
         }
     }}

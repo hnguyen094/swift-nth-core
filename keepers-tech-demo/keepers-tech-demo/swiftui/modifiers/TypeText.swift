@@ -15,14 +15,16 @@ extension View {
         text: Binding<String>,
         finalText: String?,
         cursor: String = "|",
-        isAnimated: Bool = true
-    ) -> some View {        
+        isAnimated: Bool = true,
+        isFinished: Binding<Bool>? = .none
+    ) -> some View {
         self.modifier(
             TypeTextModifier(
                 text: text,
                 finalText: finalText,
                 cursor: cursor,
-                isAnimated: isAnimated
+                isAnimated: isAnimated,
+                isFinished: isFinished ?? Binding.constant(true)
             )
         )
     }
@@ -33,6 +35,7 @@ private struct TypeTextModifier: ViewModifier {
     var finalText: String?
     var cursor: String
     var isAnimated: Bool
+    @Binding var isFinished: Bool
     
     @State private var animationTask: AnyCancellable? = .none
 
@@ -46,10 +49,12 @@ private struct TypeTextModifier: ViewModifier {
                 
                 guard let finalText = finalText else {
                     text = ""
+                    isFinished = true
                     return
                 }
                 if isAnimated == false || finalText == text {
                     text = finalText
+                    isFinished = true
                     return
                 }
                 
@@ -85,6 +90,7 @@ private struct TypeTextModifier: ViewModifier {
                         try await Task.sleep(for: .milliseconds(400))
                         text = finalText
                     } catch is CancellationError { }
+                    isFinished = true
                 }.eraseToAnyCancellable()
             }
     }

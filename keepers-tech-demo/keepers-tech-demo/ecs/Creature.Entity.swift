@@ -43,12 +43,17 @@ enum Creature {
         private func subscribeToStore() {
             viewStore.publisher.intent.sink { [weak self] newIntent in
                 guard let self = self, let body = self.body,
-                      var emotingComponent = body.components[Emoting.Component.self]
+                      var emotingComponent = body.components[Emoting.Component.self],
+                      let modelComponent = body.model
                 else { return }
                 defer {
                     body.components.set(emotingComponent)
+                    body.model = modelComponent
                 }
                 emotingComponent.desiredAnimation = newIntent.emotionAnimation
+                
+                let mesh = generateMesh(squareness: newIntent.squareness)
+                try? modelComponent.mesh.replace(with: mesh.contents)
             }
             .store(in: &cancellables)
             viewStore.publisher.color.sink { [weak self] color in
@@ -92,7 +97,7 @@ enum Creature {
             if case .none = self.customMaterialSource {
                 logger.fault("Custom material missing when initializing Creature.")
             }
-            let mesh = MeshResource.generateBox(width: 1, height: 1, depth: 0.35, cornerRadius: 0.35)
+            let mesh = generateMesh(squareness: viewStore.intent.squareness)
             let material: Material = customMaterialSource ?? SimpleMaterial(color: .init(viewStore.color), roughness: 0.5, isMetallic: false)
             let body = ModelEntity(mesh: mesh, materials: [material])
             body.components.set(Emoting.Component())
@@ -126,6 +131,12 @@ enum Creature {
             container.addChild(model)
             
             addChild(container)
+        }
+        
+        private func generateMesh(squareness: Float) -> MeshResource {
+            let sphereness = 1 - squareness
+            return .generateBox(width: 1, height: 1, depth: 0.35 + sphereness * 0.65, cornerRadius: 0.35 + sphereness * 0.15)
+//            return MeshResource.generateBox(width: 1, height: 1, depth: 0.35, cornerRadius: 0.35)
         }
         
         @MainActor required init() {

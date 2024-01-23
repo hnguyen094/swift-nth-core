@@ -19,6 +19,7 @@ struct ContentView: View {
     @State private var immersiveSpaceIsShown = false
     @State private var shouldUseCustomMaterial = true
     @State private var shouldShowTextBubble = false
+    @State private var squareness: Float = 0
 
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
@@ -64,6 +65,9 @@ struct ContentView: View {
                 }
                 .toggleStyle(.button)
                 .glassBackgroundEffect()
+                Slider(value: $squareness) {
+                    Text("Squareness")
+                }
                 Spacer()
             }
             RealityView { content, attachments in
@@ -94,6 +98,9 @@ struct ContentView: View {
         }
         .onChange(of: shouldShowTextBubble) { _, show in
             store.send(._toggleTextBubble(show))
+        }
+        .onChange(of: squareness) {_, squareness in
+            store.send(._changeSquareness(squareness))
         }
         .onChange(of: showImmersiveSpace) { _, newValue in
             Task {

@@ -42,6 +42,9 @@
 		B2BE58D22B5D389E00B28316 /* MeshAnchor.GeometryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58D12B5D389E00B28316 /* MeshAnchor.GeometryExtensions.swift */; };
 		B2BE58D42B5D61AF00B28316 /* Creature.Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58D32B5D61AF00B28316 /* Creature.Intent.swift */; };
 		B2BE58D82B5DC9C200B28316 /* SoundAnalyser.Emojis.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58D72B5DC9C100B28316 /* SoundAnalyser.Emojis.swift */; };
+		B2BE58DC2B5EA50B00B28316 /* App.Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58DB2B5EA50B00B28316 /* App.Feature.swift */; };
+		B2BE58DF2B5F1FFD00B28316 /* StepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58DE2B5F1FFC00B28316 /* StepView.swift */; };
+		B2BE58E12B5F338D00B28316 /* StepView.Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58E02B5F338D00B28316 /* StepView.Content.swift */; };
 		B2DFE0B82B569645008CD4C1 /* ColorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DFE0B72B569645008CD4C1 /* ColorData.swift */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +86,9 @@
 		B2BE58D12B5D389E00B28316 /* MeshAnchor.GeometryExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshAnchor.GeometryExtensions.swift; sourceTree = "<group>"; };
 		B2BE58D32B5D61AF00B28316 /* Creature.Intent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.Intent.swift; sourceTree = "<group>"; };
 		B2BE58D72B5DC9C100B28316 /* SoundAnalyser.Emojis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundAnalyser.Emojis.swift; sourceTree = "<group>"; };
+		B2BE58DB2B5EA50B00B28316 /* App.Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.Feature.swift; sourceTree = "<group>"; };
+		B2BE58DE2B5F1FFC00B28316 /* StepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepView.swift; sourceTree = "<group>"; };
+		B2BE58E02B5F338D00B28316 /* StepView.Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepView.Content.swift; sourceTree = "<group>"; };
 		B2D3E9332B53BCFA003009C1 /* keepers-tech-demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "keepers-tech-demo.entitlements"; sourceTree = "<group>"; };
 		B2DFE0B72B569645008CD4C1 /* ColorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +138,7 @@
 				B22C8E422B52EAE40076CC12 /* Creature.Feature.swift */,
 				B2BE58AF2B5A8B5400B28316 /* Creature.Understanding.swift */,
 				B2BE58D32B5D61AF00B28316 /* Creature.Intent.swift */,
+				B2BE58DB2B5EA50B00B28316 /* App.Feature.swift */,
 			);
 			path = tca;
 			sourceTree = "<group>";
@@ -143,6 +150,8 @@
 				B2A085642B52287F003AD224 /* ContentView.swift */,
 				B2A085662B52287F003AD224 /* ImmersiveView.swift */,
 				B2BE58C82B5C247300B28316 /* TextBubble.swift */,
+				B2BE58DE2B5F1FFC00B28316 /* StepView.swift */,
+				B2BE58E02B5F338D00B28316 /* StepView.Content.swift */,
 			);
 			path = swiftui;
 			sourceTree = "<group>";
@@ -324,6 +333,7 @@
 				B221ED0D2B551FC3006C24DF /* ARKitSessionManager.swift in Sources */,
 				B2BE58C32B5B23AA00B28316 /* SoundAnalyser.swift in Sources */,
 				B2A085632B52287F003AD224 /* keepers_tech_demoApp.swift in Sources */,
+				B2BE58E12B5F338D00B28316 /* StepView.Content.swift in Sources */,
 				B22C8E432B52EAE40076CC12 /* Creature.Feature.swift in Sources */,
 				B22C8E392B5257290076CC12 /* Creature.Entity.swift in Sources */,
 				B2BE58BF2B5B226D00B28316 /* SNClassifySoundRequestExtensions.swift in Sources */,
@@ -345,10 +355,12 @@
 				B2B777FC2B57B7CF00F82646 /* Follow.swift in Sources */,
 				B22C8E332B5241B50076CC12 /* DataProviderExtensions.swift in Sources */,
 				B22C8E312B523A850076CC12 /* CustomTimingFunction.swift in Sources */,
+				B2BE58DC2B5EA50B00B28316 /* App.Feature.swift in Sources */,
 				B2BE58D02B5C92E800B28316 /* TaskExtensions.swift in Sources */,
 				B2DFE0B82B569645008CD4C1 /* ColorData.swift in Sources */,
 				B22C8E2F2B523A720076CC12 /* AnimationResourceExtensions.swift in Sources */,
 				B22C8E3B2B5268EC0076CC12 /* Emoting.Animation.swift in Sources */,
+				B2BE58DF2B5F1FFD00B28316 /* StepView.swift in Sources */,
 				B2BE58AE2B5A7E8F00B28316 /* AudioSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -62,11 +62,23 @@ extension demoApp {
         }
         if options?.contains(.showInterest) ?? false {
             ToolbarItem(placement: .bottomOrnament) {
-                Button("+1", systemImage: "hand.thumbsup.fill") {
-                    store.send(.vote)
+                WithViewStore(store, observe: \.voteCount) { viewStore in
+                    let hasValue = viewStore.state != .none
+                    if hasValue {
+                        Button("+\(viewStore.state!)", systemImage: "hand.thumbsup.fill") {
+                            store.send(.vote)
+                        }
+                        .labelStyle(.titleAndIcon)
+                        .help("Show Interest")
+                        .animation(.spring, value: viewStore.state)
+                    } else {
+                        Button("Show Interest", systemImage: "hand.thumbsup") {
+                            store.send(.vote)
+                        }
+                        .buttonBorderShape(.circle)
+                        .help("Show Interest")
+                    }
                 }
-                .labelStyle(.titleAndIcon)
-                .help("Show Interest")
             }
         }
     }

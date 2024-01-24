@@ -26,6 +26,8 @@ extension demoApp {
             
             @BindingState var isVolumeOpen: Bool = false
             @BindingState var isImmersiveSpaceOpen: Bool = false
+            
+            @BindingState var voteCount: Int64? = .none
         }
         
         enum Action: BindableAction {
@@ -64,8 +66,9 @@ extension demoApp {
                         }
                     }
                 case .vote:
-                    cloudkit.vote()
-                    return .none
+                    return .run { send in
+                        await send(.set(\.$voteCount, await cloudkit.voteAsync()))
+                    }
                 case .creature, .binding:
                     return .none
                 }

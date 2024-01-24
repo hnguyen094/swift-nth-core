@@ -74,5 +74,10 @@ struct demoApp: App {
         Billboard.System.registerSystem()
         Follow.Component.registerComponent()
         Follow.System.registerSystem()
+
+        Demo.Component.registerComponent()
+        Demo.System.registerSystem()
+        Creature.Body.Component.registerComponent()
+        Creature.Body.System.registerSystem()
     }
 }

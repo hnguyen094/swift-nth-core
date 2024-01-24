@@ -33,6 +33,7 @@ enum Creature {
 //            components.set(Billboard.Component(mode: .lazy(0.25)))
 //            components.set(Billboard.Component(mode: .direct))
             components.set(InputTargetComponent(allowedInputTypes: .all))
+            components.set(Demo.Component())
 
             scale = .init(repeating: 0.1)
 
@@ -44,39 +45,27 @@ enum Creature {
             viewStore.publisher.intent.sink { [weak self] newIntent in
                 guard let self = self, let body = self.body,
                       var emotingComponent = body.components[Emoting.Component.self],
-                      let modelComponent = body.model
+                      var bodyComponent = body.components[Body.Component.self]
                 else { return }
                 defer {
                     body.components.set(emotingComponent)
-                    body.model = modelComponent
+                    body.components.set(bodyComponent)
                 }
                 emotingComponent.desiredAnimation = newIntent.emotionAnimation
-
-                let mesh = generateMesh(squareness: newIntent.squareness)
-                try? modelComponent.mesh.replace(with: mesh.contents)
+                bodyComponent.desiredSquareness = newIntent.squareness
             }
             .store(in: &cancellables)
             viewStore.publisher.color.sink { [weak self] color in
                 guard let self = self,
                       let body = self.body,
-                      let material = body.model!.materials.first
+                      var bodyComponent = body.components[Body.Component.self]
                 else { return }
-                switch material {
-                case is SimpleMaterial:
-                    let new = SimpleMaterial(color: .init(color), roughness: 0.5, isMetallic: false)
-                    body.model!.materials = [new]
-                case var shaderGraph as ShaderGraphMaterial:
-                    try? shaderGraph.setParameter(name: "BaseColor", value: .color(.init(color)))
-                    body.model!.materials = [shaderGraph]
-                default:
-                    logger.fault("Unexpected shader type. Falling back to SimpleMaterial")
-                    let new = SimpleMaterial(color: .init(color), roughness: 0.5, isMetallic: false)
-                    body.model!.materials = [new]
-                }
+                defer { body.components.set(bodyComponent) }
+                bodyComponent.desiredColor = color.toColorData()
             }
             .store(in: &cancellables)
             viewStore.publisher._useCustomMaterial.sink { [weak self]  useCustomMaterial in
-                guard let self = self, 
+                guard let self = self,
                       let body = self.body,
                       let customMaterial = customMaterialSource
                 else { return }
@@ -97,10 +86,10 @@ enum Creature {
             if case .none = self.customMaterialSource {
                 logger.fault("Custom material missing when initializing Creature.")
             }
-            let mesh = generateMesh(squareness: viewStore.intent.squareness)
-            let material: Material = customMaterialSource ?? SimpleMaterial(color: .init(viewStore.color), roughness: 0.5, isMetallic: false)
-            let body = ModelEntity(mesh: mesh, materials: [material])
+            let material: Material = customMaterialSource ?? SimpleMaterial()
+            let body = ModelEntity(mesh: .generateBox(size: 1), materials: [material])
             body.components.set(Emoting.Component())
+            body.components.set(Body.Component(color: viewStore.color, squareness: viewStore.intent.squareness))
             
             if !windowed { body.generateCollisionShapes(recursive: false) }
             
@@ -131,12 +120,6 @@ enum Creature {
             container.addChild(model)
             
             addChild(container)
-        }
-        
-        private func generateMesh(squareness: Float) -> MeshResource {
-            let sphereness = 1 - squareness
-            return .generateBox(width: 1, height: 1, depth: 0.35 + sphereness * 0.65, cornerRadius: 0.35 + sphereness * 0.15)
-//            return MeshResource.generateBox(width: 1, height: 1, depth: 0.35, cornerRadius: 0.35)
         }
         
         @MainActor required init() {

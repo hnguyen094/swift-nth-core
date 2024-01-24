@@ -27,7 +27,8 @@ struct TextBubble: View {
                     .offset(x: 0, y: visible ? 0 : 50)
                     .typeText(
                         text: $text,
-                        finalText: viewStore.state)
+                        finalText: viewStore.state,
+                        speed: 20)
                     .animation(.easeOut(duration: visible ? 1.5 : 1), value: visible)
                 Circle()
                     .frame(width: 30, height: 25)

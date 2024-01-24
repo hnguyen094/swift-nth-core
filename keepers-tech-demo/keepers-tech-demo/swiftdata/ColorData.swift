@@ -8,7 +8,7 @@
 import SwiftUI
 import RealityKit
 
-struct ColorData: Codable {
+struct ColorData: Codable, Equatable {
     let red: Float
     let green: Float
     let blue: Float

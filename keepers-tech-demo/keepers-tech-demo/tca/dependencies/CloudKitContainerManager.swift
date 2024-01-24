@@ -25,6 +25,7 @@ struct CloudKitContainerManager {
     }
     
     // TODO: add to queue, and have queue process multiple clicks at once to avoid oplock
+    // TODO: merge all records, or find a safe way to concurrently edit records. Potential solution: https://stackoverflow.com/questions/29373056/increment-field-value-in-a-ckrecord-variable-without-fetching
     func voteAsync() async -> Int64? {
         do {
             let id = try await CKContainer.default().userRecordID()

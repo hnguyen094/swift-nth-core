@@ -17,6 +17,7 @@ extension Creature {
 
         struct State: Equatable {
             @BindingState var intent: Intent = .init()
+            @BindingState var demoMode: Demo.Mode? = .none
             @BindingState var color: Backing.Color = .clear
             @BindingState var name: String = "critter"
             @BindingState var _useCustomMaterial: Bool = true
@@ -111,7 +112,7 @@ extension Creature {
                         guard let backing = state.backing else { return .none }
                         backing.name = state.name
                         return .none
-                    case \.$intent:
+                    case \.$intent, \.$demoMode:
                         return .none
                     default:
                         logger.warning("Missing glue for binding action [\(bindedAction.customDumpDescription)].")

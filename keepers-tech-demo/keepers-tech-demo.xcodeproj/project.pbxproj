@@ -13,6 +13,8 @@
 		B221ED0B2B550B0F006C24DF /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221ED092B550B0F006C24DF /* Logger.swift */; };
 		B221ED0D2B551FC3006C24DF /* ARKitSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221ED0C2B551FC3006C24DF /* ARKitSessionManager.swift */; };
 		B221ED0F2B55581F006C24DF /* Billboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221ED0E2B55581F006C24DF /* Billboard.swift */; };
+		B2273B042B618CE8008D0A97 /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2273B032B618CE8008D0A97 /* Demo.swift */; };
+		B2273B062B61A2D3008D0A97 /* Creature.Body.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2273B052B61A2D3008D0A97 /* Creature.Body.swift */; };
 		B22C8E2F2B523A720076CC12 /* AnimationResourceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E2E2B523A720076CC12 /* AnimationResourceExtensions.swift */; };
 		B22C8E312B523A850076CC12 /* CustomTimingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E302B523A850076CC12 /* CustomTimingFunction.swift */; };
 		B22C8E332B5241B50076CC12 /* DataProviderExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E322B5241B50076CC12 /* DataProviderExtensions.swift */; };
@@ -63,6 +65,8 @@
 		B221ED092B550B0F006C24DF /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B221ED0C2B551FC3006C24DF /* ARKitSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARKitSessionManager.swift; sourceTree = "<group>"; };
 		B221ED0E2B55581F006C24DF /* Billboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Billboard.swift; sourceTree = "<group>"; };
+		B2273B032B618CE8008D0A97 /* Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
+		B2273B052B61A2D3008D0A97 /* Creature.Body.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.Body.swift; sourceTree = "<group>"; };
 		B22C8E2E2B523A720076CC12 /* AnimationResourceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationResourceExtensions.swift; sourceTree = "<group>"; };
 		B22C8E302B523A850076CC12 /* CustomTimingFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimingFunction.swift; sourceTree = "<group>"; };
 		B22C8E322B5241B50076CC12 /* DataProviderExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderExtensions.swift; sourceTree = "<group>"; };
@@ -270,6 +274,8 @@
 				B221ED0E2B55581F006C24DF /* Billboard.swift */,
 				B2B777FB2B57B7CF00F82646 /* Follow.swift */,
 				B22C8E382B5257290076CC12 /* Creature.Entity.swift */,
+				B2273B052B61A2D3008D0A97 /* Creature.Body.swift */,
+				B2273B032B618CE8008D0A97 /* Demo.swift */,
 			);
 			path = ecs;
 			sourceTree = "<group>";
@@ -393,6 +399,7 @@
 				B2BE58D42B5D61AF00B28316 /* Creature.Intent.swift in Sources */,
 				B2BE58D82B5DC9C200B28316 /* SoundAnalyser.Emojis.swift in Sources */,
 				B22C8E3D2B52AF870076CC12 /* SequenceExtensions.swift in Sources */,
+				B2273B042B618CE8008D0A97 /* Demo.swift in Sources */,
 				B221ED072B54F86B006C24DF /* Creature.Backing.swift in Sources */,
 				B2BE58C92B5C247300B28316 /* TextBubble.swift in Sources */,
 				B2BE58E52B5FCB2400B28316 /* App.Feature.ViewState.swift in Sources */,
@@ -404,6 +411,7 @@
 				B2BE58EA2B601FF900B28316 /* StepHeroView.swift in Sources */,
 				B22C8E312B523A850076CC12 /* CustomTimingFunction.swift in Sources */,
 				B2BE58DC2B5EA50B00B28316 /* App.Feature.swift in Sources */,
+				B2273B062B61A2D3008D0A97 /* Creature.Body.swift in Sources */,
 				B2BE58D02B5C92E800B28316 /* TaskExtensions.swift in Sources */,
 				B2DFE0B82B569645008CD4C1 /* ColorData.swift in Sources */,
 				B22C8E2F2B523A720076CC12 /* AnimationResourceExtensions.swift in Sources */,

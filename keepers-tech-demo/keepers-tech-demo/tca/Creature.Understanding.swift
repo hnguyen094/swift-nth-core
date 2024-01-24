@@ -77,11 +77,18 @@ extension Creature {
                 let confidentResults = soundAnalysisResult.classifications
                     .filter { $0.confidence > 0.5 }
                 
-                let result = confidentResults
-                    .compactMap({ SoundAnalyser.soundTypeEmojiMapping[$0.label] })
-                    .reduce(into: "") { result, mappedEmoji in
-                    result = result + mappedEmoji
+//                let result = confidentResults
+//                    .compactMap({ SoundAnalyser.soundTypeEmojiMapping[$0.label] })
+//                    .reduce(into: "") { result, mappedEmoji in
+//                    result = result + mappedEmoji
+//                }
+                let result: String? = if let highConfidence = soundAnalysisResult.classifications.first {
+                    "hearing... " + highConfidence.label.rawValue.replacingOccurrences(of: "_", with: " ") + " "
+                    + (SoundAnalyser.soundTypeEmojiMapping[highConfidence.label] ?? "") + String.init(repeating: "?", count: Int((1-highConfidence.confidence) / 0.2))
+                } else {
+                    .none
                 }
+                
 //                if let hasMusic = confidentResults.first(where: { $0.label == .music }) {
 //                    intent.emotionAnimation = .dance
 //                }
@@ -110,7 +117,7 @@ extension Creature.Understanding {
 extension Creature.Understanding {
     private var intentComputeTask: EffectOf<Self> { .run(priority: .utility) { send in
         while(true) {
-            let milliseconds = /*(1 + UInt64.random(in: 0...1)) * */2000
+            let milliseconds = /*(1 + UInt64.random(in: 0...1)) * */4000
             try await Task.sleep(for: .milliseconds(milliseconds))
             await send(.computeIntent)
         }

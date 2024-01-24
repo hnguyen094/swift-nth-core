@@ -102,13 +102,13 @@ extension demoApp {
                     Button("Enable Listening", systemImage: "mic.fill") {
                         Task {
                             switch AVCaptureDevice.authorizationStatus(for: .audio) {
-                            case .denied, .notDetermined:
-                                if await AVCaptureDevice.requestAccess(for: .audio) {
-                                    continueWithAuthorization()
-                                } else {
-                                    skipWithNoAuthorization()
+                            case .notDetermined:
+                                switch await AVCaptureDevice.requestAccess(for: .audio) {
+                                case true: continueWithAuthorization()
+                                case false: skipWithNoAuthorization()
                                 }
                             case .authorized: continueWithAuthorization()
+                            case .denied: await openSettings()
                             case .restricted: skipWithNoAuthorization()
                             @unknown default: skipWithNoAuthorization()
                             }
@@ -131,12 +131,11 @@ extension demoApp {
                             await arkitSession.attemptStartARKitSession()
                             
                             let authorization = await arkitSession.session.queryAuthorization(for: [.worldSensing, .handTracking])
-                            let missingAllAuthorization = authorization[.worldSensing] != .allowed && authorization[.handTracking] != .allowed
+                            let missingAnyAuthorization = authorization[.worldSensing] != .allowed || authorization[.handTracking] != .allowed
                             
-                            if missingAllAuthorization {
-                                logger.error("Cannot get worldSensing and handTracking authorization. Skipping.")
-                                // TODO: we should be able to fallback to using EntityAnchors through RealityKit for movement.
-                                store.send(.next)
+                            if missingAnyAuthorization {
+                                logger.debug("Missing worldSensing and handTracking authorization.")
+                                await openSettings()
                             } else {
                                 store.send(.creature(.runUnderstanding([.meshUpdates, .planeUpdates, .handUpdates]))) // TODO: run demo
                             }
@@ -148,6 +147,13 @@ extension demoApp {
             }
         }
 
+        @MainActor
+        private func openSettings() async {
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                await UIApplication.shared.open(url)
+            }
+        }
+        
         private func nameToggle(
             _ viewStore: ViewStoreOfView,
             _ name: String)

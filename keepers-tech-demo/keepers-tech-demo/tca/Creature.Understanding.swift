@@ -44,7 +44,8 @@ extension Creature {
                         runOptions.contains(.listenToMusic) ? listeningToMusicTask : .none,
                         runOptions.contains(.soundAnalysis) ? soundAnalysisTask : .none,
                         runOptions.contains(.planeUpdates) ? planeUpdatesTask : .none,
-                        runOptions.contains(.meshUpdates) ? meshUpdatesTask : .none
+                        runOptions.contains(.meshUpdates) ? meshUpdatesTask : .none,
+                        runOptions.contains(.handUpdates) ? handUpdatesTask : .none
                     ].compact()
                     return .merge(tasks)
                 case .computeIntent:
@@ -99,6 +100,7 @@ extension Creature.Understanding {
         static let soundAnalysis = Self(rawValue: 1 << 1)
         static let planeUpdates = Self(rawValue: 1 << 2)
         static let meshUpdates = Self(rawValue: 1 << 3)
+        static let handUpdates = Self(rawValue: 1 << 4)
         
         static let all = Self(rawValue: ~0)
     }
@@ -161,4 +163,6 @@ extension Creature.Understanding {
             await send(.set(\.$meshes, classifications))
         }
     }}
+    
+    private var handUpdatesTask: EffectOf<Self> { .none }
 }

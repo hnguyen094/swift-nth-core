@@ -26,12 +26,18 @@ class ARKitSessionManager {
     var handData: HandTrackingProvider? = .none
     var worldTrackingData: WorldTrackingProvider? = .none
 
+    var worldSensingAuthorized: Bool = false
+    var handTrackingAuthorized: Bool = false
+    
     private var sessionStarted = false
     
     func attemptStartARKitSession() async {
         guard !sessionStarted else { return }
         
         let authorizations = await session.requestAuthorization(for: [.handTracking, .worldSensing])
+        worldSensingAuthorized = authorizations[.worldSensing] == .allowed
+        handTrackingAuthorized = authorizations[.handTracking] == .allowed
+        
         logger.debug("worldSensing auth: \(authorizations[.worldSensing].debugDescription)")
         logger.debug("handTracking auth: \(authorizations[.handTracking].debugDescription)")
 

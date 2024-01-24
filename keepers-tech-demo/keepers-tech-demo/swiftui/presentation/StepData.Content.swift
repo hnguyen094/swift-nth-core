@@ -52,7 +52,7 @@ extension demoApp {
 
             With enough development resources, it would be able to learn your habits, how you like to show affection, or what tricks it needs to learn to get the best treats. And so much more.
 
-            Send @nth_ami a follow on Twitter to let me know you’re interested. Alternatively, you can press the thumbs up button. If there’s no interest, maybe it’s time I find a job again…
+            Send [@nth_ami](https://twitter.com/intent/user?screen_name=nth_ami) a follow on Twitter to let me know you’re interested. Alternatively, you can press the thumbs up button. If there’s no interest, maybe it’s time I find a job again…
             """,
             buttons: [.previous, .goToControls, .showInterest]),
         .controls: .init(

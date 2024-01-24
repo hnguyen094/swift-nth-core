@@ -12,6 +12,7 @@ extension demoApp {
     @Reducer
     struct Feature: Reducer {
         @Dependency(\.logger) var logger
+        @Dependency(\.cloudkitManager) var cloudkit
         
         @Environment(\.openImmersiveSpace) var openImmersiveSpace
         @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
@@ -33,6 +34,7 @@ extension demoApp {
             case next
             case previous
             case run(EnvironmentAction)
+            case vote
             
             case creature(Creature.Feature.Action)
         }
@@ -61,6 +63,9 @@ extension demoApp {
                             dismissWindow(id: id)
                         }
                     }
+                case .vote:
+                    cloudkit.vote()
+                    return .none
                 case .creature, .binding:
                     return .none
                 }

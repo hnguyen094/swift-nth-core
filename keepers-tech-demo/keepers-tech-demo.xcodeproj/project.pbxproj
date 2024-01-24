@@ -52,6 +52,7 @@
 		B2BE58ED2B6021B000B28316 /* StepControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58EC2B6021B000B28316 /* StepControlView.swift */; };
 		B2BE58EF2B6028AA00B28316 /* StepOrnamentControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58EE2B6028AA00B28316 /* StepOrnamentControls.swift */; };
 		B2BE58F12B602BA700B28316 /* StepData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58F02B602BA700B28316 /* StepData.swift */; };
+		B2BE58F32B60934800B28316 /* CloudKitContainerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58F22B60934800B28316 /* CloudKitContainerManager.swift */; };
 		B2DFE0B82B569645008CD4C1 /* ColorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DFE0B72B569645008CD4C1 /* ColorData.swift */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +104,7 @@
 		B2BE58EC2B6021B000B28316 /* StepControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepControlView.swift; sourceTree = "<group>"; };
 		B2BE58EE2B6028AA00B28316 /* StepOrnamentControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOrnamentControls.swift; sourceTree = "<group>"; };
 		B2BE58F02B602BA700B28316 /* StepData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepData.swift; sourceTree = "<group>"; };
+		B2BE58F22B60934800B28316 /* CloudKitContainerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitContainerManager.swift; sourceTree = "<group>"; };
 		B2D3E9332B53BCFA003009C1 /* keepers-tech-demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "keepers-tech-demo.entitlements"; sourceTree = "<group>"; };
 		B2DFE0B72B569645008CD4C1 /* ColorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,11 +128,12 @@
 				B221ED082B550B0F006C24DF /* PersistentModelContext.swift */,
 				B221ED092B550B0F006C24DF /* Logger.swift */,
 				B221ED0C2B551FC3006C24DF /* ARKitSessionManager.swift */,
+				B2BE58F22B60934800B28316 /* CloudKitContainerManager.swift */,
 				B2BE58AD2B5A7E8F00B28316 /* AudioSession.swift */,
+				B2BE58C62B5BF25F00B28316 /* AudioEngine.swift */,
 				B2BE58C22B5B23AA00B28316 /* SoundAnalyser.swift */,
 				B2BE58C42B5B278000B28316 /* SoundAnalyser.SoundType.swift */,
 				B2BE58D72B5DC9C100B28316 /* SoundAnalyser.Emojis.swift */,
-				B2BE58C62B5BF25F00B28316 /* AudioEngine.swift */,
 			);
 			path = dependencies;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				B221ED0F2B55581F006C24DF /* Billboard.swift in Sources */,
 				B2BE58C52B5B278000B28316 /* SoundAnalyser.SoundType.swift in Sources */,
 				B2B777FC2B57B7CF00F82646 /* Follow.swift in Sources */,
+				B2BE58F32B60934800B28316 /* CloudKitContainerManager.swift in Sources */,
 				B22C8E332B5241B50076CC12 /* DataProviderExtensions.swift in Sources */,
 				B2BE58EA2B601FF900B28316 /* StepHeroView.swift in Sources */,
 				B22C8E312B523A850076CC12 /* CustomTimingFunction.swift in Sources */,

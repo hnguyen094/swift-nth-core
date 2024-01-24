@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ComposableArchitecture
+import AVFoundation
 
 extension demoApp {    
     struct StepBasicView: View {
@@ -14,6 +15,7 @@ extension demoApp {
         let store: Store<demoApp.ViewState, demoApp.Feature.Action>
         
         @Dependency(\.logger) var logger
+        @Dependency(\.arkitSessionManager) var arkitSession
         
         @State private var animatedTitle: String = ""
         @State private var isAnimationFinished: Bool = false
@@ -27,7 +29,7 @@ extension demoApp {
             WithViewStore(store, observe: { $0 }) { viewStore in
                 NavigationStack {
                     if let data = demoApp.stepData[viewStore.step] {
-                        Text(data.computeBody(name: viewStore.name))
+                        Text(.init(data.computeBody(name: viewStore.name)))
                             .font(.title)
                             .opacity(isAnimationFinished ? 1 : 0)
                             .typeText(
@@ -36,15 +38,39 @@ extension demoApp {
                                 isFinished: $isAnimationFinished,
                                 speed: 30)
                             .navigationTitle(animatedTitle)
-                        if case .volumeIntro = viewStore.step {
-                            HStack {
+                        HStack {
+                            switch viewStore.step {
+                            case .heroScreen, .welcomeAbstract:
+                                EmptyView()
+                            case .volumeIntro:
                                 nameToggle(viewStore, "Ami")
                                 nameToggle(viewStore, "Meredith")
                                 nameToggle(viewStore, "Olivia")
                                 nameToggle(viewStore, "Benjamin")
+                            case .immersiveIntro:
+                                EmptyView()
+                            case .soundAnalyserIntro:
+                                switch AVCaptureDevice.authorizationStatus(for: .audio) {
+                                case .denied, .notDetermined:
+                                    Button("Request Authorizations") {
+                                        AVCaptureDevice.requestAccess(for: .audio) {_ in } // TODO: This should actually be the thingy to run the analyser
+                                    }
+                                default:
+                                    EmptyView()
+                                }
+                            case .meshClassificationIntro:
+                                if !arkitSession.worldSensingAuthorized || !arkitSession.handTrackingAuthorized {
+                                    Button("Request Authorizations") {
+                                        Task { // TODO: figure out the right timing actually
+                                            await arkitSession.attemptStartARKitSession()
+                                        }
+                                    }
+                                }
+                            case .futureDevelopment, .controls:
+                                EmptyView()
                             }
-                            .opacity(isAnimationFinished ? 1 : 0)
                         }
+                        .opacity(isAnimationFinished ? 1 : 0)
                     }
                 }
                 .animation(isAnimationFinished ? .easeOut(duration: 2) : .none,
@@ -69,6 +95,29 @@ extension demoApp {
                             if !viewStore.showCreature {
                                 await store.send(.set(\.$creature, .init())).finish()
                             }
+                            guard !viewStore.isImmersiveSpaceOpen else { break }
+                            let result = await openImmersiveSpace(id: Creature.ImmersiveView.ID)
+                            if case .opened = result, viewStore.isVolumeOpen {
+                                // TODO
+                                // await some  some animation transition to remove from window.
+                                // and then add to immersive space, ofc. Technically they can be two different entities, so we can fake
+                                dismissWindow(id: Creature.VolumetricView.ID)
+                            }
+                        case .soundAnalyserIntro:
+                            if !viewStore.showCreature { // TODO: I'm starting to think this should always be on...
+                                await store.send(.set(\.$creature, .init())).finish()
+                            }
+                            store.send(.creature(.runUnderstanding([.soundAnalysis]))) // TODO: run soundAnalysis demo
+                            if !viewStore.isVolumeOpen && !viewStore.isImmersiveSpaceOpen {
+                                openWindow(id: Creature.VolumetricView.ID)
+                            }
+                        case .meshClassificationIntro:
+                            if !viewStore.showCreature {
+                                await store.send(.set(\.$creature, .init())).finish()
+                            }
+                            store.send(.creature(.runUnderstanding([.meshUpdates, .planeUpdates, .handUpdates]))) // TODO: run demo
+                            
+                            // copy from immerse intro
                             guard !viewStore.isImmersiveSpaceOpen else { break }
                             let result = await openImmersiveSpace(id: Creature.ImmersiveView.ID)
                             if case .opened = result, viewStore.isVolumeOpen {

@@ -63,7 +63,7 @@ extension demoApp {
         if options?.contains(.showInterest) ?? false {
             ToolbarItem(placement: .bottomOrnament) {
                 Button("+1", systemImage: "hand.thumbsup.fill") {
-                    // TODO: implement icloud counter
+                    store.send(.vote)
                 }
                 .labelStyle(.titleAndIcon)
                 .help("Show Interest")

@@ -11,7 +11,7 @@ import ComposableArchitecture
 extension demoApp {
     struct StepControlView: View {
         typealias Step = demoApp.Step
-        let store: Store<demoApp.ViewState, demoApp.Feature.Action>
+        let store: StoreOfView
 
         var body: some View {
             WithViewStore(store, observe: { $0 }) { viewStore in

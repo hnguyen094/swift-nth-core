@@ -21,8 +21,7 @@ extension demoApp {
         
         struct State {
             @BindingState var step: Step
-            @BindingState var name: String = "Ami"
-            @BindingState var creature: Creature.Feature.State? = .none
+            @BindingState var creature: Creature.Feature.State = .init()
             
             @BindingState var isVolumeOpen: Bool = false
             @BindingState var isImmersiveSpaceOpen: Bool = false
@@ -33,6 +32,7 @@ extension demoApp {
         enum Action: BindableAction {
             case binding(BindingAction<State>)
 
+            case onLoad
             case next
             case previous
             case run(EnvironmentAction)
@@ -44,8 +44,14 @@ extension demoApp {
         var body: some ReducerOf<Self> {
             BindingReducer()
 
+            Scope(state: \.creature, action: \.creature) {
+                Creature.Feature()
+            }
+            
             Reduce { state, action in
                 switch action {
+                case .onLoad:
+                    return .send(.creature(.onLoad))
                 case .next:
                     state.step.next()
                     return .none
@@ -72,8 +78,6 @@ extension demoApp {
                 case .creature, .binding:
                     return .none
                 }
-            }.ifLet(\.creature, action: /Action.creature) {
-                Creature.Feature()
             }
         }
         

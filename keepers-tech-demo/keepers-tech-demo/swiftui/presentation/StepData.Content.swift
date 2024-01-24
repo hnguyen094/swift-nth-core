@@ -20,13 +20,13 @@ extension demoApp {
             body: """
             First, your pet should always be in your environment. Would your cat send you a notification whenever it needs attention? Mine would just wake up and sit on my keyboard.
 
-            This non-square critter that represents a possible virtual pet for this demo. Take your pick:
+            Pick a name for your non-square critter:
             """,
             buttons: [.standard, .names]),
         .immersiveIntro: .init(
             title: "everywhere all at once",
             body: """
-            Once your critter, %@, does have your attention, there are no bounds. It should be able to go anywhere it wants. Imagination’s the limit.
+            Once your critter %@ does have your attention, there are no bounds. It should be able to go anywhere it wants. Imagination’s the limit.
             """,
             buttons: .standard),
         .soundAnalyserIntro: .init(

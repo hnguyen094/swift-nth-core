@@ -83,7 +83,6 @@ extension Creature {
                 }
                 .gesture(tap)
             }
-            .onAppear { store.send(.onLoad) }
             .onChange(of: shouldUseCustomMaterial) { _, use in
                 store.send(.set (\.$_useCustomMaterial, use))
             }

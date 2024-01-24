@@ -26,25 +26,26 @@ struct demoApp: App {
     var body: some Scene {
         WindowGroup(id: RootView.ID) {
             RootView(store: store)
+                .onAppear { store.send(.onLoad) }
         }
         .windowResizability(.contentSize)
         
         WindowGroup(id: Creature.VolumetricView.ID) {
-            IfLetStore(store.scope(state: \.creature, action: \.creature)) { creatureStore in
-                Creature.VolumetricView(store: creatureStore, volumeSize: volumeSize)
-                    .task {
-                        await modelContext.enableAutosave()
-                        await sessionManager.attemptStartARKitSession()
-                    }
-                    .onAppear {
-                        store.send(.set(\.$isVolumeOpen, true))
-                        logger.info("VolumetricView appeared")
-                    }
-                    .onDisappear {
-                        store.send(.set(\.$isVolumeOpen, false))
-                        logger.info("VolumetricView disappeared")
-                    }
-            }
+            let creatureStore = store.scope(state: \.creature, action: \.creature)
+            Creature.VolumetricView(store: creatureStore, volumeSize: volumeSize)
+                .task {
+                    await modelContext.enableAutosave()
+                    await sessionManager.attemptStartARKitSession()
+                }
+                .onAppear {
+                    store.send(.set(\.$isVolumeOpen, true))
+                    logger.info("VolumetricView appeared")
+                }
+                .onDisappear {
+                    store.send(.set(\.$isVolumeOpen, false))
+                    logger.info("VolumetricView disappeared")
+                }
+            
         }
         .windowStyle(.volumetric)
         .defaultSize(volumeSize, in: .meters)

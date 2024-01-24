@@ -6,24 +6,23 @@
 //
 
 import Foundation
+import ComposableArchitecture
 
 extension demoApp {
+    typealias StoreOfView = Store<demoApp.ViewState, demoApp.Feature.Action>
+    typealias ViewStoreOfView = ViewStore<demoApp.ViewState, demoApp.Feature.Action>
+    
     struct ViewState: Equatable {
         var step: Step
         var name: String
-        var showCreature: Bool
         var isVolumeOpen: Bool
         var isImmersiveSpaceOpen: Bool
         var voteCount: Int64? = .none
 
         init(state: demoApp.Feature.State) {
             step = state.step
-            name = state.name
-            if case .none = state.creature {
-                showCreature = false
-            } else {
-                showCreature = true
-            }
+            name = state.creature.name
+
             isVolumeOpen = state.isVolumeOpen
             isImmersiveSpaceOpen = state.isImmersiveSpaceOpen
             voteCount = state.voteCount

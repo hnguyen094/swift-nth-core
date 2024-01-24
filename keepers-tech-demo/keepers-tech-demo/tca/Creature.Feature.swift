@@ -18,6 +18,7 @@ extension Creature {
         struct State: Equatable {
             @BindingState var intent: Intent = .init()
             @BindingState var color: Backing.Color = .clear
+            @BindingState var name: String = "critter"
             @BindingState var _useCustomMaterial: Bool = true
 
             var understanding: Understanding.State? = .none
@@ -106,6 +107,10 @@ extension Creature {
                         guard let backing = state.backing else { return .none }
                         backing.color = state.color.toColorData()
                         return .none
+                    case \.$name:
+                        guard let backing = state.backing else { return .none }
+                        backing.name = state.name
+                        return .none
                     case \.$intent:
                         return .none
                     default:
@@ -114,6 +119,7 @@ extension Creature {
                     }
                 case .onBackingLoad(let backing):
                     guard let backing = backing else { return .none }
+                    state.name = backing.name
                     state.color = backing.color.toColor()
                     return .none
                 default:

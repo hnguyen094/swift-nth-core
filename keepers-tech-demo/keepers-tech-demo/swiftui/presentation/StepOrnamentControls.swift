@@ -10,8 +10,10 @@ import ComposableArchitecture
 
 extension demoApp {
     @ToolbarContentBuilder
-    static func ornamentButtons(_ store: Store<demoApp.ViewState, demoApp.Feature.Action>
-, _ options: ButtonOptions?) -> some ToolbarContent {
+    static func ornamentButtons(
+        _ store: StoreOfView,
+        _ options: ButtonOptions?)
+    -> some ToolbarContent {
         if options?.contains(.previous) ?? true {
             ToolbarItem(placement: .bottomOrnament) {
                 Button("Back", systemImage: "arrow.left") {
@@ -50,16 +52,6 @@ extension demoApp {
                 .help("Continue")
             }
         }
-        if options?.contains(.goToControls) ?? false {
-            ToolbarItem(placement: .bottomOrnament) {
-                Button("Done", systemImage: "checkmark") {
-                    // TODO: this should instead go to some control panel thing since a window is required to view the immersive space
-                    store.send(.set(\.$step, .controls))
-                }
-                .buttonBorderShape(.circle)
-                .help("Done")
-            }
-        }
         if options?.contains(.showInterest) ?? false {
             ToolbarItem(placement: .bottomOrnament) {
                 WithViewStore(store, observe: \.voteCount) { viewStore in
@@ -79,6 +71,16 @@ extension demoApp {
                         .help("Show Interest")
                     }
                 }
+            }
+        }
+        if options?.contains(.goToControls) ?? false {
+            ToolbarItem(placement: .bottomOrnament) {
+                Button("Done", systemImage: "checkmark") {
+                    // TODO: this should instead go to some control panel thing since a window is required to view the immersive space
+                    store.send(.set(\.$step, .controls))
+                }
+                .buttonBorderShape(.circle)
+                .help("Done")
             }
         }
     }

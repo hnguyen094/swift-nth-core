@@ -20,6 +20,7 @@ extension AppSchema.V1 {
         typealias Color = SwiftUI.Color
                 
         var birthDate: Date = Date.now
+        var name: String = "unnamed"
         var color: ColorData = ColorData(red: 0.5, green: 0.5, blue: 0.5)
         
         init() {}

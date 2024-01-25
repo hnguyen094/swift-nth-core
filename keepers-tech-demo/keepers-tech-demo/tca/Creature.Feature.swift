@@ -56,9 +56,11 @@ extension Creature {
                     state.backing = backing
                     return .none
                 case .runUnderstanding(let runOptions):
-                    state.understanding = .init(runOptions: runOptions)
+                    state.intent = .init()
+                    state.understanding = .init(runOptions: runOptions, demo: state.demoMode)
                     return .send(.understanding(.onLoad))
                 case .stopUnderstanding:
+                    state.intent = .init()
                     state.understanding = .none
                     return .none
                 case ._nextAnimation:

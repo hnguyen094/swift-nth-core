@@ -18,6 +18,7 @@ extension demoApp {
         var isVolumeOpen: Bool
         var isImmersiveSpaceOpen: Bool
         var voteCount: Int64? = .none
+        var runOptions: Creature.Understanding.RunOptions? = .none
 
         init(state: demoApp.Feature.State) {
             step = state.step
@@ -26,6 +27,7 @@ extension demoApp {
             isVolumeOpen = state.isVolumeOpen
             isImmersiveSpaceOpen = state.isImmersiveSpaceOpen
             voteCount = state.voteCount
+            runOptions = state.creature.understanding?.runOptions
         }
     }
 }

@@ -7,12 +7,14 @@
 
 import ComposableArchitecture
 import SwiftUI
+import AVFoundation
 
 extension demoApp {
     @Reducer
     struct Feature: Reducer {
         @Dependency(\.logger) var logger
         @Dependency(\.cloudkitManager) var cloudkit
+        @Dependency(\.arkitSessionManager) var arkit
         
         @Environment(\.openImmersiveSpace) var openImmersiveSpace
         @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
@@ -36,7 +38,10 @@ extension demoApp {
             case next
             case previous
             case run(EnvironmentAction)
+
             case vote
+            case enableListening(Bool)
+            case enableWorldUnderstanding(Bool)
             
             case creature(Creature.Feature.Action)
         }
@@ -53,11 +58,9 @@ extension demoApp {
                 case .onLoad:
                     return .send(.creature(.onLoad))
                 case .next:
-                    state.step.next()
-                    return .none
+                    return .send(.set(\.$step, state.step.next))
                 case .previous:
-                    state.step.previous()
-                    return .none
+                    return .send(.set(\.$step, state.step.previous))
                 case .run(let environmentAction):
                     return .run { send in
                         switch environmentAction {
@@ -75,9 +78,86 @@ extension demoApp {
                     return .run { send in
                         await send(.set(\.$voteCount, await cloudkit.voteAsync()))
                     }
+                case .enableListening(let enable):
+                    let currentRunOptions = state.creature.understanding?.runOptions ?? .init()
+                    guard enable else {
+                        let runOptions = currentRunOptions.subtracting(.soundAnalysis)
+                        switch runOptions.isEmpty {
+                        case true: return .send(.creature(.stopUnderstanding))
+                        case false: return .send(.creature(.runUnderstanding(runOptions)))
+                        }
+                    }
+                    return .run { send in
+                        switch AVCaptureDevice.authorizationStatus(for: .audio) {
+                        case .notDetermined:
+                            switch await AVCaptureDevice.requestAccess(for: .audio) {
+                            case true: await continueWithAuthorization()
+                            case false: await skipWithNoAuthorization()
+                            }
+                        case .authorized: await continueWithAuthorization()
+                        case .denied: await openSettings()
+                        case .restricted: await skipWithNoAuthorization()
+                        @unknown default: await skipWithNoAuthorization()
+                        }
+                        
+                        func continueWithAuthorization() async {
+                            // TODO: run demo too
+                            await send(.creature(.runUnderstanding(currentRunOptions.union(.soundAnalysis))))
+                        }
+                        
+                        func skipWithNoAuthorization() async {
+                            logger.error("Cannot get microphone authorization. Skipping.")
+                            await send(.next)
+                        }
+                    }
+                case .enableWorldUnderstanding(let enable):
+                    let currentRunOptions = state.creature.understanding?.runOptions ?? .init()
+                    let relevantRunOptions = Creature.Understanding.RunOptions([.meshUpdates, .planeUpdates, .handUpdates])
+                    
+                    guard enable else {
+                        let runOptions = currentRunOptions.subtracting(relevantRunOptions)
+                        switch runOptions.isEmpty {
+                        case true: return .send(.creature(.stopUnderstanding))
+                        case false: return .send(.creature(.runUnderstanding(runOptions)))
+                        }
+                    }
+                    return .run { send in
+                        // request and start whatever we can
+                        await arkit.attemptStartARKitSession()
+                        let authorization = await arkit.session.queryAuthorization(for: [.worldSensing, .handTracking])
+                        let missingAnyAuthorization = authorization[.worldSensing] != .allowed || authorization[.handTracking] != .allowed
+                        
+                        if missingAnyAuthorization {
+                            logger.debug("Missing worldSensing and handTracking authorization.")
+                            await openSettings()
+                        } else {
+                            // TODO: run demo
+                            await send(.creature(.runUnderstanding(currentRunOptions.union(relevantRunOptions))))
+                        }
+                    }
+                case .binding(\.$step):
+                    switch state.step {
+                    case .volumeIntro:
+                        return .send(.creature(.set(\.$demoMode, .animations)))
+                    case .immersiveIntro:
+                        return .send(.creature(.set(\.$demoMode, .anchorUnderstanding)))
+                    case .soundAnalyserIntro:
+                        return .send(.creature(.set(\.$demoMode, .soundUnderstanding)))
+                    case .meshClassificationIntro:
+                        return .send(.creature(.set(\.$demoMode, .worldAndHandUnderstanding)))
+                    default:
+                        return .send(.creature(.set(\.$demoMode, .none)))
+                    }
                 case .creature, .binding:
                     return .none
                 }
+            }
+        }
+        
+        @MainActor
+        private func openSettings() async {
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                await UIApplication.shared.open(url)
             }
         }
         
@@ -101,12 +181,12 @@ extension demoApp {
         case futureDevelopment
         case controls
         
-        mutating func next() {
-            self = Self(rawValue: self.rawValue + 1) ?? Self.allCases.last!
+        var next: Self {
+            Self(rawValue: self.rawValue + 1) ?? Self.allCases.last!
         }
         
-        mutating func previous() {
-            self = Self(rawValue: self.rawValue - 1) ?? Self.allCases.first!
+        var previous: Self {
+            Self(rawValue: self.rawValue - 1) ?? Self.allCases.first!
         }
         
         static func < (lhs: Self, rhs: Self) -> Bool {

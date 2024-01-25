@@ -7,23 +7,14 @@
 
 import SwiftUI
 import ComposableArchitecture
-import AVFoundation
 
 extension demoApp {    
     struct StepBasicView: View {
         typealias Step = demoApp.Step
         let store: StoreOfView
-        
-        @Dependency(\.logger) var logger
-        @Dependency(\.arkitSessionManager) var arkitSession
-        
+
         @State private var animatedTitle: String = ""
         @State private var isAnimationFinished: Bool = false
-        
-        @Environment(\.openImmersiveSpace) var openImmersiveSpace
-        @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
-        @Environment(\.openWindow) var openWindow
-        @Environment(\.dismissWindow) var dismissWindow
 
         var body: some View {
             WithViewStore(store, observe: { $0 }) { viewStore in
@@ -99,48 +90,31 @@ extension demoApp {
                         .toggleStyle(.button)
                         .animation(.default, value: viewStore.isImmersiveSpaceOpen)
                 case .soundAnalyserIntro:
-                    Button("Enable Listening", systemImage: "mic.fill") {
-                        Task {
-                            switch AVCaptureDevice.authorizationStatus(for: .audio) {
-                            case .notDetermined:
-                                switch await AVCaptureDevice.requestAccess(for: .audio) {
-                                case true: continueWithAuthorization()
-                                case false: skipWithNoAuthorization()
-                                }
-                            case .authorized: continueWithAuthorization()
-                            case .denied: await openSettings()
-                            case .restricted: skipWithNoAuthorization()
-                            @unknown default: skipWithNoAuthorization()
-                            }
-                            
-                            func continueWithAuthorization() {
-                                // TODO: run demo too
-                                store.send(.creature(.runUnderstanding([.soundAnalysis])))
-                            }
-                            
-                            func skipWithNoAuthorization() {
-                                logger.error("Cannot get microphone authorization. Skipping.")
-                                store.send(.next)
-                            }
-                        }
-                    }
+                    let isUsingSoundAnalysis = viewStore.runOptions?.contains(.soundAnalysis) ?? false
+                    let text = (isUsingSoundAnalysis ? "Disable" : "Enable") + " Listening"
+                    let systemImage = isUsingSoundAnalysis
+                    ? "mic.fill"
+                    : "mic"
+                    let binding = viewStore.binding(get: { state in
+                        state.runOptions?.contains(.soundAnalysis) ?? false
+                    }, send: demoApp.Feature.Action.enableListening)
+                    
+                    Toggle(text, systemImage: systemImage, isOn: binding)
+                        .toggleStyle(.button)
+                        .animation(.default, value: isUsingSoundAnalysis)
                 case .meshClassificationIntro:
-                    Button("Environment Understanding", systemImage: "arkit") {
-                        Task {
-                            // request and start whatever we can
-                            await arkitSession.attemptStartARKitSession()
-                            
-                            let authorization = await arkitSession.session.queryAuthorization(for: [.worldSensing, .handTracking])
-                            let missingAnyAuthorization = authorization[.worldSensing] != .allowed || authorization[.handTracking] != .allowed
-                            
-                            if missingAnyAuthorization {
-                                logger.debug("Missing worldSensing and handTracking authorization.")
-                                await openSettings()
-                            } else {
-                                store.send(.creature(.runUnderstanding([.meshUpdates, .planeUpdates, .handUpdates]))) // TODO: run demo
-                            }
-                        }
-                    }
+                    let isUsingWorldSensing = !(viewStore.runOptions?.intersection([.meshUpdates, .planeUpdates, .handUpdates]).isEmpty ?? true)
+                    let text = (isUsingWorldSensing ? "Disable" : "Enable") + " Environment Understanding"
+                    let systemImage = isUsingWorldSensing
+                    ? "arkit"
+                    : "arkit.badge.xmark"
+                    let binding = viewStore.binding(get: { state in
+                        !(state.runOptions?.intersection([.meshUpdates, .planeUpdates, .handUpdates]).isEmpty ?? true)
+                    }, send: demoApp.Feature.Action.enableWorldUnderstanding)
+                    
+                    Toggle(text, systemImage: systemImage, isOn: binding)
+                        .toggleStyle(.button)
+                        .animation(.default, value: isUsingWorldSensing)
                 case .futureDevelopment, .controls:
                     EmptyView()
                 }

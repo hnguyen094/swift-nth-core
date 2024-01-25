@@ -55,6 +55,14 @@ enum Creature {
                 bodyComponent.desiredSquareness = newIntent.squareness
             }
             .store(in: &cancellables)
+            viewStore.publisher.demoMode.sink { [weak self] demoMode in
+                guard let self = self,
+                      var demoComponent = components[Demo.Component.self]
+                else { return }
+                demoComponent.desiredMode = demoMode
+                components.set(demoComponent)
+            }
+            .store(in: &cancellables)
             viewStore.publisher.color.sink { [weak self] color in
                 guard let self = self,
                       let body = self.body,

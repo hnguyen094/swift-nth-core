@@ -35,7 +35,6 @@ struct demoApp: App {
             Creature.VolumetricView(store: creatureStore, volumeSize: volumeSize)
                 .task {
                     await modelContext.enableAutosave()
-                    await sessionManager.attemptStartARKitSession()
                 }
                 .onAppear {
                     store.send(.set(\.$isVolumeOpen, true))
@@ -54,7 +53,6 @@ struct demoApp: App {
             Creature.ImmersiveView()
                 .task {
                     await modelContext.enableAutosave()
-                    await sessionManager.attemptStartARKitSession()
                 }
                 .onAppear {
                     store.send(.set(\.$isImmersiveSpaceOpen, true))

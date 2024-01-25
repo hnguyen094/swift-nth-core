@@ -156,4 +156,20 @@ extension ARKitSessionManager : DependencyKey {
             }
         }
     }
+    
+    struct IndexFingersLocations: Equatable {
+        private(set) var indexPosition: [HandAnchor.Chirality: simd_float4x4] = [:]
+        
+        mutating func handleUpdate(_ update: AnchorUpdate<HandAnchor>) {
+            let handAnchor = update.anchor
+
+            guard handAnchor.isTracked,
+                  let indexFingerTipJoint = handAnchor.handSkeleton?.joint(.indexFingerTip),
+                  indexFingerTipJoint.isTracked
+            else { return }
+            
+            let originFromIndexFingerTip = handAnchor.originFromAnchorTransform * indexFingerTipJoint.anchorFromJointTransform
+            indexPosition[handAnchor.chirality] = originFromIndexFingerTip
+        }
+    }
 }

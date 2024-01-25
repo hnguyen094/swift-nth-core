@@ -9,7 +9,7 @@ import RealityKit
 
 enum Demo {
     struct Component: RealityKit.Component, Codable {
-        var desiredMode: Mode? = .animations
+        var desiredMode: Mode? = .none
         
         fileprivate var currentMode: Mode? = .none
         fileprivate var restorable: Restorable? = .none
@@ -48,7 +48,7 @@ enum Demo {
                 } else { // handle the frame-by-frame of the current animation.
                     switch component.desiredMode {
                     case .animations:
-                        creatureBody.components[Emoting.Component.self]?.desiredAnimation = .excitedBounce
+                        creatureBody.components[Emoting.Component.self]?.desiredAnimation = .backflip
                         guard var bodyComponent = creatureBody.components[Creature.Body.Component.self]
                         else { break }
                         let hue = component.modeDuration.truncatingRemainder(dividingBy: 10) / 10
@@ -57,7 +57,7 @@ enum Demo {
                             saturation: 1,
                             brightness: 1
                         ).toColorData()
-                        let squareness = sin(Float(component.modeDuration / 2)) / 2 + 0.5
+                        let squareness = cos(Float(component.modeDuration / 2)) / 2 + 0.5
                         bodyComponent.desiredSquareness = squareness
                         creatureBody.components.set(bodyComponent)
                     case .anchorUnderstanding:

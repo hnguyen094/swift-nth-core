@@ -21,9 +21,11 @@ extension Creature {
             @BindingState var soundAnalysisResult: SoundAnalyser.Result? = .none
             @BindingState var surfaces: ARKitSessionManager.AvailableSurfaces = .init()
             @BindingState var meshes: ARKitSessionManager.AvailableMeshes = .init()
+            @BindingState var indexFingers: ARKitSessionManager.IndexFingersLocations = .init()
             
             var dirty: Bool = true
             var runOptions: RunOptions = .all
+            var demo: Demo.Mode? = .none
         }
         
         enum Action: BindableAction {
@@ -74,16 +76,8 @@ extension Creature {
             }
 
             if let soundAnalysisResult = state.soundAnalysisResult {
-                let confidentResults = soundAnalysisResult.classifications
-                    .filter { $0.confidence > 0.5 }
-                
-//                let result = confidentResults
-//                    .compactMap({ SoundAnalyser.soundTypeEmojiMapping[$0.label] })
-//                    .reduce(into: "") { result, mappedEmoji in
-//                    result = result + mappedEmoji
-//                }
                 let result: String? = if let highConfidence = soundAnalysisResult.classifications.first {
-                    "hearing... " + highConfidence.label.rawValue.replacingOccurrences(of: "_", with: " ") + " "
+                    "👂… " + highConfidence.label.rawValue.replacingOccurrences(of: "_", with: " ") + " "
                     + (SoundAnalyser.soundTypeEmojiMapping[highConfidence.label] ?? "") + String.init(repeating: "?", count: Int((1-highConfidence.confidence) / 0.2))
                 } else {
                     .none
@@ -171,5 +165,12 @@ extension Creature.Understanding {
         }
     }}
     
-    private var handUpdatesTask: EffectOf<Self> { .none }
+    private var handUpdatesTask: EffectOf<Self> { .run(priority: .background) { send in
+        guard let handData = await arkitSession.handData else { return }
+        var indexLocations: ARKitSessionManager.IndexFingersLocations = .init()
+        for await update in handData.anchorUpdates {
+            indexLocations.handleUpdate(update)
+            await send(.set(\.$indexFingers, indexLocations))
+        }
+    }}
 }

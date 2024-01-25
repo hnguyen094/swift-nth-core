@@ -15,6 +15,7 @@
 		B221ED0F2B55581F006C24DF /* Billboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221ED0E2B55581F006C24DF /* Billboard.swift */; };
 		B2273B042B618CE8008D0A97 /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2273B032B618CE8008D0A97 /* Demo.swift */; };
 		B2273B062B61A2D3008D0A97 /* Creature.Body.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2273B052B61A2D3008D0A97 /* Creature.Body.swift */; };
+		B2273B0A2B62890C008D0A97 /* Creature.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2273B092B62890C008D0A97 /* Creature.View.swift */; };
 		B22C8E2F2B523A720076CC12 /* AnimationResourceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E2E2B523A720076CC12 /* AnimationResourceExtensions.swift */; };
 		B22C8E312B523A850076CC12 /* CustomTimingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E302B523A850076CC12 /* CustomTimingFunction.swift */; };
 		B22C8E332B5241B50076CC12 /* DataProviderExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E322B5241B50076CC12 /* DataProviderExtensions.swift */; };
@@ -67,6 +68,7 @@
 		B221ED0E2B55581F006C24DF /* Billboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Billboard.swift; sourceTree = "<group>"; };
 		B2273B032B618CE8008D0A97 /* Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
 		B2273B052B61A2D3008D0A97 /* Creature.Body.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.Body.swift; sourceTree = "<group>"; };
+		B2273B092B62890C008D0A97 /* Creature.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.View.swift; sourceTree = "<group>"; };
 		B22C8E2E2B523A720076CC12 /* AnimationResourceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationResourceExtensions.swift; sourceTree = "<group>"; };
 		B22C8E302B523A850076CC12 /* CustomTimingFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimingFunction.swift; sourceTree = "<group>"; };
 		B22C8E322B5241B50076CC12 /* DataProviderExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderExtensions.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 			children = (
 				B2A085642B52287F003AD224 /* Creature.VolumetricView.swift */,
 				B2A085662B52287F003AD224 /* Creature.ImmersiveView.swift */,
+				B2273B092B62890C008D0A97 /* Creature.View.swift */,
 				B2BE58C82B5C247300B28316 /* TextBubble.swift */,
 			);
 			path = reality;
@@ -383,6 +386,7 @@
 				B2A085632B52287F003AD224 /* demoApp.swift in Sources */,
 				B2BE58E12B5F338D00B28316 /* StepData.Content.swift in Sources */,
 				B22C8E432B52EAE40076CC12 /* Creature.Feature.swift in Sources */,
+				B2273B0A2B62890C008D0A97 /* Creature.View.swift in Sources */,
 				B2BE58ED2B6021B000B28316 /* StepControlView.swift in Sources */,
 				B22C8E392B5257290076CC12 /* Creature.Entity.swift in Sources */,
 				B2BE58BF2B5B226D00B28316 /* SNClassifySoundRequestExtensions.swift in Sources */,

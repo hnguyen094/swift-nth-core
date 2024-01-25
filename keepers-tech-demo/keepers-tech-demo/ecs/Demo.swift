@@ -14,6 +14,7 @@ enum Demo {
         fileprivate var currentMode: Mode? = .none
         fileprivate var restorable: Restorable? = .none
         fileprivate var modeDuration: Double = 0
+        fileprivate var anchoredEntityID: Entity.ID? = .none
         
         enum CodingKeys: CodingKey {  case desiredMode }
     }
@@ -61,7 +62,26 @@ enum Demo {
                         bodyComponent.desiredSquareness = squareness
                         creatureBody.components.set(bodyComponent)
                     case .anchorUnderstanding:
-                        break
+                        guard !creature.windowed else { return }
+                        if timer(component.modeDuration, context.deltaTime, value: 2) {
+                            var target: Entity?
+                            if case .some(let id) = component.anchoredEntityID {
+                                target = context.scene.findEntity(id: id)
+                            } else {
+                                target = ModelEntity(mesh: .generateSphere(radius: 0.1), materials: [SimpleMaterial(color: .clear, isMetallic: false)])
+                                creature.parent?.addChild(target!, preservingWorldTransform: true)
+                                component.anchoredEntityID = target?.id
+                                creature.components.set(Follow.Component(followeeID: target?.id, mode: .direct))
+                            }
+                            guard let targetEntity = target else { break }
+
+                            // timer hit, time to generate new anchor
+                            if targetEntity.components.has(AnchoringComponent.self) {
+                                targetEntity.components.remove(AnchoringComponent.self)
+                            } else {
+                                targetEntity.components.set(AnchoringComponent(.plane(.horizontal, classification: [.floor, .seat, .table], minimumBounds: [0.1, 0.1])))
+                            }
+                        }
                     case .soundUnderstanding:
                         break
                     case .worldAndHandUnderstanding:
@@ -71,6 +91,12 @@ enum Demo {
                     }
                 }
             }
+        }
+        
+        private func timer(_ current: Double, _ deltaTime: Double, value: Double = 1) -> Bool {
+            let lastTimestamp = (current - deltaTime).truncatingRemainder(dividingBy: value)
+            let currentTimestamp = current.truncatingRemainder(dividingBy: value)
+            return lastTimestamp > currentTimestamp
         }
         
         private func save(_ component: inout Component, creature: Creature.Entity, creatureBody: Entity) {

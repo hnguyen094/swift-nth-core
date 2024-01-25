@@ -8,21 +8,19 @@
 import SwiftUI
 import RealityKit
 import RealityKitContent
+import ComposableArchitecture
 
 extension Creature {
-    struct ImmersiveView: View {
-        var body: some View {
-            RealityView { content in
-                // Add the initial RealityKit content
-                if let scene = try? await RealityKit.Entity(named: "Immersive", in: realityKitContentBundle) {
-                    content.add(scene)
-                }
-            }
+    struct ImmersiveView: SwiftUI.View {
+        let store: StoreOf<Creature.Feature>
+
+        var body: some SwiftUI.View {
+            Creature.View(store: store)
         }
     }
 }
 
 #Preview {
-    Creature.ImmersiveView()
+    Creature.ImmersiveView(store: Store(initialState: Creature.Feature.State(), reducer: { Creature.Feature() }))
         .previewLayout(.sizeThatFits)
 }

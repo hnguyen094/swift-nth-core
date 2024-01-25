@@ -18,7 +18,7 @@ enum Creature {
         
         private(set) var body: ModelEntity? = .none
         private var customMaterialSource: ShaderGraphMaterial? = .none
-        private var windowed: Bool = true
+        private(set) var windowed: Bool = true
         
         @MainActor init(store: StoreOf<Feature>, material: ShaderGraphMaterial?, windowed: Bool) {
             self.viewStore = ViewStore(store, observe: { $0 })
@@ -35,10 +35,12 @@ enum Creature {
             components.set(InputTargetComponent(allowedInputTypes: .all))
             components.set(Demo.Component())
 
-            scale = .init(repeating: 0.1)
+            scale = .init(repeating: windowed ? 0.1 : 0.2)
 
             addBody()
-            addHighlightContainer()
+            if windowed {
+                // addHighlightContainer()
+            }
         }
 
         private func subscribeToStore() {

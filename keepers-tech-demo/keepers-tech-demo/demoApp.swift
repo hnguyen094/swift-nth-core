@@ -24,6 +24,8 @@ struct demoApp: App {
     }
     
     var body: some Scene {
+        let creatureStore = store.scope(state: \.creature, action: \.creature)
+
         WindowGroup(id: RootView.ID) {
             RootView(store: store)
                 .onAppear { store.send(.onLoad) }
@@ -31,7 +33,6 @@ struct demoApp: App {
         .windowResizability(.contentSize)
         
         WindowGroup(id: Creature.VolumetricView.ID) {
-            let creatureStore = store.scope(state: \.creature, action: \.creature)
             Creature.VolumetricView(store: creatureStore, volumeSize: volumeSize)
                 .task {
                     await modelContext.enableAutosave()
@@ -50,7 +51,7 @@ struct demoApp: App {
         .defaultSize(volumeSize, in: .meters)
         
         ImmersiveSpace(id: Creature.ImmersiveView.ID) {
-            Creature.ImmersiveView()
+            Creature.ImmersiveView(store: creatureStore)
                 .task {
                     await modelContext.enableAutosave()
                 }

@@ -67,6 +67,9 @@ extension Creature {
         
         func generateIntent(from state: State) -> Intent? {
             if !state.dirty { return .none }
+            if case .some(_) = state.demo {
+                return generateDemoIntent(from: state)
+            }
             var intent = Intent()
             
             if state.mightBeListeningToMusic && audio.anotherAppIsPlayingMusic {
@@ -89,6 +92,43 @@ extension Creature {
                 intent.textBubble = result == "" ? .none : result
             }
             return intent
+        }
+        
+        func generateDemoIntent(from state: State) -> Intent? {
+            switch state.demo {
+            case .animations:
+                return .none
+            case .anchorUnderstanding:
+                return .none
+            case .soundUnderstanding:
+                let text = generateSoundAnalysisText(state.soundAnalysisResult)
+                let confidence = state.soundAnalysisResult?.classifications.first?.confidence
+                let animation = switch confidence {
+                case .some(let valid):
+                    switch valid {
+                    case 0..<0.5: Emoting.Animation.curiousHeadTilt
+                    case 0.5..<0.8: Emoting.Animation.doubleNod
+                    default: Emoting.Animation.excitedBounce
+                    }
+                case .none: Emoting.Animation.headShake
+                }
+                return .init(emotionAnimation: animation, textBubble: text)
+            case .worldAndHandUnderstanding:
+                return .none
+            case .none:
+                return .none
+            }
+        }
+        
+        func generateSoundAnalysisText(_ soundResult: SoundAnalyser.Result?) -> String? {
+            guard let result = soundResult else { return .none }
+            let text: String? = if let highConfidence = result.classifications.first {
+                "👂… " + highConfidence.label.rawValue.replacingOccurrences(of: "_", with: " ") + " "
+                + (SoundAnalyser.soundTypeEmojiMapping[highConfidence.label] ?? "") + String.init(repeating: "?", count: Int((1-highConfidence.confidence) / 0.2))
+            } else {
+                .none
+            }
+            return text == "" ? .none : text
         }
     }
 }

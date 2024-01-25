@@ -89,6 +89,9 @@ extension demoApp {
                     Toggle(text, systemImage: systemImage, isOn: binding)
                         .toggleStyle(.button)
                         .animation(.default, value: viewStore.isImmersiveSpaceOpen)
+                        .disabled(true)
+                    Text("Due to incomplete developer tools, this feature (using immersive scenes) has been disabled until it can be tested on device.")
+                        .font(.footnote)
                 case .soundAnalyserIntro:
                     let isUsingSoundAnalysis = viewStore.runOptions?.contains(.soundAnalysis) ?? false
                     let text = (isUsingSoundAnalysis ? "Disable" : "Enable") + " Listening"
@@ -115,6 +118,9 @@ extension demoApp {
                     Toggle(text, systemImage: systemImage, isOn: binding)
                         .toggleStyle(.button)
                         .animation(.default, value: isUsingWorldSensing)
+                        .disabled(true)
+                    Text("Due to incomplete developer tools, this feature (using immersive scenes) has been disabled until it can be tested on device.")
+                        .font(.footnote)
                 case .futureDevelopment, .controls:
                     EmptyView()
                 }

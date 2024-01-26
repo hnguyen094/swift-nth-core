@@ -55,7 +55,7 @@ actor PersistentModelContext {
 
 extension PersistentModelContext: DependencyKey {
     static let liveValue = PersistentModelContext(
-        modelContainer: createContainer(from: localConfig)) // TODO: change back to live
+        modelContainer: createContainer(from: liveConfig)) // TODO: change back to live
     static let previewValue = PersistentModelContext(
         modelContainer: createContainer(from: ephemeralConfig))
     

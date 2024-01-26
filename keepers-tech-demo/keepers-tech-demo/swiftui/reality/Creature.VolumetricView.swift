@@ -23,7 +23,7 @@ extension Creature {
         
         var body: some SwiftUI.View {
             ZStack {
-                debugButtons
+//                debugButtons
                 Creature.View(store: store, volumeSize: volumeSize)
             }
             .onChange(of: shouldUseCustomMaterial) { _, use in

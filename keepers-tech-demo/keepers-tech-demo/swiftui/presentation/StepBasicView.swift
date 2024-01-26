@@ -85,7 +85,14 @@ extension demoApp {
                         // We should also dismiss/enable window again...
                         return .run(open ? .openImmersiveSpace(id) : .dismissImmersiveSpace)
                     })
-                    
+                    Button("Random Color") {
+                        let randomColor: SwiftUI.Color = .init(
+                            hue: .random(in: 0...1),
+                            saturation: 1,
+                            brightness: 1)
+                        store.send(.creature(.set(\.$color, .init(randomColor))))
+
+                    }
                     Toggle(text, systemImage: systemImage, isOn: binding)
                         .toggleStyle(.button)
                         .animation(.default, value: viewStore.isImmersiveSpaceOpen)

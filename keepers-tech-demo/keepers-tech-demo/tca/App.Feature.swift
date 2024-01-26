@@ -139,12 +139,12 @@ extension demoApp {
                     switch state.step {
                     case .volumeIntro:
                         return .send(.creature(.set(\.$demoMode, .animations)))
-                    case .immersiveIntro:
-                        return .send(.creature(.set(\.$demoMode, .anchorUnderstanding)))
+//                    case .immersiveIntro:
+//                        return .send(.creature(.set(\.$demoMode, .anchorUnderstanding)))
                     case .soundAnalyserIntro:
                         return .send(.creature(.set(\.$demoMode, .soundUnderstanding)))
-                    case .meshClassificationIntro:
-                        return .send(.creature(.set(\.$demoMode, .worldAndHandUnderstanding)))
+//                    case .meshClassificationIntro:
+//                        return .send(.creature(.set(\.$demoMode, .worldAndHandUnderstanding)))
                     default:
                         return .send(.creature(.set(\.$demoMode, .none)))
                     }

@@ -19,6 +19,7 @@ extension demoApp {
         var isImmersiveSpaceOpen: Bool
         var voteCount: Int64? = .none
         var runOptions: Creature.Understanding.RunOptions? = .none
+        var soundAnalysisConfidenceThreshold: Double
 
         init(state: demoApp.Feature.State) {
             step = state.step
@@ -28,6 +29,7 @@ extension demoApp {
             isImmersiveSpaceOpen = state.isImmersiveSpaceOpen
             voteCount = state.voteCount
             runOptions = state.creature.understanding?.runOptions
+            soundAnalysisConfidenceThreshold = state.soundAnalysisConfidenceThreshold
         }
     }
 }

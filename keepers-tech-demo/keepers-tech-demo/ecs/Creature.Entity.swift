@@ -33,7 +33,7 @@ enum Creature {
 //            components.set(Billboard.Component(mode: .lazy(0.25)))
 //            components.set(Billboard.Component(mode: .direct))
             components.set(InputTargetComponent(allowedInputTypes: .all))
-            components.set(Demo.Component())
+//            components.set(Demo.Component())
 
             scale = .init(repeating: windowed ? 0.1 : 0.2)
 

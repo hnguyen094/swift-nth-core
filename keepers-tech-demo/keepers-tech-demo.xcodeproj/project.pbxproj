@@ -560,8 +560,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "my ami — tech demo";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_CFBundleDisplayName = "See the Sounds";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Utilizes microphone for creature to hear the environment.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -590,8 +590,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "my ami — tech demo";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_CFBundleDisplayName = "See the Sounds";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Utilizes microphone for creature to hear the environment.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

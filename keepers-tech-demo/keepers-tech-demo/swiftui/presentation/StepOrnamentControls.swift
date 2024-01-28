@@ -34,15 +34,15 @@ extension demoApp {
             }
         }
         
-        if options?.contains(.skipAll) ?? false {
-            ToolbarItem(placement: .bottomOrnament) {
-                Button("Skip All", systemImage: "forward.end") {
-                    store.send(.set(\.$step, .futureDevelopment))
-                }
-                .buttonBorderShape(.circle)
-                .help("Skip All")
-            }
-        }
+//        if options?.contains(.skipAll) ?? false {
+//            ToolbarItem(placement: .bottomOrnament) {
+//                Button("Skip All", systemImage: "forward.end") {
+//                    store.send(.set(\.$step, .futureDevelopment))
+//                }
+//                .buttonBorderShape(.circle)
+//                .help("Skip All")
+//            }
+//        }
         if options?.contains(.next) ?? true {
             ToolbarItem(placement: .bottomOrnament) {
                 Button("Continue", systemImage: "arrow.right") {

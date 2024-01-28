@@ -35,7 +35,7 @@ extension Creature {
             case onLoad
             case onBackingLoad(Creature.Backing?)
 
-            case runUnderstanding(Understanding.RunOptions)
+            case runUnderstanding(Understanding.RunOptions, Double)
             case stopUnderstanding
             
             case _nextAnimation
@@ -55,9 +55,9 @@ extension Creature {
                 case .onBackingLoad(let backing):
                     state.backing = backing
                     return .none
-                case .runUnderstanding(let runOptions):
+                case .runUnderstanding(let runOptions, let confidence):
                     state.intent = .init()
-                    state.understanding = .init(runOptions: runOptions, demo: state.demoMode)
+                    state.understanding = .init(runOptions: runOptions, demo: state.demoMode, confidenceThreshold: confidence)
                     return .send(.understanding(.onLoad))
                 case .stopUnderstanding:
                     state.intent = .init()

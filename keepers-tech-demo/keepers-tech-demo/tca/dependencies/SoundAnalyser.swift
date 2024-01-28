@@ -19,7 +19,7 @@ struct SoundAnalyser {
     // time between updates = [duration * (1 - overlapFactor)]
     static let preferredWindowDuration: Double = 2
     static let preferredOverlapFactor: Double? = .none
-    static let minimumConfidenceThreshold: Double = 0.2
+    static let minimumConfidenceThreshold: Double = 0.1
     
     private let streamAnalyzer: SNAudioStreamAnalyzer?
     fileprivate let observer: SNObserver = SNObserver()

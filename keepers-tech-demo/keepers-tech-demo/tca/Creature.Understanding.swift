@@ -26,6 +26,7 @@ extension Creature {
             var dirty: Bool = true
             var runOptions: RunOptions = .all
             var demo: Demo.Mode? = .none
+            var confidenceThreshold: Double = 0.5
         }
         
         enum Action: BindableAction {
@@ -72,19 +73,29 @@ extension Creature {
             }
             var intent = Intent()
             
-            if state.mightBeListeningToMusic && audio.anotherAppIsPlayingMusic {
-                intent.textBubble = "🎧"
-                intent.emotionAnimation = .dance
-                return intent
-            }
+//            if state.mightBeListeningToMusic && audio.anotherAppIsPlayingMusic {
+//                intent.textBubble = "🎧"
+//                intent.emotionAnimation = .dance
+//                return intent
+//            }
 
             if let soundAnalysisResult = state.soundAnalysisResult {
-                let result: String? = if let highConfidence = soundAnalysisResult.classifications.first {
-                    "👂… " + highConfidence.label.rawValue.replacingOccurrences(of: "_", with: " ") + " "
-                    + (SoundAnalyser.soundTypeEmojiMapping[highConfidence.label] ?? "") + String.init(repeating: "?", count: Int((1-highConfidence.confidence) / 0.2))
-                } else {
-                    .none
+                let texts: [String] = soundAnalysisResult.classifications.compactMap { classification in
+                    guard classification.confidence > state.confidenceThreshold else { return .none }
+                    return classification.label.rawValue.replacingOccurrences(of: "_", with: " ") + " "
+                    + (SoundAnalyser.soundTypeEmojiMapping[classification.label] ?? "") + String.init(repeating: "?", count: Int((1-classification.confidence) / 0.2))
                 }
+                
+                let result = String(texts.reduce("") { partialResult, value in
+                    "\(partialResult)\(value)\n"
+                }.dropLast())
+
+//                let result: String? = if let highConfidence = soundAnalysisResult.classifications.first {
+//                    "👂… " + highConfidence.label.rawValue.replacingOccurrences(of: "_", with: " ") + " "
+//                    + (SoundAnalyser.soundTypeEmojiMapping[highConfidence.label] ?? "") + String.init(repeating: "?", count: Int((1-highConfidence.confidence) / 0.2))
+//                } else {
+//                    .none
+//                }
                 
 //                if let hasMusic = confidentResults.first(where: { $0.label == .music }) {
 //                    intent.emotionAnimation = .dance
@@ -149,7 +160,7 @@ extension Creature.Understanding {
 
 // MARK: Task Effects for onLoad
 extension Creature.Understanding {
-    private var intentComputeTask: EffectOf<Self> { .run(priority: .utility) { send in
+    private var intentComputeTask: EffectOf<Self> { .run { send in
         while(true) {
             let milliseconds = /*(1 + UInt64.random(in: 0...1)) * */4000
             try await Task.sleep(for: .milliseconds(milliseconds))
@@ -157,7 +168,7 @@ extension Creature.Understanding {
         }
     }}
     
-    private var listeningToMusicTask: EffectOf<Self> { .run(priority: .utility) { send in
+    private var listeningToMusicTask: EffectOf<Self> { .run { send in
         for await otherIsPlayingStatus in audio.anotherAppIsPlayingMusicUpdates {
             let listening = switch otherIsPlayingStatus {
             case .begin: true
@@ -168,7 +179,7 @@ extension Creature.Understanding {
         }
     }}
 
-    private var soundAnalysisTask: EffectOf<Self> { .run(priority: .background) { send in
+    private var soundAnalysisTask: EffectOf<Self> { .run { send in
         for await result in soundAnalysis.classificationUpdates() {
             // TODO: could probably handle some processing here
             var msg = "\(result.timeRange):\n"

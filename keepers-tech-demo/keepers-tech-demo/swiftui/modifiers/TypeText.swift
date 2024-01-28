@@ -69,9 +69,9 @@ private struct TypeTextModifier: ViewModifier {
                         // Blink the cursor a few times.
                         for _ in 0..<2 {
                             text = startText + cursor
-                            try await Task.sleep(for: .milliseconds(500))
+                            try await Task.sleep(for: .milliseconds(5 * speed))
                             text = startText
-                            try await Task.sleep(for: .milliseconds(200))
+                            try await Task.sleep(for: .milliseconds(2 * speed))
                         }
                         
                         // Delete the old text.
@@ -93,9 +93,9 @@ private struct TypeTextModifier: ViewModifier {
                         // Blink the cursor a few times.
                         for _ in 0..<2 {
                             text = finalText + cursor
-                            try await Task.sleep(for: .milliseconds(500))
+                            try await Task.sleep(for: .milliseconds(5 * speed))
                             text = finalText
-                            try await Task.sleep(for: .milliseconds(200))
+                            try await Task.sleep(for: .milliseconds(2 * speed))
                         }
 //                        
 //                        // Wrap up the animation.

@@ -29,6 +29,7 @@ extension demoApp {
             @BindingState var isImmersiveSpaceOpen: Bool = false
             
             @BindingState var voteCount: Int64? = .none
+            @BindingState var soundAnalysisConfidenceThreshold: Double = 0.5
         }
         
         enum Action: BindableAction {
@@ -78,13 +79,19 @@ extension demoApp {
                     return .run { send in
                         await send(.set(\.$voteCount, await cloudkit.voteAsync()))
                     }
+                case .binding(\.$soundAnalysisConfidenceThreshold):
+                    guard case .some(let runOptions) = state.creature.understanding?.runOptions else {
+                        return .none
+                    }
+                    return .send(.creature(.runUnderstanding(runOptions, state.soundAnalysisConfidenceThreshold)))
                 case .enableListening(let enable):
                     let currentRunOptions = state.creature.understanding?.runOptions ?? .init()
+                    let threshold = state.soundAnalysisConfidenceThreshold
                     guard enable else {
                         let runOptions = currentRunOptions.subtracting(.soundAnalysis)
                         switch runOptions.isEmpty {
                         case true: return .send(.creature(.stopUnderstanding))
-                        case false: return .send(.creature(.runUnderstanding(runOptions)))
+                        case false: return .send(.creature(.runUnderstanding(runOptions, threshold)))
                         }
                     }
                     return .run { send in
@@ -102,7 +109,7 @@ extension demoApp {
                         
                         func continueWithAuthorization() async {
                             // TODO: run demo too
-                            await send(.creature(.runUnderstanding(currentRunOptions.union(.soundAnalysis))))
+                            await send(.creature(.runUnderstanding(currentRunOptions.union(.soundAnalysis), threshold)))
                         }
                         
                         func skipWithNoAuthorization() async {
@@ -113,12 +120,12 @@ extension demoApp {
                 case .enableWorldUnderstanding(let enable):
                     let currentRunOptions = state.creature.understanding?.runOptions ?? .init()
                     let relevantRunOptions = Creature.Understanding.RunOptions([.meshUpdates, .planeUpdates, .handUpdates])
-                    
+                    let threshold = state.soundAnalysisConfidenceThreshold
                     guard enable else {
                         let runOptions = currentRunOptions.subtracting(relevantRunOptions)
                         switch runOptions.isEmpty {
                         case true: return .send(.creature(.stopUnderstanding))
-                        case false: return .send(.creature(.runUnderstanding(runOptions)))
+                        case false: return .send(.creature(.runUnderstanding(runOptions, threshold)))
                         }
                     }
                     return .run { send in
@@ -132,17 +139,17 @@ extension demoApp {
                             await openSettings()
                         } else {
                             // TODO: run demo
-                            await send(.creature(.runUnderstanding(currentRunOptions.union(relevantRunOptions))))
+                            await send(.creature(.runUnderstanding(currentRunOptions.union(relevantRunOptions), threshold)))
                         }
                     }
                 case .binding(\.$step):
                     switch state.step {
-                    case .volumeIntro:
-                        return .send(.creature(.set(\.$demoMode, .animations)))
+//                    case .volumeIntro:
+//                        return .send(.creature(.set(\.$demoMode, .animations)))
 //                    case .immersiveIntro:
 //                        return .send(.creature(.set(\.$demoMode, .anchorUnderstanding)))
-                    case .soundAnalyserIntro:
-                        return .send(.creature(.set(\.$demoMode, .soundUnderstanding)))
+//                    case .soundAnalyserIntro:
+//                        return .send(.creature(.set(\.$demoMode, .soundUnderstanding)))
 //                    case .meshClassificationIntro:
 //                        return .send(.creature(.set(\.$demoMode, .worldAndHandUnderstanding)))
                     default:
@@ -173,12 +180,13 @@ extension demoApp {
 extension demoApp {
     enum Step: Int, CaseIterable, Comparable, Equatable {
         case heroScreen
-        case welcomeAbstract
-        case volumeIntro
-        case immersiveIntro
-        case soundAnalyserIntro
-        case meshClassificationIntro
-        case futureDevelopment
+        case soundAnalyserOnlyIntro
+//        case welcomeAbstract
+//        case volumeIntro
+//        case immersiveIntro
+//        case soundAnalyserIntro
+//        case meshClassificationIntro
+//        case futureDevelopment
         case controls
         
         var next: Self {

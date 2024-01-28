@@ -16,7 +16,7 @@ extension demoApp {
         var body: some View {
             WithViewStore(store, observe: { $0 }) { viewStore in
                 HStack {
-                    Text("Demo complete.")
+                    Text("Configuration complete.")
                 }
                 .toolbar {
                     demoApp.ornamentButtons(store, demoApp.stepData[viewStore.step]?.buttons)

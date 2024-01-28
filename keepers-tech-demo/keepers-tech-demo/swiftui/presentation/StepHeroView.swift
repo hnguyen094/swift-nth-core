@@ -16,11 +16,11 @@ extension demoApp {
         @State private var text: String = ""
         @State private var isFinished: Bool = false
         
-        private static let subtitleText = "tech demo"
+        private static let subtitleText = "be aware of your surroundings"
         
         var body: some View {
             VStack {
-                Text("my ami")
+                Text("See the Sounds")
                     .font(.extraLargeTitle)
                 Text(Self.subtitleText)
                     .font(.extraLargeTitle2)

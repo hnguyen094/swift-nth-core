@@ -1,5 +1,5 @@
 //
-//  MeshAnchor.GeometryExtensions.swift
+//  MeshAnchor.Geometry+Extensions.swift
 //  keepers-tech-demo
 //
 //  Created by hung on 1/21/24.
@@ -8,7 +8,7 @@
 import ARKit
 
 extension MeshAnchor.Geometry {
-    func mainClassification() -> MeshAnchor.MeshClassification {
+    public func mainClassification() -> MeshAnchor.MeshClassification {
         var counts = [MeshAnchor.MeshClassification:Int]()
         for i in 0..<faces.count {
             counts[classificationOf(faceWithIndex: i), default: 0] += 1
@@ -16,7 +16,7 @@ extension MeshAnchor.Geometry {
         return counts.sorted(by: { $0.value > $1.value } ).first?.key ?? .none
     }
     
-    func allClassifications() -> [MeshAnchor.MeshClassification] {
+    public func allClassifications() -> [MeshAnchor.MeshClassification] {
         var result: [MeshAnchor.MeshClassification] = []
         guard let classifications = classifications else { return result }
         var address = classifications.buffer.contents()
@@ -28,7 +28,7 @@ extension MeshAnchor.Geometry {
         return result
     }
     
-    func classificationOf(faceWithIndex index: Int) -> MeshAnchor.MeshClassification {
+    public func classificationOf(faceWithIndex index: Int) -> MeshAnchor.MeshClassification {
         guard let classifications = classifications else { return .none }
         let classificationAddress = classifications.buffer.contents().advanced(by: index)
         let classificationValue = Int(classificationAddress.assumingMemoryBound(to: UInt8.self).pointee)

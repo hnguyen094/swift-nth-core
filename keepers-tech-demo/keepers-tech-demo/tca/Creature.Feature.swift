@@ -12,7 +12,7 @@ import SwiftUI
 extension Creature {
     @Reducer
     struct Feature {
-        @Dependency(\.modelContext) private var modelContext
+        @Dependency(\.database) private var database
         @Dependency(\.logger) private var logger
 
         struct State: Equatable {
@@ -88,11 +88,12 @@ extension Creature {
         
         var loadBacking: EffectOf<Self> {
             .run { send in
-                var backing: Creature.Backing? = try await modelContext.fetch().first
+                let modelActor = database.modelActor()
+                var backing: Creature.Backing? = try await modelActor?.fetch().first
                 if case .none = backing {
                     logger.debug("Didn't find existing backing. Creating & inserting a new one.")
                     let newBacking = Backing()
-                    await modelContext.insert([newBacking])
+                    await modelActor?.insert([newBacking])
                     backing = newBacking
                 }
                 await send(.onBackingLoad(backing))

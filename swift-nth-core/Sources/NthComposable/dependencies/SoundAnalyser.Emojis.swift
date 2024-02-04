@@ -8,7 +8,7 @@
 import Foundation
 
 extension SoundAnalyser {
-    static let soundTypeEmojiMapping: [SoundType: String] = [
+    public static let soundTypeEmojiMapping: [SoundType: String] = [
         .accordion: "🪗",
         .acoustic_guitar: "🎸",
 //        .air_conditioner: "",

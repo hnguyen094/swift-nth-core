@@ -11,7 +11,14 @@ import Dependencies
 
 /// Provides the App Data Schemas between releases. We will accept data corruption during development.
 enum AppSchema {
-    typealias Latest = V1
+    typealias Latest = V2
+    
+    enum V2: VersionedSchema {
+        static var versionIdentifier: Schema.Version = Schema.Version(0, 0, 2)
+        static var models: [any PersistentModel.Type] {
+            [Creature.Backing.self]
+        }
+    }
     
     enum V1: VersionedSchema {
         static var versionIdentifier: Schema.Version = Schema.Version(0, 0, 1)
@@ -38,9 +45,14 @@ extension AppSchema {
             [V0toV1NoOp.migration]
         }
 
+        struct V1toV2Light {
+            static let migration: MigrationStage =
+                .lightweight(
+                    fromVersion: AppSchema.V1.self,
+                    toVersion: AppSchema.V2.self)
+        }
+        
         struct V0toV1NoOp {
-            @Dependency(\.logger) var logger
-            
             static let migration: MigrationStage =
                 MigrationStage.custom(
                     fromVersion: AppSchema.V0.self,

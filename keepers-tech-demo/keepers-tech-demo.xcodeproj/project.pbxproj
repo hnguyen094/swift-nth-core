@@ -7,77 +7,57 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B213A08E2B6DCA6F00DF00AA /* App.Bootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = B213A08D2B6DCA6F00DF00AA /* App.Bootstrap.swift */; };
 		B221ED022B54E702006C24DF /* AppSchemas.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221ED002B54E702006C24DF /* AppSchemas.swift */; };
 		B221ED072B54F86B006C24DF /* Creature.Backing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221ED062B54F86B006C24DF /* Creature.Backing.swift */; };
-		B221ED0A2B550B0F006C24DF /* PersistentModelContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221ED082B550B0F006C24DF /* PersistentModelContext.swift */; };
-		B221ED0B2B550B0F006C24DF /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221ED092B550B0F006C24DF /* Logger.swift */; };
 		B221ED0D2B551FC3006C24DF /* ARKitSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221ED0C2B551FC3006C24DF /* ARKitSessionManager.swift */; };
 		B221ED0F2B55581F006C24DF /* Billboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221ED0E2B55581F006C24DF /* Billboard.swift */; };
 		B2273B042B618CE8008D0A97 /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2273B032B618CE8008D0A97 /* Demo.swift */; };
 		B2273B062B61A2D3008D0A97 /* Creature.Body.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2273B052B61A2D3008D0A97 /* Creature.Body.swift */; };
 		B2273B0A2B62890C008D0A97 /* Creature.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2273B092B62890C008D0A97 /* Creature.View.swift */; };
-		B22C8E2F2B523A720076CC12 /* AnimationResourceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E2E2B523A720076CC12 /* AnimationResourceExtensions.swift */; };
-		B22C8E312B523A850076CC12 /* CustomTimingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E302B523A850076CC12 /* CustomTimingFunction.swift */; };
-		B22C8E332B5241B50076CC12 /* DataProviderExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E322B5241B50076CC12 /* DataProviderExtensions.swift */; };
 		B22C8E372B524D490076CC12 /* Emoting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E362B524D490076CC12 /* Emoting.swift */; };
 		B22C8E392B5257290076CC12 /* Creature.Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E382B5257290076CC12 /* Creature.Entity.swift */; };
 		B22C8E3B2B5268EC0076CC12 /* Emoting.Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E3A2B5268EC0076CC12 /* Emoting.Animation.swift */; };
-		B22C8E3D2B52AF870076CC12 /* SequenceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E3C2B52AF870076CC12 /* SequenceExtensions.swift */; };
 		B22C8E402B52EA3A0076CC12 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = B22C8E3F2B52EA3A0076CC12 /* ComposableArchitecture */; };
 		B22C8E432B52EAE40076CC12 /* Creature.Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22C8E422B52EAE40076CC12 /* Creature.Feature.swift */; };
-		B2372A392B5231AE0015B8EA /* ImmersiveID.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2372A382B5231AE0015B8EA /* ImmersiveID.swift */; };
 		B2A085612B52287F003AD224 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = B2A085602B52287F003AD224 /* RealityKitContent */; };
 		B2A085632B52287F003AD224 /* demoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085622B52287F003AD224 /* demoApp.swift */; };
 		B2A085652B52287F003AD224 /* Creature.VolumetricView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085642B52287F003AD224 /* Creature.VolumetricView.swift */; };
 		B2A085672B52287F003AD224 /* Creature.ImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A085662B52287F003AD224 /* Creature.ImmersiveView.swift */; };
 		B2A085692B522881003AD224 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2A085682B522881003AD224 /* Assets.xcassets */; };
 		B2A0856C2B522881003AD224 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2A0856B2B522881003AD224 /* Preview Assets.xcassets */; };
+		B2A738DF2B6C3322008782EB /* NthComposable in Frameworks */ = {isa = PBXBuildFile; productRef = B2A738DE2B6C3322008782EB /* NthComposable */; };
 		B2B777FC2B57B7CF00F82646 /* Follow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B777FB2B57B7CF00F82646 /* Follow.swift */; };
-		B2BE58AE2B5A7E8F00B28316 /* AudioSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58AD2B5A7E8F00B28316 /* AudioSession.swift */; };
 		B2BE58B02B5A8B5500B28316 /* Creature.Understanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58AF2B5A8B5400B28316 /* Creature.Understanding.swift */; };
-		B2BE58BF2B5B226D00B28316 /* SNClassifySoundRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58B92B5B226D00B28316 /* SNClassifySoundRequestExtensions.swift */; };
-		B2BE58C32B5B23AA00B28316 /* SoundAnalyser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58C22B5B23AA00B28316 /* SoundAnalyser.swift */; };
-		B2BE58C52B5B278000B28316 /* SoundAnalyser.SoundType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58C42B5B278000B28316 /* SoundAnalyser.SoundType.swift */; };
-		B2BE58C72B5BF25F00B28316 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58C62B5BF25F00B28316 /* AudioEngine.swift */; };
 		B2BE58C92B5C247300B28316 /* TextBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58C82B5C247300B28316 /* TextBubble.swift */; };
 		B2BE58CE2B5C6FA400B28316 /* TypeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58CD2B5C6FA400B28316 /* TypeText.swift */; };
-		B2BE58D02B5C92E800B28316 /* TaskExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58CF2B5C92E800B28316 /* TaskExtensions.swift */; };
-		B2BE58D22B5D389E00B28316 /* MeshAnchor.GeometryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58D12B5D389E00B28316 /* MeshAnchor.GeometryExtensions.swift */; };
 		B2BE58D42B5D61AF00B28316 /* Creature.Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58D32B5D61AF00B28316 /* Creature.Intent.swift */; };
-		B2BE58D82B5DC9C200B28316 /* SoundAnalyser.Emojis.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58D72B5DC9C100B28316 /* SoundAnalyser.Emojis.swift */; };
 		B2BE58DC2B5EA50B00B28316 /* App.Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58DB2B5EA50B00B28316 /* App.Feature.swift */; };
 		B2BE58DF2B5F1FFD00B28316 /* StepBasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58DE2B5F1FFC00B28316 /* StepBasicView.swift */; };
 		B2BE58E12B5F338D00B28316 /* StepData.Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58E02B5F338D00B28316 /* StepData.Content.swift */; };
 		B2BE58E32B5FC7C900B28316 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58E22B5FC7C900B28316 /* RootView.swift */; };
 		B2BE58E52B5FCB2400B28316 /* App.Feature.ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58E42B5FCB2400B28316 /* App.Feature.ViewState.swift */; };
-		B2BE58E72B5FF11600B28316 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58E62B5FF11600B28316 /* StringExtensions.swift */; };
 		B2BE58EA2B601FF900B28316 /* StepHeroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58E92B601FF900B28316 /* StepHeroView.swift */; };
 		B2BE58ED2B6021B000B28316 /* StepControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58EC2B6021B000B28316 /* StepControlView.swift */; };
 		B2BE58EF2B6028AA00B28316 /* StepOrnamentControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58EE2B6028AA00B28316 /* StepOrnamentControls.swift */; };
 		B2BE58F12B602BA700B28316 /* StepData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58F02B602BA700B28316 /* StepData.swift */; };
-		B2BE58F32B60934800B28316 /* CloudKitContainerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58F22B60934800B28316 /* CloudKitContainerManager.swift */; };
 		B2DFE0B82B569645008CD4C1 /* ColorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DFE0B72B569645008CD4C1 /* ColorData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B213A08D2B6DCA6F00DF00AA /* App.Bootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.Bootstrap.swift; sourceTree = "<group>"; };
+		B21F2F532B67019D00624E74 /* swift-nth-core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "swift-nth-core"; path = "../../swift-nth-core"; sourceTree = "<group>"; };
 		B221ED002B54E702006C24DF /* AppSchemas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSchemas.swift; sourceTree = "<group>"; };
 		B221ED062B54F86B006C24DF /* Creature.Backing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.Backing.swift; sourceTree = "<group>"; };
-		B221ED082B550B0F006C24DF /* PersistentModelContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentModelContext.swift; sourceTree = "<group>"; };
-		B221ED092B550B0F006C24DF /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B221ED0C2B551FC3006C24DF /* ARKitSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARKitSessionManager.swift; sourceTree = "<group>"; };
 		B221ED0E2B55581F006C24DF /* Billboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Billboard.swift; sourceTree = "<group>"; };
 		B2273B032B618CE8008D0A97 /* Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
 		B2273B052B61A2D3008D0A97 /* Creature.Body.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.Body.swift; sourceTree = "<group>"; };
 		B2273B092B62890C008D0A97 /* Creature.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.View.swift; sourceTree = "<group>"; };
-		B22C8E2E2B523A720076CC12 /* AnimationResourceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationResourceExtensions.swift; sourceTree = "<group>"; };
-		B22C8E302B523A850076CC12 /* CustomTimingFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimingFunction.swift; sourceTree = "<group>"; };
-		B22C8E322B5241B50076CC12 /* DataProviderExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderExtensions.swift; sourceTree = "<group>"; };
 		B22C8E362B524D490076CC12 /* Emoting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoting.swift; sourceTree = "<group>"; };
 		B22C8E382B5257290076CC12 /* Creature.Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.Entity.swift; sourceTree = "<group>"; };
 		B22C8E3A2B5268EC0076CC12 /* Emoting.Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoting.Animation.swift; sourceTree = "<group>"; };
-		B22C8E3C2B52AF870076CC12 /* SequenceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtensions.swift; sourceTree = "<group>"; };
 		B22C8E422B52EAE40076CC12 /* Creature.Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.Feature.swift; sourceTree = "<group>"; };
-		B2372A382B5231AE0015B8EA /* ImmersiveID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveID.swift; sourceTree = "<group>"; };
 		B2A0855B2B52287F003AD224 /* keepers-tech-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "keepers-tech-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2A0855F2B52287F003AD224 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		B2A085622B52287F003AD224 /* demoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = demoApp.swift; sourceTree = "<group>"; };
@@ -88,29 +68,19 @@
 		B2A0856D2B522881003AD224 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2A085742B522BFD003AD224 /* RealityFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealityFoundation.framework; path = System/Library/Frameworks/RealityFoundation.framework; sourceTree = SDKROOT; };
 		B2B777FB2B57B7CF00F82646 /* Follow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follow.swift; sourceTree = "<group>"; };
-		B2BE58AD2B5A7E8F00B28316 /* AudioSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSession.swift; sourceTree = "<group>"; };
 		B2BE58AF2B5A8B5400B28316 /* Creature.Understanding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.Understanding.swift; sourceTree = "<group>"; };
-		B2BE58B92B5B226D00B28316 /* SNClassifySoundRequestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNClassifySoundRequestExtensions.swift; sourceTree = "<group>"; };
-		B2BE58C22B5B23AA00B28316 /* SoundAnalyser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundAnalyser.swift; sourceTree = "<group>"; };
-		B2BE58C42B5B278000B28316 /* SoundAnalyser.SoundType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundAnalyser.SoundType.swift; sourceTree = "<group>"; };
-		B2BE58C62B5BF25F00B28316 /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
 		B2BE58C82B5C247300B28316 /* TextBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBubble.swift; sourceTree = "<group>"; };
 		B2BE58CD2B5C6FA400B28316 /* TypeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeText.swift; sourceTree = "<group>"; };
-		B2BE58CF2B5C92E800B28316 /* TaskExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskExtensions.swift; sourceTree = "<group>"; };
-		B2BE58D12B5D389E00B28316 /* MeshAnchor.GeometryExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshAnchor.GeometryExtensions.swift; sourceTree = "<group>"; };
 		B2BE58D32B5D61AF00B28316 /* Creature.Intent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.Intent.swift; sourceTree = "<group>"; };
-		B2BE58D72B5DC9C100B28316 /* SoundAnalyser.Emojis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundAnalyser.Emojis.swift; sourceTree = "<group>"; };
 		B2BE58DB2B5EA50B00B28316 /* App.Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.Feature.swift; sourceTree = "<group>"; };
 		B2BE58DE2B5F1FFC00B28316 /* StepBasicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepBasicView.swift; sourceTree = "<group>"; };
 		B2BE58E02B5F338D00B28316 /* StepData.Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepData.Content.swift; sourceTree = "<group>"; };
 		B2BE58E22B5FC7C900B28316 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		B2BE58E42B5FCB2400B28316 /* App.Feature.ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.Feature.ViewState.swift; sourceTree = "<group>"; };
-		B2BE58E62B5FF11600B28316 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		B2BE58E92B601FF900B28316 /* StepHeroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepHeroView.swift; sourceTree = "<group>"; };
 		B2BE58EC2B6021B000B28316 /* StepControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepControlView.swift; sourceTree = "<group>"; };
 		B2BE58EE2B6028AA00B28316 /* StepOrnamentControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOrnamentControls.swift; sourceTree = "<group>"; };
 		B2BE58F02B602BA700B28316 /* StepData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepData.swift; sourceTree = "<group>"; };
-		B2BE58F22B60934800B28316 /* CloudKitContainerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitContainerManager.swift; sourceTree = "<group>"; };
 		B2D3E9332B53BCFA003009C1 /* keepers-tech-demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "keepers-tech-demo.entitlements"; sourceTree = "<group>"; };
 		B2DFE0B72B569645008CD4C1 /* ColorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2A738DF2B6C3322008782EB /* NthComposable in Frameworks */,
 				B22C8E402B52EA3A0076CC12 /* ComposableArchitecture in Frameworks */,
 				B2A085612B52287F003AD224 /* RealityKitContent in Frameworks */,
 			);
@@ -131,15 +102,7 @@
 		B221ECFE2B54E6D9006C24DF /* dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				B221ED082B550B0F006C24DF /* PersistentModelContext.swift */,
-				B221ED092B550B0F006C24DF /* Logger.swift */,
 				B221ED0C2B551FC3006C24DF /* ARKitSessionManager.swift */,
-				B2BE58F22B60934800B28316 /* CloudKitContainerManager.swift */,
-				B2BE58AD2B5A7E8F00B28316 /* AudioSession.swift */,
-				B2BE58C62B5BF25F00B28316 /* AudioEngine.swift */,
-				B2BE58C22B5B23AA00B28316 /* SoundAnalyser.swift */,
-				B2BE58C42B5B278000B28316 /* SoundAnalyser.SoundType.swift */,
-				B2BE58D72B5DC9C100B28316 /* SoundAnalyser.Emojis.swift */,
 			);
 			path = dependencies;
 			sourceTree = "<group>";
@@ -163,6 +126,7 @@
 				B2BE58D32B5D61AF00B28316 /* Creature.Intent.swift */,
 				B2BE58DB2B5EA50B00B28316 /* App.Feature.swift */,
 				B2BE58E42B5FCB2400B28316 /* App.Feature.ViewState.swift */,
+				B213A08D2B6DCA6F00DF00AA /* App.Bootstrap.swift */,
 			);
 			path = tca;
 			sourceTree = "<group>";
@@ -202,7 +166,6 @@
 				B2D3E9332B53BCFA003009C1 /* keepers-tech-demo.entitlements */,
 				B221ED032B54EADC006C24DF /* swiftdata */,
 				B22C8E412B52EA430076CC12 /* tca */,
-				B2E1306D2B522F15002CBE8A /* helpers */,
 				B2E1306A2B522EDF002CBE8A /* ecs */,
 				B28AD6C32B56E9EB0071D32C /* swiftui */,
 				B2A085622B52287F003AD224 /* demoApp.swift */,
@@ -216,6 +179,7 @@
 		B2A0855E2B52287F003AD224 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				B21F2F532B67019D00624E74 /* swift-nth-core */,
 				B2A0855F2B52287F003AD224 /* RealityKitContent */,
 			);
 			path = Packages;
@@ -283,22 +247,6 @@
 			path = ecs;
 			sourceTree = "<group>";
 		};
-		B2E1306D2B522F15002CBE8A /* helpers */ = {
-			isa = PBXGroup;
-			children = (
-				B2372A382B5231AE0015B8EA /* ImmersiveID.swift */,
-				B22C8E2E2B523A720076CC12 /* AnimationResourceExtensions.swift */,
-				B22C8E302B523A850076CC12 /* CustomTimingFunction.swift */,
-				B22C8E322B5241B50076CC12 /* DataProviderExtensions.swift */,
-				B22C8E3C2B52AF870076CC12 /* SequenceExtensions.swift */,
-				B2BE58B92B5B226D00B28316 /* SNClassifySoundRequestExtensions.swift */,
-				B2BE58CF2B5C92E800B28316 /* TaskExtensions.swift */,
-				B2BE58D12B5D389E00B28316 /* MeshAnchor.GeometryExtensions.swift */,
-				B2BE58E62B5FF11600B28316 /* StringExtensions.swift */,
-			);
-			path = helpers;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -318,6 +266,7 @@
 			packageProductDependencies = (
 				B2A085602B52287F003AD224 /* RealityKitContent */,
 				B22C8E3F2B52EA3A0076CC12 /* ComposableArchitecture */,
+				B2A738DE2B6C3322008782EB /* NthComposable */,
 			);
 			productName = "keepers-tech-demo";
 			productReference = B2A0855B2B52287F003AD224 /* keepers-tech-demo.app */;
@@ -382,46 +331,30 @@
 				B2A085652B52287F003AD224 /* Creature.VolumetricView.swift in Sources */,
 				B2BE58EF2B6028AA00B28316 /* StepOrnamentControls.swift in Sources */,
 				B221ED0D2B551FC3006C24DF /* ARKitSessionManager.swift in Sources */,
-				B2BE58C32B5B23AA00B28316 /* SoundAnalyser.swift in Sources */,
 				B2A085632B52287F003AD224 /* demoApp.swift in Sources */,
 				B2BE58E12B5F338D00B28316 /* StepData.Content.swift in Sources */,
+				B213A08E2B6DCA6F00DF00AA /* App.Bootstrap.swift in Sources */,
 				B22C8E432B52EAE40076CC12 /* Creature.Feature.swift in Sources */,
 				B2273B0A2B62890C008D0A97 /* Creature.View.swift in Sources */,
 				B2BE58ED2B6021B000B28316 /* StepControlView.swift in Sources */,
 				B22C8E392B5257290076CC12 /* Creature.Entity.swift in Sources */,
-				B2BE58BF2B5B226D00B28316 /* SNClassifySoundRequestExtensions.swift in Sources */,
 				B2BE58E32B5FC7C900B28316 /* RootView.swift in Sources */,
-				B2372A392B5231AE0015B8EA /* ImmersiveID.swift in Sources */,
 				B22C8E372B524D490076CC12 /* Emoting.swift in Sources */,
-				B2BE58C72B5BF25F00B28316 /* AudioEngine.swift in Sources */,
-				B221ED0B2B550B0F006C24DF /* Logger.swift in Sources */,
 				B2BE58B02B5A8B5500B28316 /* Creature.Understanding.swift in Sources */,
-				B221ED0A2B550B0F006C24DF /* PersistentModelContext.swift in Sources */,
-				B2BE58D22B5D389E00B28316 /* MeshAnchor.GeometryExtensions.swift in Sources */,
-				B2BE58E72B5FF11600B28316 /* StringExtensions.swift in Sources */,
 				B2A085672B52287F003AD224 /* Creature.ImmersiveView.swift in Sources */,
 				B2BE58D42B5D61AF00B28316 /* Creature.Intent.swift in Sources */,
-				B2BE58D82B5DC9C200B28316 /* SoundAnalyser.Emojis.swift in Sources */,
-				B22C8E3D2B52AF870076CC12 /* SequenceExtensions.swift in Sources */,
 				B2273B042B618CE8008D0A97 /* Demo.swift in Sources */,
 				B221ED072B54F86B006C24DF /* Creature.Backing.swift in Sources */,
 				B2BE58C92B5C247300B28316 /* TextBubble.swift in Sources */,
 				B2BE58E52B5FCB2400B28316 /* App.Feature.ViewState.swift in Sources */,
 				B221ED0F2B55581F006C24DF /* Billboard.swift in Sources */,
-				B2BE58C52B5B278000B28316 /* SoundAnalyser.SoundType.swift in Sources */,
 				B2B777FC2B57B7CF00F82646 /* Follow.swift in Sources */,
-				B2BE58F32B60934800B28316 /* CloudKitContainerManager.swift in Sources */,
-				B22C8E332B5241B50076CC12 /* DataProviderExtensions.swift in Sources */,
 				B2BE58EA2B601FF900B28316 /* StepHeroView.swift in Sources */,
-				B22C8E312B523A850076CC12 /* CustomTimingFunction.swift in Sources */,
 				B2BE58DC2B5EA50B00B28316 /* App.Feature.swift in Sources */,
 				B2273B062B61A2D3008D0A97 /* Creature.Body.swift in Sources */,
-				B2BE58D02B5C92E800B28316 /* TaskExtensions.swift in Sources */,
 				B2DFE0B82B569645008CD4C1 /* ColorData.swift in Sources */,
-				B22C8E2F2B523A720076CC12 /* AnimationResourceExtensions.swift in Sources */,
 				B22C8E3B2B5268EC0076CC12 /* Emoting.Animation.swift in Sources */,
 				B2BE58DF2B5F1FFD00B28316 /* StepBasicView.swift in Sources */,
-				B2BE58AE2B5A7E8F00B28316 /* AudioSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,6 +583,10 @@
 		B2A085602B52287F003AD224 /* RealityKitContent */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RealityKitContent;
+		};
+		B2A738DE2B6C3322008782EB /* NthComposable */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NthComposable;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

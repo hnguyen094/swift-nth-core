@@ -13,7 +13,7 @@ extension demoApp {
     @Reducer
     struct Feature: Reducer {
         @Dependency(\.logger) var logger
-        @Dependency(\.cloudkitManager) var cloudkit
+        @Dependency(\.cloudkitService) var cloudkit
         @Dependency(\.arkitSessionManager) var arkit
         
         @Environment(\.openImmersiveSpace) var openImmersiveSpace
@@ -77,7 +77,10 @@ extension demoApp {
                     }
                 case .vote:
                     return .run { send in
-                        await send(.set(\.$voteCount, await cloudkit.voteAsync()))
+                        await send(.set(\.$voteCount, try await cloudkit.vote(recordType: "Interest", key: "count")))
+                    } catch: { error, send in
+                        logger.error("Failed to submit vote: \(error)")
+                        await send(.set(\.$voteCount, .none))
                     }
                 case .binding(\.$soundAnalysisConfidenceThreshold):
                     guard case .some(let runOptions) = state.creature.understanding?.runOptions else {

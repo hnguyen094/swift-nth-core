@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import NthComposable
 
 extension Creature {
     @Reducer
@@ -180,20 +181,14 @@ extension Creature.Understanding {
     }}
 
     private var soundAnalysisTask: EffectOf<Self> { .run { send in
-        for await result in soundAnalysis.classificationUpdates() {
-            // TODO: could probably handle some processing here
-            var msg = "\(result.timeRange):\n"
-            var wasHigh = true
-            for classification in result.classifications {
-                if wasHigh && classification.confidence < 0.5 {
-                    msg += "\n"
-                    wasHigh = false
-                }
-                let confidence = String(format: "%.2f", classification.confidence)
-                msg += "\(confidence): \(classification.label.rawValue)\n"
+        for await requestResult in soundAnalysis.classificationUpdates() {
+            switch requestResult {
+            case .result(let result):
+                logger.debug("\(result.debugDescription)")
+                await send(.set(\.$soundAnalysisResult, result))
+            case .error(let error):
+                logger.error("Received error: \(error)")
             }
-            logger.debug("\(msg)")
-            await send(.set(\.$soundAnalysisResult, result))
         }
     }}
     

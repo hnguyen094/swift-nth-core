@@ -50,6 +50,8 @@ extension demoApp {
         
         var body: some ReducerOf<Self> {
             BindingReducer()
+            
+            loggingReducer
 
             Scope(state: \.creature, action: \.creature) {
                 Creature.Feature()
@@ -162,6 +164,22 @@ extension demoApp {
                 case .creature, .binding:
                     return .none
                 }
+            }
+        }
+        
+        var loggingReducer: some ReducerOf<Self> {
+            Reduce { state, action in
+                switch action {
+                case .binding(\.isVolumeOpen):
+                    let text = state.isVolumeOpen ? "Appeared": "Disappeared"
+                    logger.info("Volume \(text)")
+                case .binding(\.isImmersiveSpaceOpen):
+                    let text = state.isImmersiveSpaceOpen ? "Appeared": "Disappeared"
+                    logger.info("Immersive space \(text)")
+                default:
+                    break
+                }
+                return .none
             }
         }
         

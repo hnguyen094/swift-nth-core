@@ -13,15 +13,13 @@ extension demoApp {
         @Bindable var store: StoreOf<Feature>
         
         var body: some View {
-            WithViewStore(store, observe: \.step) { viewStore in
-                switch viewStore.state {
-                case .heroScreen:
-                    StepHeroView(store: store)
-                case .controls:
-                    StepControlView(store: store)
-                default:
-                    StepBasicView(store: store)
-                }
+            switch store.step {
+            case .heroScreen:
+                StepHeroView(store: store)
+            case .controls:
+                StepControlView(store: store)
+            default:
+                StepBasicView(store: store)
             }
         }
     }

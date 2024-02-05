@@ -54,22 +54,19 @@ extension demoApp {
         }
         if options?.contains(.showInterest) ?? false {
             ToolbarItem(placement: .bottomOrnament) {
-                WithViewStore(store, observe: \.voteCount) { viewStore in
-                    let hasValue = viewStore.state != .none
-                    if hasValue {
-                        Button("+\(viewStore.state!)", systemImage: "hand.thumbsup.fill") {
-                            store.send(.vote)
-                        }
-                        .labelStyle(.titleAndIcon)
-                        .help("Show Interest")
-                        .animation(.spring, value: viewStore.state)
-                    } else {
-                        Button("Show Interest", systemImage: "hand.thumbsup") {
-                            store.send(.vote)
-                        }
-                        .buttonBorderShape(.circle)
-                        .help("Show Interest")
+                if let voteCount = store.voteCount {
+                    Button("+\(voteCount)", systemImage: "hand.thumbsup.fill") {
+                        store.send(.vote)
                     }
+                    .labelStyle(.titleAndIcon)
+                    .help("Show Interest")
+                    .animation(.spring, value: store.voteCount)
+                } else {
+                    Button("Show Interest", systemImage: "hand.thumbsup") {
+                        store.send(.vote)
+                    }
+                    .buttonBorderShape(.circle)
+                    .help("Show Interest")
                 }
             }
         }

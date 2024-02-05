@@ -14,9 +14,6 @@ import ARKit
 
 @main
 struct demoApp: App {
-    @Dependency(\.arkitSessionManager) private var sessionManager
-    @Dependency(\.logger) private var logger
-    
     @State private var volumeSize: Size3D = .init(width : 0.2,
                                                   height: 0.3,
                                                   depth : 0.05)
@@ -40,23 +37,19 @@ struct demoApp: App {
         .windowResizability(.contentSize)
         
         WindowGroup(id: Creature.VolumetricView.ID) {
-            SwitchStore(bootstrap) { state in
-                switch state {
-                case .bootstrapping:
-                    Text("Initializing")
-                case .bootstrapped:
-                    CaseLet(/Bootstrap.State.bootstrapped, action: Bootstrap.Action.bootstrapped) { store in
-                        let creatureStore = store.scope(state: \.creature, action: \.creature)
-                        Creature.VolumetricView(store: creatureStore, volumeSize: volumeSize)
-                            .onAppear {
-                                store.send(.set(\.isVolumeOpen, true))
-                                logger.info("VolumetricView appeared")
-                            }
-                            .onDisappear {
-                                store.send(.set(\.isVolumeOpen, false))
-                                logger.info("VolumetricView disappeared")
-                            }
-                    }
+            switch bootstrap.state {
+            case .bootstrapping:
+                Text("Initializing")
+            case .bootstrapped:
+                if let store = bootstrap.scope(state: \.bootstrapped, action: \.bootstrapped) {
+                    let creatureStore = store.scope(state: \.creature, action: \.creature)
+                    Creature.VolumetricView(store: creatureStore, volumeSize: volumeSize)
+                        .onAppear {
+                            store.send(.set(\.isVolumeOpen, true))
+                        }
+                        .onDisappear {
+                            store.send(.set(\.isVolumeOpen, false))
+                        }
                 }
             }
         }
@@ -64,25 +57,22 @@ struct demoApp: App {
         .defaultSize(volumeSize, in: .meters)
         
         ImmersiveSpace(id: Creature.ImmersiveView.ID) {
-            SwitchStore(bootstrap) { state in
-                switch state {
+            switch bootstrap.state {
                 case .bootstrapping:
                     Text("Initializing")
                 case .bootstrapped:
-                    CaseLet(/Bootstrap.State.bootstrapped, action: Bootstrap.Action.bootstrapped) { store in
+                    if let store = bootstrap.scope(state: \.bootstrapped, action: \.bootstrapped) {
                         let creatureStore = store.scope(state: \.creature, action: \.creature)
                         Creature.ImmersiveView(store: creatureStore)
                             .onAppear {
                                 store.send(.set(\.isImmersiveSpaceOpen, true))
-                                logger.info("ImmersiveSpace appeared")
                             }
                             .onDisappear {
                                 store.send(.set(\.isImmersiveSpaceOpen, false))
-                                logger.info("ImmersiveSpace disappeared")
                             }
                     }
                 }
-            }
+            
         }
     }
 

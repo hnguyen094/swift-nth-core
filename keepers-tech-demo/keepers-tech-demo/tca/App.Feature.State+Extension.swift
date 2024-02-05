@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: Previously ViewState
 extension demoApp.Feature.State {
     var runOptions: Creature.Understanding.RunOptions? {
         self.creature.understanding?.runOptions

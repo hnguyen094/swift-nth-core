@@ -52,7 +52,7 @@ extension Creature {
                 }
             } attachments: {
                 Attachment(id: TextBubble.ID) {
-                    TextBubble(store: store)
+                    TextBubble(intentText: store.intent.textBubble)
                 }
             }
             .gesture(tap)

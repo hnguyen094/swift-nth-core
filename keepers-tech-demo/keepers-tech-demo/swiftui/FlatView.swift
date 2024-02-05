@@ -1,5 +1,5 @@
 //
-//  RootView.swift
+//  FlatView.swift
 //  keepers-tech-demo
 //
 //  Created by hung on 1/23/24.
@@ -9,7 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 
 extension demoApp {
-    struct RootView: View {
+    struct FlatView: View {
         @Bindable var store: StoreOf<Feature>
         
         var body: some View {

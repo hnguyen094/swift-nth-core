@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B213A08E2B6DCA6F00DF00AA /* App.Bootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = B213A08D2B6DCA6F00DF00AA /* App.Bootstrap.swift */; };
 		B221ED022B54E702006C24DF /* AppSchemas.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221ED002B54E702006C24DF /* AppSchemas.swift */; };
 		B221ED072B54F86B006C24DF /* Creature.Backing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221ED062B54F86B006C24DF /* Creature.Backing.swift */; };
 		B221ED0D2B551FC3006C24DF /* ARKitSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221ED0C2B551FC3006C24DF /* ARKitSessionManager.swift */; };
@@ -36,7 +35,7 @@
 		B2BE58DC2B5EA50B00B28316 /* App.Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58DB2B5EA50B00B28316 /* App.Feature.swift */; };
 		B2BE58DF2B5F1FFD00B28316 /* StepBasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58DE2B5F1FFC00B28316 /* StepBasicView.swift */; };
 		B2BE58E12B5F338D00B28316 /* StepData.Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58E02B5F338D00B28316 /* StepData.Content.swift */; };
-		B2BE58E32B5FC7C900B28316 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58E22B5FC7C900B28316 /* RootView.swift */; };
+		B2BE58E32B5FC7C900B28316 /* FlatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58E22B5FC7C900B28316 /* FlatView.swift */; };
 		B2BE58EA2B601FF900B28316 /* StepHeroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58E92B601FF900B28316 /* StepHeroView.swift */; };
 		B2BE58ED2B6021B000B28316 /* StepControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58EC2B6021B000B28316 /* StepControlView.swift */; };
 		B2BE58EF2B6028AA00B28316 /* StepOrnamentControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58EE2B6028AA00B28316 /* StepOrnamentControls.swift */; };
@@ -45,7 +44,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B213A08D2B6DCA6F00DF00AA /* App.Bootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.Bootstrap.swift; sourceTree = "<group>"; };
 		B21F2F532B67019D00624E74 /* swift-nth-core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "swift-nth-core"; path = "../../swift-nth-core"; sourceTree = "<group>"; };
 		B221ED002B54E702006C24DF /* AppSchemas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSchemas.swift; sourceTree = "<group>"; };
 		B221ED062B54F86B006C24DF /* Creature.Backing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.Backing.swift; sourceTree = "<group>"; };
@@ -76,7 +74,7 @@
 		B2BE58DB2B5EA50B00B28316 /* App.Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.Feature.swift; sourceTree = "<group>"; };
 		B2BE58DE2B5F1FFC00B28316 /* StepBasicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepBasicView.swift; sourceTree = "<group>"; };
 		B2BE58E02B5F338D00B28316 /* StepData.Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepData.Content.swift; sourceTree = "<group>"; };
-		B2BE58E22B5FC7C900B28316 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		B2BE58E22B5FC7C900B28316 /* FlatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatView.swift; sourceTree = "<group>"; };
 		B2BE58E92B601FF900B28316 /* StepHeroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepHeroView.swift; sourceTree = "<group>"; };
 		B2BE58EC2B6021B000B28316 /* StepControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepControlView.swift; sourceTree = "<group>"; };
 		B2BE58EE2B6028AA00B28316 /* StepOrnamentControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOrnamentControls.swift; sourceTree = "<group>"; };
@@ -126,7 +124,6 @@
 				B2BE58D32B5D61AF00B28316 /* Creature.Intent.swift */,
 				B2BE58DB2B5EA50B00B28316 /* App.Feature.swift */,
 				B2A0A5772B705D2900939FBB /* App.Feature.State+Extension.swift */,
-				B213A08D2B6DCA6F00DF00AA /* App.Bootstrap.swift */,
 			);
 			path = tca;
 			sourceTree = "<group>";
@@ -137,7 +134,7 @@
 				B2BE58CC2B5C6F7100B28316 /* modifiers */,
 				B2BE58E82B601F1300B28316 /* presentation */,
 				B2BE58EB2B6020E500B28316 /* reality */,
-				B2BE58E22B5FC7C900B28316 /* RootView.swift */,
+				B2BE58E22B5FC7C900B28316 /* FlatView.swift */,
 			);
 			path = swiftui;
 			sourceTree = "<group>";
@@ -333,12 +330,11 @@
 				B221ED0D2B551FC3006C24DF /* ARKitSessionManager.swift in Sources */,
 				B2A085632B52287F003AD224 /* demoApp.swift in Sources */,
 				B2BE58E12B5F338D00B28316 /* StepData.Content.swift in Sources */,
-				B213A08E2B6DCA6F00DF00AA /* App.Bootstrap.swift in Sources */,
 				B22C8E432B52EAE40076CC12 /* Creature.Feature.swift in Sources */,
 				B2273B0A2B62890C008D0A97 /* Creature.View.swift in Sources */,
 				B2BE58ED2B6021B000B28316 /* StepControlView.swift in Sources */,
 				B22C8E392B5257290076CC12 /* Creature.Entity.swift in Sources */,
-				B2BE58E32B5FC7C900B28316 /* RootView.swift in Sources */,
+				B2BE58E32B5FC7C900B28316 /* FlatView.swift in Sources */,
 				B22C8E372B524D490076CC12 /* Emoting.swift in Sources */,
 				B2BE58B02B5A8B5500B28316 /* Creature.Understanding.swift in Sources */,
 				B2A085672B52287F003AD224 /* Creature.ImmersiveView.swift in Sources */,

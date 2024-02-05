@@ -183,6 +183,20 @@ extension demoApp {
             }
         }
         
+        static func bootstrap() async throws {
+            @Dependency(\.database) var database
+            @Dependency(\.audioSession.initialize) var audioSessionInitializer
+            @Dependency(\.soundAnalysis.initialize) var soundAnalysisInitializer
+
+            try database.initialize(
+                .local,
+                for: AppSchema.Latest.self,
+                migrationPlan: AppSchema.AppMigrationPlan.self)
+            await database.modelActor()?.enableAutosave()
+            try audioSessionInitializer(.default)
+            try soundAnalysisInitializer(.default)
+        }
+        
         @MainActor
         private func openSettings() async {
             if let url = URL(string: UIApplication.openSettingsURLString) {

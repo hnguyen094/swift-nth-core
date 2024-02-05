@@ -5,12 +5,11 @@
 //  Created by hung on 1/13/24.
 //
 
-import NthCore
-import NthComposable
-
 import SwiftUI
 import ComposableArchitecture
-import ARKit
+
+import NthCore
+import NthComposable
 
 @main
 struct demoApp: App {
@@ -18,61 +17,45 @@ struct demoApp: App {
                                                   height: 0.3,
                                                   depth : 0.05)
 
-    let bootstrap = Store(initialState: Bootstrap.State.bootstrapping) {
-        Bootstrap()
+    let bootstrap = Store(initialState: .bootstrapping) {
+        Bootstrapping(bootstrap: Feature.bootstrap, initialState: Feature.State(step: .heroScreen)) {
+            Feature()
+        }
     }
     
     var body: some Scene {
-        WindowGroup(id: RootView.ID) {
-            switch bootstrap.state {
-            case .bootstrapping:
-                Text("Initializing")
-            case .bootstrapped:
-                if let store = bootstrap.scope(state: \.bootstrapped, action: \.bootstrapped) {
-                    RootView(store: store)
-                        .onAppear { store.send(.onLoad) }
-                }
+        WindowGroup(id: FlatView.ID) {
+            BootstrapView(store: bootstrap) { store in
+                FlatView(store: store)
+                    .onAppear { store.send(.onLoad) }
+            } placeholder: {
+                ProgressView()
             }
         }
         .windowResizability(.contentSize)
         
         WindowGroup(id: Creature.VolumetricView.ID) {
-            switch bootstrap.state {
-            case .bootstrapping:
-                Text("Initializing")
-            case .bootstrapped:
-                if let store = bootstrap.scope(state: \.bootstrapped, action: \.bootstrapped) {
-                    let creatureStore = store.scope(state: \.creature, action: \.creature)
-                    Creature.VolumetricView(store: creatureStore, volumeSize: volumeSize)
-                        .onAppear {
-                            store.send(.set(\.isVolumeOpen, true))
-                        }
-                        .onDisappear {
-                            store.send(.set(\.isVolumeOpen, false))
-                        }
-                }
+            BootstrapView(store: bootstrap) { store in
+                let creatureStore = store.scope(state: \.creature, action: \.creature)
+                Creature.VolumetricView(store: creatureStore, volumeSize: volumeSize)
+                    .onAppear { store.send(.set(\.isVolumeOpen, true)) }
+                    .onDisappear { store.send(.set(\.isVolumeOpen, false)) }
+            } placeholder: {
+                ProgressView()
             }
         }
         .windowStyle(.volumetric)
         .defaultSize(volumeSize, in: .meters)
         
         ImmersiveSpace(id: Creature.ImmersiveView.ID) {
-            switch bootstrap.state {
-                case .bootstrapping:
-                    Text("Initializing")
-                case .bootstrapped:
-                    if let store = bootstrap.scope(state: \.bootstrapped, action: \.bootstrapped) {
-                        let creatureStore = store.scope(state: \.creature, action: \.creature)
-                        Creature.ImmersiveView(store: creatureStore)
-                            .onAppear {
-                                store.send(.set(\.isImmersiveSpaceOpen, true))
-                            }
-                            .onDisappear {
-                                store.send(.set(\.isImmersiveSpaceOpen, false))
-                            }
-                    }
-                }
-            
+            BootstrapView(store: bootstrap) { store in
+                let creatureStore = store.scope(state: \.creature, action: \.creature)
+                Creature.ImmersiveView(store: creatureStore)
+                    .onAppear { store.send(.set(\.isImmersiveSpaceOpen, true)) }
+                    .onDisappear { store.send(.set(\.isImmersiveSpaceOpen, false)) }
+            } placeholder: {
+                ProgressView()
+            }
         }
     }
 

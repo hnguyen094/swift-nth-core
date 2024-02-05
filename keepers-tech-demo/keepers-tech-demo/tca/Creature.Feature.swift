@@ -15,12 +15,13 @@ extension Creature {
         @Dependency(\.database) private var database
         @Dependency(\.logger) private var logger
 
+        @ObservableState
         struct State: Equatable {
-            @BindingState var intent: Intent = .init()
-            @BindingState var demoMode: Demo.Mode? = .none
-            @BindingState var color: Backing.Color = .clear
-            @BindingState var name: String = "critter"
-            @BindingState var _useCustomMaterial: Bool = true
+            var intent: Intent = .init()
+            var demoMode: Demo.Mode? = .none
+            var color: Backing.Color = .clear
+            var name: String = "critter"
+            var _useCustomMaterial: Bool = true
 
             var understanding: Understanding.State? = .none
 
@@ -76,7 +77,7 @@ extension Creature {
                     state.intent.squareness = squareness
                     return .none
                 case .understanding(.newIntent(let intent)):
-                    return .send(.set(\.$intent, intent))
+                    return .send(.set(\.intent, intent))
                 case .binding, .understanding:
                     return .none
                 }
@@ -107,15 +108,15 @@ extension Creature {
                 switch action {
                 case .binding(let bindedAction):
                     switch bindedAction {
-                    case \.$color:
+                    case \.color:
                         guard let backing = state.backing else { return .none }
                         backing.color = state.color.toColorData()
                         return .none
-                    case \.$name:
+                    case \.name:
                         guard let backing = state.backing else { return .none }
                         backing.name = state.name
                         return .none
-                    case \.$intent, \.$demoMode:
+                    case \.intent, \.demoMode:
                         return .none
                     default:
                         logger.warning("Missing glue for binding action [\(bindedAction.customDumpDescription)].")

@@ -10,18 +10,17 @@ import ComposableArchitecture
 
 extension demoApp {
     struct RootView: View {
-        let store: StoreOf<demoApp.Feature>
+        @Bindable var store: StoreOf<Feature>
         
         var body: some View {
             WithViewStore(store, observe: \.step) { viewStore in
-                let scopedStore = store.scope(state: \.viewState, action: \.self)
                 switch viewStore.state {
                 case .heroScreen:
                     StepHeroView(store: store)
                 case .controls:
-                    StepControlView(store: scopedStore)
+                    StepControlView(store: store)
                 default:
-                    StepBasicView(store: scopedStore)
+                    StepBasicView(store: store)
                 }
             }
         }

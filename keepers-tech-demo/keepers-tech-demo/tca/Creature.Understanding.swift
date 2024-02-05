@@ -17,12 +17,13 @@ extension Creature {
         @Dependency(\.soundAnalysis) private var soundAnalysis
         @Dependency(\.arkitSessionManager) private var arkitSession
         
+        @ObservableState
         struct State: Equatable {
-            @BindingState var mightBeListeningToMusic: Bool = false
-            @BindingState var soundAnalysisResult: SoundAnalyser.Result? = .none
-            @BindingState var surfaces: ARKitSessionManager.AvailableSurfaces = .init()
-            @BindingState var meshes: ARKitSessionManager.AvailableMeshes = .init()
-            @BindingState var indexFingers: ARKitSessionManager.IndexFingersLocations = .init()
+            var mightBeListeningToMusic: Bool = false
+            var soundAnalysisResult: SoundAnalyser.Result? = .none
+            var surfaces: ARKitSessionManager.AvailableSurfaces = .init()
+            var meshes: ARKitSessionManager.AvailableMeshes = .init()
+            var indexFingers: ARKitSessionManager.IndexFingersLocations = .init()
             
             var dirty: Bool = true
             var runOptions: RunOptions = .all
@@ -176,7 +177,7 @@ extension Creature.Understanding {
             case .end: false
             @unknown default: false
             }
-            await send(.set(\.$mightBeListeningToMusic, listening))
+            await send(.set(\.mightBeListeningToMusic, listening))
         }
     }}
 
@@ -185,7 +186,7 @@ extension Creature.Understanding {
             switch requestResult {
             case .result(let result):
                 logger.debug("\(result.debugDescription)")
-                await send(.set(\.$soundAnalysisResult, result))
+                await send(.set(\.soundAnalysisResult, result))
             case .error(let error):
                 logger.error("Received error: \(error)")
             }
@@ -197,7 +198,7 @@ extension Creature.Understanding {
         var classifications: ARKitSessionManager.AvailableSurfaces = .init()
         for await update in planeData.anchorUpdates {
             classifications.handleUpdate(update)
-            await send(.set(\.$surfaces, classifications))
+            await send(.set(\.surfaces, classifications))
         }
     }}
 
@@ -207,7 +208,7 @@ extension Creature.Understanding {
         var classifications: ARKitSessionManager.AvailableMeshes = .init()
         for await update in sceneReconstructionData.anchorUpdates {
             classifications.handleUpdate(update)
-            await send(.set(\.$meshes, classifications))
+            await send(.set(\.meshes, classifications))
         }
     }}
     
@@ -216,7 +217,7 @@ extension Creature.Understanding {
         var indexLocations: ARKitSessionManager.IndexFingersLocations = .init()
         for await update in handData.anchorUpdates {
             indexLocations.handleUpdate(update)
-            await send(.set(\.$indexFingers, indexLocations))
+            await send(.set(\.indexFingers, indexLocations))
         }
     }}
 }

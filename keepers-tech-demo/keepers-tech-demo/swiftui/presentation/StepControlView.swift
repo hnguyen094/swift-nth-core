@@ -11,16 +11,14 @@ import ComposableArchitecture
 extension demoApp {
     struct StepControlView: View {
         typealias Step = demoApp.Step
-        let store: StoreOfView
+        @Bindable var store: StoreOf<Feature>
 
         var body: some View {
-            WithViewStore(store, observe: { $0 }) { viewStore in
-                HStack {
-                    Text("Configuration complete.")
-                }
-                .toolbar {
-                    demoApp.ornamentButtons(store, demoApp.stepData[viewStore.step]?.buttons)
-                }
+            HStack {
+                Text("Configuration complete.")
+            }
+            .toolbar {
+                demoApp.ornamentButtons(store, demoApp.stepData[store.step]?.buttons)
             }
             .frame(idealWidth: 300, idealHeight: 300)
         }

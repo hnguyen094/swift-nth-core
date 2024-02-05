@@ -11,6 +11,7 @@ import ComposableArchitecture
 extension demoApp {
     @Reducer
     struct Bootstrap: Reducer {
+        @ObservableState
         enum State {
             case bootstrapping
             case bootstrapped(Feature.State)

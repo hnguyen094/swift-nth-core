@@ -12,7 +12,7 @@ import ComposableArchitecture
 
 extension Creature {
     struct ImmersiveView: SwiftUI.View {
-        let store: StoreOf<Creature.Feature>
+        @Bindable var store: StoreOf<Creature.Feature>
 
         var body: some SwiftUI.View {
             Creature.View(store: store)

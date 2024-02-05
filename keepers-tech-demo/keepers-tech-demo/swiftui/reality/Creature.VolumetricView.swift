@@ -12,7 +12,7 @@ import ComposableArchitecture
 
 extension Creature {
     struct VolumetricView: SwiftUI.View {
-        let store: StoreOf<Creature.Feature>
+        @Bindable var store: StoreOf<Creature.Feature>
         
         @State var volumeSize: Size3D
         @State private var shouldUseCustomMaterial = true
@@ -27,7 +27,7 @@ extension Creature {
                 Creature.View(store: store, volumeSize: volumeSize)
             }
             .onChange(of: shouldUseCustomMaterial) { _, use in
-                store.send(.set (\.$_useCustomMaterial, use))
+                store.send(.set (\._useCustomMaterial, use))
             }
             .onChange(of: shouldShowTextBubble) { _, show in
                 store.send(._toggleTextBubble(show))
@@ -44,7 +44,7 @@ extension Creature {
                         hue: .random(in: 0...1),
                         saturation: 1,
                         brightness: 1)
-                    store.send(.set(\.$color, .init(randomColor)))
+                    store.send(.set(\.color, .init(randomColor)))
                 }
                 .glassBackgroundEffect()
                 

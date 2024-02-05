@@ -12,7 +12,7 @@ import ComposableArchitecture
 
 extension Creature {
     struct View: SwiftUI.View {
-        let store: StoreOf<Creature.Feature>
+        @Bindable var store: StoreOf<Creature.Feature>
         
         @State var volumeSize: Size3D?
 

@@ -21,15 +21,16 @@ extension demoApp {
         @Environment(\.openWindow) var openWindow
         @Environment(\.dismissWindow) var dismissWindow
         
+        @ObservableState
         struct State {
-            @BindingState var step: Step
-            @BindingState var creature: Creature.Feature.State = .init()
+            var step: Step
+            var creature: Creature.Feature.State = .init()
             
-            @BindingState var isVolumeOpen: Bool = false
-            @BindingState var isImmersiveSpaceOpen: Bool = false
+            var isVolumeOpen: Bool = false
+            var isImmersiveSpaceOpen: Bool = false
             
-            @BindingState var voteCount: Int64? = .none
-            @BindingState var soundAnalysisConfidenceThreshold: Double = 0.5
+            var voteCount: Int64? = .none
+            var soundAnalysisConfidenceThreshold: Double = 0.5
         }
         
         enum Action: BindableAction {
@@ -59,9 +60,9 @@ extension demoApp {
                 case .onLoad:
                     return .send(.creature(.onLoad))
                 case .next:
-                    return .send(.set(\.$step, state.step.next))
+                    return .send(.set(\.step, state.step.next))
                 case .previous:
-                    return .send(.set(\.$step, state.step.previous))
+                    return .send(.set(\.step, state.step.previous))
                 case .run(let environmentAction):
                     return .run { send in
                         switch environmentAction {
@@ -77,12 +78,12 @@ extension demoApp {
                     }
                 case .vote:
                     return .run { send in
-                        await send(.set(\.$voteCount, try await cloudkit.vote(recordType: "Interest", key: "count")))
+                        await send(.set(\.voteCount, try await cloudkit.vote(recordType: "Interest", key: "count")))
                     } catch: { error, send in
                         logger.error("Failed to submit vote: \(error)")
-                        await send(.set(\.$voteCount, .none))
+                        await send(.set(\.voteCount, .none))
                     }
-                case .binding(\.$soundAnalysisConfidenceThreshold):
+                case .binding(\.soundAnalysisConfidenceThreshold):
                     guard case .some(let runOptions) = state.creature.understanding?.runOptions else {
                         return .none
                     }
@@ -145,7 +146,7 @@ extension demoApp {
                             await send(.creature(.runUnderstanding(currentRunOptions.union(relevantRunOptions), threshold)))
                         }
                     }
-                case .binding(\.$step):
+                case .binding(\.step):
                     switch state.step {
 //                    case .volumeIntro:
 //                        return .send(.creature(.set(\.$demoMode, .animations)))
@@ -156,7 +157,7 @@ extension demoApp {
 //                    case .meshClassificationIntro:
 //                        return .send(.creature(.set(\.$demoMode, .worldAndHandUnderstanding)))
                     default:
-                        return .send(.creature(.set(\.$demoMode, .none)))
+                        return .send(.creature(.set(\.demoMode, .none)))
                     }
                 case .creature, .binding:
                     return .none

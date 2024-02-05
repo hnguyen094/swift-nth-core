@@ -20,22 +20,20 @@ struct demoApp: App {
     @State private var volumeSize: Size3D = .init(width : 0.2,
                                                   height: 0.3,
                                                   depth : 0.05)
-    
-    private let bootstrap = Store(initialState: Bootstrap.State.bootstrapping) {
+
+    let bootstrap = Store(initialState: Bootstrap.State.bootstrapping) {
         Bootstrap()
     }
     
     var body: some Scene {
         WindowGroup(id: RootView.ID) {
-            SwitchStore(bootstrap) { state in
-                switch state {
-                case .bootstrapping:
-                    Text("Initializing")
-                case .bootstrapped:
-                    CaseLet(/Bootstrap.State.bootstrapped, action: Bootstrap.Action.bootstrapped) { store in
-                        RootView(store: store)
-                            .onAppear { store.send(.onLoad) }
-                    }
+            switch bootstrap.state {
+            case .bootstrapping:
+                Text("Initializing")
+            case .bootstrapped:
+                if let store = bootstrap.scope(state: \.bootstrapped, action: \.bootstrapped) {
+                    RootView(store: store)
+                        .onAppear { store.send(.onLoad) }
                 }
             }
         }
@@ -51,11 +49,11 @@ struct demoApp: App {
                         let creatureStore = store.scope(state: \.creature, action: \.creature)
                         Creature.VolumetricView(store: creatureStore, volumeSize: volumeSize)
                             .onAppear {
-                                store.send(.set(\.$isVolumeOpen, true))
+                                store.send(.set(\.isVolumeOpen, true))
                                 logger.info("VolumetricView appeared")
                             }
                             .onDisappear {
-                                store.send(.set(\.$isVolumeOpen, false))
+                                store.send(.set(\.isVolumeOpen, false))
                                 logger.info("VolumetricView disappeared")
                             }
                     }
@@ -75,11 +73,11 @@ struct demoApp: App {
                         let creatureStore = store.scope(state: \.creature, action: \.creature)
                         Creature.ImmersiveView(store: creatureStore)
                             .onAppear {
-                                store.send(.set(\.$isImmersiveSpaceOpen, true))
+                                store.send(.set(\.isImmersiveSpaceOpen, true))
                                 logger.info("ImmersiveSpace appeared")
                             }
                             .onDisappear {
-                                store.send(.set(\.$isImmersiveSpaceOpen, false))
+                                store.send(.set(\.isImmersiveSpaceOpen, false))
                                 logger.info("ImmersiveSpace disappeared")
                             }
                     }

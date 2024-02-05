@@ -9,7 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 
 struct TextBubble: View {
-    let store: StoreOf<Creature.Feature>
+    @Bindable var store: StoreOf<Creature.Feature>
     
     @State var text: String = ""
     

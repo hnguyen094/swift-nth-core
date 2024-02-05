@@ -13,7 +13,7 @@ enum Creature {
     class Entity: RealityKit.Entity {
         @Dependency(\.logger) private var logger
         
-        private let viewStore: ViewStoreOf<Feature>
+        private let store: StoreOf<Feature>
         private var cancellables: Set<AnyCancellable> = []
         
         private(set) var body: ModelEntity? = .none
@@ -21,7 +21,7 @@ enum Creature {
         private(set) var windowed: Bool = true
         
         @MainActor init(store: StoreOf<Feature>, material: ShaderGraphMaterial?, windowed: Bool) {
-            self.viewStore = ViewStore(store, observe: { $0 })
+            self.store = store
             self.customMaterialSource = material
             self.windowed = windowed
             super.init()
@@ -44,7 +44,7 @@ enum Creature {
         }
 
         private func subscribeToStore() {
-            viewStore.publisher.intent.sink { [weak self] newIntent in
+            store.publisher.intent.sink { [weak self] newIntent in
                 guard let self = self, let body = self.body,
                       var emotingComponent = body.components[Emoting.Component.self],
                       var bodyComponent = body.components[Body.Component.self]
@@ -57,7 +57,7 @@ enum Creature {
                 bodyComponent.desiredSquareness = newIntent.squareness
             }
             .store(in: &cancellables)
-            viewStore.publisher.demoMode.sink { [weak self] demoMode in
+            store.publisher.demoMode.sink { [weak self] demoMode in
                 guard let self = self,
                       var demoComponent = components[Demo.Component.self]
                 else { return }
@@ -65,7 +65,7 @@ enum Creature {
                 components.set(demoComponent)
             }
             .store(in: &cancellables)
-            viewStore.publisher.color.sink { [weak self] color in
+            store.publisher.color.sink { [weak self] color in
                 guard let self = self,
                       let body = self.body,
                       var bodyComponent = body.components[Body.Component.self]
@@ -74,7 +74,7 @@ enum Creature {
                 bodyComponent.desiredColor = color.toColorData()
             }
             .store(in: &cancellables)
-            viewStore.publisher._useCustomMaterial.sink { [weak self]  useCustomMaterial in
+            store.publisher._useCustomMaterial.sink { [weak self]  useCustomMaterial in
                 guard let self = self,
                       let body = self.body,
                       let customMaterial = customMaterialSource
@@ -82,10 +82,10 @@ enum Creature {
 
                 if useCustomMaterial {
                     var new = customMaterial
-                    try? new.setParameter(name: "BaseColor", value: .color(.init(viewStore.color)))
+                    try? new.setParameter(name: "BaseColor", value: .color(.init(store.color)))
                     body.model!.materials = [new]
                 } else {
-                    let new = SimpleMaterial(color: .init(viewStore.color), roughness: 0.5, isMetallic: false)
+                    let new = SimpleMaterial(color: .init(store.color), roughness: 0.5, isMetallic: false)
                     body.model!.materials = [new]
                 }
             }
@@ -99,7 +99,7 @@ enum Creature {
             let material: Material = customMaterialSource ?? SimpleMaterial()
             let body = ModelEntity(mesh: .generateBox(size: 1), materials: [material])
             body.components.set(Emoting.Component())
-            body.components.set(Body.Component(color: viewStore.color, squareness: viewStore.intent.squareness))
+            body.components.set(Body.Component(color: store.color, squareness: store.intent.squareness))
             
             if !windowed { body.generateCollisionShapes(recursive: false) }
             
@@ -133,7 +133,7 @@ enum Creature {
         }
         
         @MainActor required init() {
-            viewStore = ViewStore(Store(initialState: Feature.State()) { Feature() }, observe: { $0 })
+            store = Store(initialState: Feature.State()) { Feature() }
             super.init()
             initialConfiguration()
         }

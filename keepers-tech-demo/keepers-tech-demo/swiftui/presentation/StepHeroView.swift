@@ -11,7 +11,7 @@ import ComposableArchitecture
 extension demoApp {
     struct StepHeroView: View {
         typealias Step = demoApp.Step
-        let store: StoreOf<demoApp.Feature>
+        @Bindable var store: StoreOf<Feature>
         
         @State private var text: String = ""
         @State private var isFinished: Bool = false

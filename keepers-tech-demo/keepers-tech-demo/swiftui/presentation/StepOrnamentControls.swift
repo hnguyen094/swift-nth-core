@@ -11,7 +11,7 @@ import ComposableArchitecture
 extension demoApp {
     @ToolbarContentBuilder
     static func ornamentButtons(
-        _ store: StoreOfView,
+        _ store: StoreOf<Feature>,
         _ options: ButtonOptions?)
     -> some ToolbarContent {
         if options?.contains(.previous) ?? true {
@@ -27,7 +27,7 @@ extension demoApp {
         if options?.contains(.restart) ?? false {
             ToolbarItem(placement: .bottomOrnament) {
                 Button("Restart", systemImage: "arrow.counterclockwise") {
-                    store.send(.set(\.$step, .heroScreen))
+                    store.send(.set(\.step, .heroScreen))
                 }
                 .buttonBorderShape(.circle)
                 .help("Start From Beginning")
@@ -77,7 +77,7 @@ extension demoApp {
             ToolbarItem(placement: .bottomOrnament) {
                 Button("Done", systemImage: "checkmark") {
                     // TODO: this should instead go to some control panel thing since a window is required to view the immersive space
-                    store.send(.set(\.$step, .controls))
+                    store.send(.set(\.step, .controls))
                 }
                 .buttonBorderShape(.circle)
                 .help("Done")

@@ -7,8 +7,8 @@
 
 import SwiftData
 
-import Foundation
 import SwiftUI
+import NthCore
 
 extension Creature {
     typealias Backing = AppSchema.V1.CreatureBacking

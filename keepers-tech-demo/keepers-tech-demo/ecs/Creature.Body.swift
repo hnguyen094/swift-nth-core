@@ -6,6 +6,7 @@
 //
 
 import RealityKit
+import NthCore
 
 extension Creature {
     enum Body {

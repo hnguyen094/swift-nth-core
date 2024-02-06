@@ -40,7 +40,6 @@
 		B2BE58ED2B6021B000B28316 /* StepControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58EC2B6021B000B28316 /* StepControlView.swift */; };
 		B2BE58EF2B6028AA00B28316 /* StepOrnamentControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58EE2B6028AA00B28316 /* StepOrnamentControls.swift */; };
 		B2BE58F12B602BA700B28316 /* StepData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BE58F02B602BA700B28316 /* StepData.swift */; };
-		B2DFE0B82B569645008CD4C1 /* ColorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DFE0B72B569645008CD4C1 /* ColorData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,7 +79,6 @@
 		B2BE58EE2B6028AA00B28316 /* StepOrnamentControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOrnamentControls.swift; sourceTree = "<group>"; };
 		B2BE58F02B602BA700B28316 /* StepData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepData.swift; sourceTree = "<group>"; };
 		B2D3E9332B53BCFA003009C1 /* keepers-tech-demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "keepers-tech-demo.entitlements"; sourceTree = "<group>"; };
-		B2DFE0B72B569645008CD4C1 /* ColorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +108,6 @@
 			children = (
 				B221ED002B54E702006C24DF /* AppSchemas.swift */,
 				B221ED062B54F86B006C24DF /* Creature.Backing.swift */,
-				B2DFE0B72B569645008CD4C1 /* ColorData.swift */,
 			);
 			path = swiftdata;
 			sourceTree = "<group>";
@@ -348,7 +345,6 @@
 				B2BE58DC2B5EA50B00B28316 /* App.Feature.swift in Sources */,
 				B2273B062B61A2D3008D0A97 /* Creature.Body.swift in Sources */,
 				B2A0A5782B705D2900939FBB /* App.Feature.State+Extension.swift in Sources */,
-				B2DFE0B82B569645008CD4C1 /* ColorData.swift in Sources */,
 				B22C8E3B2B5268EC0076CC12 /* Emoting.Animation.swift in Sources */,
 				B2BE58DF2B5F1FFD00B28316 /* StepBasicView.swift in Sources */,
 			);

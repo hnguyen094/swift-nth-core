@@ -7,6 +7,7 @@
 
 import ARKit
 import Dependencies
+import NthVision
 
 extension DependencyValues {
     var arkitSessionManager: ARKitSessionManager {

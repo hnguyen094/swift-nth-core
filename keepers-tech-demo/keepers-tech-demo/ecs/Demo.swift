@@ -6,6 +6,7 @@
 //
 
 import RealityKit
+import NthCore
 
 enum Demo {
     struct Component: RealityKit.Component, Codable {

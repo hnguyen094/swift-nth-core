@@ -13,12 +13,10 @@ import NthComposable
 
 @main
 struct demoApp: App {
-    @State private var volumeSize: Size3D = .init(width : 0.2,
-                                                  height: 0.3,
-                                                  depth : 0.05)
+    @State private var volumeSize: Size3D = .init(width : 0.2, height: 0.3, depth : 0.05)
 
     let bootstrap = Store(initialState: .bootstrapping) {
-        Bootstrapping(bootstrap: Feature.bootstrap, initialState: Feature.State(step: .heroScreen)) {
+        Bootstrapping(bootstrap: Feature.bootstrap, initialState: .init(step: .heroScreen)) {
             Feature()
         }
     }

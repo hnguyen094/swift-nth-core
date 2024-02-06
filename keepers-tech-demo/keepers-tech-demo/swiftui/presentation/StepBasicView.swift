@@ -15,6 +15,11 @@ extension demoApp {
         
         @State private var animatedTitle: String = ""
         @State private var isAnimationFinished: Bool = false
+
+        @Environment(\.openImmersiveSpace) var openImmersiveSpace
+        @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
+        @Environment(\.openWindow) var openWindow
+        @Environment(\.dismissWindow) var dismissWindow
         
         var body: some View {
             NavigationStack {
@@ -175,7 +180,7 @@ extension demoApp {
                 get: { store.isVolumeOpen },
                 set: { open in
                     let id = Creature.VolumetricView.ID
-                    store.send(.run(open ? .openWindow(id) : .dismissWindow(id)))
+                    open ? openWindow(id: id) : dismissWindow(id: id)
                 }
             )
             return Toggle(text, systemImage: systemImage, isOn: binding)

@@ -16,11 +16,6 @@ extension demoApp {
         @Dependency(\.cloudkitService) var cloudkit
         @Dependency(\.arkitSessionManager) var arkit
         
-        @Environment(\.openImmersiveSpace) var openImmersiveSpace
-        @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
-        @Environment(\.openWindow) var openWindow
-        @Environment(\.dismissWindow) var dismissWindow
-        
         @ObservableState
         struct State {
             var step: Step
@@ -39,7 +34,6 @@ extension demoApp {
             case onLoad
             case next
             case previous
-            case run(EnvironmentAction)
 
             case vote
             case enableListening(Bool)
@@ -65,19 +59,6 @@ extension demoApp {
                     return .send(.set(\.step, state.step.next))
                 case .previous:
                     return .send(.set(\.step, state.step.previous))
-                case .run(let environmentAction):
-                    return .run { send in
-                        switch environmentAction {
-                        case .openImmersiveSpace(let id):
-                            await openImmersiveSpace(id: id)
-                        case .dismissImmersiveSpace:
-                            await dismissImmersiveSpace()
-                        case .openWindow(let id):
-                            openWindow(id: id)
-                        case .dismissWindow(let id):
-                            dismissWindow(id: id)
-                        }
-                    }
                 case .vote:
                     return .run { send in
                         await send(.set(\.voteCount, try await cloudkit.vote(recordType: "Interest", key: "count")))
@@ -202,13 +183,6 @@ extension demoApp {
             if let url = URL(string: UIApplication.openSettingsURLString) {
                 await UIApplication.shared.open(url)
             }
-        }
-        
-        enum EnvironmentAction: Equatable {
-            case openImmersiveSpace(String)
-            case dismissImmersiveSpace
-            case openWindow(String)
-            case dismissWindow(String)
         }
     }
 }

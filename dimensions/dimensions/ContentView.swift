@@ -1,8 +1,8 @@
 //
 //  ContentView.swift
-//  keepers:together
+//  dimensions
 //
-//  Created by Hung on 9/5/23.
+//  Created by hung on 2/6/24.
 //
 
 import SwiftUI
@@ -28,7 +28,7 @@ struct ContentView: View {
         .onChange(of: showImmersiveSpace) { _, newValue in
             Task {
                 if newValue {
-                    switch await openImmersiveSpace(id: SampleImmersiveView.Id) {
+                    switch await openImmersiveSpace(id: "ImmersiveSpace") {
                     case .opened:
                         immersiveSpaceIsShown = true
                     case .error, .userCancelled:

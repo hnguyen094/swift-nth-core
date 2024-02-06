@@ -10,6 +10,11 @@ import RealityKit
 import Dependencies
 
 enum Emoting {
+    public static func register() {
+        Component.registerComponent()
+        System.registerSystem()
+    }
+
     struct Component: RealityKit.Component, Codable {
         var desiredAnimation: Animation = .excitedBounce
         fileprivate var current: IdentifiedAnimationController? = .none

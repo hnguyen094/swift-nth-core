@@ -10,20 +10,34 @@ import Dependencies
 
 import UIKit
 
-enum Billboard {
-    struct Component: RealityKit.Component, Codable {
-        var mode: Mode
+public enum Billboard {
+    public static func register() {
+        Component.registerComponent()
+        System.registerSystem()
     }
 
-    struct System: RealityKit.System {
+    public enum Mode: Codable {
+        case direct
+        case lazy(Double)
+    }
+
+    public struct Component: RealityKit.Component, Codable {
+        public var mode: Mode
+        
+        public init(mode: Mode) {
+            self.mode = mode
+        }
+    }
+
+    public struct System: RealityKit.System {
         @Dependency(\.arkitSessionManager.worldTrackingData) var worldTrackingData
         @Dependency(\.logger) var logger
         
         static let query = EntityQuery(where: .has(Component.self))
 
-        init(scene: Scene) { }
+        public init(scene: Scene) { }
         
-        func update(context: SceneUpdateContext) {
+        public func update(context: SceneUpdateContext) {
             let entities = context.entities(matching: Self.query, updatingSystemWhen: .rendering)
 
             guard case .some = entities.first(where: {_ in true }),
@@ -53,12 +67,5 @@ enum Billboard {
                 transform.rotation = simd_slerp(transform.rotation, entity.transform.rotation, Float(context.deltaTime * value))
             }
         }
-    }
-}
-
-extension Billboard {
-    enum Mode: Codable {
-        case direct
-        case lazy(Double)
     }
 }

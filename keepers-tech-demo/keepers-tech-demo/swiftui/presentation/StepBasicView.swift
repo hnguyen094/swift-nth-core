@@ -180,7 +180,7 @@ extension demoApp {
                 get: { store.isVolumeOpen },
                 set: { open in
                     let id = Creature.VolumetricView.ID
-                    open ? openWindow(id: id) : dismissWindow(id: id)
+                    !store.isVolumeOpen ? openWindow(id: id) : dismissWindow(id: id)
                 }
             )
             return Toggle(text, systemImage: systemImage, isOn: binding)

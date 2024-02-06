@@ -10,6 +10,11 @@ import NthCore
 
 extension Creature {
     enum Body {
+        public static func register() {
+            Component.registerComponent()
+            System.registerSystem()
+        }
+
         struct Component: RealityKit.Component, Codable {
             var desiredColor: ColorData
             var desiredSquareness: Float

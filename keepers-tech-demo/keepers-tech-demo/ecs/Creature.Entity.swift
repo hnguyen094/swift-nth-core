@@ -8,6 +8,7 @@ import RealityKit
 
 import ComposableArchitecture
 import Combine
+import NthCore
 
 enum Creature {
     class Entity: RealityKit.Entity {

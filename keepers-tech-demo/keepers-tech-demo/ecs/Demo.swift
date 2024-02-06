@@ -9,6 +9,11 @@ import RealityKit
 import NthCore
 
 enum Demo {
+    public static func register() {
+        Component.registerComponent()
+        System.registerSystem()
+    }
+
     struct Component: RealityKit.Component, Codable {
         var desiredMode: Mode? = .none
         

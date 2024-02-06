@@ -58,17 +58,11 @@ struct demoApp: App {
     }
 
     init() {
-        Emoting.Component.registerComponent()
-        Emoting.System.registerSystem()
-        Billboard.Component.registerComponent()
-        Billboard.System.registerSystem()
-        Follow.Component.registerComponent()
-        Follow.System.registerSystem()
-
-        Demo.Component.registerComponent()
-        Demo.System.registerSystem()
-        Creature.Body.Component.registerComponent()
-        Creature.Body.System.registerSystem()
+        Emoting.register()
+        Billboard.register()
+        Follow.register()
+        Demo.register()
+        Creature.Body.register()
         
         bootstrap.send(.onLaunch)
     }

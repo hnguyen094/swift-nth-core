@@ -9,6 +9,7 @@ import SwiftUI
 import RealityKit
 import RealityKitContent
 import ComposableArchitecture
+import NthCore
 
 extension Creature {
     struct View: SwiftUI.View {

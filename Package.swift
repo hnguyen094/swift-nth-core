@@ -24,7 +24,7 @@ let package = Package(
         .target(
             name: "NthComposable",
             dependencies: [
-                "NthCore",
+                .target(name: "NthCore"),
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]),
         .target(

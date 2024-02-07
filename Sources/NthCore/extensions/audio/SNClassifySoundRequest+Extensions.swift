@@ -7,8 +7,8 @@
 
 import SoundAnalysis
 
-extension SNClassifySoundRequest {
-    public func getWindowDuration(preferredDuration seconds: Double) -> CMTime? {
+public extension SNClassifySoundRequest {
+    func getWindowDuration(preferredDuration seconds: Double) -> CMTime? {
         let target = CMTime(seconds: seconds, preferredTimescale: 1000)
         
         return switch self.windowDurationConstraint {

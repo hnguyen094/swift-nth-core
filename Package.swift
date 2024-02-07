@@ -4,6 +4,13 @@ import PackageDescription
 
 let package = Package(
     name: "swift-nth-core",
+    platforms: [
+        .iOS(.v17),
+        .macOS(.v13),
+        .visionOS(.v1),
+        .tvOS(.v16),
+        .watchOS(.v9)
+    ],
     products: [
         .library(
             name: "NthCore",

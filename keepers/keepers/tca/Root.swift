@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import SwiftUI
 
 @Reducer
 struct Root: Reducer {
@@ -41,7 +42,7 @@ struct Root: Reducer {
                     state.destination = .attribution(TextDisplay.State(
                         title: "Attributions",
                         autoscroll: true,
-                        text: attributions))
+                        text: LocalizedStringKey(attributions)))
                 } catch {
                     logger.error("Failed to read attribution file. (\(error))")
                 }

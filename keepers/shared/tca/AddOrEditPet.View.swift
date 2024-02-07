@@ -16,7 +16,7 @@ extension AddOrEditPet {
 
 extension AddOrEditPet.View {
     var body: some SwiftUI.View {
-        WithViewStore(self.store, observe: identity) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             List {
                 LabeledContent {
                     if let id = viewStore.state.petIdentity?.persistentModelID.id {

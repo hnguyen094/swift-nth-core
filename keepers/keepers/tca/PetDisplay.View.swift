@@ -16,7 +16,7 @@ extension PetDisplay {
 
 extension PetDisplay.View {
     var body: some SwiftUI.View {
-        WithViewStore(store, observe: identity) { viewStore in
+        WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
                 VStack {
                     RKView(viewStore: viewStore)

@@ -1,5 +1,5 @@
 //
-//  UIColorExtensions.swift
+//  UIColor+Extensions.swift
 //  keepers
 //
 //  Created by Hung on 9/21/23.
@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-extension UIColor {
+public extension UIColor {
     /// A color that reflects the accent color of the system or app.
     ///
     /// The accent color is a broad theme color applied to

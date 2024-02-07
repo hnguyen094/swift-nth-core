@@ -7,16 +7,16 @@
 
 import GameplayKit
 
-protocol GKRandomCopyable: GKRandom, NSMutableCopying {}
+public protocol GKRandomCopyable: GKRandom, NSMutableCopying {}
 
-class ReproducibleRandomSource: GKRandomCopyable {
+public class ReproducibleRandomSource: GKRandomCopyable {
     private var seed: UInt64
 
     private let source: GKRandom
     private let sourceType: GKSourceType
     private(set) var history = [FnType]()
     
-    init(seed: UInt64, with sourceType: GKSourceType) {
+    public init(seed: UInt64, with sourceType: GKSourceType) {
         self.seed = seed
 
         source = switch sourceType {
@@ -30,33 +30,33 @@ class ReproducibleRandomSource: GKRandomCopyable {
         self.sourceType = sourceType
     }
     
-    func nextInt() -> Int {
+    public func nextInt() -> Int {
         history.append(.nextInt)
         return source.nextInt()
     }
     
-    func nextInt(upperBound: Int) -> Int {
+    public func nextInt(upperBound: Int) -> Int {
         history.append(.nextIntWithUpperBound(upperBound: upperBound))
         return source.nextInt(upperBound: upperBound)
     }
     
-    func nextUniform() -> Float {
+    public func nextUniform() -> Float {
         history.append(.nextUniform)
         return source.nextUniform()
     }
     
-    func nextBool() -> Bool {
+    public func nextBool() -> Bool {
         history.append(.nextBool)
         return source.nextBool()
     }
     
-    enum GKSourceType {
+    public enum GKSourceType {
         case ARC4
         case LinearCongruential
         case MersenneTwister
     }
     
-    enum FnType {
+    public enum FnType {
         case nextInt
         case nextIntWithUpperBound(upperBound: Int)
         case nextUniform
@@ -65,7 +65,7 @@ class ReproducibleRandomSource: GKRandomCopyable {
 }
 
 extension ReproducibleRandomSource: NSMutableCopying {
-    func mutableCopy(with zone: NSZone? = nil) -> Any {
+    public func mutableCopy(with zone: NSZone? = nil) -> Any {
         let copy = ReproducibleRandomSource(seed: self.seed, with: self.sourceType)
         copy.update(with: self.history)
         return copy

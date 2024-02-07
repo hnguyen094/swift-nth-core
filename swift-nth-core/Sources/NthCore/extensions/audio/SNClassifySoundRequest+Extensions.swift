@@ -1,6 +1,13 @@
+//
+//  SNClassifySoundRequest+Extensions.swift
+//  keepers-tech-demo
+//
+//  Created by hung on 1/13/24.
+//
+
 import SoundAnalysis
 
-extension SNClassifySoundRequest {
+public extension SNClassifySoundRequest {
     func getWindowDuration(preferredDuration seconds: Double) -> CMTime? {
         let target = CMTime(seconds: seconds, preferredTimescale: 1000)
         

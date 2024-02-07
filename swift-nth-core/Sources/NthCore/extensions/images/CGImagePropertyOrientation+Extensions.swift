@@ -9,7 +9,7 @@
 **/
 import UIKit
 
-extension CGImagePropertyOrientation {
+public extension CGImagePropertyOrientation {
     init(_ orientation: UIDeviceOrientation) {
         switch orientation {
         case .portraitUpsideDown: self = .left

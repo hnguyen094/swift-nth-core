@@ -1,23 +1,30 @@
+//
+//  VPTree.swift
+//  keepers
+//
+//  Created by Hung.
+//
+//  based on: https://github.com/huyng/algorithms/blob/master/vptree/vptree.py
+
 import Foundation
 import simd
 
 import DequeModule
 import SwiftPriorityQueue
 
-// based on: https://github.com/huyng/algorithms/blob/master/vptree/vptree.py
-class VPTree<Object: Equatable> {
-    typealias DistanceFunction = (SIMD3<Float>, SIMD3<Float>) -> Float
+public class VPTree<Object: Equatable> {
+    public typealias DistanceFunction = (SIMD3<Float>, SIMD3<Float>) -> Float
     
-    struct Point: Equatable {
-        let position: simd_float3
-        let object: Object
+    public struct Point: Equatable {
+        public let position: simd_float3
+        public let object: Object
     }
 
-    struct Neighbor: Comparable {
-        let distance: Float
-        let point: Point
+    public struct Neighbor: Comparable {
+        public let distance: Float
+        public let point: Point
         
-        static func <(lhs: Self, rhs: Self) -> Bool {
+        public static func <(lhs: Self, rhs: Self) -> Bool {
             lhs.distance < rhs.distance
         }
     }
@@ -29,7 +36,7 @@ class VPTree<Object: Equatable> {
     private let vantagePoint: Point
     private let radius: Float
 
-    init?(points: [Point], distanceFunction: DistanceFunction? = .none) {
+    public init?(points: [Point], distanceFunction: DistanceFunction? = .none) {
         guard let randomElement = points.randomElement() else {
             return nil
         }
@@ -57,12 +64,12 @@ class VPTree<Object: Equatable> {
         }
     }
 
-    func isLeaf() -> Bool {
+    public func isLeaf() -> Bool {
         if case .none = left, case .none = right { true }
         else { false }
     }
 
-    func getNearestNeighbors(of point: simd_float3, n: Int = 1) -> any Sequence<Neighbor> {
+    public func getNearestNeighbors(of point: simd_float3, n: Int = 1) -> any Sequence<Neighbor> {
         var neighbors = PriorityQueue<Neighbor>()
         var toVisit = Deque<VPTree<Object>?>()
         var furthestDistance: Float = .infinity
@@ -96,7 +103,7 @@ class VPTree<Object: Equatable> {
         return neighbors
     }
 
-    func getInRange(of point: simd_float3, range: Float) -> any Sequence<Neighbor> {
+    public func getInRange(of point: simd_float3, range: Float) -> any Sequence<Neighbor> {
         var toVisit = Deque<VPTree<Object>?>()
         toVisit.append(self)
         var neighbors: [Neighbor] = []
@@ -128,7 +135,7 @@ class VPTree<Object: Equatable> {
         return neighbors
     }
 
-    static func median(_ elements: [Float]) -> Float? {
+    public static func median(_ elements: [Float]) -> Float? {
         let count = elements.count
         guard count != 0 else {
             return .none
@@ -142,12 +149,12 @@ class VPTree<Object: Equatable> {
         return sorted[count / 2]
     }
     
-    static func l2(p1: SIMD3<Float>, p2:  SIMD3<Float>) -> Float {
+    public static func l2(p1: SIMD3<Float>, p2:  SIMD3<Float>) -> Float {
         let sum = pow(p2.x-p1.x, 2) + pow(p2.y-p1.y, 2) + pow(p2.z-p1.z, 2)
         return sqrt(sum)
     }
     
-    static func squaredDistance(p1: SIMD3<Float>, p2: SIMD3<Float>) -> Float {
+    public static func squaredDistance(p1: SIMD3<Float>, p2: SIMD3<Float>) -> Float {
         return simd_fast_distance(p1, p2)
     }
 }

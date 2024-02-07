@@ -18,7 +18,7 @@ extension AudioSettings.View {
     typealias Category = AudioPlayerClient.AudioCategory
     
     var body: some SwiftUI.View {
-        WithViewStore(self.store, observe: identity) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             List {
                 ForEach(Category.allCases, id: \.self) {
                     createVolumeSlider(store: viewStore, category: $0)

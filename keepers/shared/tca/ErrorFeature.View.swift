@@ -20,7 +20,7 @@ extension ErrorFeature {
 
 extension ErrorFeature.View {
     var body: some View {
-        WithViewStore(self.store, observe: identity) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             Text(viewStore.error.localizedDescription)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {

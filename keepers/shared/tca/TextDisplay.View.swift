@@ -17,7 +17,7 @@ extension TextDisplay {
 
 extension TextDisplay.View {
     var body: some SwiftUI.View {
-        WithViewStore(self.store, observe: identity) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             ScrollView(.vertical) {
                 Text(viewStore.text)
             }

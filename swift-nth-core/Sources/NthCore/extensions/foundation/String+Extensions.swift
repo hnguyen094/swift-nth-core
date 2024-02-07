@@ -7,6 +7,6 @@
 
 import Foundation
 
-extension String {
-    public static let zwsp: Self = "​"
+public extension String {
+    static let zwsp: Self = "​"
 }

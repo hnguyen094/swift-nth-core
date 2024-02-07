@@ -1,6 +1,13 @@
+//
+//  UIInterfaceOrientation+Extensions.swift
+//  keepers-tech-demo
+//
+//  Created by hung.
+//
+
 import UIKit
 
-extension UIInterfaceOrientation {
+public extension UIInterfaceOrientation {
     init(_ orientation: UIDeviceOrientation) {
         switch orientation {
         case .portrait: self = .portrait

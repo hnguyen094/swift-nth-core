@@ -16,7 +16,7 @@ extension WaitForLoad {
 
 extension WaitForLoad.View {
     var body: some SwiftUI.View {
-        WithViewStore(self.store, observe: identity) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             VStack {
                 ProgressView {
                     Text(viewStore.loadingText)

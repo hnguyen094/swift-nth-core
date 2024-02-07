@@ -5,8 +5,9 @@
 //  Created by Hung on 11/23/23.
 //
 
-import SwiftUI
 import Dependencies
+import DependenciesMacros
+import Foundation
 
 extension DependencyValues {
     var fileReader: FileReader {
@@ -15,19 +16,27 @@ extension DependencyValues {
     }
 }
 
-struct FileReader {
-    var readText: (_ file: String) throws -> LocalizedStringKey
+@DependencyClient
+public struct FileReader {
+    public var readText: (_ file: String) throws -> String
 }
 
 extension FileReader: DependencyKey {
-    static let liveValue = liveClient
-    
-    static let liveClient = Self(
-        readText: { file in
-            let path = Bundle.main.path(forResource: file, ofType: nil)
-            if path == nil {
-                return "[attributions file not found]"
+    public static var testValue: Self = .init()
+    public static var previewValue: Self = .init()
+
+    public static var liveValue: Self { 
+        .init(
+            readText: { file in
+                guard let path = Bundle.main.path(forResource: file, ofType: .none) else {
+                    throw Error.invalidPath
+                }
+                return try String.init(contentsOfFile: path)
             }
-            return try LocalizedStringKey(String.init(contentsOfFile: path!))
-        })
+        )
+    }
+
+    public enum Error: Swift.Error {
+        case invalidPath
+    }
 }

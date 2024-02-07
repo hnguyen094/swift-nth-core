@@ -7,6 +7,8 @@
 //  Naive implementation of a functional pet runtime.
 
 import Foundation
+import NthCore
+
 // MARK: for pet runtime
 extension PetRuntime.Naive {
     static func observeRuntime(pet: Creature, upTo date: Date = .now) -> RuntimeState {

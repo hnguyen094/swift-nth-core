@@ -1,18 +1,15 @@
 //
-//  ViewExtensions.swift
-//  keepers
+//  View+Extensions.swift
+//  keepers-tech-demo
 //
-//  Created by Hung on 9/9/23.
+//  Created by hung on 1/13/24.
 //
 
 import SwiftUI
 
-extension View {
-    /// Returns itself. Replaces `{ $0 }`.
-    public func identity<A>(id: A) -> A {
-        return id
-    }
-    
+public extension View {
+    static var ID: String { .init(describing: Body.self) }
+
     /// Combines `clipShape` and `overlay` with `strokeBorder`.
     @ViewBuilder
     func clipShapeWithStrokeBorder<I, S>(

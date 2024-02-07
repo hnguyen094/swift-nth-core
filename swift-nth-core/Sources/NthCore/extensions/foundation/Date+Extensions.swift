@@ -1,5 +1,5 @@
 //
-//  DateExtensions.swift
+//  Date+Extensions.swift
 //  keepers
 //
 //  Created by Hung on 9/11/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Date {
+public extension Date {
     /// A description of the calendar elapsed time. This is intended for describing age.
     ///
     /// Compatible range of time units: era -- minute.

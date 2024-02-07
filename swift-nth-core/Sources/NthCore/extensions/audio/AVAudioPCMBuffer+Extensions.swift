@@ -1,6 +1,13 @@
+//
+//  AVAudioPCMBuffer+Extensions.swift
+//  keepers-tech-demo
+//
+//  Created by hung.
+//
+
 import SoundAnalysis
 
-extension AVAudioPCMBuffer {
+public extension AVAudioPCMBuffer {
     // https://developer.apple.com/forums/thread/123926
     convenience init?(cmSampleBuffer sampleBuffer: CMSampleBuffer) {
         guard let audioFormat = sampleBuffer.getAudioFormat() else { 

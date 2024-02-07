@@ -1,5 +1,5 @@
 //
-//  TimeInvervalExtensions.swift
+//  TimeInverval+Extensions.swift
 //  keepers
 //
 //  Created by Hung on 9/11/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension TimeInterval {
+public extension TimeInterval {
     /// Extension for converting time intervals.
     /// - Author: [Ben Park](https://gist.github.com/ppth0608/edaf9d4e2b1932a72f98688a346805f5 ).
     var weeks: Int {

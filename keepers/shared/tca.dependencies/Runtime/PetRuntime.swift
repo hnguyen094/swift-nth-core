@@ -8,6 +8,7 @@
 
 import Foundation
 import Dependencies
+import NthCore
 
 extension DependencyValues {
     var petRuntime: PetRuntime {

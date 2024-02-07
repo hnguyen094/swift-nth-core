@@ -4,7 +4,7 @@
 //
 //  Created by hung on 1/17/24.
 //
-
+#if os(visionOS)
 import RealityKit
 
 public enum Follow {
@@ -42,7 +42,7 @@ public enum Follow {
         public init(scene: Scene) { }
         
         public func update(context: SceneUpdateContext) {
-            context.scene.performQuery(Self.query).forEach { entity in
+            context.entities(matching: Self.query, updatingSystemWhen: .rendering).forEach { entity in
                 let component = entity.components[Component.self]!
                 let position = entity.position(relativeTo: .none)
 
@@ -69,3 +69,4 @@ public enum Follow {
         }
     }
 }
+#endif

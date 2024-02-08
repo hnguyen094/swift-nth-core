@@ -6,16 +6,27 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
+
+import NthComposable
 
 @main
 struct dimensionsApp: App {
+    let store = Store(initialState: Feature.State()) {
+        Feature()
+    }
+    
     var body: some Scene {
-        WindowGroup {
-            ContentView()
+        let lifecycle = store.scope(state: \.sceneLifecycle, action: \.sceneLifecycle)
+        WindowGroup(id: ContentView.ID) {
+            ContentView(store: store)
+                .registerLifecycle(lifecycle, as: .window(.id(ContentView.ID)))
         }
+        .windowResizability(.contentSize)
 
-        ImmersiveSpace(id: "ImmersiveSpace") {
+        ImmersiveSpace(id: ImmersiveView.ID) {
             ImmersiveView()
+                .registerLifecycle(lifecycle, as: .immersive(ImmersiveView.ID))
         }
     }
 }

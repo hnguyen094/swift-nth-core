@@ -7,45 +7,29 @@
 
 import SwiftUI
 import RealityKit
+import ComposableArchitecture
+import NthComposable
 
 struct ContentView: View {
-
-    @State private var showImmersiveSpace = false
-    @State private var immersiveSpaceIsShown = false
-
-    @Environment(\.openImmersiveSpace) var openImmersiveSpace
-    @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
+    @Bindable var store: StoreOf<dimensionsApp.Feature>
 
     var body: some View {
         VStack {
             Text("Hello, world!")
-
-            Toggle("Show Immersive Space", isOn: $showImmersiveSpace)
-                .toggleStyle(.button)
-                .padding(.top, 50)
+            SceneToggle(
+                "Show Immersive Space",
+                scene: .immersive(ImmersiveView.ID),
+                using: store.scope(state: \.sceneLifecycle, action: \.sceneLifecycle)
+            )
+            .toggleStyle(.button)
+            .padding(.top, 50)
         }
         .padding()
-        .onChange(of: showImmersiveSpace) { _, newValue in
-            Task {
-                if newValue {
-                    switch await openImmersiveSpace(id: "ImmersiveSpace") {
-                    case .opened:
-                        immersiveSpaceIsShown = true
-                    case .error, .userCancelled:
-                        fallthrough
-                    @unknown default:
-                        immersiveSpaceIsShown = false
-                        showImmersiveSpace = false
-                    }
-                } else if immersiveSpaceIsShown {
-                    await dismissImmersiveSpace()
-                    immersiveSpaceIsShown = false
-                }
-            }
-        }
     }
 }
 
 #Preview(windowStyle: .automatic) {
-    ContentView()
+    ContentView(store: .init(initialState: .init(), reducer: {
+        dimensionsApp.Feature()
+    }))
 }

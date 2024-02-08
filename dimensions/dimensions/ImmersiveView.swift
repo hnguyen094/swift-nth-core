@@ -11,6 +11,7 @@ import RealityKit
 struct ImmersiveView: View {
     var body: some View {
         RealityView { content in
+            content.add(ModelEntity(mesh: .generateSphere(radius: 0.1), materials: [PhysicallyBasedMaterial()]))
         }
     }
 }

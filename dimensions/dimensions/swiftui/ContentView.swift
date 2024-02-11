@@ -16,9 +16,11 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Text("Hello, world!")
+            Toggle("Using metric system", isOn: $store.usesMetricSystem)
+                .toggleStyle(.button)
             SceneToggle(
                 "Show Immersive Space",
-                scene: .immersive(ImmersiveView.ID),
+                toggling: .immersive(ImmersiveView.ID),
                 using: store.scope(state: \.sceneLifecycle, action: \.sceneLifecycle)
             )
             .toggleStyle(.button)

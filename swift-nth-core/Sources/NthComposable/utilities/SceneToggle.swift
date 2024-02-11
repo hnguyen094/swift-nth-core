@@ -24,12 +24,12 @@ public struct SceneToggle: View {
 
     public init(
         _ text: LocalizedStringKey,
-        scene: SceneLifecycle.SceneType,
+        toggling: SceneLifecycle.SceneType,
         using store: StoreOf<SceneLifecycle>
     ) {
         self.store = store
         self.text = text
-        self.scene = scene
+        self.scene = toggling
     }
 
     public var body: some View {

@@ -16,12 +16,15 @@ extension dimensionsApp {
         struct State {
             var usesMetricSystem: Bool
             var sceneLifecycle: SceneLifecycle.State = .init()
+            var planeMeasure: PlaneMeasure.State = .init()
+            var worldAnchoring: WorldAnchoring.State = .init()
 
             init() {
                 @Dependency(\.userDefaults) var userDefaults
+                @Dependency(\.locale) var locale
                 usesMetricSystem = userDefaults.hasShownFirstLaunch
                 ? userDefaults.usesMetricSystem
-                : Locale.current.measurementSystem == .metric
+                : locale.measurementSystem == .metric
             }
         }
 
@@ -30,21 +33,34 @@ extension dimensionsApp {
 
             case binding(BindingAction<State>)
             case sceneLifecycle(SceneLifecycle.Action)
+            case planeMeasure(PlaneMeasure.Action)
+            case worldAnchoring(WorldAnchoring.Action)
         }
 
+        @Dependency(\.userDefaults) var userDefaults
+        
         var body: some ReducerOf<Self> {
             BindingReducer()
             Scope(state: \.sceneLifecycle, action: \.sceneLifecycle) {
                 SceneLifecycle()
             }
+            Scope(state: \.planeMeasure, action: \.planeMeasure) {
+                PlaneMeasure()
+            }
+            Scope(state: \.worldAnchoring, action: \.worldAnchoring) {
+                WorldAnchoring()
+            }
             Reduce { state, action in
                 switch action {
                 case .onLaunch:
                     return .run { send in
-                        @Dependency(\.userDefaults) var userDefaults
-                        await userDefaults.sethasShownFirstLaunch(true)
+                        await userDefaults.setHasShownFirstLaunch(true)
                     }
-                case .binding, .sceneLifecycle:
+                case .binding(\.usesMetricSystem):
+                    return .run { [usesMetricSystem = state.usesMetricSystem] _ in
+                        await userDefaults.setUsesMetricSystem(usesMetricSystem)
+                    }
+                case .binding, .sceneLifecycle, .planeMeasure, .worldAnchoring:
                     return .none
                 }
             }

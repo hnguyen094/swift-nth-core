@@ -12,7 +12,7 @@ extension UserDefaultsClient {
         self.boolForKey(Keys.hasShownFirstLaunch.rawValue)
     }
     
-    func sethasShownFirstLaunch(_ v: Bool) async {
+    func setHasShownFirstLaunch(_ v: Bool) async {
         await self.setBool(v, Keys.hasShownFirstLaunch.rawValue)
     }
     

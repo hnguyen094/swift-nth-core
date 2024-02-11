@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B253B3382B76CA040002D4AE /* PlaneMeasure.swift in Sources */ = {isa = PBXBuildFile; fileRef = B253B3372B76CA040002D4AE /* PlaneMeasure.swift */; };
+		B253B33A2B76EBE10002D4AE /* PlaneVisualization.swift in Sources */ = {isa = PBXBuildFile; fileRef = B253B3392B76EBE10002D4AE /* PlaneVisualization.swift */; };
+		B253B33D2B7816C60002D4AE /* TextSpin.swift in Sources */ = {isa = PBXBuildFile; fileRef = B253B33C2B7816C60002D4AE /* TextSpin.swift */; };
+		B253B3412B7829020002D4AE /* WorldAnchoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = B253B3402B7829020002D4AE /* WorldAnchoring.swift */; };
+		B253B3482B7868A70002D4AE /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = B253B3472B7868A70002D4AE /* RealityKitContent */; };
 		B266E05B2B72C65900D97F56 /* dimensionsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B266E05A2B72C65900D97F56 /* dimensionsApp.swift */; };
 		B266E05D2B72C65900D97F56 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B266E05C2B72C65900D97F56 /* ContentView.swift */; };
 		B266E05F2B72C65900D97F56 /* ImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B266E05E2B72C65900D97F56 /* ImmersiveView.swift */; };
@@ -20,6 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B253B3372B76CA040002D4AE /* PlaneMeasure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaneMeasure.swift; sourceTree = "<group>"; };
+		B253B3392B76EBE10002D4AE /* PlaneVisualization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaneVisualization.swift; sourceTree = "<group>"; };
+		B253B33C2B7816C60002D4AE /* TextSpin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSpin.swift; sourceTree = "<group>"; };
+		B253B3402B7829020002D4AE /* WorldAnchoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldAnchoring.swift; sourceTree = "<group>"; };
 		B266E0532B72C65900D97F56 /* dimensions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dimensions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B266E05A2B72C65900D97F56 /* dimensionsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dimensionsApp.swift; sourceTree = "<group>"; };
 		B266E05C2B72C65900D97F56 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -38,6 +47,7 @@
 			files = (
 				B266E06F2B72C6CF00D97F56 /* NthCore in Frameworks */,
 				B266E06D2B72C6CF00D97F56 /* NthComposable in Frameworks */,
+				B253B3482B7868A70002D4AE /* RealityKitContent in Frameworks */,
 				B266E0722B72C71500D97F56 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -45,11 +55,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B253B3332B7465540002D4AE /* ecs */ = {
+			isa = PBXGroup;
+			children = (
+				B253B33C2B7816C60002D4AE /* TextSpin.swift */,
+			);
+			path = ecs;
+			sourceTree = "<group>";
+		};
+		B253B3342B74655C0002D4AE /* swiftui */ = {
+			isa = PBXGroup;
+			children = (
+				B266E05C2B72C65900D97F56 /* ContentView.swift */,
+				B266E05E2B72C65900D97F56 /* ImmersiveView.swift */,
+			);
+			path = swiftui;
+			sourceTree = "<group>";
+		};
+		B253B33B2B78162C0002D4AE /* dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				B2E2E7D72B73D40400B06F85 /* UserDefaults+Extensions.swift */,
+				B253B3392B76EBE10002D4AE /* PlaneVisualization.swift */,
+			);
+			path = dependencies;
+			sourceTree = "<group>";
+		};
+		B253B3462B7868A30002D4AE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B266E04A2B72C65900D97F56 = {
 			isa = PBXGroup;
 			children = (
 				B266E0552B72C65900D97F56 /* dimensions */,
 				B266E0542B72C65900D97F56 /* Products */,
+				B253B3462B7868A30002D4AE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,14 +108,13 @@
 		B266E0552B72C65900D97F56 /* dimensions */ = {
 			isa = PBXGroup;
 			children = (
+				B253B3332B7465540002D4AE /* ecs */,
 				B2E2E7D92B73DB6F00B06F85 /* tca */,
+				B253B3342B74655C0002D4AE /* swiftui */,
 				B266E05A2B72C65900D97F56 /* dimensionsApp.swift */,
-				B266E05C2B72C65900D97F56 /* ContentView.swift */,
-				B266E05E2B72C65900D97F56 /* ImmersiveView.swift */,
 				B266E0602B72C65A00D97F56 /* Assets.xcassets */,
 				B266E0652B72C65A00D97F56 /* Info.plist */,
 				B266E0622B72C65A00D97F56 /* Preview Content */,
-				B2E2E7D72B73D40400B06F85 /* UserDefaults+Extensions.swift */,
 			);
 			path = dimensions;
 			sourceTree = "<group>";
@@ -87,7 +130,10 @@
 		B2E2E7D92B73DB6F00B06F85 /* tca */ = {
 			isa = PBXGroup;
 			children = (
+				B253B33B2B78162C0002D4AE /* dependencies */,
 				B2BF9FF42B73CD65001EBEDB /* App.Feature.swift */,
+				B253B3372B76CA040002D4AE /* PlaneMeasure.swift */,
+				B253B3402B7829020002D4AE /* WorldAnchoring.swift */,
 			);
 			path = tca;
 			sourceTree = "<group>";
@@ -112,6 +158,7 @@
 				B266E06C2B72C6CF00D97F56 /* NthComposable */,
 				B266E06E2B72C6CF00D97F56 /* NthCore */,
 				B266E0712B72C71500D97F56 /* ComposableArchitecture */,
+				B253B3472B7868A70002D4AE /* RealityKitContent */,
 			);
 			productName = dimensions;
 			productReference = B266E0532B72C65900D97F56 /* dimensions.app */;
@@ -171,8 +218,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B253B33D2B7816C60002D4AE /* TextSpin.swift in Sources */,
+				B253B3382B76CA040002D4AE /* PlaneMeasure.swift in Sources */,
 				B266E05D2B72C65900D97F56 /* ContentView.swift in Sources */,
 				B266E05B2B72C65900D97F56 /* dimensionsApp.swift in Sources */,
+				B253B33A2B76EBE10002D4AE /* PlaneVisualization.swift in Sources */,
+				B253B3412B7829020002D4AE /* WorldAnchoring.swift in Sources */,
 				B266E05F2B72C65900D97F56 /* ImmersiveView.swift in Sources */,
 				B2E2E7D82B73D40400B06F85 /* UserDefaults+Extensions.swift in Sources */,
 				B2BF9FF52B73CD65001EBEDB /* App.Feature.swift in Sources */,
@@ -395,6 +446,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B253B3472B7868A70002D4AE /* RealityKitContent */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RealityKitContent;
+		};
 		B266E06C2B72C6CF00D97F56 /* NthComposable */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = NthComposable;

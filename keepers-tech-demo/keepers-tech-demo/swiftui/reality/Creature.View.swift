@@ -30,7 +30,7 @@ extension Creature {
             RealityView { content, attachments in
                 let creatureMaterial = try? await ShaderGraphMaterial(
                     named: "/Root/CelShading",
-                    from: "Materials/CustomMaterials",
+                    from: "Materials/CelShading",
                     in: realityKitContentBundle)
                 let ent = Creature.Entity(
                     store: store,

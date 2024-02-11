@@ -29,7 +29,7 @@ struct WorldTrackerClient {
     func run() async {
         do {
             // TODO: planeData and meshData are not supported on simulator
-            try await session.run([worldInfo])
+            try await session.run([planeData, worldInfo, meshData])
             logger.debug("begin ARKitSession")
         } catch {
             logger.error("Failed to start ARKitSession (\(error))")

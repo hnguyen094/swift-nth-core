@@ -14,6 +14,7 @@ struct PlaneMeasure {
     @ObservableState
     struct State {
         var labels: [ID: Label] = .init()
+        var offset: SIMD3<Float> = [0, 0, 0.01]
     }
     
     let arSession = ARKitSession()
@@ -31,8 +32,8 @@ struct PlaneMeasure {
         Reduce { state, action in
             switch action {
             case .onStart(let config):
-                planeEntities.initialize(config)
                 return .run { send in
+                    await planeEntities.initialize(config)
                     try await arSession.run([planeData])
                     for await update in planeData.anchorUpdates {
                         await send(.handleUpdate(update))
@@ -44,16 +45,17 @@ struct PlaneMeasure {
                     await planeEntities.update(update: update)
                 }
             case .onEnd:
+                state.labels.removeAll(keepingCapacity: true)
                 arSession.stop()
-                planeEntities.clear()
-                return .none
+                return .run { _ in
+                    await planeEntities.clear()
+                }
             }
         }
     }
     
     func generateLabels(_ state: inout State, from update: AnchorUpdate<PlaneAnchor>) {
         let extent = update.anchor.geometry.extent
-        let classification = update.anchor.classification.description
 
         switch update.event {
         case .added, .updated:
@@ -62,12 +64,13 @@ struct PlaneMeasure {
                 case .top, .bottom: extent.width
                 case .left, .right: extent.height
                 }
-                let translation: SIMD3<Float> = switch edge {
+                var translation: SIMD3<Float> = switch edge {
                 case .top: [0, extent.height/2, 0]
                 case .bottom: [0, -extent.height/2, 0]
                 case .left: [-extent.width/2, 0, 0]
                 case .right: [extent.width/2, 0, 0]
                 }
+                translation += state.offset
                 let rotation: simd_quatf = switch edge {
                 case .top, .bottom: .init(angle: 0, axis: [0, 1, 0])
                 case .left: .init(angle: .pi / 2, axis: [0, 0, 1])
@@ -87,14 +90,12 @@ struct PlaneMeasure {
                         anchorID: update.anchor.id,
                         edge: edge))
             }
-            return
         case .removed:
             for edge in Edge.allCases {
                 state.labels.removeValue(forKey: .init(
                     anchorID: update.anchor.id,
                     edge: edge))
             }
-            return
         }
     }
 

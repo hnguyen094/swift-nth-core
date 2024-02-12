@@ -16,8 +16,7 @@ extension dimensionsApp {
         struct State {
             var usesMetricSystem: Bool
             var sceneLifecycle: SceneLifecycle.State = .init()
-            var planeMeasure: PlaneMeasure.State = .init()
-            var worldAnchoring: WorldAnchoring.State = .init()
+            var mode: Mode.State = .meshes(.init())
 
             init() {
                 @Dependency(\.userDefaults) var userDefaults
@@ -33,8 +32,7 @@ extension dimensionsApp {
 
             case binding(BindingAction<State>)
             case sceneLifecycle(SceneLifecycle.Action)
-            case planeMeasure(PlaneMeasure.Action)
-            case worldAnchoring(WorldAnchoring.Action)
+            case mode(Mode.Action)
         }
 
         @Dependency(\.userDefaults) var userDefaults
@@ -44,11 +42,8 @@ extension dimensionsApp {
             Scope(state: \.sceneLifecycle, action: \.sceneLifecycle) {
                 SceneLifecycle()
             }
-            Scope(state: \.planeMeasure, action: \.planeMeasure) {
-                PlaneMeasure()
-            }
-            Scope(state: \.worldAnchoring, action: \.worldAnchoring) {
-                WorldAnchoring()
+            Scope(state: \.mode, action: \.mode) {
+                Mode()
             }
             Reduce { state, action in
                 switch action {
@@ -60,9 +55,30 @@ extension dimensionsApp {
                     return .run { [usesMetricSystem = state.usesMetricSystem] _ in
                         await userDefaults.setUsesMetricSystem(usesMetricSystem)
                     }
-                case .binding, .sceneLifecycle, .planeMeasure, .worldAnchoring:
+                case .binding, .sceneLifecycle, .mode:
                     return .none
                 }
+            }
+        }
+    }
+
+    @Reducer
+    struct Mode {
+        @ObservableState
+        enum State {
+            case planes(PlaneMeasure.State)
+            case meshes(MeshMeasure.State)
+        }
+        enum Action {
+            case planes(PlaneMeasure.Action)
+            case meshes(MeshMeasure.Action)
+        }
+        var body: some ReducerOf<Self> {
+            Scope(state: \.planes, action: \.planes) {
+                PlaneMeasure()
+            }
+            Scope(state: \.meshes, action: \.meshes) {
+                MeshMeasure()
             }
         }
     }

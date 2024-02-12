@@ -12,6 +12,8 @@
 		B253B33D2B7816C60002D4AE /* TextSpin.swift in Sources */ = {isa = PBXBuildFile; fileRef = B253B33C2B7816C60002D4AE /* TextSpin.swift */; };
 		B253B3412B7829020002D4AE /* WorldAnchoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = B253B3402B7829020002D4AE /* WorldAnchoring.swift */; };
 		B253B3482B7868A70002D4AE /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = B253B3472B7868A70002D4AE /* RealityKitContent */; };
+		B253B34A2B7A69900002D4AE /* MeshMeasure.swift in Sources */ = {isa = PBXBuildFile; fileRef = B253B3492B7A69900002D4AE /* MeshMeasure.swift */; };
+		B253B34C2B7A6F8E0002D4AE /* PlaneMeasureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B253B34B2B7A6F8E0002D4AE /* PlaneMeasureView.swift */; };
 		B266E05B2B72C65900D97F56 /* dimensionsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B266E05A2B72C65900D97F56 /* dimensionsApp.swift */; };
 		B266E05D2B72C65900D97F56 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B266E05C2B72C65900D97F56 /* ContentView.swift */; };
 		B266E05F2B72C65900D97F56 /* ImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B266E05E2B72C65900D97F56 /* ImmersiveView.swift */; };
@@ -22,6 +24,8 @@
 		B266E0722B72C71500D97F56 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = B266E0712B72C71500D97F56 /* ComposableArchitecture */; };
 		B2BF9FF52B73CD65001EBEDB /* App.Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BF9FF42B73CD65001EBEDB /* App.Feature.swift */; };
 		B2E2E7D82B73D40400B06F85 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E2E7D72B73D40400B06F85 /* UserDefaults+Extensions.swift */; };
+		B2E51DB12B7A790A00B1539E /* MeshMeasureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E51DB02B7A790A00B1539E /* MeshMeasureView.swift */; };
+		B2E51DB52B7A8BC700B1539E /* MeshVisualization.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E51DB42B7A8BC700B1539E /* MeshVisualization.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +33,8 @@
 		B253B3392B76EBE10002D4AE /* PlaneVisualization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaneVisualization.swift; sourceTree = "<group>"; };
 		B253B33C2B7816C60002D4AE /* TextSpin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSpin.swift; sourceTree = "<group>"; };
 		B253B3402B7829020002D4AE /* WorldAnchoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldAnchoring.swift; sourceTree = "<group>"; };
+		B253B3492B7A69900002D4AE /* MeshMeasure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshMeasure.swift; sourceTree = "<group>"; };
+		B253B34B2B7A6F8E0002D4AE /* PlaneMeasureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaneMeasureView.swift; sourceTree = "<group>"; };
 		B266E0532B72C65900D97F56 /* dimensions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dimensions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B266E05A2B72C65900D97F56 /* dimensionsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dimensionsApp.swift; sourceTree = "<group>"; };
 		B266E05C2B72C65900D97F56 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -38,6 +44,8 @@
 		B266E0652B72C65A00D97F56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2BF9FF42B73CD65001EBEDB /* App.Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.Feature.swift; sourceTree = "<group>"; };
 		B2E2E7D72B73D40400B06F85 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
+		B2E51DB02B7A790A00B1539E /* MeshMeasureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshMeasureView.swift; sourceTree = "<group>"; };
+		B2E51DB42B7A8BC700B1539E /* MeshVisualization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshVisualization.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +76,8 @@
 			children = (
 				B266E05C2B72C65900D97F56 /* ContentView.swift */,
 				B266E05E2B72C65900D97F56 /* ImmersiveView.swift */,
+				B253B34B2B7A6F8E0002D4AE /* PlaneMeasureView.swift */,
+				B2E51DB02B7A790A00B1539E /* MeshMeasureView.swift */,
 			);
 			path = swiftui;
 			sourceTree = "<group>";
@@ -77,6 +87,7 @@
 			children = (
 				B2E2E7D72B73D40400B06F85 /* UserDefaults+Extensions.swift */,
 				B253B3392B76EBE10002D4AE /* PlaneVisualization.swift */,
+				B2E51DB42B7A8BC700B1539E /* MeshVisualization.swift */,
 			);
 			path = dependencies;
 			sourceTree = "<group>";
@@ -134,6 +145,7 @@
 				B2BF9FF42B73CD65001EBEDB /* App.Feature.swift */,
 				B253B3372B76CA040002D4AE /* PlaneMeasure.swift */,
 				B253B3402B7829020002D4AE /* WorldAnchoring.swift */,
+				B253B3492B7A69900002D4AE /* MeshMeasure.swift */,
 			);
 			path = tca;
 			sourceTree = "<group>";
@@ -219,9 +231,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B253B33D2B7816C60002D4AE /* TextSpin.swift in Sources */,
+				B2E51DB52B7A8BC700B1539E /* MeshVisualization.swift in Sources */,
 				B253B3382B76CA040002D4AE /* PlaneMeasure.swift in Sources */,
+				B253B34C2B7A6F8E0002D4AE /* PlaneMeasureView.swift in Sources */,
 				B266E05D2B72C65900D97F56 /* ContentView.swift in Sources */,
+				B253B34A2B7A69900002D4AE /* MeshMeasure.swift in Sources */,
 				B266E05B2B72C65900D97F56 /* dimensionsApp.swift in Sources */,
+				B2E51DB12B7A790A00B1539E /* MeshMeasureView.swift in Sources */,
 				B253B33A2B76EBE10002D4AE /* PlaneVisualization.swift in Sources */,
 				B253B3412B7829020002D4AE /* WorldAnchoring.swift in Sources */,
 				B266E05F2B72C65900D97F56 /* ImmersiveView.swift in Sources */,

@@ -14,19 +14,34 @@ struct ContentView: View {
     @Bindable var store: StoreOf<dimensionsApp.Feature>
 
     var body: some View {
-        VStack {
-            Text("Hello, world!")
-            Toggle("Using metric system", isOn: $store.usesMetricSystem)
-                .toggleStyle(.button)
+        NavigationStack {
+            HStack {
+                Spacer()
+                Text("Measure using")
+                let binding: Binding<Bool> = $store.usesMetricSystem
+                Toggle(binding.wrappedValue ? "the metric system" : "the imperial system", isOn: $store.usesMetricSystem)
+                    .toggleStyle(.button)
+                Spacer()
+            }
             SceneToggle(
-                "Show Immersive Space",
+                "Stop measuring",
+                "Begin measuring",
                 toggling: .immersive(ImmersiveView.ID),
                 using: store.scope(state: \.sceneLifecycle, action: \.sceneLifecycle)
             )
             .toggleStyle(.button)
             .padding(.top, 50)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    HStack {
+                        Image(systemName: "ruler")
+                        Text("Dimensions")
+                            .font(.title)
+                    }
+                }
+            }
         }
-        .padding()
+        .frame(width: 500, height: 300)
     }
 }
 

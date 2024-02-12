@@ -22,6 +22,7 @@ struct WorldAnchoring {
     
     enum Action {
         case onStart
+        case monitorUpdates
         case handleUpdate(AnchorUpdate<WorldAnchor>)
         case register(_ entity: Entity)
         case onEnd
@@ -33,6 +34,10 @@ struct WorldAnchoring {
             case .onStart:
                 return .run { send in
                     try await arSession.run([worldData])
+                    await send(.monitorUpdates)
+                }
+            case .monitorUpdates:
+                return .run { send in
                     for await update in worldData.anchorUpdates {
                         await send(.handleUpdate(update))
                     }
@@ -56,6 +61,8 @@ struct WorldAnchoring {
                 state.associations.updateValue(entity.id, forKey: anchor.id)
                 return .run { send in
                     try await worldData.addAnchor(anchor)
+                } catch: { error, send in
+                    // TODO: properly handle -- request close/open immersive space?
                 }
             case .onEnd:
                 arSession.stop()

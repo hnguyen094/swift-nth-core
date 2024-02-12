@@ -31,7 +31,7 @@ struct dimensionsApp: App {
     }
 
     init() {
-        TextSpin.register()
+//        TextSpin.register()
         store.send(.onLaunch)
     }
 }

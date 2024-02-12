@@ -8,10 +8,10 @@
 import ComposableArchitecture
 import SwiftUI
 
+@MainActor
 public struct SceneToggle: View {
     @Bindable var store: StoreOf<SceneLifecycle>
 
-    @State var toggleRequest: Bool = false
     @State private var disabled: Bool = false
     
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
@@ -20,22 +20,20 @@ public struct SceneToggle: View {
     @Environment(\.dismissWindow) var dismissWindow
 
     var text: LocalizedStringKey
+    var textOnFalse: LocalizedStringKey?
     var scene: SceneLifecycle.SceneType
 
-    public init(
-        _ text: LocalizedStringKey,
-        toggling: SceneLifecycle.SceneType,
-        using store: StoreOf<SceneLifecycle>
-    ) {
-        self.store = store
-        self.text = text
-        self.scene = toggling
-    }
-
-    public var body: some View {
-        Toggle(text, isOn: $toggleRequest)
-            .disabled(disabled)
-            .onChange(of: toggleRequest) {
+    var binding: Binding<Bool> {
+        .init(
+            get: {
+                switch scene {
+                case .immersive(let id):
+                    store.openedImmersiveSpace == id
+                case .window(let openableWindow):
+                    store.openedWindows.contains(openableWindow)
+                }
+            },
+            set: { _ in
                 guard !disabled else { return }
                 switch scene {
                 case .immersive(let id):
@@ -43,13 +41,8 @@ public struct SceneToggle: View {
                     Task {
                         if store.openedImmersiveSpace == id {
                             await dismissImmersiveSpace()
-                            toggleRequest = false
                         } else {
-                            let result = await openImmersiveSpace(id: id)
-                            toggleRequest = switch result {
-                            case .opened: true
-                            default: false
-                            }
+                            await openImmersiveSpace(id: id)
                         }
                         disabled = false
                     }
@@ -71,5 +64,24 @@ public struct SceneToggle: View {
                     }
                 }
             }
+        )
+    }
+    
+    public init(
+        _ text: LocalizedStringKey,
+        _ textOnFalse: LocalizedStringKey? = .none,
+        toggling: SceneLifecycle.SceneType,
+        using store: StoreOf<SceneLifecycle>
+    ) {
+        self.store = store
+        self.text = text
+        self.textOnFalse = textOnFalse
+        self.scene = toggling
+    }
+
+    public var body: some View {
+        let shownText = binding.wrappedValue ? text : (textOnFalse ?? text)
+        Toggle(shownText, isOn: binding)
+            .disabled(disabled)
     }
 }

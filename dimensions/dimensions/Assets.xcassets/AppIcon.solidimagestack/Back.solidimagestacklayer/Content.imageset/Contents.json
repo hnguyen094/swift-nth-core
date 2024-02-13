@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "dimensions_l1.png",
       "idiom" : "vision",
       "scale" : "2x"
     }

@@ -18,6 +18,8 @@ struct MeshMeasureView: View {
         root: Entity(),
         material: SimpleMaterial(color: .blue, isMetallic: false))
 
+    let lineMesh = MeshResource.generateBox(width: 0.005, height: 1, depth: 0.005, cornerRadius: 0.005)
+
     var tap: some Gesture {
         SpatialTapGesture()
             .targetedToEntity(where: .has(SceneUnderstandingComponent.self))
@@ -30,6 +32,14 @@ struct MeshMeasureView: View {
     var body: some View {
         RealityView { content, attachments in
             content.add(config.root)
+            let material = try? await ShaderGraphMaterial(
+                named: "/Root/Glow",
+                from: "Materials/Glow",
+                in: realityKitContentBundle)
+            let materialStore = ModelEntity()
+            materialStore.name = "MaterialStore"
+            materialStore.model?.materials = [material ?? UnlitMaterial(color: .white)]
+            content.add(materialStore)
             addAttachments(&content, attachments)
         } update: { content, attachments in
             addAttachments(&content, attachments)
@@ -42,7 +52,7 @@ struct MeshMeasureView: View {
                 }
             }
         }
-        .task {
+        .onAppear {
             store.send(.onStart(config))
         }
         .onDisappear {
@@ -52,6 +62,10 @@ struct MeshMeasureView: View {
     }
 
     func addAttachments(_ content: inout RealityViewContent, _ attachments: RealityViewAttachments) {
+        let materialStore = content.entities.first { entity in
+            entity.name == "MaterialStore"
+        }
+        let material = materialStore?.components[ModelComponent.self]?.materials.first
         for (key, value) in store.measurements {
             guard let attachment = attachments.entity(for: key),
                   case .complete(let p1, let p2) = value
@@ -77,6 +91,13 @@ struct MeshMeasureView: View {
                 entity.setPosition(i == 0 ? p1 : p2, relativeTo: .none)
                 attachment.addChild(entity, preservingWorldTransform: true)
             }
+
+//            let idk = simd_cross(simd_fast_normalize(p2 - p1), [0, 1, 0])
+//            let entity = ModelEntity(mesh: lineMesh, materials: [material ?? UnlitMaterial(color: .white)])
+//            entity.setPosition(middle, relativeTo: .none)
+//            entity.setScale([1, simd_distance(p2, p1), 1], relativeTo: .none)
+//            entity.transform.rotation = .init(from: [0, 0, 1], to: idk)  * .init(angle: .pi / 2, axis: [0, 0, 1])
+//            attachment.addChild(entity, preservingWorldTransform: true)
 
             content.add(attachment)
         }

@@ -15,7 +15,7 @@ struct MeshMeasure {
     struct State {
         var measurements: [UUID: Pair] = .init()
         var offset: SIMD3<Float> = [0, 0, 0.01]
-        var current: Pair? = .none
+        var current: UUID? = .none
     }
 
     enum Pair {
@@ -24,7 +24,7 @@ struct MeshMeasure {
 
         func label(metric usesMetricSystem: Bool) -> String {
             guard case .complete(let p1, let p2) = self else {
-                return "[measuring]"
+                return "[waiting for another point…]"
             }
             let measurement = simd_distance(p1, p2)
             let value = measurement * (usesMetricSystem ? 1 : 3.28084)
@@ -64,11 +64,14 @@ struct MeshMeasure {
                 }
             case .addPoint(let point):
                 switch state.current {
-                case .partial(let first):
-                    state.current = .complete(first, point)
-                    state.measurements[uuid()] = state.current
-                case .none, .complete:
-                    state.current = .partial(point)
+                case .some(let id):
+                    guard let pair = state.measurements[id] else { break }
+                    guard case .partial(let first) = pair else { fallthrough }
+                    state.measurements[id] = .complete(first, point)
+                case .none:
+                    let id = uuid()
+                    state.current = id
+                    state.measurements[id] = .partial(point)
                 }
                 return .none
             case .onEnd:

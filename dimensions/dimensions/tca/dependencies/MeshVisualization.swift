@@ -37,40 +37,40 @@ extension MeshVisualization: DependencyKey {
         var configuration: Configuration? = .none
         var entities: [MeshAnchor.ID: ModelEntity]? = .none
 
-        return .init { config in
+        return .init { @MainActor config in
             configuration = config
             entities = .init()
-        } update: { update in
-            guard let config = configuration else { return }
-
-            guard let shape = try? await ShapeResource.generateStaticMesh(from: update.anchor) else { return }
+        } update: { @MainActor update in
+            guard let config = configuration,
+                  let shape = try? await ShapeResource.generateStaticMesh(from: update.anchor)
+            else { return }
 
             switch update.event {
             case .added:
-                let entity = await ModelEntity()
+                let entity = ModelEntity()
                 // TODO: create mesh, create occlusion material
-                await entity.setTransformMatrix(update.anchor.originFromAnchorTransform, relativeTo: .none)
-                await entity.components.set(CollisionComponent(shapes: [shape], isStatic: true))
-                await entity.components.set(InputTargetComponent())
-                await entity.components.set(SceneUnderstandingComponent())
-                await entity.components.set(PhysicsBodyComponent(mode: .static))
-                await entity.components.set(HoverEffectComponent())
-                await entity.setParent(config.root, preservingWorldTransform: true)
+                entity.setTransformMatrix(update.anchor.originFromAnchorTransform, relativeTo: .none)
+                entity.components.set(CollisionComponent(shapes: [shape], isStatic: true))
+                entity.components.set(InputTargetComponent())
+                entity.components.set(SceneUnderstandingComponent())
+                entity.components.set(PhysicsBodyComponent(mode: .static))
+                entity.components.set(HoverEffectComponent())
+                entity.setParent(config.root, preservingWorldTransform: true)
 
                 entities?[update.anchor.id] = entity
             case .updated:
                 guard let entity = entities?[update.anchor.id] else { return }
-                await entity.setTransformMatrix(update.anchor.originFromAnchorTransform, relativeTo: .none)
-                await entity.components.set(CollisionComponent(shapes: [shape], isStatic: true))
+                entity.setTransformMatrix(update.anchor.originFromAnchorTransform, relativeTo: .none)
+                entity.components.set(CollisionComponent(shapes: [shape], isStatic: true))
             case .removed:
                 guard let entity = entities?[update.anchor.id] else { return }
-                await entity.removeFromParent()
+                entity.removeFromParent()
                 entities?.removeValue(forKey: update.anchor.id)
             }
-        } clear: {
+        } clear: { @MainActor in
             guard let config = configuration else { return }
             entities?.removeAll(keepingCapacity: true)
-            await config.root.children.removeAll()
+            config.root.children.removeAll()
         }
 
     }

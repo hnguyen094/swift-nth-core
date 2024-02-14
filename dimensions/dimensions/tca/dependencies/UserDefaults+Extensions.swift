@@ -23,9 +23,18 @@ extension UserDefaultsClient {
     func setUsesMetricSystem(_ v: Bool) async {
         await self.setBool(v, Keys.usesMetricSystem.rawValue)
     }
-    
+
+    var prefersMeshReconstruction: Bool {
+        self.boolForKey(Keys.prefersMeshReconstruction.rawValue)
+    }
+
+    func setPrefersMeshReconstruction(_ v: Bool) async {
+        await self.setBool(v, Keys.prefersMeshReconstruction.rawValue)
+    }
+
     private enum Keys: String {
         case hasShownFirstLaunch
         case usesMetricSystem
+        case prefersMeshReconstruction
     }
 }

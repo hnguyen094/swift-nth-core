@@ -16,7 +16,7 @@ extension dimensionsApp {
         struct State {
             var usesMetricSystem: Bool
             var sceneLifecycle: SceneLifecycle.State = .init()
-            var mode: Mode.State = .meshes(.init())
+            var mode: Mode.State
 
             init() {
                 @Dependency(\.userDefaults) var userDefaults
@@ -24,11 +24,15 @@ extension dimensionsApp {
                 usesMetricSystem = userDefaults.hasShownFirstLaunch
                 ? userDefaults.usesMetricSystem
                 : locale.measurementSystem == .metric
+                mode = userDefaults.prefersMeshReconstruction
+               ? .meshes(.init())
+               : .planes(.init())
             }
         }
 
         enum Action: BindableAction {
             case onLaunch
+            case toggleMode(newValue: Bool)
 
             case binding(BindingAction<State>)
             case sceneLifecycle(SceneLifecycle.Action)
@@ -48,8 +52,17 @@ extension dimensionsApp {
             Reduce { state, action in
                 switch action {
                 case .onLaunch:
-                    return .run { send in
+                    return .run { _ in
                         await userDefaults.setHasShownFirstLaunch(true)
+                    }
+                case .toggleMode(newValue: let usePlanes):
+                    if usePlanes {
+                        state.mode = .planes(.init())
+                    } else {
+                        state.mode = .meshes(.init())
+                    }
+                    return .run { _ in
+                        await userDefaults.setPrefersMeshReconstruction(!usePlanes)
                     }
                 case .binding(\.usesMetricSystem):
                     return .run { [usesMetricSystem = state.usesMetricSystem] _ in

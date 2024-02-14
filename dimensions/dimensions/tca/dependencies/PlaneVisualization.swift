@@ -42,34 +42,34 @@ extension PlaneVisualization: DependencyKey {
         var entities: [PlaneAnchor.ID: ModelEntity]? = .none
 
         return .init(
-            initialize: { config in
+            initialize: { @MainActor config in
                 configuration = config
                 entities = .init()
-            }, update: { update in
+            }, update: { @MainActor update in
                 guard let config = configuration else { return }
 
                 let extent = update.anchor.geometry.extent
                 switch update.event {
                 case .added:
-                    let entity = await ModelEntity(mesh: config.mesh, materials: [ config.material])
+                    let entity = ModelEntity(mesh: config.mesh, materials: [ config.material])
                     let local = Transform(scale: [extent.width, extent.height, 1])
                     let extentTransform = update.anchor.originFromAnchorTransform * extent.anchorFromExtentTransform * local.matrix
-                    await entity.setTransformMatrix(extentTransform, relativeTo: .none)
-                    await entity.setScale([extent.width, extent.height, 1], relativeTo: .none)
-                    await entity.setParent(config.root, preservingWorldTransform: true)
+                    entity.setTransformMatrix(extentTransform, relativeTo: .none)
+                    entity.setScale([extent.width, extent.height, 1], relativeTo: .none)
+                    entity.setParent(config.root, preservingWorldTransform: true)
                     entities?[update.anchor.id] = entity
                 case .updated:
                     guard let entity = entities?[update.anchor.id] else { return }
-                    await entity.setScale([extent.width, extent.height, 1], relativeTo: .none)
+                    entity.setScale([extent.width, extent.height, 1], relativeTo: .none)
                 case .removed:
                     guard let entity = entities?[update.anchor.id] else { return }
-                    await entity.removeFromParent()
+                    entity.removeFromParent()
                     entities?.removeValue(forKey: update.anchor.id)
                 }
-            }, clear: {
+            }, clear: { @MainActor in
                 guard let config = configuration else { return }
                 entities?.removeAll(keepingCapacity: true)
-                await config.root.children.removeAll()
+                config.root.children.removeAll()
             })
     }
     
@@ -77,10 +77,10 @@ extension PlaneVisualization: DependencyKey {
         var configuration: Configuration? = .none
         var entities: [PlaneMeasure.ID: ModelEntity]? = .none
 
-        return .init { config in
+        return .init { @MainActor config in
             configuration = config
             entities = .init()
-        } update: { update in
+        } update: { @MainActor update in
             guard let config = configuration else { return }
 
             let extent = update.anchor.geometry.extent
@@ -88,26 +88,26 @@ extension PlaneVisualization: DependencyKey {
                 let id = PlaneMeasure.ID(anchorID: update.anchor.id, edge: edge)
                 switch update.event {
                 case .added:
-                    let entity = await ModelEntity(mesh: config.mesh, materials: [config.material])
+                    let entity = ModelEntity(mesh: config.mesh, materials: [config.material])
                     let extentTransform = update.anchor.originFromAnchorTransform * extent.anchorFromExtentTransform * computeLocalTransform(extent: extent, edge: edge)
-                    await entity.setTransformMatrix(extentTransform, relativeTo: .none)
-                    await entity.setParent(config.root, preservingWorldTransform: true)
+                    entity.setTransformMatrix(extentTransform, relativeTo: .none)
+                    entity.setParent(config.root, preservingWorldTransform: true)
                     entities?[id] = entity
                 case .updated:
                     guard let entity = entities?[id] else { return }
 
                     let extentTransform = update.anchor.originFromAnchorTransform * extent.anchorFromExtentTransform * computeLocalTransform(extent: extent, edge: edge)
-                    await entity.setTransformMatrix(extentTransform, relativeTo: .none)
+                    entity.setTransformMatrix(extentTransform, relativeTo: .none)
                 case .removed:
                     guard let entity = entities?[id] else { return }
-                    await entity.removeFromParent()
+                    entity.removeFromParent()
                     entities?.removeValue(forKey: id)
                 }
             }
-        } clear: {
+        } clear: { @MainActor in
             guard let config = configuration else { return }
             entities?.removeAll(keepingCapacity: true)
-            await config.root.children.removeAll()
+            config.root.children.removeAll()
         }
 
         func computeLocalTransform(extent: PlaneAnchor.Geometry.Extent, edge: PlaneMeasure.Edge) -> simd_float4x4 {

@@ -108,7 +108,7 @@ struct PlaneMeasure {
         func label(metric usesMetricSystem: Bool) -> String {
             let value = measurement * (usesMetricSystem ? 1 : 3.28084)
             let unit = usesMetricSystem ? "m" : "ft"
-            let prefix = "[\(classification)]"
+            let prefix = "[\(classification)] "
 
             return prefix + String(format: "%.2f", value) + unit
         }

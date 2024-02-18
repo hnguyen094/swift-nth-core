@@ -13,9 +13,11 @@ public struct SceneToggle: View {
     @Bindable var store: StoreOf<SceneLifecycle>
 
     @State private var disabled: Bool = false
-    
+
+    #if os(visionOS)
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
+    #endif
     @Environment(\.openWindow) var openWindow
     @Environment(\.dismissWindow) var dismissWindow
 
@@ -37,6 +39,7 @@ public struct SceneToggle: View {
                 guard !disabled else { return }
                 switch scene {
                 case .immersive(let id):
+                    #if os(visionOS)
                     disabled = true
                     Task {
                         if store.openedImmersiveSpace == id {
@@ -46,6 +49,9 @@ public struct SceneToggle: View {
                         }
                         disabled = false
                     }
+                    #else
+                    break
+                    #endif
                 case .window(let openableWindow):
                     let opened = store.openedWindows.contains(openableWindow)
                     switch openableWindow {

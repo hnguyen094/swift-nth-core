@@ -26,22 +26,20 @@ private struct Modifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .onAppear {
-                let action: SceneLifecycle.Action = switch sceneType {
+                switch sceneType {
                 case .immersive(let id):
-                    .immersiveSpaceOpened(id: id)
+                    store.send(.immersiveSpaceOpened(id: id))
                 case .window(let openableWindow):
-                    .windowOpened(openableWindow)
+                    store.send(.windowOpened(openableWindow))
                 }
-                store.send(action)
             }
             .onDisappear {
-                let action: SceneLifecycle.Action = switch sceneType {
+                switch sceneType {
                 case .immersive(let id):
-                    .immersiveSpaceClosed(id: id)
+                    store.send(.immersiveSpaceClosed(id: id))
                 case .window(let openableWindow):
-                    .windowClosed(openableWindow)
+                    store.send(.windowClosed(openableWindow))
                 }
-                store.send(action)
             }
     }
 }

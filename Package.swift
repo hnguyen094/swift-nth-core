@@ -24,10 +24,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "NthCore",
-            dependencies: [
-                .target(name: "NthVision", condition: .when(platforms: [.visionOS]))
-            ]),
+            name: "NthCore"),
         .target(
             name: "NthComposable",
             dependencies: [

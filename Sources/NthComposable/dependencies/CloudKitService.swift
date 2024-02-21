@@ -18,43 +18,70 @@ extension DependencyValues {
 
 @DependencyClient
 public struct CloudKitService {
-    public var vote: (_ recordType: CKRecord.RecordType, _ key: String) async throws -> Int64
+    public var createRecord: @Sendable () async throws -> Void
+    public var findRecord: @Sendable (_ of: Key) async throws -> CKRecord?
+    public var deleteRecord: @Sendable (_ of: Key) async throws -> Void
+    public var readField: @Sendable (Key) async throws -> Any?
+    public var writeField: @Sendable (Key, _ value: Any?) async throws -> Void
+
+    public struct Key {
+        public let scope: CKDatabase.Scope
+        public let isOwner: Bool = false
+        public let recordType: CKRecord.RecordType
+        public let key: CKRecord.FieldKey
+    }
 }
 
 extension CloudKitService: DependencyKey {
     public static let testValue: Self = .init()
     public static let previewValue: Self = .init()
     public static var liveValue: Self {
-        let publicDatabase = CKContainer.default().publicCloudDatabase
-        return .init(
-            // TODO: add to queue, and have queue process multiple clicks at once to avoid oplock
-            // TODO: merge all records, or find a safe way to concurrently edit records. Potential solution: https://stackoverflow.com/questions/29373056/increment-field-value-in-a-ckrecord-variable-without-fetching
-            vote: { recordType, key in
-                let id = try await CKContainer.default().userRecordID()
-                let reference = CKRecord.Reference(recordID: id, action: .none)
-                let predicate = NSPredicate(format: "creatorUserRecordID == %@", reference)
-                let query = CKQuery(recordType: recordType, predicate: predicate)
-
-                let (matchResults, _) = try await publicDatabase.records(matching: query, resultsLimit: 1)
-                var record: CKRecord? = .none
-                if case .success(let existingRecord) = matchResults.first?.1 {
-                    let currentValue = existingRecord.value(forKey: key) as? Int64 ?? 0
-                    if currentValue == Int64.max {
-                        throw Error.voteMaxedOut
-                    }
-                    existingRecord.setValue(currentValue + 1, forKey: key)
-                    record = existingRecord
-                } else {
-                    record = CKRecord(recordType: recordType)
-                    record?.setValue(1, forKey: key)
-                }
-                let newRecordCount = (try await publicDatabase.save(record!)).value(forKey: key) as? Int64 ?? 0
-                return newRecordCount
-            }
-        )
+        .init()
     }
-    
+
+    private static func record(of key: Key) async throws -> CKRecord? {
+        var predicate: NSPredicate = .init(value: true)
+        if key.isOwner {
+            let id = try await CKContainer.default().userRecordID()
+            let reference = CKRecord.Reference(recordID: id, action: .none)
+            predicate = NSPredicate(format: "creatorUserRecordID == %@", reference)
+        }
+        let query = CKQuery(recordType: key.recordType, predicate: predicate)
+        let database = CKContainer.default().database(with: key.scope)
+
+        let (matchResults, _) = try await database.records(matching: query, resultsLimit: 1)
+        switch matchResults.first?.1 {
+        case .success(let existingRecord): return existingRecord
+        case .failure(let error): throw error
+        case .none: return .none
+        }
+    }
+
+    private static func read(_ key: Key) async throws -> Any? {
+        let record = try await record(of: key)
+        return record?.value(forKey: key.key)
+    }
+
+    private static func write(_ key: Key, value: Any?) async throws {
+        let record = try await record(of: key) ?? CKRecord(recordType: key.recordType)
+        record.setValue(value, forKey: key.key)
+
+        let database = CKContainer.default().database(with: key.scope)
+        try await database.save(record)
+    }
+
+    private static func createRecord(_ key: Key) async throws {
+        let record = CKRecord(recordType: key.recordType)
+    }
+
+    private static func deleteRecord(of key: Key) async throws {
+        if let record = try await record(of: key) {
+            let database = CKContainer.default().database(with: key.scope)
+            try await database.deleteRecord(withID: record.recordID)
+        }
+    }
+
     public enum Error: Swift.Error {
-        case voteMaxedOut
+        case typeMismatch
     }
 }

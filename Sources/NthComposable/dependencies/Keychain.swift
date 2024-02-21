@@ -28,6 +28,12 @@ public struct KeychainClient {
         public let service: String
         public let account: String
         public let accessGroup: String?
+
+        public init(service: String, account: String, accessGroup: String?) {
+            self.service = service
+            self.account = account
+            self.accessGroup = accessGroup
+        }
     }
 
     public enum KeychainError: Error {

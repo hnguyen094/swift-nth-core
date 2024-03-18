@@ -1,6 +1,6 @@
 //
 //  CloudKitDatabase.swift
-//
+//  flaky-mvp
 //
 //  Created by hung on 3/12/24.
 //
@@ -22,6 +22,16 @@ extension DependencyValues {
 public struct CloudKitDatabase {
     public var accountStatus: () async throws -> CKAccountStatus
     public var accountStatusUpdates: AsyncThrowingStream<CKAccountStatus, Swift.Error> = .never
+    public var userRecord: () async throws -> CKRecord
+    public var modifyRecords: (
+        _ scope: CKDatabase.Scope,
+        _ saving: [CKRecord],
+        _ deleting: [CKRecord.ID],
+        _ atomically: Bool) async throws -> Void
+    public var getRecords: (
+        _ scope: CKDatabase.Scope,
+        _ query: CKQuery,
+        _ zones: [CKRecordZone]) async throws -> [CKRecord]
 }
 
 extension CloudKitDatabase: DependencyKey {
@@ -34,7 +44,10 @@ extension CloudKitDatabase: DependencyKey {
             accountStatusUpdates: NotificationCenter.default.notifications(named: .CKAccountChanged)
                 .compactMap { _ in
                     try await client.accountStatus()
-                }.eraseToThrowingStream()
+                }.eraseToThrowingStream(),
+            userRecord: client.userRecord,
+            modifyRecords: client.modifyRecords(scope:saving:deleting:atomically:),
+            getRecords: client.getRecords(scope:query:in:)
         )
     }
 }
@@ -50,7 +63,7 @@ extension CloudKitDatabase {
             try await container.accountStatus()
         }
 
-        private func userRecord() async throws -> CKRecord {
+        func userRecord() async throws -> CKRecord {
             guard let record = userRecord else {
                 let database = container.database(with: .public)
                 let userRecordID = try await container.userRecordID()
@@ -60,7 +73,7 @@ extension CloudKitDatabase {
             return record
         }
 
-        private func modifyRecordsHelper(
+        func modifyRecords(
             scope: CKDatabase.Scope,
             saving: [CKRecord],
             deleting: [CKRecord.ID],
@@ -85,7 +98,7 @@ extension CloudKitDatabase {
             }       
         }
 
-        private func getRecordsHelper(
+        func getRecords(
             scope: CKDatabase.Scope,
             query: CKQuery,
             in zones: [CKRecordZone])

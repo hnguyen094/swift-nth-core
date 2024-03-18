@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import RealityKit
 
 public struct ColorData: Codable, Equatable {
     public let red: Float

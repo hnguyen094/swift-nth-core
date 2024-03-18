@@ -15,23 +15,38 @@ let package = Package(
         .library(
             name: "NthCore",
             targets: ["NthCore"]),
-        .library(
-            name: "NthComposable",
-            targets: ["NthComposable"]),
     ],
     dependencies: [
-      .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.7.0")
+        .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.9.0")
     ],
     targets: [
         .target(
-            name: "NthCore"),
+            name: "NthCore",
+            dependencies: [
+                .target(name: "NthCommon"),
+                .target(name: "NthVisionOS", condition: .when(platforms: [.visionOS])),
+                .target(name: "NthComposable")
+            ],
+            path: "Sources/core"
+        ),
+        .target(
+            name: "NthCommon",
+            path: "Sources/common"
+        ),
+        .target(
+            name: "NthVisionOS",
+            dependencies: [
+                .target(name: "NthCommon")
+            ],
+            path: "Sources/visionos"
+        ),
         .target(
             name: "NthComposable",
             dependencies: [
-                .target(name: "NthCore"),
-                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-            ]),
-        .target(
-            name: "NthVision"),
+                .target(name: "NthCommon"),
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/composable"
+        )
     ]
 )

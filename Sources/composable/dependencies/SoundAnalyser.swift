@@ -8,7 +8,7 @@
 import Dependencies
 import DependenciesMacros
 import SoundAnalysis
-import NthCore
+import NthCommon
 
 extension DependencyValues {
     public var soundAnalysis: SoundAnalyser {

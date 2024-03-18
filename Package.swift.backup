@@ -1,0 +1,35 @@
+// swift-tools-version: 5.9
+
+import PackageDescription
+
+let package = Package(
+    name: "swift-nth-core",
+    platforms: [
+        .iOS(.v17),
+        .macOS(.v13),
+        .visionOS(.v1),
+        .tvOS(.v16),
+        .watchOS(.v9)
+    ],
+    products: [
+        .library(
+            name: "NthCore",
+            targets: ["NthCore"])
+    ],
+    dependencies: [
+        .package(path: "common"),
+        .package(path: "composable"),
+        .package(path: "visionos")
+    ],
+    targets: [
+        .target(
+            name: "NthCore",
+            dependencies: [
+                .product(name: "NthCommon", package: "common"),
+                .product(name: "NthVisionOS", package: "visionos", condition: .when(platforms: [.visionOS])),
+                .product(name: "NthComposable", package: "composable")
+            ],
+            path: "Sources"
+        )
+    ]
+)

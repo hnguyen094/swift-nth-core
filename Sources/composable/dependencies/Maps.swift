@@ -11,7 +11,10 @@ import DependenciesMacros
 import MapKit
 
 extension DependencyValues {
-
+    public var maps: Maps {
+        get { self[Maps.self] }
+        set { self[Maps.self] = newValue }
+    }
 }
 
 @DependencyClient

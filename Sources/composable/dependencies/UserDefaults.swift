@@ -15,6 +15,14 @@ extension DependencyValues {
         set { self[UserDefaultsClient.self] = newValue }
     }
 }
+
+// could instead use App Groups to share UserDefaults w/ visionOS
+// and use UserDefaults.group
+// static let userDefaultsClient = Self(/**/)
+
+// or instead use NSUbiquitousKeyValueStore
+// static let cloudKitClient = Self(/**/)
+
 @DependencyClient
 public struct UserDefaultsClient {
     public var boolForKey: @Sendable (String) -> Bool = { _ in false }

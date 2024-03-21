@@ -90,7 +90,7 @@ extension ReproducibleRandomSource: NSMutableCopying {
 }
 
 extension ReproducibleRandomSource: Equatable {
-    static func == (lhs: ReproducibleRandomSource, rhs: ReproducibleRandomSource) 
+    public static func == (lhs: ReproducibleRandomSource, rhs: ReproducibleRandomSource) 
     -> Bool {
         lhs.seed == rhs.seed && lhs.sourceType == rhs.sourceType &&
             lhs.history == rhs.history

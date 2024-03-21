@@ -7,11 +7,12 @@
 
 import GameplayKit
 
-public protocol GKRandomCopyable: GKRandom, NSMutableCopying {}
+public protocol GKRandomCopyable: GKRandom, NSMutableCopying, Equatable {}
 
 public class ReproducibleRandomSource: GKRandomCopyable {
     private var seed: UInt64
 
+    // note: not used in equatable definition
     private let source: GKRandom
     private let sourceType: GKSourceType
     private(set) var history = [FnType]()
@@ -56,7 +57,7 @@ public class ReproducibleRandomSource: GKRandomCopyable {
         case MersenneTwister
     }
     
-    public enum FnType {
+    public enum FnType: Equatable {
         case nextInt
         case nextIntWithUpperBound(upperBound: Int)
         case nextUniform
@@ -85,5 +86,13 @@ extension ReproducibleRandomSource: NSMutableCopying {
             }
         }
         self.history = history
+    }
+}
+
+extension ReproducibleRandomSource: Equatable {
+    static func == (lhs: ReproducibleRandomSource, rhs: ReproducibleRandomSource) 
+    -> Bool {
+        lhs.seed == rhs.seed && lhs.sourceType == rhs.sourceType &&
+            lhs.history == rhs.history
     }
 }

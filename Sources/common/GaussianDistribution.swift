@@ -25,7 +25,7 @@ public class GaussianDistribution: GKGaussianDistribution {
     }
     
     public override func copy() -> Any {
-        guard let source = randomSource as? GKRandomCopyable else {
+        guard let source = randomSource as? any GKRandomCopyable else {
             return super.copy()
         }
         return GaussianDistribution(

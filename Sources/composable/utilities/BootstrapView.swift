@@ -27,6 +27,7 @@ public struct BootstrapView<R: Reducer, Content: View, PlaceholderContent: View>
         switch store.state {
         case .bootstrapping:
             placeholder()
+                .onAppear { store.send(.onLaunch) }
         case .bootstrapped:
             if let childStore = store.scope(state: \.bootstrapped, action: \.bootstrapped) {
                 content(childStore)

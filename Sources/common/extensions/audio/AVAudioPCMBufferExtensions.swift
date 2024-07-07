@@ -1,5 +1,5 @@
 //
-//  AVAudioPCMBuffer+Extensions.swift
+//  AVAudioPCMBufferExtensions.swift
 //  keepers-tech-demo
 //
 //  Created by hung.

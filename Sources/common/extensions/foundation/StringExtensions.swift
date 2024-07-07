@@ -1,5 +1,5 @@
 //
-//  String+Extensions.swift
+//  StringExtensions.swift
 //  keepers-tech-demo
 //
 //  Created by hung on 1/23/24.

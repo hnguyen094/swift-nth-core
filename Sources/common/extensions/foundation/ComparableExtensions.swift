@@ -1,5 +1,5 @@
 //
-//  Comparable+Extensions.swift
+//  ComparableExtensions.swift
 //  keepers
 //
 //  Created by Hung on 10/4/23.

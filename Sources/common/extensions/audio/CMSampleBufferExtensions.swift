@@ -1,5 +1,5 @@
 //
-//  CMSampleBuffer+Extensions.swift
+//  CMSampleBufferExtensions.swift
 //  keepers-tech-demo
 //
 //  Created by hung.

@@ -1,5 +1,5 @@
 //
-//  Sequence+Extensions.swift
+//  SequenceExtensions.swift
 //  keepers-tech-demo
 //
 //  Created by hung on 1/13/24.

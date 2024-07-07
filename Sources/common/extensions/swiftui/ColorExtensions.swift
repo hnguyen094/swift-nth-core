@@ -1,5 +1,5 @@
 //
-//  Color+Extensions.swift
+//  ColorExtensions.swift
 //
 //
 //  Created by hung on 3/2/24.

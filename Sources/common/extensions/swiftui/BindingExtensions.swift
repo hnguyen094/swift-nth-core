@@ -1,5 +1,5 @@
 //
-//  Binding+Extensions.swift
+//  BindingExtensions.swift
 //  keepers
 //
 //  Created by Hung on 9/10/23.

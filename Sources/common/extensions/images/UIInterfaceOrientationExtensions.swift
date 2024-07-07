@@ -1,5 +1,5 @@
 //
-//  UIInterfaceOrientation+Extensions.swift
+//  UIInterfaceOrientationExtensions.swift
 //  keepers-tech-demo
 //
 //  Created by hung.

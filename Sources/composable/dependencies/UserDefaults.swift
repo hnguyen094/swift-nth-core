@@ -10,6 +10,7 @@ import DependenciesMacros
 import Foundation
 
 extension DependencyValues {
+    /// - Warning: New TCA now supports using @Shared with UserDefaults implementation, making this clunky.
     public var userDefaults: UserDefaultsClient {
         get { self[UserDefaultsClient.self] }
         set { self[UserDefaultsClient.self] = newValue }

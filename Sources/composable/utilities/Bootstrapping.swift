@@ -8,56 +8,56 @@
 import ComposableArchitecture
 
 @Reducer
-public struct Bootstrapping<R: Reducer> {
+public struct Bootstrapping<R: Reducer> where R.State: Equatable {
     let bootstrap: () async throws -> Void
-    let initialState: R.State
+    let initialState: () -> R.State
     let reducer: () -> R
     
     public init(
         bootstrap: @escaping () async throws -> Void,
-        initialState: @autoclosure () -> R.State,
+        initialState: @autoclosure @escaping () -> R.State,
         reducer: @escaping () -> R)
     {
         self.bootstrap = bootstrap
-        self.initialState = initialState()
+        self.initialState = initialState
         self.reducer = reducer
     }
     
     @ObservableState
-    public enum State {
+    public enum State: Equatable {
         case bootstrapping
         case bootstrapped(R.State)
     }
     
     public enum Action {
         case onLaunch
-        case bootstrapResponse(Result<Void, Error>)
+        case response(Result<Void, Error>)
         case bootstrapped(R.Action)
     }
 
     public var body: some ReducerOf<Self> {
+        Scope(state: \.bootstrapped, action: \.bootstrapped) {
+            reducer()
+        }
         Reduce { state, action in
             switch action {
             case .onLaunch:
                 return .run { send in
                     try await bootstrap()
-                    await send(.bootstrapResponse(.success(())))
+                    await send(.response(.success))
                 } catch: { error, send in
-                    await send(.bootstrapResponse(.failure(error)))
+                    await send(.response(.failure(error)))
                 }
-           case .bootstrapResponse(.success(_)):
-                state = .bootstrapped(initialState)
+           case .response(.success(_)):
+                state = .bootstrapped(initialState())
                 return .none
-            case .bootstrapResponse(.failure(let error)):
+            case .response(.failure(let error)):
                 @Dependency(\.logger) var logger
                 logger.error("Failed to bootstrap \(R.self): \(error)")
                 return .none
             case .bootstrapped:
                 return .none
             }
-        }
-        Scope(state: \.bootstrapped, action: \.bootstrapped) {
-            reducer()
         }
     }
 }

@@ -8,7 +8,9 @@
 import SwiftUI
 import ComposableArchitecture
 
-public struct BootstrapView<R: Reducer, Content: View, PlaceholderContent: View>: View {
+public struct BootstrapView<R: Reducer, Content: View, PlaceholderContent: View>: View
+where R.State: Equatable
+{
     @Bindable public var store: StoreOf<Bootstrapping<R>>
     public var content: (StoreOf<R>) -> Content
     public var placeholder: () -> PlaceholderContent

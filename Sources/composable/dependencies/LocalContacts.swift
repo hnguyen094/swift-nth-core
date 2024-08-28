@@ -19,7 +19,6 @@ extension DependencyValues {
 }
 
 @DependencyClient
-@MainActor
 public struct LocalContacts {
     public var requestAuthorization: () async throws -> CNAuthorizationStatus
     public var getContacts: (_ forceUpdate: Bool) throws -> [Contact]
@@ -35,7 +34,6 @@ public struct LocalContacts {
 }
 
 extension LocalContacts: DependencyKey {
-    public static let testValue: Self = .init()
     public static var previewValue: Self {
         var contacts = mockContacts()
         return .init(

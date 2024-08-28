@@ -7,7 +7,6 @@
 
 import Dependencies
 import DependenciesMacros
-
 import CloudKit
 
 extension DependencyValues {
@@ -18,7 +17,6 @@ extension DependencyValues {
 }
 
 @DependencyClient
-@MainActor
 public struct CloudKitDatabase {
     public var accountStatus: () async throws -> CKAccountStatus
     public var accountStatusUpdates: AsyncThrowingStream<CKAccountStatus, Swift.Error> = .never
@@ -35,8 +33,6 @@ public struct CloudKitDatabase {
 }
 
 extension CloudKitDatabase: DependencyKey {
-    public static let testValue: Self = .init()
-    public static let previewValue: Self = .init()
     public static var liveValue: Self {
         let client = Client()
         return .init(
@@ -53,7 +49,6 @@ extension CloudKitDatabase: DependencyKey {
 }
 
 extension CloudKitDatabase {
-    @MainActor
     class Client {
         let container = CKContainer.default()
 

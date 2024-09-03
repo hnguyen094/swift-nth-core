@@ -15,7 +15,7 @@ public extension AnimationDefinition {
 }
 
 public extension SampledAnimation<Transform> {
-    static func fromTo(name: String = "", from: Transform? = nil, to: Transform? = nil, duration: TimeInterval = 1.0, timing: CustomTimingFunction = .linear, frameInterval: Float = 0.01, isAdditive: Bool = false, blendLayer: Int32 = 0, repeatMode: AnimationRepeatMode = .none, fillMode: AnimationFillMode = [], trimStart: TimeInterval? = nil, trimEnd: TimeInterval? = nil, trimDuration: TimeInterval? = nil, offset: TimeInterval = 0, delay: TimeInterval = 0, speed: Float = 1.0) -> Self {
+    static func fromTo(name: String = "", from: Transform? = nil, to: Transform? = nil, duration: TimeInterval = 1.0, timing: CustomTimingFunction = .linear, tweenMode: TweenMode = .linear, frameInterval: Float = 0.01, isAdditive: Bool = false, blendLayer: Int32 = 0, repeatMode: AnimationRepeatMode = .none, fillMode: AnimationFillMode = [], trimStart: TimeInterval? = nil, trimEnd: TimeInterval? = nil, trimDuration: TimeInterval? = nil, offset: TimeInterval = 0, delay: TimeInterval = 0, speed: Float = 1.0) -> Self {
 
         var frames: [Transform] = []
         let start = from ?? Transform()
@@ -33,6 +33,22 @@ public extension SampledAnimation<Transform> {
             frames.append(sample)
         }
 
-        return SampledAnimation(frames: frames, name: name, tweenMode: .linear, frameInterval: frameInterval, isAdditive: isAdditive, bindTarget: .transform, blendLayer: blendLayer, repeatMode: repeatMode, fillMode: fillMode, trimStart: trimStart, trimEnd: trimEnd, trimDuration: trimDuration, offset: offset, delay: delay, speed: speed)
+        return SampledAnimation(
+            frames: frames,
+            name: name,
+            tweenMode: tweenMode,
+            frameInterval: frameInterval,
+            isAdditive: isAdditive,
+            bindTarget: .transform,
+            blendLayer: blendLayer,
+            repeatMode: repeatMode,
+            fillMode: fillMode,
+            trimStart: trimStart,
+            trimEnd: trimEnd,
+            trimDuration: trimDuration,
+            offset: offset,
+            delay: delay,
+            speed: speed
+        )
     }
 }

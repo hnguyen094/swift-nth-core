@@ -38,23 +38,18 @@ extension DeviceStatus: DependencyKey {
 // this is necessary because UIDevice.BatteryState directly with @retroactive Codable causes a bug
 // with SwiftData/Apple's llvm.
 extension DeviceStatus {
-    public struct BatteryState: RawRepresentable, Codable, Hashable {
-        public let rawValue: Int
-
-        public init?(rawValue: Int) {
-            guard case .some = UIDevice.BatteryState(rawValue: rawValue) else {
-                return nil
-            }
-            self.rawValue = rawValue
-        }
-
-        public static let unplugged: Self = .init(UIDevice.BatteryState.unplugged)
-        public static let charging: Self = .init(UIDevice.BatteryState.charging)
-        public static let unknown: Self = .init(UIDevice.BatteryState.unknown)
-        public static let full: Self = .init(UIDevice.BatteryState.full)
+    public enum BatteryState: Int, Codable {
+        case unknown = 0
+        case unplugged = 1
+        case charging = 2
+        case full = 3
 
         init(_ batteryState: UIDevice.BatteryState) {
             self.init(rawValue: batteryState.rawValue)!
+        }
+
+        public var uiBatteryState: UIDevice.BatteryState {
+            .init(rawValue: self.rawValue)!
         }
     }
 }

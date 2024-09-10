@@ -48,7 +48,6 @@ extension Database: DependencyKey {
                 case .ephemeral: .init(
                     schema: schema,
                     isStoredInMemoryOnly: true,
-                    allowsSave: false,
                     groupContainer: .none,
                     cloudKitDatabase: .none)
                 }

@@ -5,6 +5,7 @@
 //  Created by Hung Nguyen on 9/12/24.
 //
 
+#if os(iOS)
 import UIKit
 
 public extension UIWindow {
@@ -18,3 +19,4 @@ public extension UIWindow {
         return nil
     }
 }
+#endif

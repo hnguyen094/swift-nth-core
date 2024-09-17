@@ -122,9 +122,9 @@ extension UserNotificationClient.Notification.Settings {
 
 extension UserNotificationClient {
     fileprivate class Delegate: NSObject, UNUserNotificationCenterDelegate {
-        let continuation: AsyncStream<UserNotificationClient.DelegateEvent>.Continuation
+        let continuation: AsyncStream<DelegateEvent>.Continuation
 
-        init(continuation: AsyncStream<UserNotificationClient.DelegateEvent>.Continuation) {
+        init(continuation: AsyncStream<DelegateEvent>.Continuation) {
             self.continuation = continuation
         }
 

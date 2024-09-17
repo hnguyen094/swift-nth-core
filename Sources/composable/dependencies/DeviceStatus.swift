@@ -38,7 +38,7 @@ extension DeviceStatus: DependencyKey {
 // this is necessary because UIDevice.BatteryState directly with @retroactive Codable causes a bug
 // with SwiftData/Apple's llvm.
 extension DeviceStatus {
-    public enum BatteryState: Int, Codable {
+    public enum BatteryState: Int, CaseIterable, Codable {
         case unknown = 0
         case unplugged = 1
         case charging = 2

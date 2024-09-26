@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import OSLog
 
 @Reducer
 public struct Bootstrapping<R: Reducer> where R.State: Equatable {
@@ -52,8 +53,7 @@ public struct Bootstrapping<R: Reducer> where R.State: Equatable {
                 state = .bootstrapped(initialState())
                 return .none
             case .response(.failure(let error)):
-                @Dependency(\.logger) var logger
-                logger.error("Failed to bootstrap \(R.self): \(error)")
+                Logger.app.error("Failed to bootstrap \(R.self): \(error)")
                 state = .bootstrapping(error.localizedDescription)
                 return .none
             case .bootstrapped:

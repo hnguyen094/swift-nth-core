@@ -25,7 +25,7 @@ public struct Bootstrapping<R: Reducer> where R.State: Equatable {
     
     @ObservableState
     public enum State: Equatable {
-        case bootstrapping
+        case bootstrapping(_ message: String)
         case bootstrapped(R.State)
     }
     
@@ -54,10 +54,15 @@ public struct Bootstrapping<R: Reducer> where R.State: Equatable {
             case .response(.failure(let error)):
                 @Dependency(\.logger) var logger
                 logger.error("Failed to bootstrap \(R.self): \(error)")
+                state = .bootstrapping(error.localizedDescription)
                 return .none
             case .bootstrapped:
                 return .none
             }
         }
     }
+}
+
+public extension Bootstrapping.State {
+    static var bootstrapping: Self { .bootstrapping("Loading…") }
 }

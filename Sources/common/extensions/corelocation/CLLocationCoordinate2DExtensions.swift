@@ -40,16 +40,10 @@ extension CLLocationCoordinate2D: @retroactive Hashable {
     }
 }
 
-fileprivate extension CLLocationDegrees {
-    var radians: Double { self * .pi / 180 }
-}
-
-// https://community.fabric.microsoft.com/t5/Desktop/How-to-calculate-lat-long-distance/td-p/1488227
 public extension CLLocationCoordinate2D {
-    func distance(to other: Self) -> Double {
-        return acos(
-            sin(self.latitude.radians) * sin(other.latitude.radians) + cos(self.latitude.radians) *
-            cos(other.latitude.radians) * cos(other.longitude.radians - self.longitude.radians)
-        ) * 6_371_000 // Earth's radius in meters
+    func distance(to other: Self) -> CLLocationDistance {
+        let origin: CLLocation = .init(latitude: latitude, longitude: longitude)
+        let other: CLLocation = .init(latitude: other.latitude, longitude: other.longitude)
+        return other.distance(from: origin)
     }
 }

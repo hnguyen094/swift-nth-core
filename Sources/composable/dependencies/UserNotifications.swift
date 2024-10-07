@@ -57,7 +57,6 @@ public struct UserNotificationClient {
             }
         }
 
-        // TODO: should this be nested in UserNotificationClient instead of Notification?
         public struct Settings: Equatable {
             public var authorizationStatus: UNAuthorizationStatus
 

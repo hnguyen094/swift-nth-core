@@ -77,7 +77,7 @@ extension UserNotificationClient: DependencyKey {
                 AsyncStream { continuation in
                     let delegate = Delegate(continuation: continuation)
                     UNUserNotificationCenter.current().delegate = delegate
-                    // commented out due to Sendable conformances
+                    // TODO: commented out due to Sendable conformances, might need fix.
 //                    continuation.onTermination = { _ in
 //                        _ = delegate
 //                    }

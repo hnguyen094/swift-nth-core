@@ -88,9 +88,11 @@ extension AppDelegate {
                 case .didRegisterForRemoteNotifications:
                     return .none
                 case .userNotifications(let event):
-                    guard case .willPresentNotification(_, completionHandler: let handler) = event
-                    else { return .none }
-                    return .run { _ in handler(.banner) }
+                    return .run { _ in
+                        guard case .willPresentNotification(_, completionHandler: let handler) = event
+                        else { return }
+                        handler(.banner)
+                    }
                 }
             }
         }

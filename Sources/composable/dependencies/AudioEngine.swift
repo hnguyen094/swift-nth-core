@@ -7,7 +7,7 @@
 
 import Dependencies
 import DependenciesMacros
-import AVFAudio
+@preconcurrency import AVFAudio
 
 extension DependencyValues {
     public var audioEngine: AudioEngine {
@@ -17,14 +17,12 @@ extension DependencyValues {
 }
 
 @DependencyClient
-public struct AudioEngine {
-    public var installInputTap: (_ block: @escaping AVAudioNodeTapBlock) throws -> Void
-    public var validInputFormat: () -> AVAudioFormat? = { .none }
+public struct AudioEngine: Sendable {
+    public var installInputTap: @Sendable (@escaping @Sendable AVAudioNodeTapBlock) async throws -> Void
+    public var validInputFormat: @Sendable () async -> AVAudioFormat? = { .none }
 }
 
 extension AudioEngine: DependencyKey {
-    public static let testValue: Self = .init()
-    public static let previewValue: Self = .init()
     public static var liveValue: Self {
         let audioEngine: AVAudioEngine = .init()
         let inputBus = AVAudioNodeBus(0)
@@ -38,18 +36,18 @@ extension AudioEngine: DependencyKey {
                     bufferSize: 8192,
                     format: inputNode.inputFormat(forBus: inputBus),
                     block: tapBlock)
-                try startEngine()
+                try await startEngine()
 
-                func startEngine() throws {
+                func startEngine() async throws {
                     @Dependency(\.audioSession) var audioSession
-                    guard audioSession.active(), !audioEngine.isRunning
+                    guard await audioSession.active(), !audioEngine.isRunning
                     else { return }
                     try audioEngine.start() // TODO: is there a scenario for calling stop?
                 }
             },
             validInputFormat: {
                 @Dependency(\.audioSession) var audioSession
-                guard audioSession.active() else { return .none }
+                guard await audioSession.active() else { return .none }
                 let format = inputNode.inputFormat(forBus: inputBus)
                 return format.isValid() ? format : .none
             })

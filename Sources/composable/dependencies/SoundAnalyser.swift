@@ -36,9 +36,9 @@ extension SoundAnalyser: DependencyKey {
         let observer = SNObserver()
         let analysisQueue = DispatchQueue(label: "com.nth.soundanalysis", qos: .userInitiated)
 
-        func initialize(_ config: Configuration) throws {
+        func initialize(_ config: Configuration) async throws {
             @Dependency(\.audioEngine) var audioEngine
-            guard let inputFormat = audioEngine.validInputFormat() else {
+            guard let inputFormat = await audioEngine.validInputFormat() else {
                 throw Error.invalidFormat
             }
             observer.minimumThreshold = config.minimumConfidenceThreshold
@@ -51,7 +51,7 @@ extension SoundAnalyser: DependencyKey {
                 request.overlapFactor = overlapFactor
             }
             try streamAnalyzer.add(request, withObserver: observer)
-            try audioEngine.installInputTap { buffer, time in
+            try await audioEngine.installInputTap { @Sendable buffer, time in
                 self.analysisQueue.async {
                     streamAnalyzer.analyze(buffer, atAudioFramePosition: time.sampleTime)
                 }

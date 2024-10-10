@@ -1,11 +1,11 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.0
 
 import PackageDescription
 
 let package = Package(
     name: "swift-nth-core",
     platforms: [
-        .iOS(.v17),
+        .iOS(.v18),
         .macOS(.v13),
         .visionOS(.v1),
         .tvOS(.v16),

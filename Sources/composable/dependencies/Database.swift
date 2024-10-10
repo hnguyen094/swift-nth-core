@@ -18,21 +18,19 @@ extension DependencyValues {
 }
 
 @DependencyClient
-public struct Database {
-    public var initialize: (
+public struct Database: Sendable {
+    public var initialize: @Sendable (
         Configuration,
         _ for: VersionedSchema.Type,
-        _ migrationPlan: SchemaMigrationPlan.Type) throws 
+        _ migrationPlan: SchemaMigrationPlan.Type) async throws
     -> Void
     
-    public var modelActor: () -> DataHandler?
+    public var modelActor: @Sendable () async -> DataHandler?
 }
 
 extension Database: DependencyKey {
-    public static var testValue: Self = .init()
-    public static var previewValue: Self = .init()
     public static var liveValue: Self {
-        var handler: DataHandler? = .none
+        let client = Client()
         return .init(
             initialize: { config, versionedSchema, migrationPlan in
                 let schema = Schema(versionedSchema: versionedSchema)
@@ -51,12 +49,12 @@ extension Database: DependencyKey {
                     groupContainer: .none,
                     cloudKitDatabase: .none)
                 }
-                handler = .init(modelContainer: try .init(
+                await client.setHandler(.init(modelContainer: try .init(
                     for: schema,
                     migrationPlan: migrationPlan,
-                    configurations: [modelConfiguration] ))
-            }, 
-            modelActor: { handler })
+                    configurations: [modelConfiguration] )))
+            },
+            modelActor: { await client.handler })
     }
     
     public enum Configuration {
@@ -67,6 +65,14 @@ extension Database: DependencyKey {
 }
 
 extension Database {
+    actor Client {
+        var handler: DataHandler? = .none
+
+        func setHandler(_ handler: DataHandler) {
+            self.handler = handler
+        }
+    }
+
     @ModelActor
     public actor DataHandler {
         public func enableAutosave() {

@@ -18,7 +18,7 @@ extension DependencyValues {
 }
 
 @DependencyClient
-public struct UserNotificationClient {
+public struct UserNotificationClient: Sendable {
     public var add: @Sendable (UNNotificationRequest) async throws -> Void
     public var delegate: @Sendable () -> AsyncStream<DelegateEvent> = { .finished }
     public var getNotificationSettings: @Sendable () async -> Notification.Settings = {
@@ -28,12 +28,14 @@ public struct UserNotificationClient {
     public var removePendingNotificationRequestsWithIdentifiers: @Sendable ([String]) async -> Void
     public var requestAuthorization: @Sendable (UNAuthorizationOptions) async throws -> Bool
 
+    // TODO: we pretend this is sendable as we don't plan on using it outside yielding directly
+    // to the continuation.
     @CasePathable
-    public enum DelegateEvent: Sendable {
-        case didReceiveResponse(Notification.Response, completionHandler: @Sendable () -> Void)
+    public enum DelegateEvent: @unchecked Sendable {
+        case didReceiveResponse(Notification.Response, completionHandler: () -> Void)
         case openSettingsForNotification(Notification?)
         case willPresentNotification(
-            Notification, completionHandler: @Sendable (UNNotificationPresentationOptions) -> Void
+            Notification, completionHandler: (UNNotificationPresentationOptions) -> Void
         )
     }
 
@@ -57,7 +59,7 @@ public struct UserNotificationClient {
             }
         }
 
-        public struct Settings: Equatable {
+        public struct Settings: Equatable, Sendable {
             public var authorizationStatus: UNAuthorizationStatus
 
             public init(authorizationStatus: UNAuthorizationStatus) {
@@ -69,32 +71,31 @@ public struct UserNotificationClient {
 
 extension UserNotificationClient: DependencyKey {
     public static let liveValue: Self = {
-        let current = UNUserNotificationCenter.current()
-
         return Self(
-            add: { try await current.add($0) },
+            add: { try await UNUserNotificationCenter.current().add($0) },
             delegate: {
                 AsyncStream { continuation in
                     let delegate = Delegate(continuation: continuation)
-                    current.delegate = delegate
-                    continuation.onTermination = { _ in
-                        _ = delegate
-                    }
+                    UNUserNotificationCenter.current().delegate = delegate
+                    // commented out due to Sendable conformances
+//                    continuation.onTermination = { _ in
+//                        _ = delegate
+//                    }
                 }
             },
             getNotificationSettings: {
                 await Notification.Settings(
-                    rawValue: current.notificationSettings()
+                    rawValue: UNUserNotificationCenter.current().notificationSettings()
                 )
             },
             removeDeliveredNotificationsWithIdentifiers: {
-                current.removeDeliveredNotifications(withIdentifiers: $0)
+                UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: $0)
             },
             removePendingNotificationRequestsWithIdentifiers: {
-                current.removePendingNotificationRequests(withIdentifiers: $0)
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: $0)
             },
             requestAuthorization: {
-                try await current.requestAuthorization(options: $0)
+                try await UNUserNotificationCenter.current().requestAuthorization(options: $0)
             }
         )
     }()

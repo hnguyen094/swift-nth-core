@@ -11,8 +11,8 @@ public extension Binding {
     /// Allows converting Int bindings to become `Float`. Useful for Sliders.
     /// - Author: [Mark A. Donohoe](https://stackoverflow.com/a/74356845 ).
     static func convert<TInt, TFloat>(from intBinding: Binding<TInt>) -> Binding<TFloat>
-    where TInt:   BinaryInteger,
-          TFloat: BinaryFloatingPoint{
+    where TInt:   BinaryInteger & Sendable,
+          TFloat: BinaryFloatingPoint {
         Binding<TFloat> (
             get: { TFloat(intBinding.wrappedValue) },
             set: { intBinding.wrappedValue = TInt($0) }
@@ -22,7 +22,7 @@ public extension Binding {
     /// Allows converting Int bindings to become `Float`. Useful for Sliders.
     /// - Author: [Mark A. Donohoe](https://stackoverflow.com/a/74356845 ).
     static func convert<TFloat, TInt>(from floatBinding: Binding<TFloat>) -> Binding<TInt>
-    where TFloat: BinaryFloatingPoint,
+    where TFloat: BinaryFloatingPoint & Sendable,
           TInt:   BinaryInteger {
         Binding<TInt> (
             get: { TInt(floatBinding.wrappedValue) },
@@ -31,7 +31,7 @@ public extension Binding {
     }
     
     static func convert<TInt>(from intBinding: Binding<TInt>) -> Binding<String>
-    where TInt: BinaryInteger {
+    where TInt: BinaryInteger & Sendable {
         Binding<String> (
             get: { String(intBinding.wrappedValue) },
             set: {v in

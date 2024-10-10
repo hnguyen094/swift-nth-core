@@ -7,7 +7,7 @@
 
 import Dependencies
 import DependenciesMacros
-import SoundAnalysis
+@preconcurrency import SoundAnalysis
 import NthCommon
 
 extension DependencyValues {
@@ -18,54 +18,68 @@ extension DependencyValues {
 }
 
 @DependencyClient
-public struct SoundAnalyser {
-    public var initialize: (Configuration) throws -> Void
-    public var classificationUpdates: () -> AsyncStream<RequestResult> = { .never }
+public struct SoundAnalyser: Sendable {
+    public var initialize: @Sendable (Configuration) async throws -> Void
+    public var classificationUpdates: @Sendable () async -> AsyncStream<RequestResult> = { .never }
 }
 
 extension SoundAnalyser: DependencyKey {
-    public static let testValue: Self = .init()
-    public static let previewValue: Self = .init()
     public static var liveValue: Self {
+        let client = Client()
+        return .init(
+            initialize: { try await client.initialize($0) },
+            classificationUpdates: { await client.classificationUpdates() }
+        )
+    }
+
+    private actor Client {
         let observer = SNObserver()
         let analysisQueue = DispatchQueue(label: "com.nth.soundanalysis", qos: .userInitiated)
-        return .init(
-            initialize: { config in
-                @Dependency(\.audioEngine) var audioEngine
-                guard let inputFormat = audioEngine.validInputFormat() else {
-                    throw Error.invalidFormat
+
+        func initialize(_ config: Configuration) throws {
+            @Dependency(\.audioEngine) var audioEngine
+            guard let inputFormat = audioEngine.validInputFormat() else {
+                throw Error.invalidFormat
+            }
+            observer.minimumThreshold = config.minimumConfidenceThreshold
+            let streamAnalyzer = SNAudioStreamAnalyzer(format: inputFormat)
+            let request = try SNClassifySoundRequest(classifierIdentifier: .version1)
+            if let windowDuration = request.getWindowDuration(preferredDuration: config.preferredWindowDuration) {
+                request.windowDuration = windowDuration
+            }
+            if let overlapFactor = config.preferredOverlapFactor {
+                request.overlapFactor = overlapFactor
+            }
+            try streamAnalyzer.add(request, withObserver: observer)
+            try audioEngine.installInputTap { buffer, time in
+                self.analysisQueue.async {
+                    streamAnalyzer.analyze(buffer, atAudioFramePosition: time.sampleTime)
                 }
-                observer.minimumThreshold = config.minimumConfidenceThreshold
-                let streamAnalyzer = SNAudioStreamAnalyzer(format: inputFormat)
-                let request = try SNClassifySoundRequest(classifierIdentifier: .version1)
-                if let windowDuration = request.getWindowDuration(preferredDuration: config.preferredWindowDuration) {
-                    request.windowDuration = windowDuration
-                }
-                if let overlapFactor = config.preferredOverlapFactor {
-                    request.overlapFactor = overlapFactor
-                }
-                try streamAnalyzer.add(request, withObserver: observer)
-                try audioEngine.installInputTap { buffer, time in
-                    analysisQueue.async {
-                        streamAnalyzer.analyze(buffer, atAudioFramePosition: time.sampleTime)
-                    }
-                }
-            },
-            classificationUpdates: { .init { continuation in
+            }
+        }
+
+        func classificationUpdates() -> AsyncStream<RequestResult> {
+            .init { continuation in
                 @Dependency(\.uuid) var uuid
                 let continuationContainer = IdentifiedContinuation(id: uuid(), continuation: continuation)
                 observer.continuations.insert(continuationContainer)
 
                 continuation.onTermination = { status in
-                    observer.continuations.remove(continuationContainer)
+                    Task {
+                        await self.remove(continuation: continuationContainer)
+                    }
                 }
-            }}
-        )
+            }
+        }
+
+        func remove(continuation: IdentifiedContinuation) {
+            observer.continuations.remove(continuation)
+        }
     }
 }
 
 extension SoundAnalyser {
-    public struct Configuration {
+    public struct Configuration: Sendable {
         public let preferredWindowDuration: Double = 2
         public let preferredOverlapFactor: Double? = .none
         public let minimumConfidenceThreshold: Double = 0.1
@@ -77,7 +91,7 @@ extension SoundAnalyser {
         case invalidFormat
     }
     
-    public enum RequestResult {
+    public enum RequestResult: Sendable {
         case result(Result)
         case error(Swift.Error)
     }
@@ -95,7 +109,7 @@ extension SoundAnalyser {
         }
     }
     
-    public struct Result: Equatable, CustomDebugStringConvertible {
+    public struct Result: Equatable, Sendable, CustomDebugStringConvertible {
         public var timeRange: Range<Double>
         public var classifications: [Classification]
         
@@ -114,7 +128,7 @@ extension SoundAnalyser {
         }
     }
     
-    public struct Classification: Equatable, Identifiable {
+    public struct Classification: Equatable, Identifiable, Sendable {
         public var id: UUID
         public var label: SoundAnalyser.SoundType
         public var confidence: Double

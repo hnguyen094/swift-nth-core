@@ -9,6 +9,7 @@ import SwiftUI
 
 public extension ColorScheme {
     #if os(iOS)
+    @MainActor
     static var system: Optional<Self> {
         guard let style = UIScreen.current?.traitCollection.userInterfaceStyle
         else { return .none }

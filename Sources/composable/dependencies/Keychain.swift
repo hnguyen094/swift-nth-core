@@ -18,13 +18,13 @@ extension DependencyValues {
 }
 
 @DependencyClient
-public struct KeychainClient {
-    public var initialize: (Query) -> Void
-    public var readItem: () throws -> String
-    public var saveItem: (_ password: String) throws -> Void
-    public var deleteItem: () throws -> Void
+public struct KeychainClient: Sendable {
+    public var initialize: @Sendable (Query) async -> Void
+    public var readItem: @Sendable () async throws -> String
+    public var saveItem: @Sendable (_ password: String) async throws -> Void
+    public var deleteItem: @Sendable () async throws -> Void
 
-    public struct Query {
+    public struct Query: Sendable {
         public let service: String
         public let account: String
         public let accessGroup: String?
@@ -46,10 +46,22 @@ public struct KeychainClient {
 }
 
 extension KeychainClient: DependencyKey {
-    public static var testValue: Self = .init()
-    public static var previewValue: Self = .init()
     public static var liveValue: Self {
+        let client = Client()
+        return .init(
+            initialize: client.setQuery(_:),
+            readItem: client.readItem,
+            saveItem: client.saveItem(_:),
+            deleteItem: client.deleteItem)
+    }
+
+    @MainActor
+    class Client {
         var maybeQuery: Query? = .none
+
+        func setQuery(_ query: Query) {
+            maybeQuery = query
+        }
 
         func readItem() throws -> String {
             guard let q = maybeQuery else {
@@ -62,7 +74,11 @@ extension KeychainClient: DependencyKey {
              Build a query to find the item that matches the service, account and
              access group.
              */
-            var query = keychainQuery(withService: service, account: account, accessGroup: accessGroup)
+            var query = Self.keychainQuery(
+                withService: service,
+                account: account,
+                accessGroup: accessGroup
+            )
             query[kSecMatchLimit as String] = kSecMatchLimitOne
             query[kSecReturnAttributes as String] = kCFBooleanTrue
             query[kSecReturnData as String] = kCFBooleanTrue
@@ -107,7 +123,11 @@ extension KeychainClient: DependencyKey {
                 var attributesToUpdate = [String: AnyObject]()
                 attributesToUpdate[kSecValueData as String] = encodedPassword as AnyObject?
 
-                let query = keychainQuery(withService: service, account: account, accessGroup: accessGroup)
+                let query = Self.keychainQuery(
+                    withService: service,
+                    account: account,
+                    accessGroup: accessGroup
+                )
                 let status = SecItemUpdate(query as CFDictionary, attributesToUpdate as CFDictionary)
 
                 // Throw an error if an unexpected status was returned.
@@ -117,7 +137,11 @@ extension KeychainClient: DependencyKey {
                  No password was found in the keychain. Create a dictionary to save
                  as a new keychain item.
                  */
-                var newItem = keychainQuery(withService: service, account: account, accessGroup: accessGroup)
+                var newItem = Self.keychainQuery(
+                    withService: service,
+                    account: account,
+                    accessGroup: accessGroup
+                )
                 newItem[kSecValueData as String] = encodedPassword as AnyObject?
 
                 // Add a the new item to the keychain.
@@ -137,33 +161,31 @@ extension KeychainClient: DependencyKey {
                 accessGroup = q.accessGroup
 
             // Delete the existing item from the keychain.
-            let query = keychainQuery(withService: service, account: account, accessGroup: accessGroup)
+            let query = Self.keychainQuery(
+                withService: service,
+                account: account,
+                accessGroup: accessGroup
+            )
             let status = SecItemDelete(query as CFDictionary)
 
             // Throw an error if an unexpected status was returned.
             guard status == noErr || status == errSecItemNotFound else { throw KeychainError.unhandledError }
         }
 
-        return .init(
-            initialize: { maybeQuery = $0 },
-            readItem: readItem,
-            saveItem: saveItem(_:),
-            deleteItem: deleteItem)
-    }
+        private static func keychainQuery(withService service: String, account: String? = nil, accessGroup: String? = nil) -> [String: AnyObject] {
+            var query = [String: AnyObject]()
+            query[kSecClass as String] = kSecClassGenericPassword
+            query[kSecAttrService as String] = service as AnyObject?
 
-    private static func keychainQuery(withService service: String, account: String? = nil, accessGroup: String? = nil) -> [String: AnyObject] {
-        var query = [String: AnyObject]()
-        query[kSecClass as String] = kSecClassGenericPassword
-        query[kSecAttrService as String] = service as AnyObject?
+            if let account = account {
+                query[kSecAttrAccount as String] = account as AnyObject?
+            }
 
-        if let account = account {
-            query[kSecAttrAccount as String] = account as AnyObject?
+            if let accessGroup = accessGroup {
+                query[kSecAttrAccessGroup as String] = accessGroup as AnyObject?
+            }
+
+            return query
         }
-
-        if let accessGroup = accessGroup {
-            query[kSecAttrAccessGroup as String] = accessGroup as AnyObject?
-        }
-
-        return query
     }
 }

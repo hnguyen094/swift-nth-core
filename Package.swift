@@ -17,7 +17,10 @@ let package = Package(
             targets: ["NthCore"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.9.0")
+        .package(
+            url: "https://github.com/pointfreeco/swift-composable-architecture",
+            from: "1.9.0"
+        )
     ],
     targets: [
         .target(

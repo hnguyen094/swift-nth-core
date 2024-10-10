@@ -18,9 +18,9 @@ extension DependencyValues {
 }
 
 @DependencyClient
-public struct Maps {
-    public var lookup: (_ query: String) async throws -> [MKMapItem]
-    public var openInMaps: (_ location: CLLocation, _ name: String) -> Void
+public struct Maps: Sendable {
+    public var lookup: @Sendable (_ query: String) async throws -> [MKMapItem]
+    public var openInMaps: @Sendable (_ location: CLLocation, _ name: String) -> Void
 }
 
 extension Maps: DependencyKey {

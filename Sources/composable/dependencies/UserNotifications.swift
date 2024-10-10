@@ -29,7 +29,7 @@ public struct UserNotificationClient {
     public var requestAuthorization: @Sendable (UNAuthorizationOptions) async throws -> Bool
 
     @CasePathable
-    public enum DelegateEvent {
+    public enum DelegateEvent: Sendable {
         case didReceiveResponse(Notification.Response, completionHandler: @Sendable () -> Void)
         case openSettingsForNotification(Notification?)
         case willPresentNotification(

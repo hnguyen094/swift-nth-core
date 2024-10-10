@@ -17,16 +17,16 @@ extension DependencyValues {
 }
 
 @DependencyClient
-public struct CloudKitDatabase {
-    public var accountStatus: () async throws -> CKAccountStatus
-    public var accountStatusUpdates: AsyncThrowingStream<CKAccountStatus, Swift.Error> = .never
-    public var userRecord: () async throws -> CKRecord
-    public var modifyRecords: (
+public struct CloudKitDatabase: Sendable {
+    public var accountStatus: @Sendable () async throws -> CKAccountStatus
+    public var accountStatusUpdates: @Sendable () async throws -> any AsyncSequence<CKAccountStatus, Swift.Error>
+    public var userRecord: @Sendable () async throws -> CKRecord
+    public var modifyRecords: @Sendable (
         _ scope: CKDatabase.Scope,
         _ saving: [CKRecord],
         _ deleting: [CKRecord.ID],
         _ atomically: Bool) async throws -> Void
-    public var getRecords: (
+    public var getRecords: @Sendable (
         _ scope: CKDatabase.Scope,
         _ query: CKQuery,
         _ zones: [CKRecordZone]) async throws -> [CKRecord]
@@ -37,10 +37,10 @@ extension CloudKitDatabase: DependencyKey {
         let client = Client()
         return .init(
             accountStatus: client.accountStatus,
-            accountStatusUpdates: NotificationCenter.default.notifications(named: .CKAccountChanged)
-                .compactMap { _ in
-                    try await client.accountStatus()
-                }.eraseToThrowingStream(),
+            accountStatusUpdates: {
+                NotificationCenter.default.notifications(named: .CKAccountChanged)
+                    .compactMap { _ in try await client.accountStatus() }
+            },
             userRecord: client.userRecord,
             modifyRecords: client.modifyRecords(scope:saving:deleting:atomically:),
             getRecords: client.getRecords(scope:query:in:)
@@ -49,7 +49,7 @@ extension CloudKitDatabase: DependencyKey {
 }
 
 extension CloudKitDatabase {
-    class Client {
+    actor Client {
         let container = CKContainer.default()
 
         private var userRecord: CKRecord? = .none

@@ -19,18 +19,22 @@ public extension DependencyValues {
 }
 
 @DependencyClient
-public struct DeviceStatus {
-    public var getBatteryState: () -> BatteryState = { .unknown }
-    public var getBatteryLevel: () -> Float = { -1.0 }
+public struct DeviceStatus: Sendable {
+    public var getBatteryState: @Sendable () async -> BatteryState = { .unknown }
+    public var getBatteryLevel: @Sendable () async -> Float = { -1.0 }
 }
 
 extension DeviceStatus: DependencyKey {
     public static var liveValue: Self {
-        let device: UIDevice = .current
-        device.isBatteryMonitoringEnabled = true
         return .init(
-            getBatteryState:  { .init(device.batteryState) },
-            getBatteryLevel: { device.batteryLevel }
+            getBatteryState: {
+                .init(await UIDevice.current.batteryState)
+            },
+            getBatteryLevel: { @MainActor in
+                let device: UIDevice = .current
+                device.isBatteryMonitoringEnabled = true
+                return device.batteryLevel
+            }
         )
     }
 }

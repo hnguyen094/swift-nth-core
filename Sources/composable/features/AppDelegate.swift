@@ -40,7 +40,7 @@ public class AppDelegate: NSObject, UIApplicationDelegate {
 
 extension AppDelegate {
     @Reducer
-    public struct Feature {
+    public struct Feature: Sendable {
         public init() { }
 
         @ObservableState

@@ -9,15 +9,15 @@ import ComposableArchitecture
 import OSLog
 
 @Reducer
-public struct Bootstrapping<R: Reducer> where R.State: Equatable {
-    let bootstrap: () async throws -> Void
-    let initialState: () -> R.State
-    let reducer: () -> R
-    
+public struct Bootstrapping<R: Reducer>: Sendable where R.State: Equatable {
+    let bootstrap: @Sendable () async throws -> Void
+    let initialState: @Sendable () -> R.State
+    let reducer: @Sendable () -> R
+
     public init(
-        bootstrap: @escaping () async throws -> Void,
-        initialState: @autoclosure @escaping () -> R.State,
-        reducer: @escaping () -> R)
+        bootstrap: @escaping @Sendable () async throws -> Void,
+        initialState: @autoclosure @escaping @Sendable () -> R.State,
+        reducer: @escaping @Sendable () -> R)
     {
         self.bootstrap = bootstrap
         self.initialState = initialState

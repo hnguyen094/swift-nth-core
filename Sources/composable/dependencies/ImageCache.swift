@@ -19,17 +19,23 @@ extension DependencyValues {
 }
 
 @DependencyClient
-public struct ImageCache {
-    public var getURL: (UIImage) throws -> URL?
-    public var getImage: (URL) throws -> UIImage?
+public struct ImageCache: Sendable {
+    public var getURL: @Sendable (UIImage) async throws -> URL?
+    public var getImage: @Sendable (URL) async throws -> UIImage?
 }
 
 extension ImageCache: DependencyKey {
-    public static let testValue: Self = .init()
-    public static let previewValue: Self = .init()
     public static var liveValue: Self {
+        let client: Client = .init()
+        return .init(
+            getURL: { try await client.getURL($0) },
+            getImage: { try await client.getImage($0) }
+        )
+    }
+
+    private actor Client {
         var mapping: [URL: UIImage] = [:]
-        return .init { image in
+        func getURL(_ image: UIImage) throws -> URL? {
             if let exist = mapping.first(where: { $0.value == image }) {
                 return exist.key
             }
@@ -38,7 +44,9 @@ extension ImageCache: DependencyKey {
                 return url
             }
             return .none
-        } getImage: { url in
+        }
+
+        func getImage(_ url: URL) throws -> UIImage? {
             if let index = mapping.index(forKey: url) {
                 return mapping[index].value
             }

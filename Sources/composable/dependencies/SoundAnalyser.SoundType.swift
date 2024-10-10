@@ -26,7 +26,7 @@ import Foundation
 
 extension SoundAnalyser {
     /// The SoundType enum represents all known labels of the `SNClassifierIdentifier.version1` model as of iOS 15.0.
-    public enum SoundType: String, CaseIterable {
+    public enum SoundType: String, CaseIterable, Sendable {
         case unknown
         
         case accordion

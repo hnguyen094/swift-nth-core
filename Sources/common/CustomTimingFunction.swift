@@ -7,10 +7,10 @@
 
 import Foundation
 
-public struct CustomTimingFunction {
-    public var fn: (TimeInterval) -> Double
-    
-    public init(_ fn: @escaping (TimeInterval) -> Double) {
+public struct CustomTimingFunction: Sendable {
+    public var fn: @Sendable (TimeInterval) -> Double
+
+    public init(_ fn: @escaping @Sendable (TimeInterval) -> Double) {
         self.fn = fn
     }
     

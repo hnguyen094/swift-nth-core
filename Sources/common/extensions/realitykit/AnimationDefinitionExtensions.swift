@@ -9,6 +9,7 @@ import RealityKit
 import Foundation
 
 public extension AnimationDefinition {
+    @MainActor
     func asAnimationResource() -> AnimationResource? {
         return try? .generate(with: self)
     }

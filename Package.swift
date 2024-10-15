@@ -6,10 +6,10 @@ let package = Package(
     name: "swift-nth-core",
     platforms: [
         .iOS(.v18),
-        .macOS(.v13),
-        .visionOS(.v1),
-        .tvOS(.v16),
-        .watchOS(.v9)
+        .macOS(.v15),
+        .visionOS(.v2),
+        .tvOS(.v18),
+        .watchOS(.v11)
     ],
     products: [
         .library(
@@ -19,7 +19,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/pointfreeco/swift-composable-architecture",
-            from: "1.9.0"
+            from: "1.15.0"
         )
     ],
     targets: [

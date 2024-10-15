@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 /// Clamps value in range. Requires initial value.
 ///
 /// - Author: [Mattt](https://nshipster.com/propertywrapper/) with modifications for other ranges.

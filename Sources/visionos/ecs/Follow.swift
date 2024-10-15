@@ -4,7 +4,6 @@
 //
 //  Created by hung on 1/17/24.
 //
-#if os(visionOS)
 import RealityKit
 
 public enum Follow {
@@ -69,4 +68,3 @@ public enum Follow {
         }
     }
 }
-#endif

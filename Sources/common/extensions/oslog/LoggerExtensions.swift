@@ -12,5 +12,8 @@ public extension Logger {
     private static let subsystem = Bundle.main.bundleIdentifier ?? "com.nth.unknown"
 
     static let app: Self = Self(subsystem: subsystem, category: "main")
-    static let stats: Self = Self(subsystem: subsystem, category: "stats")
+
+    static func app(category: String) -> Self {
+        return .init(subsystem: subsystem, category: category)
+    }
 }

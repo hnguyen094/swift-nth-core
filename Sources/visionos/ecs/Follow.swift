@@ -7,6 +7,7 @@
 import RealityKit
 
 public enum Follow {
+    @MainActor
     public static func register() {
         Component.registerComponent()
         System.registerSystem()
@@ -36,12 +37,12 @@ public enum Follow {
     }
 
     public struct System: RealityKit.System {
-        static let query: EntityQuery = .init(where: .has(Component.self))
-        
+        let query: EntityQuery = .init(where: .has(Component.self))
+
         public init(scene: Scene) { }
         
         public func update(context: SceneUpdateContext) {
-            context.entities(matching: Self.query, updatingSystemWhen: .rendering).forEach { entity in
+            context.entities(matching: query, updatingSystemWhen: .rendering).forEach { entity in
                 let component = entity.components[Component.self]!
                 let position = entity.position(relativeTo: .none)
 

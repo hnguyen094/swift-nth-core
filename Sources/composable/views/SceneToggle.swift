@@ -9,8 +9,8 @@ import ComposableArchitecture
 import SwiftUI
 
 @MainActor
-public struct SceneToggle: View {
-    @Bindable var store: StoreOf<SceneLifecycle>
+public struct SceneToggle<ID: RawRepresentable & Hashable>: View where ID.RawValue == String {
+    @Bindable var store: StoreOf<SceneLifecycle<ID>>
 
     @State private var disabled: Bool = false
 
@@ -23,7 +23,7 @@ public struct SceneToggle: View {
 
     var text: LocalizedStringKey
     var textOnFalse: LocalizedStringKey?
-    var scene: SceneLifecycle.SceneType
+    var scene: SceneLifecycle<ID>.SceneType
 
     var binding: Binding<Bool> {
         .init(
@@ -45,7 +45,7 @@ public struct SceneToggle: View {
                         if store.openedImmersiveSpace == id {
                             await dismissImmersiveSpace()
                         } else {
-                            await openImmersiveSpace(id: id)
+                            await openImmersiveSpace(id: id.rawValue)
                         }
                         disabled = false
                     }
@@ -57,16 +57,16 @@ public struct SceneToggle: View {
                     switch openableWindow {
                     case .id(let id):
                         opened
-                        ? dismissWindow(id: id)
-                        : openWindow(id: id)
+                        ? dismissWindow(id: id.rawValue)
+                        : openWindow(id: id.rawValue)
                     case .value(let value):
                         opened
                         ? dismissWindow(value: value)
                         : openWindow(value: value)
                     case .both(id: let id, value: let value):
                         opened
-                        ? dismissWindow(id: id, value: value)
-                        : openWindow(id: id, value: value)
+                        ? dismissWindow(id: id.rawValue, value: value)
+                        : openWindow(id: id.rawValue, value: value)
                     }
                 }
             }
@@ -76,8 +76,8 @@ public struct SceneToggle: View {
     public init(
         _ text: LocalizedStringKey,
         _ textOnFalse: LocalizedStringKey? = .none,
-        toggling: SceneLifecycle.SceneType,
-        using store: StoreOf<SceneLifecycle>
+        toggling: SceneLifecycle<ID>.SceneType,
+        using store: StoreOf<SceneLifecycle<ID>>
     ) {
         self.store = store
         self.text = text

@@ -8,8 +8,6 @@
 import SwiftUI
 
 public extension View {
-    static var ID: String { .init(describing: Body.self) }
-
     /// Combines `clipShape` and `overlay` with `strokeBorder`.
     @ViewBuilder
     func clipShapeWithStrokeBorder<I, S>(

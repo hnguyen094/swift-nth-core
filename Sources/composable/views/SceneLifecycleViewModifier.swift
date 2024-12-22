@@ -9,19 +9,19 @@ import SwiftUI
 import ComposableArchitecture
 
 extension View {
-    public func registerLifecycle(
-        _ store: StoreOf<SceneLifecycle>,
-        as sceneType: SceneLifecycle.SceneType
-    ) -> some View {
-        self.modifier(Modifier(
+    public func registerLifecycle<ID: RawRepresentable & Hashable>(
+        _ store: StoreOf<SceneLifecycle<ID>>,
+        as sceneType: SceneLifecycle<ID>.SceneType
+    ) -> some View where ID.RawValue == String {
+        self.modifier(Modifier<ID>(
             store: store,
             sceneType: sceneType))
     }
 }
 
-private struct Modifier: ViewModifier {
-    @Bindable var store: StoreOf<SceneLifecycle>
-    var sceneType: SceneLifecycle.SceneType
+private struct Modifier<ID: RawRepresentable & Hashable>: ViewModifier where ID.RawValue == String {
+    @Bindable var store: StoreOf<SceneLifecycle<ID>>
+    var sceneType: SceneLifecycle<ID>.SceneType
 
     func body(content: Content) -> some View {
         content

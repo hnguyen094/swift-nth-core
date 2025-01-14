@@ -9,7 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 
 extension View {
-    public func registerLifecycle<ID: RawRepresentable & Hashable>(
+    public func registerLifecycle<ID: RawRepresentable & Hashable & Sendable>(
         _ store: StoreOf<SceneLifecycle<ID>>,
         as sceneType: SceneLifecycle<ID>.SceneType
     ) -> some View where ID.RawValue == String {
@@ -19,7 +19,11 @@ extension View {
     }
 }
 
-private struct Modifier<ID: RawRepresentable & Hashable>: ViewModifier where ID.RawValue == String {
+private struct Modifier<ID>: ViewModifier
+where
+    ID: RawRepresentable & Hashable & Sendable,
+    ID.RawValue == String
+{
     @Bindable var store: StoreOf<SceneLifecycle<ID>>
     var sceneType: SceneLifecycle<ID>.SceneType
 

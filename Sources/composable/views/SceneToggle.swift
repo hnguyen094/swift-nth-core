@@ -9,7 +9,11 @@ import ComposableArchitecture
 import SwiftUI
 
 @MainActor
-public struct SceneToggle<ID: RawRepresentable & Hashable>: View where ID.RawValue == String {
+public struct SceneToggle<ID>: View
+where
+    ID: RawRepresentable & Hashable & Sendable,
+    ID.RawValue == String
+{
     @Bindable var store: StoreOf<SceneLifecycle<ID>>
 
     @State private var disabled: Bool = false

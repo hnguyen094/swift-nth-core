@@ -8,11 +8,15 @@
 import ComposableArchitecture
 
 @Reducer
-public struct SceneLifecycle<ID: RawRepresentable & Hashable> where ID.RawValue == String {
-    public enum OpenableWindow: Hashable {
+public struct SceneLifecycle<ID>
+where
+    ID: RawRepresentable & Hashable & Sendable,
+    ID.RawValue == String
+{
+    public enum OpenableWindow: Hashable, Sendable {
         case id(ID)
-        case value(any (Codable & Hashable))
-        case both(id: ID, value: any(Codable & Hashable))
+        case value(any (Codable & Hashable & Sendable))
+        case both(id: ID, value: any(Codable & Hashable & Sendable))
 
         public static func == (lhs: Self, rhs: Self) -> Bool {
             lhs.hashValue == rhs.hashValue
@@ -37,7 +41,7 @@ public struct SceneLifecycle<ID: RawRepresentable & Hashable> where ID.RawValue 
     }
 
     @ObservableState
-    public struct State {
+    public struct State: Equatable, Sendable {
         public var openedImmersiveSpace: ID? = .none
         public var openedWindows: Set<OpenableWindow> = .init()
         public init() { }

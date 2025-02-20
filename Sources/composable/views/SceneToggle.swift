@@ -9,10 +9,11 @@ import ComposableArchitecture
 import SwiftUI
 
 @MainActor
-public struct SceneToggle<ID>: View
+public struct SceneToggle<ID, ContentLabel>: View
 where
     ID: RawRepresentable & Hashable & Sendable,
-    ID.RawValue == String
+    ID.RawValue == String,
+    ContentLabel: View
 {
     @Bindable var store: StoreOf<SceneLifecycle<ID>>
 
@@ -25,8 +26,8 @@ where
     @Environment(\.openWindow) var openWindow
     @Environment(\.dismissWindow) var dismissWindow
 
-    var text: LocalizedStringKey
-    var textOnFalse: LocalizedStringKey?
+    var contentLabel: (_ opened: Bool) -> ContentLabel
+
     var scene: SceneLifecycle<ID>.SceneType
 
     var binding: Binding<Bool> {
@@ -78,20 +79,42 @@ where
     }
     
     public init(
+        toggling: SceneLifecycle<ID>.SceneType,
+        using store: StoreOf<SceneLifecycle<ID>>,
+        @ViewBuilder label: @escaping (Bool) -> ContentLabel
+    ) {
+        self.store = store
+        self.contentLabel = label
+        self.scene = toggling
+    }
+
+    public var body: some View {
+        Toggle(isOn: binding, label: { contentLabel(binding.wrappedValue) })
+            .disabled(disabled)
+    }
+
+}
+
+public extension SceneToggle where ContentLabel == Text {
+    init(
         _ text: LocalizedStringKey,
         _ textOnFalse: LocalizedStringKey? = .none,
         toggling: SceneLifecycle<ID>.SceneType,
         using store: StoreOf<SceneLifecycle<ID>>
     ) {
         self.store = store
-        self.text = text
-        self.textOnFalse = textOnFalse
+        self.contentLabel = { Self.textToView(text: text, textOnFalse: textOnFalse, opened: $0) }
         self.scene = toggling
     }
 
-    public var body: some View {
-        let shownText = binding.wrappedValue ? text : (textOnFalse ?? text)
-        Toggle(shownText, isOn: binding)
-            .disabled(disabled)
+    private static func textToView(
+        text: LocalizedStringKey,
+        textOnFalse: LocalizedStringKey?,
+        opened: Bool
+    ) -> Text {
+        guard let falseText = textOnFalse else {
+            return Text(text)
+        }
+        return Text(opened ? text : falseText)
     }
 }

@@ -17,4 +17,10 @@ public extension Collection {
     subscript(safe index: Index) -> Element? {
         indices.contains(index) ? self[index] : nil
     }
+
+    /**
+     Returns the distance from the start index.
+     - Author: [Leo Dabus](https://stackoverflow.com/a/34540310)
+     */
+    func distance(to index: Index) -> Int { distance(from: startIndex, to: index) }
 }

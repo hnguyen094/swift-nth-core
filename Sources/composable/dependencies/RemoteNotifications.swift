@@ -27,8 +27,8 @@ public struct RemoteNotificationsClient: Sendable {
 @available(iOSApplicationExtension, unavailable)
 extension RemoteNotificationsClient: DependencyKey {
     public static let liveValue = Self(
-        isRegistered: { UIApplication.shared.isRegisteredForRemoteNotifications },
-        register: { UIApplication.shared.registerForRemoteNotifications() },
-        unregister: { UIApplication.shared.unregisterForRemoteNotifications() }
+        isRegistered: { await UIApplication.shared.isRegisteredForRemoteNotifications },
+        register: { await UIApplication.shared.registerForRemoteNotifications() },
+        unregister: { await UIApplication.shared.unregisterForRemoteNotifications() }
     )
 }

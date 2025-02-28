@@ -29,12 +29,12 @@ where
 
     func body(content: Content) -> some View {
         content
-            .onAppear {
+            .task {
                 switch sceneType {
                 case .immersive(let id):
-                    store.send(.immersiveSpaceOpened(id: id))
+                    await store.send(.immersiveSpaceOpened(id: id)).finish()
                 case .window(let openableWindow):
-                    store.send(.windowOpened(openableWindow))
+                    await store.send(.windowOpened(openableWindow)).finish()
                 }
             }
             .onDisappear {

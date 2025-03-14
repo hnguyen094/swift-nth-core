@@ -11,11 +11,12 @@ import ComposableArchitecture
 
 public extension ARKitSession {
     protocol State {
+        var session: ARKitSession { get }
         var updates: [any AnchorUpdatesState] { get }
     }
 
     protocol Action: Sendable {
-        static func task(_ session: ARKitSession) -> Self
+        static var task: Self { get }
         static var updates: [Self] { get }
     }
 }
@@ -25,8 +26,8 @@ public extension ARKitSession.State {
 }
 
 public extension Reducer where State: ARKitSession.State, Action: ARKitSession.Action {
-    static func task(state: State, session: ARKitSession) -> Effect<Action> {
-        return .run { [providers = state.dataProviders] send in
+    static func task(state: State) -> Effect<Action> {
+        return .run { [session = state.session, providers = state.dataProviders] send in
             try await session.run(providers)
             await withDiscardingTaskGroup { group in
                 for updateAction in Action.updates {

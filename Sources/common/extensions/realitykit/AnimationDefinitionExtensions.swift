@@ -26,11 +26,8 @@ public extension SampledAnimation<Transform> {
 
         for t: Float in stride(from: 0, to: fDuration, by: frameInterval) {
             let normalizedValue = Float(timing.fn(TimeInterval(t / fDuration)))
-            let sample = Transform(
-                scale: start.scale + (end.scale - start.scale) * normalizedValue,
-                rotation: simd_slerp(start.rotation, end.rotation, normalizedValue),
-                translation: start.translation + (end.translation - start.translation) * normalizedValue
-            )
+
+            let sample = start.lerp(to: end, t: normalizedValue)
             frames.append(sample)
         }
 

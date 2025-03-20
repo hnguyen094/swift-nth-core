@@ -17,6 +17,7 @@ public extension ARKitSession {
 
     protocol Action: Sendable {
         static var task: Self { get }
+        static var running: Self { get }
         static var updates: [Self] { get }
     }
 }
@@ -29,6 +30,7 @@ public extension Reducer where State: ARKitSession.State, Action: ARKitSession.A
     static func task(state: State) -> Effect<Action> {
         return .run { [session = state.session, providers = state.dataProviders] send in
             try await session.run(providers)
+            await send(.running)
             await withDiscardingTaskGroup { group in
                 for updateAction in Action.updates {
                     _ = group.addTaskUnlessCancelled { await send(updateAction) }

@@ -8,14 +8,28 @@
 import SwiftUI
 import ComposableArchitecture
 
-extension View {
-    public func registerLifecycle<ID: RawRepresentable & Hashable & Sendable>(
+public extension View {
+    #if os(visionOS)
+    static var backgroundShouldDismiss: Bool { true }
+    #else
+    static var backgroundShouldDismiss: Bool { false }
+    #endif
+    /// Note: `backgroundingDismisses` only affects windows.
+
+    @ViewBuilder
+    func registerLifecycle<ID: RawRepresentable & Hashable & Sendable>(
         _ store: StoreOf<SceneLifecycle<ID>>,
-        as sceneType: SceneLifecycle<ID>.SceneType
+        as sceneType: SceneLifecycle<ID>.SceneType,
+        backgroundDismisses: Bool = backgroundShouldDismiss
     ) -> some View where ID.RawValue == String {
-        self.modifier(Modifier<ID>(
+        let modified = self.modifier(Modifier<ID>(
             store: store,
-            sceneType: sceneType))
+            sceneType: sceneType
+        ))
+        switch backgroundDismisses {
+        case true: modified.modifier(BackgroundDismissesModifier(sceneType: sceneType))
+        case false: modified
+        }
     }
 }
 
@@ -43,6 +57,30 @@ where
                     store.send(.immersiveSpaceClosed(id: id))
                 case .window(let openableWindow):
                     store.send(.windowClosed(openableWindow))
+                }
+            }
+    }
+}
+
+private struct BackgroundDismissesModifier<ID>: ViewModifier
+where
+    ID: RawRepresentable & Hashable & Sendable,
+    ID.RawValue == String
+{
+    @Environment(\.scenePhase) var scenePhase
+    @Environment(\.dismissWindow) var dismissWindow
+
+    var sceneType: SceneLifecycle<ID>.SceneType
+
+    func body(content: Content) -> some View {
+        content
+            .onChange(of: scenePhase) {
+                guard case .background = scenePhase, case .window(let window) = sceneType
+                else { return }
+                switch window {
+                case let .both(id, value): dismissWindow(id: id.rawValue, value: value)
+                case let .id(id): dismissWindow(id: id.rawValue)
+                case let .value(value): dismissWindow(value: value)
                 }
             }
     }

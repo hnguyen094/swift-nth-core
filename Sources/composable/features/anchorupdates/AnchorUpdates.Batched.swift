@@ -18,9 +18,16 @@ extension AnchorUpdates {
         public struct State: Equatable, AnchorUpdatesState {
             public let options: Options
             @ForceEquatable public var provider: ProviderType
-            public init(options: Options, provider: ProviderType) {
+            @ForceEquatable public var filter: FilterPredicate?
+
+            public init(
+                options: Options,
+                provider: ProviderType,
+                filter: FilterPredicate? = .none
+            ) {
                 self.options = options
                 self.provider = provider
+                self.filter = filter
             }
         }
 
@@ -29,7 +36,7 @@ extension AnchorUpdates {
             case anchorsUpdated(TimedBatch)
 
             static func anchorUpdates(
-                _ updates: AnchorUpdateSequence<ProviderType.AnchorType>,
+                _ updates: some AsyncSequence<AnchorUpdate<ProviderType.AnchorType>, Never>,
                 options: Options,
                 send: Send<Self>
             ) async {
@@ -50,8 +57,22 @@ extension AnchorUpdates {
         public func reduce(into state: inout State, action: Action) -> Effect<Action> {
             switch action {
             case .updates:
-                return .run { [options = state.options, provider = state.provider] send in
-                    await Action.anchorUpdates(provider.anchorUpdates, options: options, send: send)
+                return .run { [
+                    options = state.options,
+                    provider = state.provider,
+                    filter = state.filter
+                ] send in
+                    let updates = provider.anchorUpdates
+                    switch filter {
+                    case .some(let validFilter):
+                        await Action.anchorUpdates(
+                            updates.filter(validFilter),
+                            options: options,
+                            send: send
+                        )
+                    case .none:
+                        await Action.anchorUpdates(updates, options: options, send: send)
+                    }
                 }
             default:
                 return .none

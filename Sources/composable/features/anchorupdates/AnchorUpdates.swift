@@ -17,8 +17,13 @@ public protocol HasAnchorUpdates: DataProvider {
 
 public protocol AnchorUpdatesState {
     associatedtype ProviderType: HasAnchorUpdates
+    typealias FilterPredicate = @Sendable
+    (AnchorUpdateSequence<ProviderType.AnchorType>.Element) async -> Bool
+
     var provider: ProviderType { get }
+    var filter: FilterPredicate? { get }
 }
+
 
 public protocol AnchorUpdatesAction: Sendable {
     static var updates: Self { get }
@@ -40,8 +45,14 @@ public struct AnchorUpdates<ProviderType: HasAnchorUpdates> {
 
     public struct State: Equatable, AnchorUpdatesState {
         @ForceEquatable public var provider: ProviderType
-        public init(provider: ProviderType) {
+        @ForceEquatable public var filter: FilterPredicate?
+
+        public init(
+            provider: ProviderType,
+            filter: FilterPredicate? = .none
+        ) {
             self.provider = provider
+            self.filter = filter
         }
     }
     public enum Action: AnchorUpdatesAction {
@@ -49,7 +60,7 @@ public struct AnchorUpdates<ProviderType: HasAnchorUpdates> {
         case anchorUpdated(AnchorUpdate<ProviderType.AnchorType>)
 
         static func anchorUpdates(
-            _ updates: AnchorUpdateSequence<ProviderType.AnchorType>,
+            _ updates: some AsyncSequence<AnchorUpdate<ProviderType.AnchorType>, Never>,
             send: Send<Self>
         ) async {
             for await update in updates {
@@ -61,8 +72,14 @@ public struct AnchorUpdates<ProviderType: HasAnchorUpdates> {
     public func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
         case .updates:
-            return .run { [provider = state.provider] send in
-                await Action.anchorUpdates(provider.anchorUpdates, send: send)
+            return .run { [provider = state.provider, filter = state.filter] send in
+                let updates = provider.anchorUpdates
+                switch filter {
+                case .some(let validFilter):
+                    await Action.anchorUpdates(updates.filter(validFilter), send: send)
+                case .none:
+                    await Action.anchorUpdates(updates, send: send)
+                }
             }
         default:
             return .none

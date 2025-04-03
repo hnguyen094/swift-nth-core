@@ -45,16 +45,16 @@ where
         content
             .task {
                 switch sceneType {
-                case .immersive(let id):
-                    await store.send(.immersiveSpaceOpened(id: id)).finish()
+                case .immersive(let openableSpace):
+                    await store.send(.immersiveSpaceOpened(openableSpace)).finish()
                 case .window(let openableWindow):
                     await store.send(.windowOpened(openableWindow)).finish()
                 }
             }
             .onDisappear {
                 switch sceneType {
-                case .immersive(let id):
-                    store.send(.immersiveSpaceClosed(id: id))
+                case .immersive(let openableSpace):
+                    store.send(.immersiveSpaceClosed(openableSpace))
                 case .window(let openableWindow):
                     store.send(.windowClosed(openableWindow))
                 }

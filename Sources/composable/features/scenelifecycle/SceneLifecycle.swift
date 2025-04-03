@@ -13,10 +13,10 @@ where
     ID: RawRepresentable & Hashable & Sendable,
     ID.RawValue == String
 {
-    public enum OpenableWindow: Hashable, Sendable {
+    public enum Openable: Hashable, Sendable {
         case id(ID)
         case value(any (Codable & Hashable & Sendable))
-        case both(id: ID, value: any(Codable & Hashable & Sendable))
+        case both(id: ID, value: any (Codable & Hashable & Sendable))
 
         public static func == (lhs: Self, rhs: Self) -> Bool {
             lhs.hashValue == rhs.hashValue
@@ -36,22 +36,22 @@ where
     }
 
     public enum SceneType {
-        case immersive(ID)
-        case window(OpenableWindow)
+        case immersive(Openable)
+        case window(Openable)
     }
 
     @ObservableState
     public struct State: Equatable, Sendable {
-        public var openedImmersiveSpace: ID? = .none
-        public var openedWindows: Set<OpenableWindow> = .init()
+        public var openedImmersiveSpace: Openable? = .none
+        public var openedWindows: Set<Openable> = .init()
         public init() { }
     }
 
     public enum Action {
-        case immersiveSpaceOpened(id: ID)
-        case immersiveSpaceClosed(id: ID)
-        case windowOpened(OpenableWindow)
-        case windowClosed(OpenableWindow)
+        case immersiveSpaceOpened(Openable)
+        case immersiveSpaceClosed(Openable)
+        case windowOpened(Openable)
+        case windowClosed(Openable)
     }
 
     public init() { }
@@ -59,11 +59,11 @@ where
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
-            case .immersiveSpaceOpened(id: let id):
-                state.openedImmersiveSpace = id
+            case .immersiveSpaceOpened(let space):
+                state.openedImmersiveSpace = space
                 return .none
-            case .immersiveSpaceClosed(id: let id):
-                if state.openedImmersiveSpace == id {
+            case .immersiveSpaceClosed(let space):
+                if state.openedImmersiveSpace == space {
                     state.openedImmersiveSpace = .none
                 }
                 return .none

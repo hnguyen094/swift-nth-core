@@ -34,8 +34,8 @@ where
         .init(
             get: {
                 switch scene {
-                case .immersive(let id):
-                    store.openedImmersiveSpace == id
+                case .immersive(let space):
+                    store.openedImmersiveSpace == space
                 case .window(let openableWindow):
                     store.openedWindows.contains(openableWindow)
                 }
@@ -43,14 +43,21 @@ where
             set: { _ in
                 guard !disabled else { return }
                 switch scene {
-                case .immersive(let id):
+                case .immersive(let openableSpace):
                     #if os(visionOS)
                     disabled = true
                     Task {
-                        if store.openedImmersiveSpace == id {
+                        if store.openedImmersiveSpace == openableSpace {
                             await dismissImmersiveSpace()
                         } else {
-                            await openImmersiveSpace(id: id.rawValue)
+                            switch openableSpace {
+                            case .id(let id):
+                                await openImmersiveSpace(id: id.rawValue)
+                            case .value(let value):
+                                await openImmersiveSpace(value: value)
+                            case let .both(id: id, value: value):
+                                await openImmersiveSpace(id: id.rawValue, value: value)
+                            }
                         }
                         disabled = false
                     }

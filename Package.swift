@@ -14,7 +14,12 @@ let package = Package(
     products: [
         .library(
             name: "NthCore",
-            targets: ["NthCore"]),
+            targets: ["NthCore"]
+        ),
+        .library(
+            name: "NthComposableContacts",
+            targets: ["NthComposableContacts"]
+        )
     ],
     dependencies: [
         .package(
@@ -50,6 +55,14 @@ let package = Package(
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/composable"
+        ),
+        .target(
+            name: "NthComposableContacts",
+            dependencies: [
+                .target(name: "NthCommon"),
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/composable-contacts"
         )
     ]
 )

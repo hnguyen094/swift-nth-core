@@ -7,6 +7,9 @@
 
 import ComposableArchitecture
 import UIKit
+#if canImport(NthComposableRemoteNotifications)
+import NthComposableRemoteNotifications
+#endif
 
 public class AppDelegate: NSObject, UIApplicationDelegate {
     var store: StoreOf<Feature>!
@@ -23,6 +26,7 @@ public class AppDelegate: NSObject, UIApplicationDelegate {
         return true
     }
 
+    #if canImport(NthComposableRemoteNotifications)
     public func application(
         _ application: UIApplication,
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
@@ -36,6 +40,7 @@ public class AppDelegate: NSObject, UIApplicationDelegate {
     ) {
         store.send(.didRegisterForRemoteNotifications(.failure(error)))
     }
+    #endif
 }
 
 extension AppDelegate {
@@ -48,13 +53,16 @@ extension AppDelegate {
         
         public enum Action {
             case didFinishLaunching
+            #if canImport(NthComposableRemoteNotifications)
             case didRegisterForRemoteNotifications(Result<Data, Error>)
+            #endif
             case userNotifications(UserNotificationClient.DelegateEvent)
         }
 
         @Dependency(\.userNotifications) var userNotifications
+        #if canImport(NthComposableRemoteNotifications)
         @Dependency(\.remoteNotifications.register) var registerForRemoteNotifications
-
+        #endif
         public var body: some ReducerOf<Self> {
             Reduce { state, action in
                 switch action {
@@ -81,12 +89,16 @@ extension AppDelegate {
                                 default:
                                     return
                                 }
+                                #if canImport(NthComposableRemoteNotifications)
                                 await registerForRemoteNotifications()
+                                #endif
                             }
                         }
                     }
+                #if canImport(NthComposableRemoteNotifications)
                 case .didRegisterForRemoteNotifications:
                     return .none
+                #endif
                 case .userNotifications(let event):
                     return .run { _ in
                         guard case .willPresentNotification(_, completionHandler: let handler) = event

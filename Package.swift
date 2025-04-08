@@ -19,6 +19,10 @@ let package = Package(
         .library(
             name: "NthComposableContacts",
             targets: ["NthComposableContacts"]
+        ),
+        .library(
+            name: "NthComposableRemoteNotifications",
+            targets: ["NthComposableRemoteNotifications"]
         )
     ],
     dependencies: [
@@ -63,6 +67,14 @@ let package = Package(
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/composable-contacts"
+        ),
+        .target(
+            name: "NthComposableRemoteNotifications",
+            dependencies: [
+                .target(name: "NthCommon"),
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/composable-remote-notifications"
         )
     ]
 )

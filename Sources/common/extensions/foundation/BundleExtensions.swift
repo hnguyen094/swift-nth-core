@@ -16,4 +16,8 @@ public extension Bundle {
         #endif
         return Bundle.main.object(forInfoDictionaryKey: key) as? String
     }
+
+    static var displayName: String? {
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
+    }
 }

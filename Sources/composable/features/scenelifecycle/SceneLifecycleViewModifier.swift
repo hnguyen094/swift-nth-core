@@ -14,7 +14,6 @@ public extension View {
     #else
     static var backgroundShouldDismiss: Bool { false }
     #endif
-    /// Note: `backgroundingDismisses` only affects windows.
 
     @ViewBuilder
     func registerLifecycle<ID: RawRepresentable & Hashable & Sendable>(
@@ -27,7 +26,7 @@ public extension View {
             sceneType: sceneType
         ))
         switch backgroundDismisses {
-        case true: modified.modifier(BackgroundDismissesModifier(sceneType: sceneType))
+        case true: modified.modifier(BackgroundDismisses(store: store, sceneType: sceneType))
         case false: modified
         }
     }
@@ -62,25 +61,40 @@ where
     }
 }
 
-private struct BackgroundDismissesModifier<ID>: ViewModifier
+private struct BackgroundDismisses<ID>: ViewModifier
 where
     ID: RawRepresentable & Hashable & Sendable,
     ID.RawValue == String
 {
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.dismissWindow) var dismissWindow
+    #if os(visionOS)
+    @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
+    #endif
 
+    @Bindable var store: StoreOf<SceneLifecycle<ID>>
     var sceneType: SceneLifecycle<ID>.SceneType
 
     func body(content: Content) -> some View {
         content
-            .onChange(of: scenePhase) {
-                guard case .background = scenePhase, case .window(let window) = sceneType
-                else { return }
-                switch window {
-                case let .both(id, value): dismissWindow(id: id.rawValue, value: value)
-                case let .id(id): dismissWindow(id: id.rawValue)
-                case let .value(value): dismissWindow(value: value)
+            .onChange(of: scenePhase, initial: true) {
+                guard case .background = scenePhase else { return }
+
+                switch sceneType {
+                case .window(let window):
+                    switch window {
+                    case let .both(id, value): dismissWindow(id: id.rawValue, value: value)
+                    case let .id(id): dismissWindow(id: id.rawValue)
+                    case let .value(value): dismissWindow(value: value)
+                    }
+                // workaround for AppIntents starts (xros 2.5)
+                case .immersive(let immersive):
+                    #if os(visionOS)
+                    guard store.openedImmersiveSpace != immersive else { break }
+                    Task { await dismissImmersiveSpace() }
+                    #else
+                    break
+                    #endif
                 }
             }
     }

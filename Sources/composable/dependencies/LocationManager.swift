@@ -57,7 +57,7 @@ extension LocationManagerClient {
             }
             .makeAsyncIterator()
 
-        let firstUpdate = try await validUpdates.next()!
+        guard let firstUpdate = try await validUpdates.next() else { return .none }
         guard precise && firstUpdate.accuracyLimited else {
             return firstUpdate.location
         }

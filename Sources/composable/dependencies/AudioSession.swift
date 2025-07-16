@@ -64,7 +64,7 @@ extension AudioSession {
             category: .playAndRecord,
             mode: .measurement,
             options: [
-                .allowBluetooth,
+                .allowBluetoothHFP,
                 .allowBluetoothA2DP,
                 .overrideMutedMicrophoneInterruption,
                 .mixWithOthers])

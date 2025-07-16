@@ -9,7 +9,7 @@ import ComposableArchitecture
 import OSLog
 
 @Reducer
-public struct Bootstrapping<R: Reducer>: Sendable where R.State: Equatable {
+public struct Bootstrapping<R: Reducer & Sendable>: Sendable where R.State: Equatable & Sendable {
     let bootstrap: @Sendable () async throws -> Void
     let initialState: @Sendable () -> R.State
     let reducer: @Sendable () -> R

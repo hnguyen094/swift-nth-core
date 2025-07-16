@@ -12,7 +12,7 @@ public extension Binding {
     /// - Author: [Mark A. Donohoe](https://stackoverflow.com/a/74356845 ).
     static func convert<TInt, TFloat>(from intBinding: Binding<TInt>) -> Binding<TFloat>
     where TInt:   BinaryInteger & Sendable,
-          TFloat: BinaryFloatingPoint {
+          TFloat: BinaryFloatingPoint & Sendable {
         Binding<TFloat> (
             get: { TFloat(intBinding.wrappedValue) },
             set: { intBinding.wrappedValue = TInt($0) }
@@ -23,7 +23,7 @@ public extension Binding {
     /// - Author: [Mark A. Donohoe](https://stackoverflow.com/a/74356845 ).
     static func convert<TFloat, TInt>(from floatBinding: Binding<TFloat>) -> Binding<TInt>
     where TFloat: BinaryFloatingPoint & Sendable,
-          TInt:   BinaryInteger {
+          TInt:   BinaryInteger & Sendable {
         Binding<TInt> (
             get: { TInt(floatBinding.wrappedValue) },
             set: { floatBinding.wrappedValue = TFloat($0) }

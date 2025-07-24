@@ -6,7 +6,7 @@ let package = Package(
     name: "swift-nth-core",
     platforms: [
         .iOS(.v18),
-        .macOS(.v15),
+        .macCatalyst(.v18),
         .visionOS(.v2),
         .tvOS(.v18),
         .watchOS(.v11)

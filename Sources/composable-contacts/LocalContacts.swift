@@ -68,7 +68,7 @@ extension LocalContacts: DependencyKey {
         for given in randomGivenNames {
             for family in randomFamilyNames {
                 contacts.append(.init(
-                    id: uuid(),
+                    id: uuid().uuidString,
                     givenName: given,
                     familyName: family,
                     fullName: "\(given) \(family)",
@@ -136,7 +136,7 @@ fileprivate extension LocalContacts {
                 } else { .none }
 
                 contacts.append(.init(
-                    id: contact.id,
+                    id: contact.identifier,
                     givenName: contact.givenName,
                     familyName: contact.familyName,
                     fullName: formatter.string(from: contact),
